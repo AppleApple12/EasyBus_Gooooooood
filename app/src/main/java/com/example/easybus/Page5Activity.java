@@ -1,15 +1,14 @@
 package com.example.easybus;
 
-import androidx.appcompat.app.ActionBar;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
@@ -24,17 +23,8 @@ public class Page5Activity extends AppCompatActivity {
         ActionBar actionBar = getSupportActionBar();
         actionBar.hide();
 
-        des = (EditText)findViewById(R.id.edt2);
-        //產生新路線跳頁到google map
-        ImageButton btn1 = (ImageButton)findViewById(R.id.search);
-        btn1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent it2 = new Intent(Page5Activity.this,Page501Activity.class);
-                it2.putExtra("destination",des.getText().toString());
-                startActivity(it2);
-            }
-        });
+        Intent it = new Intent(Page5Activity.this,Page501Activity.class);
+        startActivity(it);
         //浮動按鈕撥打給緊急聯絡人
         FloatingActionButton fab = (FloatingActionButton)findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {

@@ -63,16 +63,6 @@
         app:layout_constraintStart_toEndOf="@+id/iv2"
         app:layout_constraintTop_toTopOf="@+id/iv1" />
 
-    <EditText
-        android:id="@+id/edt2"
-        android:layout_width="254dp"
-        android:layout_height="103dp"
-        android:hint="輸入目的地"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/top"
-        app:layout_constraintBottom_toTopOf="@+id/search"/>
-
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab"
         android:layout_width="wrap_content"
@@ -86,44 +76,5 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.971" />
-
-    <ImageButton
-        android:id="@+id/search"
-        android:layout_width="263dp"
-        android:layout_height="76dp"
-        android:background="@drawable/search"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edt2" />
-
-    <ImageView
-        android:id="@+id/searchicon"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
-        android:layout_marginStart="24dp"
-        android:layout_marginLeft="24dp"
-        app:layout_constraintBottom_toBottomOf="@+id/search"
-        app:layout_constraintStart_toStartOf="@+id/search"
-        app:layout_constraintTop_toTopOf="@+id/search"
-        app:layout_constraintVertical_bias="0.5"
-        app:srcCompat="@drawable/ic_search_black_24dp"
-        tools:ignore="VectorDrawableCompat" />
-
-    <TextView
-        android:id="@+id/txv1"
-        android:layout_width="136dp"
-        android:layout_height="53dp"
-        android:layout_marginEnd="40dp"
-        android:layout_marginRight="40dp"
-        android:gravity="center"
-        android:text="產生路線"
-        android:textColor="#5B5B5B"
-        android:textSize="30sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@+id/search"
-        app:layout_constraintEnd_toEndOf="@+id/search"
-        app:layout_constraintTop_toTopOf="@+id/search"
-        app:layout_constraintVertical_bias="0.5" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "1066237684460",
+    "firebase_url": "https://easybus-f36e9.firebaseio.com",
+    "project_id": "easybus-f36e9",
+    "storage_bucket": "easybus-f36e9.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1066237684460:android:9db6c09bd08528959913c9",
+        "android_client_info": {
+          "package_name": "com.example.easybus"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1066237684460-oqf5ocgp72sepomilq3tb96cm35nlnh4.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.easybus",
+            "certificate_hash": "58807ce5da30fac3b2b973297be286d1743947a3"
+          }
+        },
+        {
+          "client_id": "1066237684460-04u1t8ci16l7p1c0dsq18304o805hn5p.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDRImYvIyRmi4q1XixWy2oqus3QSL_GQNc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1066237684460-04u1t8ci16l7p1c0dsq18304o805hn5p.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

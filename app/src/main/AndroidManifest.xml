@@ -8,6 +8,7 @@
     -->
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.CALL_PHONE" />
 
@@ -18,20 +19,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".AddFamMember"></activity>
-        <activity android:name=".AddContact" />
-        <activity android:name=".edit" />
-        <activity android:name=".ForgetPassword" />
-        <activity android:name=".Page801Activity" />
-        <activity android:name=".Page7falseActivity" />
-        <activity android:name=".Page7trueActivity" />
-        <activity android:name=".Page702Activity" />
-        <activity android:name=".Page701Activity"/>
-        <activity android:name=".Login" />
-        <activity android:name=".Register" />
-        <activity android:name=".Page10Activity" />
-        <activity android:name=".Page9Activity" />
-        <activity android:name=".Page501Activity" />
+        <activity android:name=".MapsLayout"></activity>
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").
@@ -44,6 +32,22 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />
 
+        <activity
+            android:name=".Page501Activity"
+            android:label="@string/title_activity_page501" />
+        <activity android:name=".AddFamMember" />
+        <activity android:name=".AddContact" />
+        <activity android:name=".edit" />
+        <activity android:name=".ForgetPassword" />
+        <activity android:name=".Page801Activity" />
+        <activity android:name=".Page7falseActivity" />
+        <activity android:name=".Page7trueActivity" />
+        <activity android:name=".Page702Activity" />
+        <activity android:name=".Page701Activity" />
+        <activity android:name=".Login" />
+        <activity android:name=".Register" />
+        <activity android:name=".Page10Activity" />
+        <activity android:name=".Page9Activity" />
         <activity android:name=".Page8Activity" />
         <activity android:name=".Page7Activity" />
         <activity android:name=".Page6Activity" />

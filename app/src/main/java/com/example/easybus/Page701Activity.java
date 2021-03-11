@@ -1,18 +1,16 @@
 package com.example.easybus;
 
-import androidx.appcompat.app.ActionBar;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.Menu;
-import android.view.View;
-import android.widget.Button;
 import android.widget.MediaController;
+import android.widget.Toast;
 import android.widget.VideoView;
+
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AppCompatActivity;
 
 public class Page701Activity extends AppCompatActivity {
 
@@ -23,17 +21,26 @@ public class Page701Activity extends AppCompatActivity {
         //隱藏title bar
         ActionBar actionBar = getSupportActionBar();
         actionBar.hide();
-        //跳選擇頁   耶!!!  //  哈哈
+        //跳選擇頁
 
         //播放video
-        VideoView videoView = (VideoView)this.findViewById(R.id.videoView);
+        final VideoView videoView = (VideoView)this.findViewById(R.id.videoView);
         MediaController mc = new MediaController(this);
         videoView.setMediaController(mc);
 
         videoView.setVideoURI(Uri.parse("android.resource://"+getPackageName()+"/"+R.raw.one));
         videoView.requestFocus();
         videoView.start();
-        long duration = videoView.getDuration();
+
+
+        videoView.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+            @Override
+            public void onCompletion(MediaPlayer mp) {
+                Toast.makeText(Page701Activity.this,"影片播完了！",Toast.LENGTH_SHORT).show();
+                Intent it = new Intent(Page701Activity.this,Page702Activity.class);
+                startActivity(it);
+            }
+        });
 
         //影片播放時發生錯誤時觸發的方法
         videoView.setOnErrorListener(new MediaPlayer.OnErrorListener() {
@@ -43,7 +50,6 @@ public class Page701Activity extends AppCompatActivity {
                 return false;
             }
         });
-
 
     }
 
