@@ -1,81 +1,85 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app = "http://schemas.android.com/apk/res-auto"
+    xmlns:tools = "http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_height="wrap_content"
     android:layout_margin="10dp"
     android:orientation="vertical"
     android:background="#fff">
 
+
     <TextView
-        android:id="@+id/txv1"
+        android:id="@+id/gps_time"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="車號："
         android:layout_marginStart="16dp"
         android:layout_marginLeft="16dp"
         android:layout_marginTop="16dp"
+        android:text="GPS_time"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
         android:textSize="24sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/txv2"
+        android:id="@+id/direction"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginLeft="16dp"
         android:layout_marginTop="16dp"
-        android:text="目的地："
-        android:textSize="24sp"
+        android:text="Direction"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@id/txv1" />
+        app:layout_constraintTop_toBottomOf="@id/gps_time" />
 
     <TextView
-        android:id="@+id/txv3"
+        android:id="@+id/routeid"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="車牌號"
         android:layout_marginStart="16dp"
         android:layout_marginLeft="16dp"
         android:layout_marginTop="16dp"
-        android:textSize="24sp"
+        android:text="RouteID"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@id/txv2"/>
+        app:layout_constraintTop_toBottomOf="@id/direction" />
 
     <TextView
-        android:id="@+id/txv4"
+        android:id="@+id/platenumb"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="GPS時間："
         android:layout_marginStart="16dp"
         android:layout_marginLeft="16dp"
         android:layout_marginTop="16dp"
-        android:textSize="24sp"
+        android:text="PlateNumb"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@id/txv3"/>
+        app:layout_constraintTop_toBottomOf="@id/routeid" />
 
     <TextView
-        android:id="@+id/txv5"
+        android:id="@+id/y"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="X："
         android:layout_marginStart="16dp"
         android:layout_marginLeft="16dp"
         android:layout_marginTop="16dp"
-        android:textSize="24sp"
+        android:text="Y"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@id/txv4"/>
+        app:layout_constraintTop_toBottomOf="@id/platenumb" />
 
     <TextView
-        android:id="@+id/txv6"
+        android:id="@+id/x"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Y："
         android:layout_marginStart="16dp"
         android:layout_marginLeft="16dp"
         android:layout_marginTop="16dp"
-        android:textSize="24sp"
+        android:text="X"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@id/txv5"/>
+        app:layout_constraintTop_toBottomOf="@id/y" />
 </androidx.constraintlayout.widget.ConstraintLayout>

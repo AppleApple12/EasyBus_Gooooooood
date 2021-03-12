@@ -13,11 +13,11 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toTopOf="@+id/txv1"
+        app:layout_constraintBottom_toTopOf="@+id/gps_time"
         app:srcCompat="@drawable/true001" />
 
     <TextView
-        android:id="@+id/txv1"
+        android:id="@+id/gps_time"
         android:layout_width="339dp"
         android:layout_height="71dp"
         android:layout_marginBottom="184dp"
