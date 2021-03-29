@@ -23,7 +23,7 @@ public class Page5Activity extends AppCompatActivity {
         ActionBar actionBar = getSupportActionBar();
         actionBar.hide();
 
-        Intent it = new Intent(Page5Activity.this,Page501Activity.class);
+        Intent it = new Intent(Page5Activity.this,Page5011Activity.class);
         startActivity(it);
         //浮動按鈕撥打給緊急聯絡人
         FloatingActionButton fab = (FloatingActionButton)findViewById(R.id.fab);
