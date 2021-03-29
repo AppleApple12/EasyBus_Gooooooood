@@ -8,19 +8,34 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
+import android.drm.ProcessedData;
+import android.media.Image;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.HandlerThread;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ListAdapter;
 import android.widget.ListView;
+import android.widget.SearchView;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.Volley;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -36,124 +51,117 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class Page6Activity extends AppCompatActivity {
-    String TAG = Page6Activity.class.getSimpleName()+"My";
+public class Page6Activity extends AppCompatActivity{
 
-    ArrayList<HashMap<String ,String>> arrayList = new ArrayList<>();
+    RecyclerView recyclerView;
+    Page6ArticleAdapter adapter;
+    ArrayList<Page6article> articles;
+    //SearchView sv;
+    String  url = "https://datacenter.taichung.gov.tw/swagger/OpenData/6af70a9e-4afc-4f54-bf56-01dd84ee8972";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_page6);
         //隱藏title bar
-        ActionBar actionBar = getSupportActionBar();
-        actionBar.hide();
+        //ActionBar actionBar = getSupportActionBar();
+        //actionBar.hide();
 
-        catchData();
+        recyclerView = findViewById(R.id.rvPrograms);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
+        adapter = new Page6ArticleAdapter();
+        recyclerView.setAdapter(adapter);
 
-    }
+        articles = new ArrayList<>();
+        getData();
 
-    private void catchData(){
-        final String catchdata = "http://www.json-generator.com/api/json/get/ceFZlTiUJe?indent=2";
-        final ProgressDialog dialog = ProgressDialog.show(this,"讀取中","請稍後",true);
-        new Thread(new Runnable() {
+        ImageButton btnback = (ImageButton)findViewById(R.id.back);
+        btnback.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void run() {
-                try{
-                    URL url = new URL(catchdata);
-                    HttpURLConnection connection = (HttpURLConnection)url.openConnection();
-                    InputStream is = connection.getInputStream();
-                    BufferedReader in = new BufferedReader(new InputStreamReader(is));
-                    String line = in.readLine();
-                    StringBuffer json = new StringBuffer();
-                    while(line!=null){
-                        json.append(line);
-                        line = in.readLine();
+            public void onClick(View view) {
+                Intent it1 = new Intent(Page6Activity.this,Page3Activity.class);
+                startActivity(it1);
+            }
+        });
+
+        //sv = (SearchView)findViewById(R.id.searchView);
+
+    }
+
+    private void getData() {
+        final ProgressDialog progressDialog = new ProgressDialog(this);
+        progressDialog.setMessage("Loading......");
+        progressDialog.show();
+
+        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(url, new Response.Listener<JSONArray>() {
+            @Override
+            public void onResponse(JSONArray response) {
+                try {
+                    for(int i = 0;i<response.length();i++){
+                        JSONObject JO = response.getJSONObject(i);
+                        Page6article article = new Page6article();
+                        article.setLine(JO.getString("路線"));
+                        article.setLine_name(JO.getString("路線名稱"));
+                        //article.setStamp_num(JO.getString("站序"));
+                        article.setChinese_stamp(JO.getString("中文站點名稱"));
+                        //article.setLongitude(JO.getString("經度"));
+                        //article.setLatitude(JO.getString("緯度"));
+                        article.setCome_back(JO.getString("去回"));
+                        //article.setEnglish_stamp(JO.getString("英文站點名稱"));
+                        articles.add(article);
                     }
-                    JSONArray jsonArray = new JSONArray(String.valueOf(json));
-                    for(int i = 0;i<jsonArray.length();i++){
-                        JSONObject jsonObject = jsonArray.getJSONObject(i);
-                        String gps_time = jsonObject.getString("GPS_Time");
-                        String direction = jsonObject.getString("Direction");
-                        String routeid = jsonObject.getString("RouteID");
-                        String platenumb = jsonObject.getString("PlateNumb");
-                        String y = jsonObject.getString("Y");
-                        String x = jsonObject.getString("X");
-
-                        HashMap<String,String > hashMap = new HashMap<>();
-                        hashMap.put("GPS_Time",gps_time);
-                        hashMap.put("Direction",direction);
-                        hashMap.put("RouteID",routeid);
-                        hashMap.put("PlateNumb",platenumb);
-                        hashMap.put("Y",y);
-                        hashMap.put("X",x);
-
-                        arrayList.add(hashMap);
-                    }
-
-                    Log.d(TAG,"catch data:"+arrayList);
-
-                    runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            dialog.dismiss();
-                            RecyclerView recyclerView;
-                            MyAdapter myAdapter;
-                            recyclerView = findViewById(R.id.recyclerView);
-                            recyclerView.setLayoutManager(new LinearLayoutManager(Page6Activity.this));
-                            recyclerView.addItemDecoration(new DividerItemDecoration(Page6Activity.this,DividerItemDecoration.VERTICAL));
-                            myAdapter = new MyAdapter();
-                            recyclerView.setAdapter(myAdapter);
-                        }
-                    });
-                } catch (MalformedURLException e) {
-                    e.printStackTrace();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                } catch (JSONException e) {
-                    e.printStackTrace();
+                }catch (JSONException e){
+                    Toast.makeText(Page6Activity.this,"JSON is not valid!",Toast.LENGTH_LONG).show();
                 }
+                adapter.setData(articles);
+                adapter.notifyDataSetChanged();
+                progressDialog.dismiss();
             }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                progressDialog.dismiss();
+                Toast.makeText(Page6Activity.this,"Error occurred!",Toast.LENGTH_LONG).show();
+            }
+        });
 
-        }).start();
+        RequestQueue requestQueue = Volley.newRequestQueue(this);
+        requestQueue.add(jsonArrayRequest);
+
     }
 
-    private class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder>{
-        public class ViewHolder extends RecyclerView.ViewHolder{
-            TextView tv_gps,tv_direction,tv_routeid,tv_platenumb,tv_y,tv_x;
-            public ViewHolder(@NonNull View itemView){
-                super(itemView);
-                tv_gps = findViewById(R.id.gps_time);
-                tv_direction = findViewById(R.id.direction);
-                tv_routeid = findViewById(R.id.routeid);
-                tv_platenumb = findViewById(R.id.platenumb);
-                tv_y = findViewById(R.id.y);
-                tv_x = findViewById(R.id.x);
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.search,menu);
+        MenuItem menuItem = menu.findItem(R.id.search);
+        SearchView searchView = (SearchView) menuItem.getActionView();
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String s) {
+                return false;
             }
-        }
 
-        @NonNull
-        @Override
-        public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent,int viewType){
-            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.recylerview_item,parent,false);
-            return new ViewHolder(view);
-        }
-
-        @Override
-        public void onBindViewHolder(@NonNull ViewHolder holder,int position){
-            holder.tv_gps.setText(arrayList.get(position).get("GPS_Time"));
-            holder.tv_direction.setText("目的地："+arrayList.get(position).get("Direction"));
-            holder.tv_routeid.setText("車號："+arrayList.get(position).get("RouteID"));
-            holder.tv_platenumb.setText("車牌號："+arrayList.get(position).get("PlateNumb"));
-            holder.tv_y.setText("Y："+arrayList.get(position).get("Y"));
-            holder.tv_x.setText("X"+arrayList.get(position).get("X"));
-        }
-
-        @Override
-        public int getItemCount(){
-            return arrayList.size();
-        }
+            @Override
+            public boolean onQueryTextChange(String s) {
+                filter(s);
+                return false;
+            }
+        });
+        return super.onCreateOptionsMenu(menu);
     }
 
-
+    private void filter(String text){
+        ArrayList<Page6article> filteredList = new ArrayList<>();
+        for (Page6article item:articles){
+            if(item.getLine().toLowerCase().contains(text.toLowerCase())){
+                filteredList.add(item);
+            }
+        }
+        if(filteredList.isEmpty()){
+            Toast.makeText(this,"No Data Found....",Toast.LENGTH_SHORT);
+        }else{
+            adapter.filterList(filteredList);
+        }
+    }
 }
