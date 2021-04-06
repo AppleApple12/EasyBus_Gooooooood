@@ -40,8 +40,7 @@ public class Page501Activity extends FragmentActivity implements OnMapReadyCallb
     private final String TAG = "Page501Activity";
 
     private Button btnFindPath;
-    private EditText etOrigin;
-    private EditText etDestination;
+    private EditText etOrigin,etDestination;
 
     private List<Marker> originMarkers = new ArrayList<>();
     private List<Marker> destinationMarkers = new ArrayList<>();
@@ -72,8 +71,8 @@ public class Page501Activity extends FragmentActivity implements OnMapReadyCallb
     }
 
     private void sendRequest(){
-        String origin = etOrigin.getText().toString();
-        String destination = etDestination.getText().toString();
+        String origin = etOrigin.getText().toString().trim();
+        String destination = etDestination.getText().toString().trim();
         if(origin.isEmpty()){
             Toast.makeText(this,"請輸入起點",Toast.LENGTH_SHORT).show();
             return;
