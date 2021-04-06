@@ -1,10 +1,13 @@
 package com.example.easybus;
 
+import android.content.Intent;
 import android.view.View;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import static androidx.core.content.ContextCompat.startActivity;
 
 public class Page6AritcleViewHolder extends RecyclerView.ViewHolder {
     TextView txv_line,txv_linename,txv_stampnum,txv_chinesestamp,txv_longitude,txv_latitude,txv_comeback;//txv_englishstamp;
@@ -18,6 +21,7 @@ public class Page6AritcleViewHolder extends RecyclerView.ViewHolder {
         //txv_latitude = itemView.findViewById(R.id.txvlatitude);
         txv_comeback = itemView.findViewById(R.id.txvcomeback);
         //txv_englishstamp = itemView.findViewById(R.id.txvenglish);
+
 
     }
 }

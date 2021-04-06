@@ -58,7 +58,7 @@ public class Page6Activity extends AppCompatActivity{
     ArrayList<Page6article> articles;
     //SearchView sv;
     String  url = "https://datacenter.taichung.gov.tw/swagger/OpenData/6af70a9e-4afc-4f54-bf56-01dd84ee8972";
-
+    static String line,linename,stampnum,c_name,e_name,longitude,latitude,comeback;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -75,16 +75,21 @@ public class Page6Activity extends AppCompatActivity{
 
         articles = new ArrayList<>();
         getData();
-
-        ImageButton btnback = (ImageButton)findViewById(R.id.back);
-        btnback.setOnClickListener(new View.OnClickListener() {
+        adapter.setOnItemClick(new Page6ArticleAdapter.OnItemClickListener() {
             @Override
-            public void onClick(View view) {
-                Intent it1 = new Intent(Page6Activity.this,Page3Activity.class);
+            public void onItemClick(View view, int position) {
+                Intent it1 = new Intent(Page6Activity.this,Page601.class);
+                it1.putExtra("line",Page6ArticleAdapter.a);
+                it1.putExtra("linename",Page6ArticleAdapter.b);
+                it1.putExtra("stampnum",Page6ArticleAdapter.c);
+                it1.putExtra("c_name",Page6ArticleAdapter.d);
+                it1.putExtra("e_name",Page6ArticleAdapter.h);
+                it1.putExtra("longitude",Page6ArticleAdapter.e);
+                it1.putExtra("latitude",Page6ArticleAdapter.f);
+                it1.putExtra("comeback",Page6ArticleAdapter.g);
                 startActivity(it1);
             }
         });
-
         //sv = (SearchView)findViewById(R.id.searchView);
 
     }
@@ -101,21 +106,33 @@ public class Page6Activity extends AppCompatActivity{
                     for(int i = 0;i<response.length();i++){
                         JSONObject JO = response.getJSONObject(i);
                         Page6article article = new Page6article();
-                        article.setLine(JO.getString("路線"));
-                        article.setLine_name(JO.getString("路線名稱"));
+                        line = JO.getString("路線");
+                        linename = JO.getString("路線名稱");
+                        stampnum = JO.getString("站序");
+                        c_name = JO.getString("中文站點名稱");
+                        longitude = JO.getString("經度");
+                        latitude = JO.getString("緯度");
+                        comeback = JO.getString("去回");
+                        e_name = JO.getString("英文站點名稱");
+
+                        article.setLine(line);
+                        article.setLine_name(linename);
                         //article.setStamp_num(JO.getString("站序"));
-                        article.setChinese_stamp(JO.getString("中文站點名稱"));
-                        //article.setLongitude(JO.getString("經度"));
-                        //article.setLatitude(JO.getString("緯度"));
-                        article.setCome_back(JO.getString("去回"));
-                        //article.setEnglish_stamp(JO.getString("英文站點名稱"));
+                        article.setChinese_stamp(c_name);
+                        //article.setLongitude(longitude);
+                        //article.setLatitude(latitude);
+                        article.setCome_back(comeback);
+                        //article.setEnglish_stamp(e_name);
                         articles.add(article);
+
+
                     }
                 }catch (JSONException e){
                     Toast.makeText(Page6Activity.this,"JSON is not valid!",Toast.LENGTH_LONG).show();
                 }
                 adapter.setData(articles);
                 adapter.notifyDataSetChanged();
+
                 progressDialog.dismiss();
             }
         }, new Response.ErrorListener() {
@@ -159,7 +176,7 @@ public class Page6Activity extends AppCompatActivity{
             }
         }
         if(filteredList.isEmpty()){
-            Toast.makeText(this,"No Data Found....",Toast.LENGTH_SHORT);
+            Toast.makeText(this,"No Data Found....",Toast.LENGTH_SHORT).show();
         }else{
             adapter.filterList(filteredList);
         }
