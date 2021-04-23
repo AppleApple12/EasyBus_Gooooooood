@@ -6,7 +6,7 @@ public class User {
     String fullName;
     String emName;
     String emPhone;
-    String imageURL;
+    String imageURL; //
 
     public User() {
     }
