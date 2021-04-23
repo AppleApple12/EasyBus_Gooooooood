@@ -32,8 +32,8 @@
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txvline"/>
-
-    <!--<TextView
+    <!--
+    <TextView
         android:id="@+id/txvstampnum"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -43,7 +43,7 @@
         android:layout_marginLeft="16dp"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txvlinename"/>-->
+        app:layout_constraintTop_toBottomOf="@+id/txvlinename"/>
 
     <TextView
         android:id="@+id/txvchinese"
@@ -57,7 +57,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txvstampnum"/>
 
-    <!--<TextView
+    <TextView
         android:id="@+id/txvlongitude"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -79,7 +79,7 @@
         android:layout_marginLeft="16dp"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txvlongitude"/>-->
+        app:layout_constraintTop_toBottomOf="@+id/txvlongitude"/>
 
     <TextView
         android:id="@+id/txvcomeback"
@@ -93,7 +93,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txvlatitude"/>
 
-    <!--<TextView
+    <TextView
         android:id="@+id/txvenglish"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

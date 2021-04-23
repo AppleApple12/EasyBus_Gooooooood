@@ -49,7 +49,8 @@
         <activity android:name=".Page9Activity" />
         <activity android:name=".Page8Activity" />
         <activity android:name=".Page7Activity" />
-        <activity android:name=".Page6Activity" />
+        <activity android:name=".Page601" />
+        <activity android:name=".Page6Activity"/>
         <activity android:name=".Page5Activity" />
         <activity android:name=".Page4Activity" />
         <activity android:name=".Page3Activity" />
