@@ -34,7 +34,7 @@ import tw.edu.pu.s1071481.module.DirectionFinder;
 import tw.edu.pu.s1071481.module.DirectionFinderListener;
 import tw.edu.pu.s1071481.module.Route;
 
-public class Page501Activity extends FragmentActivity implements OnMapReadyCallback, DirectionFinderListener {
+public class Page501Activity extends FragmentActivity implements OnMapReadyCallback {
 
     private GoogleMap mMap;
     private final String TAG = "Page501Activity";
@@ -57,7 +57,7 @@ public class Page501Activity extends FragmentActivity implements OnMapReadyCallb
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
 
-        btnFindPath = (Button)findViewById(R.id.btnFindPath);
+        /* btnFindPath = (Button)findViewById(R.id.btnFindPath);
         etOrigin = (EditText)findViewById(R.id.etOrigin);
         etDestination = (EditText)findViewById(R.id.etDestination);
 
@@ -66,11 +66,11 @@ public class Page501Activity extends FragmentActivity implements OnMapReadyCallb
             public void onClick(View v) {
                 sendRequest();
             }
-        });
+        }); */
 
     }
 
-    private void sendRequest(){
+    /* private void sendRequest(){
         String origin = etOrigin.getText().toString().trim();
         String destination = etDestination.getText().toString().trim();
         if(origin.isEmpty()){
@@ -88,7 +88,7 @@ public class Page501Activity extends FragmentActivity implements OnMapReadyCallb
         }catch (UnsupportedEncodingException e){
             e.printStackTrace();
         }
-    }
+    } */
 
     /**
      * Manipulates the map once available.
@@ -125,7 +125,7 @@ public class Page501Activity extends FragmentActivity implements OnMapReadyCallb
 
 
 
-    public void onDirectionFinderStart(){
+    /* public void onDirectionFinderStart(){
         progressDialog = ProgressDialog.show(this,"Please wait.","Finding  direction..!",true);
         if (originMarkers!=null){
             for (Marker marker : originMarkers){
@@ -178,6 +178,6 @@ public class Page501Activity extends FragmentActivity implements OnMapReadyCallb
 
             polylinePaths.add(mMap.addPolyline(polylineOptions));
         }
-    }
+    } */
 }
 

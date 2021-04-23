@@ -1,6 +1,8 @@
 package tw.edu.pu.s1071481.module;
 
 import android.os.AsyncTask;
+import android.util.Log;
+import android.view.View;
 
 import com.google.android.gms.maps.model.LatLng;
 
@@ -21,13 +23,13 @@ import java.util.List;
 
 public class DirectionFinder {
 
-    private static final String DIRECTION_URL_API = "https://maps.googleapis.com/api/direction/json?";
-    private static final String GOOGLE_API_KEY = "AIzaSyAsuekuBQspN4Gr5GqFiMGE51Ov4yPdOTQ";
+    private static final String DIRECTION_URL_API = "https://maps.googleapis.com/maps/api/directions/json?";
+    private static final String GOOGLE_API_KEY = "AIzaSyA_-6P0XDrkAv02T3ZhnvzztyFokKFx64M";
     private DirectionFinderListener listener;
     private String origin;
     private String destination;
 
-    public DirectionFinder(DirectionFinderListener listener,String origin,String destination){
+    public DirectionFinder( DirectionFinderListener listener, String origin, String destination){
         this.listener = listener;
         this.origin = origin;
         this.destination = destination;
@@ -55,11 +57,13 @@ public class DirectionFinder {
                 InputStream is = url.openConnection().getInputStream();
                 StringBuffer buffer = new StringBuffer();
                 BufferedReader reader = new BufferedReader(new InputStreamReader(is));
+
                 String line;
                 while((line = reader.readLine())!=null){
                     buffer.append(line+"\n");
                 }
                 return buffer.toString();
+
             }catch (MalformedURLException e){
                 e.printStackTrace();
             }catch (IOException e){
@@ -77,6 +81,7 @@ public class DirectionFinder {
             }
         }
     }
+
     private void parseJSon(String data) throws JSONException{
         if(data == null)
             return;
