@@ -74,7 +74,7 @@ public class Page5012Activity extends AppCompatActivity{
                     //JSONObject stepsArray=stepsObj.getJSONArray("steps");
                     for(int i=0;i<legsArray.length();i++){ //改!!!!!!!!!!!!!
                         //JSONObject jsonSteps=stepsArray.getJSONObject(i);
-                        //BusInfo busInfo=new BusInfo();
+                        //BusInfo busInfo=new BusInfo(); //
                         //busInfo.setHtmlinstructions(jsonObject.getString("htmlinstructions"));
                         //busInfo.setName(jsonObject.getString("name"));
                         //businfos.add(busInfo);
