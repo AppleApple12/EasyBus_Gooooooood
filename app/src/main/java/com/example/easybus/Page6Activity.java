@@ -178,4 +178,5 @@ public class Page6Activity extends AppCompatActivity implements SearchView.OnQue
         adapter.getFilter().filter(newText);
         return false;
     }
+    //2021.04.26
 }
