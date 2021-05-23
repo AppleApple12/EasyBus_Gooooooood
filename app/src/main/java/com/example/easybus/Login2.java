@@ -15,7 +15,6 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 import java.net.InetAddress;
-import java.net.UnknownHostException;
 
 import com.vishnusivadas.advanced_httpurlconnection.PutData;
 
@@ -36,7 +35,7 @@ public class Login2 extends AppCompatActivity {
         //隱藏title bar///
         ActionBar actionBar = getSupportActionBar();
         actionBar.hide();
-        mPassword=findViewById(R.id.password);
+        mPassword=findViewById(R.id.password2);
         mEmail=findViewById(R.id.Email);
         mRegistertext=findViewById(R.id.registertext);
         mLoginBtn=findViewById(R.id.login);
@@ -58,8 +57,9 @@ public class Login2 extends AppCompatActivity {
         mForgetext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(),Forgotpassword.class);
+                Intent intent = new Intent(Login2.this,Forgotpassword.class);
                 startActivity(intent);
+                Toast.makeText(Login2.this,"跳頁成功",Toast.LENGTH_SHORT).show();
                 finish();
             }
         });
@@ -87,7 +87,7 @@ public class Login2 extends AppCompatActivity {
                             data[0] = email;
                             data[1] = password;
 
-                            PutData putData = new PutData("http://10.0.32.218/LoginRegister/login.php", "POST", field, data);//小高電腦的IP
+                            PutData putData = new PutData("http://192.168.0.132/LoginRegister/login.php", "POST", field, data);//小高電腦的IP
                             if (putData.startPut()) {
                                 if (putData.onComplete()) {
 
@@ -96,7 +96,9 @@ public class Login2 extends AppCompatActivity {
                                     if(result.equals("Login Success")){
                                         //System.out.println("幹"+result);
                                         Toast.makeText(getApplicationContext(),result,Toast.LENGTH_SHORT).show();
-                                        Intent intent = new Intent(getApplicationContext(),Page3Activity.class);
+                                        Intent intent = new Intent(getApplicationContext(),Page8Activity.class);
+                                        intent.putExtra("email",email);
+                                        intent.putExtra("password",password);
                                         startActivity(intent);
                                         finish();
                                     }else{

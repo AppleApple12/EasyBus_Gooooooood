@@ -22,28 +22,10 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.18" />
+        app:layout_constraintVertical_bias="0.095" />
 
     <EditText
-        android:id="@+id/Email"
-        android:layout_width="333dp"
-        android:layout_height="55dp"
-        android:drawableLeft="@drawable/email1"
-        android:drawablePadding="10dp"
-        android:ems="10"
-        android:hint="請輸入信箱"
-        android:singleLine="true"
-        android:inputType="textEmailAddress"
-        android:textSize="22sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.321" />
-
-
-    <EditText
-        android:id="@+id/password"
+        android:id="@+id/password2"
         android:layout_width="333dp"
         android:layout_height="55dp"
         android:layout_marginTop="5dip"
@@ -57,7 +39,71 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.453" />
+        app:layout_constraintVertical_bias="0.377" />
+
+    <EditText
+        android:id="@+id/password2"
+        android:layout_width="333dp"
+        android:layout_height="55dp"
+        android:layout_marginTop="5dip"
+        android:drawableLeft="@drawable/password1"
+        android:drawablePadding="10dp"
+        android:ems="10"
+        android:hint="請再輸入一次密碼"
+        android:inputType="textPassword"
+        android:textSize="22sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.518" />
+
+    <EditText
+        android:id="@+id/Email"
+        android:layout_width="333dp"
+        android:layout_height="55dp"
+        android:drawableLeft="@drawable/email1"
+        android:drawablePadding="10dp"
+        android:ems="10"
+        android:hint="請輸入信箱"
+        android:inputType="textEmailAddress"
+        android:singleLine="true"
+        android:textSize="22sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.236" />
+
+
+    <EditText
+        android:id="@+id/userphone"
+        android:layout_width="333dp"
+        android:layout_height="55dp"
+        android:layout_marginTop="5dip"
+        android:drawableLeft="@drawable/phone1"
+        android:drawablePadding="10dp"
+        android:ems="10"
+        android:hint="請輸入自己的手機號碼"
+        android:inputType="textPassword"
+        android:textSize="22sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.659" />
+
+    <TextView
+        android:id="@+id/Registertext"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="36dp"
+        android:layout_marginBottom="172dp"
+        android:text="登入"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
 
     <Button
         android:id="@+id/register"
@@ -70,19 +116,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.73" />
-
-    <TextView
-        android:id="@+id/Registertext"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="328dp"
-        android:text="登入"
-        android:textSize="18sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.896"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintVertical_bias="0.865" />
 
     <ProgressBar
         android:id="@+id/progressBar"
@@ -94,7 +128,7 @@
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.871" />
+        app:layout_constraintVertical_bias="0.976" />
 
     <RadioGroup
         android:id="@+id/RadioGroup"
@@ -103,24 +137,29 @@
         android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.24"
+        app:layout_constraintHorizontal_bias="0.168"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.59000003">
+        app:layout_constraintVertical_bias="0.758">
 
         <RadioButton
             android:id="@+id/radioButton1"
-            android:layout_width="125dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+
             android:text="需求者"
             android:textSize="20dp" />
 
         <RadioButton
             android:id="@+id/radioButton2"
-            android:layout_width="100dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+
             android:text="照顧者"
-            android:textSize="20dp" />
+            android:textSize="20dp"
+            tools:layout_editor_absoluteX="131dp"
+            tools:layout_editor_absoluteY="530dp" />
+
     </RadioGroup>
 
 

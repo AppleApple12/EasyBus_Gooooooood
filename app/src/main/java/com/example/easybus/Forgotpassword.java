@@ -1,7 +1,7 @@
 package com.example.easybus;
 
 import androidx.appcompat.app.ActionBar;
-import androidx.appcompat.app.AlertDialog;
+//import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.ProgressDialog;
@@ -13,7 +13,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Toast;
-
+import android.app.AlertDialog;
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -33,7 +33,7 @@ public class Forgotpassword extends AppCompatActivity {
     EditText mEmail;
     Button mForgotPassword;
 
-    ProgressDialog progressDialog;
+    //ProgressDialog progressDialog;
 
 
     StringRequest stringRequest;
@@ -52,9 +52,9 @@ public class Forgotpassword extends AppCompatActivity {
         mForgotPassword = findViewById(R.id.RegisterBtn);
 
 
-        progressDialog = new ProgressDialog(this);
-        progressDialog.setMessage("寄送中......");
-        progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        //progressDialog = new ProgressDialog(this);
+       // progressDialog.setMessage("寄送中......");
+        //progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
         //忘記密碼回登入頁
         ImageButton btn1 = (ImageButton) findViewById(R.id.back);
         btn1.setOnClickListener(new View.OnClickListener() {
@@ -64,7 +64,7 @@ public class Forgotpassword extends AppCompatActivity {
                 startActivity(it1);
             }
         });
-        mForgotPassword.setOnClickListener(new View.OnClickListener() {
+        /*mForgotPassword.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
@@ -76,7 +76,7 @@ public class Forgotpassword extends AppCompatActivity {
                         Toast.makeText(Forgotpassword.this, "輸入email", Toast.LENGTH_SHORT).show();
                         progressDialog.dismiss();
                     } else {
-                        stringRequest = new StringRequest(Request.Method.POST, "http://www1.pu.edu.tw/~s1070321/mysql/resetpasswordform.php", new Response.Listener<String>() {
+                        stringRequest = new StringRequest(Request.Method.POST, "http://10.0.32.41/mysql/forgot.php", new Response.Listener<String>() {
                             @Override
                             public void onResponse(String response) {
                                 try {
@@ -91,6 +91,7 @@ public class Forgotpassword extends AppCompatActivity {
                                     }
                                 } catch (JSONException e) {
                                     e.printStackTrace();
+                                    Toast.makeText(Forgotpassword.this,e.toString(), Toast.LENGTH_SHORT).show();
                                 }
                             }
                         }, new Response.ErrorListener() {
@@ -113,7 +114,7 @@ public class Forgotpassword extends AppCompatActivity {
                     }
                 }
             }
-        });
+        });*/
     }
 
     private boolean validateEmailAddress(String email){ //加空值判斷
