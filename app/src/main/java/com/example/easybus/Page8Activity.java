@@ -5,6 +5,7 @@ import android.app.Activity;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -41,23 +42,27 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.Set;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class Page8Activity extends AppCompatActivity {
     SelectPicPopupWindow menuWindow; //自訂義的彈出框類別(SelectPicPopupWindow)
 
-    ImageView backBtn,editpassword,qrcode,emergency,mycontact;
+    ImageView backBtn,editpassword,qrcode,emergency,mycontact,logout;
     CircleImageView mPforfilepic;
-    
-    TextView mEnteredName,myphone;
 
+    TextView mEnteredName,myphone;
+    String identity;
     public static final int SELECT_PHOTO=1;
     public static final int TAKE_PHOTO = 3;
     private Uri imageUri;
     private Context mContext;
-    public String email,getmail,password,getpass,name;
+    public String email,getmail,password,getpass,name,nameeeee;
     RequestQueue requestQueue;
+    //String fullname,phone;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -75,24 +80,52 @@ public class Page8Activity extends AppCompatActivity {
         qrcode = findViewById(R.id.frame3);
         emergency = findViewById(R.id.frame4);
         mycontact = findViewById(R.id.frame5);
+        logout = findViewById(R.id.frame6);
         mContext = Page8Activity.this;
 
         requestQueue = Volley.newRequestQueue(this);
 
         getmail=mail();
-        getpass=pass();
-        System.out.println(mPforfilepic);
-        readUser();
 
+        getpass=pass();
+        readUser();
+        //System.out.println("名字:"+readUser());
+        //我的聯絡人
+        mycontact.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Page8Activity.this,my_contact.class);
+                intent.putExtra("email",getmail);
+                startActivity(intent);
+                finish();
+            }
+        });
+        //新增緊急聯絡人
+        emergency.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Page8Activity.this,emergency_contact.class);
+                intent.putExtra("email",getmail);
+                startActivity(intent);
+                finish();
+            }
+        });
+        //登出
+        logout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SharedPreferences email = getSharedPreferences("email",MODE_PRIVATE);
+                email.edit().clear().commit();
+                Intent it = new Intent(Page8Activity.this,Login2.class);
+                startActivity(it);
+            }
+        });
 
         //QRcode
         qrcode.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(Page8Activity.this,qrcode_page.class);
-                intent.putExtra("email",getmail);
-                startActivity(intent);
-                finish();
+               QR();
             }
         });
 
@@ -108,11 +141,18 @@ public class Page8Activity extends AppCompatActivity {
 
             }
         });
-        //返回健(回需求者選單)
+        //返回健(回選單)
         backBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(getApplicationContext(),Page3Activity.class));
+                if(identity.equals("需求者")) {
+                    Intent it4 = new Intent(Page8Activity.this, Page3Activity.class);
+                    startActivity(it4);
+                }else if(identity.equals("照顧者")){
+                    Intent it = new Intent(Page8Activity.this,Page4Activity.class);
+                    startActivity(it);
+                }
+
             }
         });
 
@@ -127,20 +167,20 @@ public class Page8Activity extends AppCompatActivity {
         });
     }
     //抓取使用者基本資料
-    private void readUser(){
-        String URL ="http://192.168.0.132/LoginRegister/fetch.php?email="+getmail;
+    public void readUser(){
+        String URL =Urls.url1+"/LoginRegister/fetch.php?email="+getmail;
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(
                 Request.Method.GET,
                 URL,
                 null,
                 new Response.Listener<JSONObject>() {
+                    String fullname,phone;
                     @Override
                     public void onResponse(JSONObject response) {
-                        String fullname,phone;
                         try {
                             fullname = response.getString("fullname");
                             phone = response.getString("userphone");
-                            name=fullname;
+                            identity = response.getString("identity");
                             myphone.setText(phone);
                             mEnteredName.setText(fullname);
                         } catch (JSONException e) {
@@ -158,7 +198,38 @@ public class Page8Activity extends AppCompatActivity {
         );
         requestQueue.add(jsonObjectRequest);
     }
-
+    public void QR(){
+        String URL =Urls.url1+"/LoginRegister/fetch.php?email="+getmail;
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(
+                Request.Method.GET,
+                URL,
+                null,
+                new Response.Listener<JSONObject>() {
+                    String fullname,phone;
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        try {
+                            fullname = response.getString("fullname");
+                            Intent intent = new Intent(Page8Activity.this,qrcode_page.class);
+                            intent.putExtra("email",getmail);
+                            intent.putExtra("fullname",fullname);
+                            startActivity(intent);
+                            finish();
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                            Toast.makeText(Page8Activity.this, e.toString(), Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(Page8Activity.this, error.toString(), Toast.LENGTH_SHORT).show();
+                    }
+                }
+        );
+        requestQueue.add(jsonObjectRequest);
+    }
     public String mail(){
         Bundle extras = getIntent().getExtras();
         if (extras!=null){

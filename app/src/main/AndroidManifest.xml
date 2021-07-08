@@ -22,9 +22,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".qrscnnner"></activity>
+        <activity android:name=".qrscanner" />
+        <activity android:name=".my_contact" />
+        <activity android:name=".emergency_contact" />
         <activity android:name=".qrcode_page" />
-        <activity android:name=".myfamily" />
         <activity android:name=".edit_password" />
         <activity
             android:name=".SelectPicPopupWindow"
@@ -32,6 +33,7 @@
         <activity android:name=".AddFamMember" />
         <activity android:name=".edit" />
         <activity android:name=".ForgetPassword" />
+        <activity android:name=".Forgotpassword" />
         <activity android:name=".Page801Activity" />
         <activity android:name=".Page7falseActivity" />
         <activity android:name=".Page7trueActivity" />
@@ -74,10 +76,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Capture"
+        <activity
+            android:name=".Capture"
             android:screenOrientation="portrait"
             android:stateNotNeeded="true"
-            android:theme="@style/zxing_CaptureTheme"/>
+            android:theme="@style/zxing_CaptureTheme" />
     </application>
 
 </manifest>

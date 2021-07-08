@@ -4,66 +4,35 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Login">
-
-    <View
-        android:id="@+id/top"
-        android:layout_width="405dp"
-        android:layout_height="95dp"
-        android:background="@drawable/round_button"
-        android:visibility="visible"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <ImageButton
-        android:id="@+id/back"
-        android:layout_width="85dp"
-        android:layout_height="85dp"
-        android:scaleType="fitCenter"
-        app:layout_constraintBottom_toBottomOf="@+id/top"
-        app:layout_constraintStart_toStartOf="@+id/top"
-        app:layout_constraintTop_toTopOf="@+id/top"
-        app:srcCompat="@drawable/back"
-        tools:layout_editor_absoluteY="5dp" />
-
-    <ImageView
-        android:id="@+id/iv1"
-        android:layout_width="275dp"
-        android:layout_height="64dp"
-        android:layout_marginEnd="24dp"
-        android:layout_marginRight="24dp"
-        app:layout_constraintBottom_toBottomOf="@+id/top"
-        app:layout_constraintEnd_toEndOf="@+id/top"
-        app:layout_constraintTop_toTopOf="@+id/top"
-        app:layout_constraintVertical_bias="0.516"
-        app:srcCompat="@drawable/page5up" />
-
-    <ImageView
-        android:id="@+id/iv2"
-        android:layout_width="47dp"
-        android:layout_height="47dp"
-        android:layout_marginStart="28dp"
-        app:layout_constraintBottom_toBottomOf="@+id/iv1"
-        app:layout_constraintStart_toStartOf="@+id/iv1"
-        app:layout_constraintTop_toTopOf="@+id/iv1"
-        app:layout_constraintVertical_bias="0.47"
-        app:srcCompat="@drawable/qrcode" />
+    android:background="#FFFFFF"
+    tools:context=".qrcode_page">
 
     <TextView
-        android:id="@+id/txvtop"
-        android:layout_width="142dp"
-        android:layout_height="45dp"
-        android:layout_marginEnd="36dp"
-        android:layout_marginRight="36dp"
+        android:id="@+id/title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="35dp"
+        android:layout_marginTop="5dp"
+        android:background="#FFFFFF"
         android:text="QRcode"
-        android:textColor="#000000"
-        android:textSize="33sp"
+        android:textColor="@android:color/black"
+        android:textSize="40dp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@+id/iv1"
-        app:layout_constraintEnd_toEndOf="@+id/iv1"
-        app:layout_constraintTop_toTopOf="@+id/iv1"
-        app:layout_constraintVertical_bias="0.526" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.172"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/logo" />
+
+    <ImageView
+        android:id="@+id/logo"
+        android:layout_width="wrap_content"
+        android:layout_height="75dp"
+        android:layout_marginTop="4dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/logo" />
 
     <ImageView
         android:id="@+id/qrimage"
@@ -100,4 +69,16 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.885" />
+
+    <TextView
+        android:id="@+id/back"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="返回前一頁"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.873"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.775" />
 </androidx.constraintlayout.widget.ConstraintLayout>

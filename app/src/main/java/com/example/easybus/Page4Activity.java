@@ -4,6 +4,7 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -40,8 +41,16 @@ public class Page4Activity extends AppCompatActivity {
         btn3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent it3 = new Intent(Page4Activity.this,Page8Activity.class);
-                startActivity(it3);
+                SharedPreferences email = getSharedPreferences("email",MODE_PRIVATE);
+                String email2=email.getString("Email","");
+                if(email2 != "") {
+                    Intent it4 = new Intent(Page4Activity.this, Page8Activity.class);
+                    it4.putExtra("email", email2);
+                    startActivity(it4);
+                }else{
+                    Intent it = new Intent(Page4Activity.this,Login2.class);
+                    startActivity(it);
+                }
             }
         });
 

@@ -8,6 +8,7 @@ import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.MultiFormatWriter;
@@ -16,8 +17,9 @@ import com.google.zxing.common.BitMatrix;
 import com.journeyapps.barcodescanner.BarcodeEncoder;
 
 public class qrcode_page extends AppCompatActivity {
-    String email,getmail;
+    String email,getmail,fullname,getfullname;
     ImageView qrcode,backBtn,qrscan;
+    TextView back;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,20 +30,22 @@ public class qrcode_page extends AppCompatActivity {
         actionBar.hide();
         qrscan = findViewById(R.id.qrscan_btn);
         qrcode=findViewById(R.id.qrimage);
-        backBtn=findViewById(R.id.back);
+        back=findViewById(R.id.back);
         getmail = mail();
+        getfullname=fullname();
+
         //前往掃描
         qrscan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(qrcode_page.this,qrscnnner.class);
+                Intent intent = new Intent(qrcode_page.this,qrscanner.class);
                 intent.putExtra("email",getmail);
                 startActivity(intent);
                 finish();
             }
         });
         //返回健(基本資料)
-        backBtn.setOnClickListener(new View.OnClickListener() {
+        back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(qrcode_page.this,Page8Activity.class);
@@ -67,5 +71,12 @@ public class qrcode_page extends AppCompatActivity {
             email=extras.getString("email");
         }
         return email;
+    }
+    public String fullname(){
+        Bundle extras = getIntent().getExtras();
+        if (extras!=null){
+            fullname=extras.getString("fullname");
+        }
+        return fullname;
     }
 }

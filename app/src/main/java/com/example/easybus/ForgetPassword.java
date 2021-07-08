@@ -32,7 +32,7 @@ public class ForgetPassword extends AppCompatActivity {
         ActionBar actionBar = getSupportActionBar();
         actionBar.hide();
 
-        sendEmailBtn=findViewById(R.id.sendBtn);
+        sendEmailBtn=findViewById(R.id.okBtn);
         userEmail=findViewById(R.id.Email);
         backBtn=findViewById(R.id.back);
 

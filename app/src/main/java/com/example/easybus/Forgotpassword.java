@@ -1,19 +1,22 @@
 package com.example.easybus;
 
 import androidx.appcompat.app.ActionBar;
-//import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ProgressBar;
 import android.widget.Toast;
-import android.app.AlertDialog;
+
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -21,6 +24,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.vishnusivadas.advanced_httpurlconnection.PutData;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -33,7 +37,7 @@ public class Forgotpassword extends AppCompatActivity {
     EditText mEmail;
     Button mForgotPassword;
 
-    //ProgressDialog progressDialog;
+    ProgressDialog progressDialog;
 
 
     StringRequest stringRequest;
@@ -49,22 +53,22 @@ public class Forgotpassword extends AppCompatActivity {
         actionBar.hide();
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         mEmail = findViewById(R.id.Email);
-        mForgotPassword = findViewById(R.id.RegisterBtn);
+        mForgotPassword = findViewById(R.id.forgotpassword);
 
 
-        //progressDialog = new ProgressDialog(this);
-       // progressDialog.setMessage("寄送中......");
-        //progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        progressDialog = new ProgressDialog(this);
+        progressDialog.setMessage("寄送中......");
+        progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
         //忘記密碼回登入頁
-        ImageButton btn1 = (ImageButton) findViewById(R.id.back);
+       /* ImageButton btn1 = (ImageButton) findViewById(R.id.back);
         btn1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent it1 = new Intent(Forgotpassword.this,Login2.class);
                 startActivity(it1);
             }
-        });
-        /*mForgotPassword.setOnClickListener(new View.OnClickListener() {
+        });*/
+        mForgotPassword.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
@@ -76,7 +80,7 @@ public class Forgotpassword extends AppCompatActivity {
                         Toast.makeText(Forgotpassword.this, "輸入email", Toast.LENGTH_SHORT).show();
                         progressDialog.dismiss();
                     } else {
-                        stringRequest = new StringRequest(Request.Method.POST, "http://10.0.32.41/mysql/forgot.php", new Response.Listener<String>() {
+                        stringRequest = new StringRequest(Request.Method.POST, Urls.url1+"/mysql/forgot.php", new Response.Listener<String>() {
                             @Override
                             public void onResponse(String response) {
                                 try {
@@ -91,7 +95,6 @@ public class Forgotpassword extends AppCompatActivity {
                                     }
                                 } catch (JSONException e) {
                                     e.printStackTrace();
-                                    Toast.makeText(Forgotpassword.this,e.toString(), Toast.LENGTH_SHORT).show();
                                 }
                             }
                         }, new Response.ErrorListener() {
@@ -114,7 +117,7 @@ public class Forgotpassword extends AppCompatActivity {
                     }
                 }
             }
-        });*/
+        });
     }
 
     private boolean validateEmailAddress(String email){ //加空值判斷

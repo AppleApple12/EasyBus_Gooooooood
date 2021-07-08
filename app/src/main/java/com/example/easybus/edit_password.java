@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
@@ -29,7 +30,7 @@ public class edit_password extends AppCompatActivity {
     public String pass1, pass2, pass3;
     RequestQueue requestQueue;
     Button btnok;
-    ImageView btnback;
+    TextView btnback;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,7 +40,7 @@ public class edit_password extends AppCompatActivity {
         //隱藏title bar
         ActionBar actionBar = getSupportActionBar();
         actionBar.hide();
-        pas1 = findViewById(R.id.password2);
+        pas1 = findViewById(R.id.password1);
         pas2 = findViewById(R.id.password2);
         pas3 = findViewById(R.id.password3);
         btnok = findViewById(R.id.okBtn);
@@ -71,6 +72,8 @@ public class edit_password extends AppCompatActivity {
                         Toast.makeText(edit_password.this, "請輸入正確密碼", Toast.LENGTH_SHORT).show();
                     }else  if(!pass2.equals(pass3)){
                         Toast.makeText(edit_password.this, "請輸入相同密碼", Toast.LENGTH_SHORT).show();
+                    }else if(pass2.equals(pass1) && pass3.equals(pass1)){
+                        Toast.makeText(edit_password.this, "不可與原密碼相同", Toast.LENGTH_SHORT).show();
                     }else{
                         UpdateUser(pass3);
                     }
@@ -79,7 +82,7 @@ public class edit_password extends AppCompatActivity {
         });
     }
     public void UpdateUser(final String pass3) {
-        String URL = "http://192.168.0.132/LoginRegister/edit.php?email=" + getmail;
+        String URL = Urls.url1+"/LoginRegister/edit.php?email=" + getmail;
         StringRequest stringRequest = new StringRequest(
                 Request.Method.POST,
                 URL,

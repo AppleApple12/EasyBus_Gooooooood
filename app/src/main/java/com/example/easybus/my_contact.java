@@ -20,49 +20,37 @@ import com.android.volley.toolbox.Volley;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class myfamily extends AppCompatActivity {
-    ImageView personalbtn,backBtn;
-    TextView mEnteredName;
-    RequestQueue requestQueue;
+public class my_contact extends AppCompatActivity {
     String email,getmail;
+    TextView mEnteredName;
+    ImageView backBtn;
+    RequestQueue requestQueue;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_myfamily);
-
-        //隱藏title bar
+        setContentView(R.layout.activity_my_contact);
+        backBtn=findViewById(R.id.backicon);
+        mEnteredName = findViewById(R.id.EnteredName);
+        //隱藏title bar///
         ActionBar actionBar = getSupportActionBar();
         actionBar.hide();
-
-        personalbtn=findViewById(R.id.personal);
-        mEnteredName = findViewById(R.id.EnteredName);
-        backBtn=findViewById(R.id.backicon);
-
-        getmail=mail();
-
         requestQueue = Volley.newRequestQueue(this);
+        getmail=mail();
         readUser();
-        //返回健(回需求者選單)
+        //返回我的資料
         backBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(getApplicationContext(),Page3Activity.class));
-            }
-        });
-        //基本資料
-        personalbtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(myfamily.this,Page8Activity.class);
+                Intent intent = new Intent(my_contact.this,Page8Activity.class);
                 intent.putExtra("email",getmail);
                 startActivity(intent);
                 finish();
             }
         });
     }
-
+    //抓取使用者基本資料
     private void readUser(){
-        String URL ="https://0065a21d3bfa.ngrok.io/LoginRegister/fetch.php?email="+getmail;
+        String URL =Urls.url1+"/LoginRegister/fetch.php?email="+getmail;
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(
                 Request.Method.GET,
                 URL,
@@ -70,26 +58,25 @@ public class myfamily extends AppCompatActivity {
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
-                        String fullname,phone;
+                        String fullname;
                         try {
                             fullname = response.getString("fullname");
                             mEnteredName.setText(fullname);
                         } catch (JSONException e) {
                             e.printStackTrace();
-                            Toast.makeText(myfamily.this, e.toString(), Toast.LENGTH_SHORT).show();
+                            Toast.makeText(my_contact.this, e.toString(), Toast.LENGTH_SHORT).show();
                         }
                     }
                 },
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(myfamily.this, error.toString(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(my_contact.this, error.toString(), Toast.LENGTH_SHORT).show();
                     }
                 }
         );
         requestQueue.add(jsonObjectRequest);
     }
-
     public String mail(){
         Bundle extras = getIntent().getExtras();
         if (extras!=null){
