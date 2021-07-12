@@ -2,6 +2,8 @@ package com.example.easybus;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -14,26 +16,45 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class my_contact extends AppCompatActivity {
     String email,getmail;
     TextView mEnteredName;
     ImageView backBtn;
     RequestQueue requestQueue;
+    RecyclerView mrecyclerView;
+    friendAdapter friendAdapter;
+    List<friend> friendList;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_contact);
-        backBtn=findViewById(R.id.backicon);
-        mEnteredName = findViewById(R.id.EnteredName);
         //隱藏title bar///
         ActionBar actionBar = getSupportActionBar();
         actionBar.hide();
+
+        backBtn=findViewById(R.id.backicon);
+        mEnteredName = findViewById(R.id.EnteredName);
+
+        mrecyclerView=findViewById(R.id.recyclerview);
+        mrecyclerView.setHasFixedSize(true);
+        mrecyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+        friendList = new ArrayList<>();
+
+
+        LoadAllfriend();
+
         requestQueue = Volley.newRequestQueue(this);
         getmail=mail();
         readUser();
@@ -48,6 +69,41 @@ public class my_contact extends AppCompatActivity {
             }
         });
     }
+
+    private void LoadAllfriend() {
+        String URL =Urls.url1+"/LoginRegister/my_contact.php?email="+getmail;
+                                                        //Request.Method.GET,URL,null我自己加的
+        JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET,URL,null,
+                new Response.Listener<JSONArray>() {
+            @Override
+            public void onResponse(JSONArray array) {
+                for(int i =0;i<array.length();i++){
+                    try {
+                        JSONObject object = array.getJSONObject(i);
+                        String name = object.getString("F_name").trim();
+                        String phone = object.getString("F_phone").trim();
+
+                        friend f =new friend();
+                        f.setF_name(name);
+                        f.setF_phone(phone);
+                        friendList.add(f);
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+                friendAdapter = new friendAdapter(my_contact.this,friendList);
+                mrecyclerView.setAdapter(friendAdapter);
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(my_contact.this, error.toString(), Toast.LENGTH_SHORT).show();
+            }
+        });
+        RequestQueue requestQueue2 = Volley.newRequestQueue(my_contact.this);
+        requestQueue2.add(request);
+    }
+
     //抓取使用者基本資料
     private void readUser(){
         String URL =Urls.url1+"/LoginRegister/fetch.php?email="+getmail;

@@ -14,11 +14,13 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
@@ -26,9 +28,12 @@ import com.google.zxing.integration.android.IntentResult;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class qrscanner extends AppCompatActivity {
-    String friendmail,email,getmail;
-    RequestQueue requestQueue;
+    String f_email,email,mygetmail;
+    RequestQueue requestQueue, requestQueue1;
     Dialog dialog;
     Button btnok,btncancle;
     TextView maddfriend,friendname;
@@ -40,7 +45,8 @@ public class qrscanner extends AppCompatActivity {
 
         ActionBar actionBar = getSupportActionBar();
         actionBar.hide();
-        getmail=mail();
+        mygetmail=mail();
+        requestQueue1 = Volley.newRequestQueue(this);
         requestQueue = Volley.newRequestQueue(this);
         //Initialize intent integrator
         IntentIntegrator intentIntegrator = new IntentIntegrator(qrscanner.this);
@@ -64,20 +70,88 @@ public class qrscanner extends AppCompatActivity {
         maddfriend = dialog.findViewById(R.id.addfriend);
 
     }
-    public void readUser(String getmail){
-        String URL =Urls.url1+"/LoginRegister/fetch.php?email="+getmail;
+    public void addfriend(final String f_name,final String f_email,final String f_phone){
+        String URL =Urls.url1+"/LoginRegister/addfriend.php?email="+mygetmail;
+        StringRequest stringRequest = new StringRequest(
+                Request.Method.POST,
+                URL,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        if(response.equals("Success")){
+                            Toast.makeText(qrscanner.this, "加入成功 !", Toast.LENGTH_SHORT).show();
+                        }else{
+                            Toast.makeText(qrscanner.this, "已為聯絡人", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(qrscanner.this, error.toString(), Toast.LENGTH_SHORT).show();
+                    }
+                }
+        ) {
+            @Nullable
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> parms = new HashMap<>();
+                //引號內是key值;
+                parms.put("email", mygetmail);
+                parms.put("f_name", f_name);
+                parms.put("f_email", f_email);
+                parms.put("f_phone", f_phone);
+                return parms;
+            }
+        };
+        requestQueue1.add(stringRequest);
+    }
+//加好友用的readUser
+        public void readUser2(final String f_email){
+        String URL =Urls.url1+"/LoginRegister/fetch.php?email="+f_email;
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(
                 Request.Method.GET,
                 URL,
                 null,
                 new Response.Listener<JSONObject>() {
-                    String fullname;
+                    String f_name,f_phone;
                     @Override
                     public void onResponse(JSONObject response) {
                         try {
-                            fullname = response.getString("fullname");
+                            f_name = response.getString("fullname");
+                            f_phone = response.getString("userphone");
+                            addfriend(f_name,f_email,f_phone);
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                            Toast.makeText(qrscanner.this, e.toString(), Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(qrscanner.this, error.toString(), Toast.LENGTH_SHORT).show();
+                    }
+                }
+        );
+        requestQueue.add(jsonObjectRequest);
+    }
+
+
+    public void readUser(final String f_email){
+        String URL =Urls.url1+"/LoginRegister/fetch.php?email="+f_email;
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(
+                Request.Method.GET,
+                URL,
+                null,
+                new Response.Listener<JSONObject>() {
+                    String f_name,f_phone;
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        try {
+                            f_name = response.getString("fullname");
                             //dialog內的TextView
-                            maddfriend.setText("是否加入\n"+fullname+"\n為聯絡人");
+                            maddfriend.setText("是否加入\n"+f_name+"\n為聯絡人");
                         } catch (JSONException e) {
                             e.printStackTrace();
                             Toast.makeText(qrscanner.this, e.toString(), Toast.LENGTH_SHORT).show();
@@ -101,14 +175,15 @@ public class qrscanner extends AppCompatActivity {
                 requestCode, resultCode, data);
         if(intentResult.getContents()!=null){
             //when reuslt content not null
-            friendmail = intentResult.getContents();
-            readUser(friendmail);
+            f_email = intentResult.getContents();
+            readUser(f_email);
             btnok.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     dialog.dismiss();
+                    readUser2(f_email);
                     Intent intent = new Intent(qrscanner.this,Page8Activity.class);
-                    intent.putExtra("email",getmail);
+                    intent.putExtra("email",mygetmail);
                     startActivity(intent);
                 }
             });
@@ -117,7 +192,7 @@ public class qrscanner extends AppCompatActivity {
                 public void onClick(View v) {
                     dialog.dismiss();
                     Intent intent = new Intent(qrscanner.this,Page8Activity.class);
-                    intent.putExtra("email",getmail);
+                    intent.putExtra("email",mygetmail);
                     startActivity(intent);
                 }
             });
