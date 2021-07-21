@@ -46,15 +46,19 @@ public class my_contact extends AppCompatActivity {
         backBtn=findViewById(R.id.backicon);
         mEnteredName = findViewById(R.id.EnteredName);
 
-        mrecyclerView=findViewById(R.id.recyclerview);
-        mrecyclerView.setHasFixedSize(true);
-        mrecyclerView.setLayoutManager(new LinearLayoutManager(this));
-
-        friendList = new ArrayList<>();
-
 
         LoadAllfriend();
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
+        mrecyclerView=findViewById(R.id.recyclerview);
+        mrecyclerView.setHasFixedSize(true);
+       // LinearLayoutManager llm = new LinearLayoutManager(this);
+        //llm.setOrientation(LinearLayoutManager.VERTICAL);
+       //mrecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        mrecyclerView.setLayoutManager(linearLayoutManager);
 
+        friendList = new ArrayList<>();
+        //friendAdapter = new friendAdapter(my_contact.this,friendList);
+        //mrecyclerView.setAdapter(friendAdapter);
         requestQueue = Volley.newRequestQueue(this);
         getmail=mail();
         readUser();
@@ -68,33 +72,33 @@ public class my_contact extends AppCompatActivity {
                 finish();
             }
         });
-    }
 
-    private void LoadAllfriend() {
         String URL =Urls.url1+"/LoginRegister/my_contact.php?email="+getmail;
-                                                        //Request.Method.GET,URL,null我自己加的
+        //Request.Method.GET,URL,null我自己加的
         JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET,URL,null,
                 new Response.Listener<JSONArray>() {
-            @Override
-            public void onResponse(JSONArray array) {
-                for(int i =0;i<array.length();i++){
-                    try {
-                        JSONObject object = array.getJSONObject(i);
-                        String name = object.getString("F_name").trim();
-                        String phone = object.getString("F_phone").trim();
+                    @Override
+                    public void onResponse(JSONArray array) {
+                        for(int i =0;i<array.length();i++){
+                            try {
+                                JSONObject object = array.getJSONObject(i);
+                                String name = object.getString("F_name").trim();
+                                String phone = object.getString("F_phone").trim();
 
-                        friend f =new friend();
-                        f.setF_name(name);
-                        f.setF_phone(phone);
-                        friendList.add(f);
-                    } catch (JSONException e) {
-                        e.printStackTrace();
+                                friend f =new friend();
+                                f.setF_name(name);
+                                f.setF_phone(phone);
+                                friendList.add(f);
+
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                        friendAdapter = new friendAdapter(my_contact.this,friendList);
+                        mrecyclerView.setAdapter(friendAdapter);
+
                     }
-                }
-                friendAdapter = new friendAdapter(my_contact.this,friendList);
-                mrecyclerView.setAdapter(friendAdapter);
-            }
-        }, new Response.ErrorListener() {
+                }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
                 Toast.makeText(my_contact.this, error.toString(), Toast.LENGTH_SHORT).show();
@@ -102,6 +106,13 @@ public class my_contact extends AppCompatActivity {
         });
         RequestQueue requestQueue2 = Volley.newRequestQueue(my_contact.this);
         requestQueue2.add(request);
+       // int count = manager.getItemCount();
+       // System.out.println(count);
+       // Toast.makeText(my_contact.this, String.valueOf(count), Toast.LENGTH_SHORT).show();
+    }
+
+    private void LoadAllfriend() {
+
     }
 
     //抓取使用者基本資料

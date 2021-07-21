@@ -59,6 +59,7 @@ public class edit_password extends AppCompatActivity {
                 finish();
             }
         });
+        //Toast.makeText(edit_password.this, getpass, Toast.LENGTH_SHORT).show();
         btnok.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

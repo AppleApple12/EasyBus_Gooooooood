@@ -41,6 +41,7 @@
         android:layout_width="250dp"
         android:layout_height="40dp"
         android:background="@drawable/input"
+        android:hint=" ex:0900123456"
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -63,7 +64,7 @@
         app:srcCompat="@drawable/people" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/add"
         android:layout_width="92dp"
         android:layout_height="49dp"
         android:background="@drawable/accountbtn"

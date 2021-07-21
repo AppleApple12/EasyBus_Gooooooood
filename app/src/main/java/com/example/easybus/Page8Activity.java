@@ -145,11 +145,13 @@ public class Page8Activity extends AppCompatActivity {
         backBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(identity.equals("需求者")) {
+                if(identity.equals("requester")) {
                     Intent it4 = new Intent(Page8Activity.this, Page3Activity.class);
+                    it4.putExtra("email",getmail);
                     startActivity(it4);
-                }else if(identity.equals("照顧者")){
+                }else if(identity.equals("caregiver")){
                     Intent it = new Intent(Page8Activity.this,Page4Activity.class);
+                    it.putExtra("email",getmail);
                     startActivity(it);
                 }
 

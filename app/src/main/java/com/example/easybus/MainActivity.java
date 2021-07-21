@@ -17,6 +17,7 @@ import android.os.Bundle;
 import android.provider.Settings;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -34,7 +35,7 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
     private static final int REQUEST_FINE_LOCATION_PERMISSION = 102;
-
+    ImageView imv;
     String[] permissionsArray=new String[]{Manifest.permission.CAMERA, Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.CALL_PHONE};
     List<String> permissionsList=new ArrayList<>();
     private static final int REQUEST_CODE_ASK_PERMISSION = 1;
@@ -46,11 +47,11 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         requestQueue = Volley.newRequestQueue(this);
         Button btn1 = (Button)findViewById(R.id.btn1);
-
+        imv=findViewById(R.id.imv1);
         SharedPreferences email = getSharedPreferences("email",MODE_PRIVATE);
         email2=email.getString("Email","");
 
-        btn1.setOnClickListener(new View.OnClickListener() {
+        imv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 // Toast.makeText(MainActivity.this,identity,Toast.LENGTH_LONG).show();
@@ -58,9 +59,11 @@ public class MainActivity extends AppCompatActivity {
                 if(email2 != "") {
                     if("requester".equalsIgnoreCase(identity)) {
                         Intent it4 = new Intent(MainActivity.this,Page3Activity.class);
+                        it4.putExtra("email",email2);
                         startActivity(it4);
                     }else if("caregiver".equalsIgnoreCase(identity)){
                         Intent it = new Intent(MainActivity.this,Page4Activity.class);
+                        it.putExtra("email",email2);
                         startActivity(it);
                     }
                 }else{
@@ -125,15 +128,15 @@ public class MainActivity extends AppCompatActivity {
                             identity = response.getString("identity");
                         } catch (JSONException e) {
                             e.printStackTrace();
-                            Toast.makeText(MainActivity.this, e.toString(), Toast.LENGTH_SHORT).show();
+                           // Toast.makeText(MainActivity.this, e.toString(), Toast.LENGTH_SHORT).show();
                         }
                     }
                 },
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(MainActivity.this,"錯誤拉幹\n"+URL,Toast.LENGTH_LONG).show();
-                        Toast.makeText(MainActivity.this, error.toString(), Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(MainActivity.this,"錯誤拉幹\n"+URL,Toast.LENGTH_LONG).show();
+                       // Toast.makeText(MainActivity.this, error.toString(), Toast.LENGTH_SHORT).show();
                     }
                 }
         );

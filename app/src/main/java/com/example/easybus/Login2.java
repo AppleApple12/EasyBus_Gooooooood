@@ -102,7 +102,7 @@ public class Login2 extends AppCompatActivity {
                                     String result = putData.getResult();
                                     if(result.equals("Login Success")){
                                         //System.out.println("幹"+result);
-                                        Toast.makeText(getApplicationContext(),result,Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(getApplicationContext(),"登入成功",Toast.LENGTH_SHORT).show();
                                         Intent intent = new Intent(getApplicationContext(),Page8Activity.class);
                                         intent.putExtra("email",email);
                                         intent.putExtra("password",password);

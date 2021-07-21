@@ -115,12 +115,12 @@ public class SignUp2 extends AppCompatActivity {
                                             mProgressBar.setVisibility(View.GONE);
                                             String result = putData.getResult();
                                             if (result.equals("Sign Up Success")) {
-                                                Toast.makeText(getApplicationContext(), result, Toast.LENGTH_SHORT).show();
+                                                Toast.makeText(getApplicationContext(), "註冊成功", Toast.LENGTH_SHORT).show();
                                                 Intent intent = new Intent(getApplicationContext(), Login2.class);
                                                 startActivity(intent);
                                                 finish();
                                             } else {
-                                                Toast.makeText(getApplicationContext(), result, Toast.LENGTH_SHORT).show();
+                                                Toast.makeText(getApplicationContext(),"信箱或手機已註冊過", Toast.LENGTH_SHORT).show();
                                             }
                                         }
                                     }

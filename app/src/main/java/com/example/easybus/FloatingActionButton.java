@@ -20,7 +20,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 public class FloatingActionButton extends AppCompatActivity {
-    FirebaseAuth fAuth;
+   FirebaseAuth fAuth;
     FirebaseUser fUser;
     DatabaseReference databaseReference;
     static TextView mEMphone;
@@ -33,14 +33,14 @@ public class FloatingActionButton extends AppCompatActivity {
         fAuth = FirebaseAuth.getInstance();
         fUser = fAuth.getCurrentUser();
         databaseReference = FirebaseDatabase.getInstance().getReference("Users").child(fUser.getUid());
-
+        mEMphone.setText("0926666533");
         //獲取username
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 User user =snapshot.getValue(User.class);
                 assert user != null;
-                mEMphone.setText(user.getEmPhone());
+
             }
 
             @Override
