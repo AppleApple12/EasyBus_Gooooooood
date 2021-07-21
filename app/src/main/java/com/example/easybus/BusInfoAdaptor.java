@@ -1,6 +1,7 @@
 package com.example.easybus;
 
 import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -34,8 +35,13 @@ public class BusInfoAdaptor extends RecyclerView.Adapter<BusInfoViewHolder> {
     @Override
     public void onBindViewHolder(@NonNull BusInfoViewHolder holder, int position) {
         BusInfo businfo=businfos.get(position);
-        holder.mNum.setText(businfo.shortname);
-        holder.mText.setText(businfo.htmlinstructions);
+        if (businfo.shortname==null)
+            holder.mText.setText(businfo.htmlinstructions);
+        else{
+            holder.mText.setText(businfo.shortname);
+            holder.mText.append("  "+businfo.htmlinstructions);
+        }
+        holder.mImg.setImageLevel(businfo.pic);
     }
 
     @Override

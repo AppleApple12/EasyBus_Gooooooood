@@ -26,7 +26,7 @@ public class Page3Activity extends AppCompatActivity {
         btn1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent it1 = new Intent(Page3Activity.this,Page5Activity.class);
+                Intent it1 = new Intent(Page3Activity.this,Page5011Activity.class);
                 startActivity(it1);
             }
         });
@@ -49,14 +49,14 @@ public class Page3Activity extends AppCompatActivity {
             }
         });
         //跳頁到我的帳戶
-        Button btn4 = (Button)findViewById(R.id.btn4);
+        /*Button btn4 = (Button)findViewById(R.id.btn4);
         btn4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent it4 = new Intent(Page3Activity.this,Login.class);
                 startActivity(it4);
             }
-        });
+        }); */
         //浮動按鈕撥打給緊急聯絡人
         FloatingActionButton fab = (FloatingActionButton)findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {

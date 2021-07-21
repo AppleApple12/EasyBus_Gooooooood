@@ -3,18 +3,19 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content">
 
     <ImageView
         android:id="@+id/backg"
-        android:layout_width="332dp"
-        android:layout_height="80dp"
+        android:layout_width="355dp"
+        android:layout_height="125dp"
+        android:gravity="center"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.494"
+        app:layout_constraintHorizontal_bias="0.493"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.156"
+        app:layout_constraintVertical_bias="1.0"
         app:srcCompat="@drawable/routebg" />
 
     <ImageView
@@ -27,36 +28,23 @@
         android:layout_marginRight="274dp"
         app:layout_constraintBottom_toBottomOf="@+id/backg"
         app:layout_constraintEnd_toEndOf="@+id/backg"
+        app:layout_constraintHorizontal_bias="0.062"
         app:layout_constraintStart_toStartOf="@+id/backg"
         app:layout_constraintTop_toTopOf="@+id/backg"
-        tools:srcCompat="@tools:sample/avatars" />
-
-    <TextView
-        android:id="@+id/Num"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="number"
-        android:textSize="18sp"
-        app:layout_constraintBottom_toBottomOf="@+id/backg"
-        app:layout_constraintEnd_toStartOf="@+id/Text"
-        app:layout_constraintHorizontal_bias="0.406"
-        app:layout_constraintStart_toEndOf="@+id/img"
-        app:layout_constraintTop_toTopOf="@+id/backg"
-        app:layout_constraintVertical_bias="0.459" />
+        tools:srcCompat="@drawable/page5012modepic" />
 
     <TextView
         android:id="@+id/Text"
-        android:layout_width="164dp"
-        android:layout_height="20dp"
-        android:layout_marginStart="88dp"
-        android:layout_marginLeft="88dp"
+        android:layout_width="278dp"
+        android:layout_height="48dp"
+        android:layout_gravity="center"
+        android:layout_marginLeft="13dp"
         android:text="Text"
-        android:textSize="18sp"
+        android:textColor="@color/colorPrimary"
+        app:autoSizeTextType="uniform"
         app:layout_constraintBottom_toBottomOf="@+id/backg"
-        app:layout_constraintEnd_toEndOf="@+id/backg"
-        app:layout_constraintHorizontal_bias="0.09"
         app:layout_constraintStart_toEndOf="@+id/img"
         app:layout_constraintTop_toTopOf="@+id/backg"
-        app:layout_constraintVertical_bias="0.45" />
+        app:layout_constraintVertical_bias="0.509" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

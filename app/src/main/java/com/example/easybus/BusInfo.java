@@ -2,8 +2,8 @@ package com.example.easybus;
 
 public class BusInfo {
     String htmlinstructions;
-    String name;
     String shortname;
+    int pic;
 
     public String getHtmlinstructions() {
         return htmlinstructions;
@@ -11,14 +11,6 @@ public class BusInfo {
 
     public void setHtmlinstructions(String htmlinstructions) {
         this.htmlinstructions = htmlinstructions;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     public String getShortname() {
@@ -29,8 +21,9 @@ public class BusInfo {
         this.shortname = shortname;
     }
 
-    public BusInfo(){
+    public int getPic() { return pic;}
 
-    }
+    public void setPic(int pic) { this.pic = pic; }
 
+    public BusInfo(){}
 }

@@ -11,21 +11,23 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
+import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.Polyline;
 import com.google.android.gms.maps.model.PolylineOptions;
 
+import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
@@ -36,12 +38,11 @@ import tw.edu.pu.s1071481.module.Route;
 
 public class Page5011Activity extends FragmentActivity implements OnMapReadyCallback, DirectionFinderListener{
 
-    Page5012Activity page5012Activity;
     String origin,destination;
     private static final String TAG = "Page5011Activity";
     private GoogleMap mMap;
     private EditText mEtOrigin,mEtDestination;
-    private Button mBtnFindPath,mBusInfo;
+    private ImageButton mBtnFindPath,mBusInfo;
     private ProgressDialog progressDialog;
     private List<Marker> originMarkers = new ArrayList<>();
     private List<Marker> destinationMarkers = new ArrayList<>();
@@ -52,8 +53,8 @@ public class Page5011Activity extends FragmentActivity implements OnMapReadyCall
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_page5011);
 
-        mBtnFindPath=(Button)findViewById(R.id.btnFindPath);
-        mBusInfo=(Button)findViewById(R.id.busInfo);
+        mBtnFindPath=(ImageButton)findViewById(R.id.btnFindPath);
+        mBusInfo=(ImageButton)findViewById(R.id.busInfo);
         mEtOrigin=(EditText)findViewById(R.id.etOrigin);
         mEtDestination=(EditText)findViewById(R.id.etDestination);
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
@@ -69,13 +70,7 @@ public class Page5011Activity extends FragmentActivity implements OnMapReadyCall
         mBusInfo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent it=new Intent(Page5011Activity.this,Page5012Activity.class);
-                Bundle bundle = new Bundle();
-                //傳值(origin,destination)
-                bundle.putString("origin2",origin);
-                bundle.putString("destination2",destination);
-                it.putExtras(bundle);
-                startActivity(it);
+                sendRequest2();
             }
         });
     }
@@ -94,6 +89,29 @@ public class Page5011Activity extends FragmentActivity implements OnMapReadyCall
             new DirectionFinder(this,origin,destination).execute();
         }catch(UnsupportedEncodingException e){
             e.printStackTrace();
+        }
+    }
+
+    public void sendRequest2(){
+        origin = mEtOrigin.getText().toString().trim();
+        destination = mEtDestination.getText().toString().trim();
+        if(origin.isEmpty()){
+            Toast.makeText(this, "請輸入起點", Toast.LENGTH_LONG).show();
+            return;
+        }else if(destination.isEmpty()){
+            Toast.makeText(this, "請輸入目的地", Toast.LENGTH_LONG).show();
+            return;
+        }
+        try{
+            Intent it=new Intent(Page5011Activity.this,Page5012Activity.class);
+            Bundle bundle = new Bundle();
+            //傳值(origin,destination)
+            bundle.putString("origin2",origin);
+            bundle.putString("destination2",destination);
+            it.putExtras(bundle);
+            startActivity(it);
+        }catch(Exception e){
+            Toast.makeText(this, e.getMessage(), Toast.LENGTH_LONG).show();
         }
     }
 
@@ -151,15 +169,15 @@ public class Page5011Activity extends FragmentActivity implements OnMapReadyCall
 
         for(Route route:routes){
             mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(route.startLocation,16));
-            ((TextView) findViewById(R.id.tvDuration)).setText(route.duration.text);
-            ((TextView) findViewById(R.id.tvDistance)).setText(route.distance.text);
 
             originMarkers.add(mMap.addMarker(new MarkerOptions()
                     .title(route.startAddress)
+                    .icon(BitmapDescriptorFactory.fromResource(R.drawable.a))
                     .position(route.startLocation)));
 
             destinationMarkers.add(mMap.addMarker(new MarkerOptions()
                     .title(route.endAddress)
+                    .icon(BitmapDescriptorFactory.fromResource(R.drawable.b))
                     .position(route.endLocation)));
 
             PolylineOptions polylineOptions=new PolylineOptions().

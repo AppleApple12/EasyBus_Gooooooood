@@ -6,8 +6,86 @@
     android:layout_height="match_parent"
     tools:context=".Page5012Activity">
 
+    <ImageView
+        android:id="@+id/txvtop"
+        android:layout_width="wrap_content"
+        android:layout_height="105dp"
+        app:layout_constraintBottom_toTopOf="@+id/background2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0"
+        app:srcCompat="@drawable/page501210" />
+
+    <ImageView
+        android:id="@+id/txvtop2"
+        android:layout_width="199dp"
+        android:layout_height="55dp"
+        android:layout_marginTop="16dp"
+        android:alpha="0.5"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/page50125" />
+
+    <TextView
+        android:id="@+id/txvtoptext"
+        android:layout_width="wrap_content"
+        android:layout_height="45dp"
+        android:text="最 佳 路 線"
+        android:textColor="#000000"
+        android:textSize="33sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/txvtop2"
+        app:layout_constraintEnd_toEndOf="@+id/txvtop2"
+        app:layout_constraintStart_toStartOf="@+id/txvtop2"
+        app:layout_constraintTop_toTopOf="@+id/txvtop2" />
+
+    <ImageView
+        android:id="@+id/background2"
+        android:layout_width="450dp"
+        android:layout_height="624dp"
+        android:layout_marginTop="57dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txvtoptext"
+        app:layout_constraintVertical_bias="1.0"
+        app:srcCompat="@drawable/page501211" />
+
+    <ImageView
+        android:id="@+id/backicon"
+        android:layout_width="31dp"
+        android:layout_height="36dp"
+        app:layout_constraintBottom_toBottomOf="@+id/txvtop"
+        app:layout_constraintEnd_toStartOf="@+id/txvtop2"
+        app:layout_constraintHorizontal_bias="0.52"
+        app:layout_constraintStart_toStartOf="@+id/txvtop"
+        app:layout_constraintTop_toTopOf="@+id/txvtop"
+        app:layout_constraintVertical_bias="0.405"
+        app:srcCompat="@drawable/backicon" />
+
+    <ImageView
+        android:id="@+id/addIcon"
+        android:layout_width="31dp"
+        android:layout_height="36dp"
+        app:layout_constraintBottom_toBottomOf="@+id/txvtop"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.506"
+        app:layout_constraintStart_toEndOf="@+id/txvtop2"
+        app:layout_constraintTop_toTopOf="@+id/txvtop"
+        app:layout_constraintVertical_bias="0.333"
+        app:srcCompat="@drawable/page50129" />
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/busInfo"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_width="wrap_content"
+        android:layout_height="520dp"
+        app:layout_constraintBottom_toBottomOf="@+id/background2"
+        app:layout_constraintEnd_toEndOf="@+id/background2"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="@+id/background2"
+        app:layout_constraintTop_toBottomOf="@+id/textView3"
+        app:layout_constraintVertical_bias="0.84" />
 </androidx.constraintlayout.widget.ConstraintLayout>

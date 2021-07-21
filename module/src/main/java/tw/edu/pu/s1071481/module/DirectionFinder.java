@@ -3,6 +3,7 @@ package tw.edu.pu.s1071481.module;
 import android.os.AsyncTask;
 import android.util.Log;
 import android.view.View;
+import android.widget.Toast;
 
 import com.google.android.gms.maps.model.LatLng;
 
@@ -99,10 +100,10 @@ public class DirectionFinder {
             JSONObject jsonDistance = jsonLeg.getJSONObject("distance");
             JSONObject jsonDuration = jsonLeg.getJSONObject("duration");
             JSONObject jsonEndLocation = jsonLeg.getJSONObject("end_location");
-            JSONObject jsonStartLocation = jsonLeg.getJSONObject("start_location");
+            JSONObject jsonStartLocation = jsonLeg.getJSONObject("start_location");;
 
-            route.distance = new Distance(jsonDistance.getString("text"),jsonDistance.getInt("value"));
-            route.duration = new Duration(jsonDuration.getString("text"),jsonDuration.getInt("value"));
+            route.distance = new Distance(jsonDistance.getString("text"));
+            route.duration = new Duration(jsonDuration.getString("text"));
             route.endAddress = jsonLeg.getString("end_address");
             route.startAddress = jsonLeg.getString("start_address");
             route.startLocation = new LatLng(jsonStartLocation.getDouble("lat"),jsonStartLocation.getDouble("lng"));
