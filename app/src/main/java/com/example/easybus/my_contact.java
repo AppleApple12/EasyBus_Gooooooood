@@ -5,9 +5,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.Dialog;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -35,6 +39,8 @@ public class my_contact extends AppCompatActivity {
     RecyclerView mrecyclerView;
     friendAdapter friendAdapter;
     List<friend> friendList;
+    Dialog dialog;
+    Button clickme;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,7 +51,12 @@ public class my_contact extends AppCompatActivity {
 
         backBtn=findViewById(R.id.backicon);
         mEnteredName = findViewById(R.id.EnteredName);
+        dialog = new Dialog(my_contact.this);
 
+        dialog.setContentView(R.layout.nofriend_dialog);
+        //刪除dialog方方的背景
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        clickme=dialog.findViewById(R.id.button9);
 
         LoadAllfriend();
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
@@ -79,6 +90,17 @@ public class my_contact extends AppCompatActivity {
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray array) {
+                        if (array.length()==0){
+                            dialog.show();
+                            clickme.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    Intent intent = new Intent(my_contact.this,qrcode_page.class);
+                                    intent.putExtra("email",getmail);
+                                    startActivity(intent);
+                                }
+                            });
+                        }else
                         for(int i =0;i<array.length();i++){
                             try {
                                 JSONObject object = array.getJSONObject(i);
@@ -106,9 +128,7 @@ public class my_contact extends AppCompatActivity {
         });
         RequestQueue requestQueue2 = Volley.newRequestQueue(my_contact.this);
         requestQueue2.add(request);
-       // int count = manager.getItemCount();
-       // System.out.println(count);
-       // Toast.makeText(my_contact.this, String.valueOf(count), Toast.LENGTH_SHORT).show();
+
     }
 
     private void LoadAllfriend() {
