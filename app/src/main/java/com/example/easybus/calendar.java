@@ -53,7 +53,7 @@ public class calendar extends View {
     private float mTextSizeWeek;
     //日期文本的顏色.大小
     private int mTextColorDay;
-    private float mTextSizeDay;//
+    private float mTextSizeDay;
     //任務次數文本顏色.大小
     private int mTextColorPreFinish,mTextColorPreUnFinish,mTextColorPreNull;
     private float mTextSizePre;
