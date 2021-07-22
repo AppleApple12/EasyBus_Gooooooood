@@ -106,7 +106,9 @@ public class Page3Activity extends AppCompatActivity {
             Log.i("Finished making a call...", "");
         } catch (android.content.ActivityNotFoundException ex) {
             Toast.makeText(Page3Activity.this,
-                    "Call faild, please try again later.", Toast.LENGTH_SHORT).show();
+                    ex.toString(), Toast.LENGTH_SHORT).show();
+           // Toast.makeText(Page3Activity.this,
+                    //"Call faild, please try again later.", Toast.LENGTH_SHORT).show();
         }
         //startActivity(call);
     }
