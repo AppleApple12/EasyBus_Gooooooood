@@ -1,0 +1,48 @@
+Index: gradle/wrapper/gradle-wrapper.properties
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>#Sun Feb 07 17:27:30 CST 2021\r\ndistributionBase=GRADLE_USER_HOME\r\ndistributionPath=wrapper/dists\r\nzipStoreBase=GRADLE_USER_HOME\r\nzipStorePath=wrapper/dists\r\ndistributionUrl=https\\://services.gradle.org/distributions/gradle-6.5-bin.zip\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>x-windows-950
+===================================================================
+--- gradle/wrapper/gradle-wrapper.properties	(revision d8c2d8e58c44151170f1328b537c8597719b9591)
++++ gradle/wrapper/gradle-wrapper.properties	(date 1627030456600)
+@@ -1,6 +1,6 @@
+-#Sun Feb 07 17:27:30 CST 2021
++#Fri Jul 23 16:54:16 CST 2021
+ distributionBase=GRADLE_USER_HOME
++distributionUrl=https\://services.gradle.org/distributions/gradle-7.1.1-bin.zip
+ distributionPath=wrapper/dists
+-zipStoreBase=GRADLE_USER_HOME
+ zipStorePath=wrapper/dists
+-distributionUrl=https\://services.gradle.org/distributions/gradle-6.5-bin.zip
++zipStoreBase=GRADLE_USER_HOME
+Index: build.gradle
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>// Top-level build file where you can add configuration options common to all sub-projects/modules.\r\n\r\nbuildscript {\r\n    repositories {\r\n        google()\r\n        jcenter()\r\n        \r\n    }\r\n    dependencies {\r\n<<<<<<< HEAD\r\n        classpath 'com.android.tools.build:gradle:4.1.2'\r\n        classpath 'com.google.gms:google-services:4.3.3'\r\n\r\n=======\r\n        classpath 'com.android.tools.build:gradle:3.5.3'\r\n        classpath 'com.google.gms:google-services:4.2.0'\r\n>>>>>>> snoopy\r\n        // NOTE: Do not place your application dependencies here; they belong\r\n        // in the individual module build.gradle files\r\n    }\r\n}\r\n\r\nallprojects {\r\n    repositories {\r\n        google()\r\n        jcenter()\r\n        maven { url 'https://jitpack.io' }\r\n    }\r\n}\r\n\r\ntask clean(type: Delete) {\r\n    delete rootProject.buildDir\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- build.gradle	(revision d8c2d8e58c44151170f1328b537c8597719b9591)
++++ build.gradle	(date 1627030987191)
+@@ -7,14 +7,14 @@
+         
+     }
+     dependencies {
+-<<<<<<< HEAD
+-        classpath 'com.android.tools.build:gradle:4.1.2'
+-        classpath 'com.google.gms:google-services:4.3.3'
++//<<<<<<< HEAD
++       // classpath 'com.android.tools.build:gradle:3.5.3'
++        //classpath 'com.google.gms:google-services:4.3.3'
+ 
+-=======
++//=======
+         classpath 'com.android.tools.build:gradle:3.5.3'
+         classpath 'com.google.gms:google-services:4.2.0'
+->>>>>>> snoopy
++//>>>>>>> snoopy
+         // NOTE: Do not place your application dependencies here; they belong
+         // in the individual module build.gradle files
+     }

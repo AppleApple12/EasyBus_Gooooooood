@@ -1,0 +1,388 @@
+Index: app/src/main/AndroidManifest.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<manifest xmlns:android=\"http://schemas.android.com/apk/res/android\"\r\n    xmlns:tools=\"http://schemas.android.com/tools\"\r\n    package=\"com.example.easybus\">\r\n\r\n    <uses-permission android:name=\"android.permission.ACCESS_FINE_LOCATION\" />\r\n    <uses-permission android:name=\"android.permission.INTERNET\" />\r\n    <uses-permission android:name=\"android.permission.ACCESS_COARSE_LOCATION\" />\r\n    <uses-permission android:name=\"android.permission.ACCESS_NETWORK_STATE\" />\r\n    <uses-permission android:name=\"android.permission.CALL_PHONE\" />\r\n    <uses-permission android:name=\"android.permission.WRITE_EXTERNAL_STORAGE\" />\r\n    <uses-permission android:name=\"android.permission.READ_EXTERNAL_STORAGE\"/>\r\n    <uses-permission android:name=\"android.permission.CAMERA\" />\r\n\r\n    <uses-feature\r\n        android:name=\"android.hardware.camera\"\r\n        android:required=\"true\" />\r\n\r\n    <application\r\n        android:allowBackup=\"true\"\r\n        android:icon=\"@mipmap/ic_launcher\"\r\n        android:label=\"@string/app_name\"\r\n        android:roundIcon=\"@mipmap/ic_launcher_round\"\r\n        android:supportsRtl=\"true\"\r\n        android:theme=\"@style/AppTheme\">\r\n<<<<<<< HEAD\r\n        <activity android:name=\".SelectPicPopupWindow\"\r\n            tools:ignore=\"Instantiatable\"></activity>\r\n        <activity android:name=\".AddFamMember\" />\r\n        <activity android:name=\".edit\" />\r\n        <activity android:name=\".ForgetPassword\" />\r\n        <activity android:name=\".Page801Activity\" />\r\n        <activity android:name=\".Page7falseActivity\" />\r\n        <activity android:name=\".Page7trueActivity\" />\r\n        <activity android:name=\".Page702Activity\" />\r\n        <activity android:name=\".Page701Activity\" />\r\n        <activity android:name=\".Login\" />\r\n        <activity android:name=\".Register\" />\r\n        <activity android:name=\".Page10Activity\" />\r\n        <activity android:name=\".Page9Activity\" />\r\n        <activity android:name=\".Page501Activity\" />\r\n        <activity android:name=\".Login2\" />\r\n        <activity android:name=\".SignUp2\" />\r\n=======\r\n        <activity android:name=\".Page5011Activity\"></activity>\r\n        <!--\r\n             The API key for Google Maps-based APIs is defined as a string resource.\r\n             (See the file \"res/values/google_maps_api.xml\").\r\n             Note that the API key is linked to the encryption key used to sign the APK.\r\n             You need a different API key for each encryption key, including the release key that is used to\r\n             sign the APK for publishing.\r\n             You can define the keys for the debug and release targets in src/debug/ and src/release/.\r\n        -->\r\n>>>>>>> snoopy\r\n        <meta-data\r\n            android:name=\"com.google.android.geo.API_KEY\"\r\n            android:value=\"@string/google_maps_key\" />\r\n\r\n<<<<<<< HEAD\r\n        <provider\r\n            android:name=\"androidx.core.content.FileProvider\"\r\n            android:authorities=\"com.example.EasyBus.fileprovider\"\r\n            android:exported=\"false\"\r\n            android:grantUriPermissions=\"true\"\r\n            tools:ignore=\"ExtraText\">\r\n            <meta-data\r\n                android:name=\"android.support.FILE_PROVIDER_PATHS\"\r\n                android:resource=\"@xml/file_paths\" />\r\n        </provider>\r\n\r\n=======\r\n        <activity\r\n            android:name=\".Page501Activity\"\r\n            android:label=\"@string/title_activity_page501\" />\r\n        <activity android:name=\".AddFamMember\" />\r\n        <activity android:name=\".edit\" />\r\n        <activity android:name=\".ForgetPassword\" />\r\n        <activity android:name=\".Page801Activity\" />\r\n        <activity android:name=\".Page7falseActivity\" />\r\n        <activity android:name=\".Page7trueActivity\" />\r\n        <activity android:name=\".Page702Activity\" />\r\n        <activity android:name=\".Page701Activity\" />\r\n        <activity android:name=\".Login\" />\r\n        <activity android:name=\".Register\" />\r\n        <activity android:name=\".Page10Activity\" />\r\n        <activity android:name=\".Page9Activity\" />\r\n>>>>>>> snoopy\r\n        <activity android:name=\".Page8Activity\" />\r\n        <activity android:name=\".Page7Activity\" />\r\n        <activity android:name=\".Page6Activity\" />\r\n        <activity android:name=\".Page5Activity\" />\r\n        <activity android:name=\".Page4Activity\" />\r\n        <activity android:name=\".Page3Activity\" />\r\n        <activity android:name=\".Page2Activity\" />\r\n        <activity android:name=\".MainActivity\">\r\n\r\n            <intent-filter>\r\n                <action android:name=\"android.intent.action.MAIN\" />\r\n\r\n                <category android:name=\"android.intent.category.LAUNCHER\" />\r\n            </intent-filter>\r\n        </activity>\r\n    </application>\r\n\r\n</manifest>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/AndroidManifest.xml	(revision d8c2d8e58c44151170f1328b537c8597719b9591)
++++ app/src/main/AndroidManifest.xml	(date 1627115939024)
+@@ -1,20 +1,16 @@
+ <?xml version="1.0" encoding="utf-8"?>
+ <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+-    xmlns:tools="http://schemas.android.com/tools"
+     package="com.example.easybus">
+-
++    <!--
++         The ACCESS_COARSE/FINE_LOCATION permissions are not required to use
++         Google Maps Android API v2, but you must specify either coarse or fine
++         location permissions for the 'MyLocation' functionality.
++    -->
+     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+     <uses-permission android:name="android.permission.INTERNET" />
+     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+     <uses-permission android:name="android.permission.CALL_PHONE" />
+-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+-    <uses-permission android:name="android.permission.CAMERA" />
+-
+-    <uses-feature
+-        android:name="android.hardware.camera"
+-        android:required="true" />
+ 
+     <application
+         android:allowBackup="true"
+@@ -23,25 +19,6 @@
+         android:roundIcon="@mipmap/ic_launcher_round"
+         android:supportsRtl="true"
+         android:theme="@style/AppTheme">
+-<<<<<<< HEAD
+-        <activity android:name=".SelectPicPopupWindow"
+-            tools:ignore="Instantiatable"></activity>
+-        <activity android:name=".AddFamMember" />
+-        <activity android:name=".edit" />
+-        <activity android:name=".ForgetPassword" />
+-        <activity android:name=".Page801Activity" />
+-        <activity android:name=".Page7falseActivity" />
+-        <activity android:name=".Page7trueActivity" />
+-        <activity android:name=".Page702Activity" />
+-        <activity android:name=".Page701Activity" />
+-        <activity android:name=".Login" />
+-        <activity android:name=".Register" />
+-        <activity android:name=".Page10Activity" />
+-        <activity android:name=".Page9Activity" />
+-        <activity android:name=".Page501Activity" />
+-        <activity android:name=".Login2" />
+-        <activity android:name=".SignUp2" />
+-=======
+         <activity android:name=".Page5011Activity"></activity>
+         <!--
+              The API key for Google Maps-based APIs is defined as a string resource.
+@@ -51,24 +28,10 @@
+              sign the APK for publishing.
+              You can define the keys for the debug and release targets in src/debug/ and src/release/.
+         -->
+->>>>>>> snoopy
+         <meta-data
+             android:name="com.google.android.geo.API_KEY"
+             android:value="@string/google_maps_key" />
+ 
+-<<<<<<< HEAD
+-        <provider
+-            android:name="androidx.core.content.FileProvider"
+-            android:authorities="com.example.EasyBus.fileprovider"
+-            android:exported="false"
+-            android:grantUriPermissions="true"
+-            tools:ignore="ExtraText">
+-            <meta-data
+-                android:name="android.support.FILE_PROVIDER_PATHS"
+-                android:resource="@xml/file_paths" />
+-        </provider>
+-
+-=======
+         <activity
+             android:name=".Page501Activity"
+             android:label="@string/title_activity_page501" />
+@@ -84,7 +47,6 @@
+         <activity android:name=".Register" />
+         <activity android:name=".Page10Activity" />
+         <activity android:name=".Page9Activity" />
+->>>>>>> snoopy
+         <activity android:name=".Page8Activity" />
+         <activity android:name=".Page7Activity" />
+         <activity android:name=".Page6Activity" />
+@@ -93,7 +55,6 @@
+         <activity android:name=".Page3Activity" />
+         <activity android:name=".Page2Activity" />
+         <activity android:name=".MainActivity">
+-
+             <intent-filter>
+                 <action android:name="android.intent.action.MAIN" />
+ 
+Index: build.gradle
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>// Top-level build file where you can add configuration options common to all sub-projects/modules.\r\n\r\nbuildscript {\r\n    repositories {\r\n        google()\r\n        jcenter()\r\n        \r\n    }\r\n    dependencies {\r\n<<<<<<< HEAD\r\n        classpath 'com.android.tools.build:gradle:4.1.2'\r\n        classpath 'com.google.gms:google-services:4.3.3'\r\n\r\n=======\r\n        classpath 'com.android.tools.build:gradle:3.5.3'\r\n        classpath 'com.google.gms:google-services:4.2.0'\r\n>>>>>>> snoopy\r\n        // NOTE: Do not place your application dependencies here; they belong\r\n        // in the individual module build.gradle files\r\n    }\r\n}\r\n\r\nallprojects {\r\n    repositories {\r\n        google()\r\n        jcenter()\r\n        maven { url 'https://jitpack.io' }\r\n    }\r\n}\r\n\r\ntask clean(type: Delete) {\r\n    delete rootProject.buildDir\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- build.gradle	(revision d8c2d8e58c44151170f1328b537c8597719b9591)
++++ build.gradle	(date 1627117363052)
+@@ -7,14 +7,9 @@
+         
+     }
+     dependencies {
+-<<<<<<< HEAD
+-        classpath 'com.android.tools.build:gradle:4.1.2'
+-        classpath 'com.google.gms:google-services:4.3.3'
+-
+-=======
+         classpath 'com.android.tools.build:gradle:3.5.3'
+         classpath 'com.google.gms:google-services:4.2.0'
+->>>>>>> snoopy
++
+         // NOTE: Do not place your application dependencies here; they belong
+         // in the individual module build.gradle files
+     }
+Index: app/build.gradle
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>apply plugin: 'com.android.application'\r\napply plugin: 'com.google.gms.google-services'\r\n\r\nandroid {\r\n    compileSdkVersion 29\r\n    buildToolsVersion \"29.0.2\"\r\n    defaultConfig {\r\n        applicationId \"com.example.easybus\"\r\n<<<<<<< HEAD\r\n        minSdkVersion 25\r\n=======\r\n        minSdkVersion 16\r\n>>>>>>> snoopy\r\n        targetSdkVersion 29\r\n        versionCode 1\r\n        versionName \"1.0\"\r\n        vectorDrawables.useSupportLibrary = true\r\n        testInstrumentationRunner \"androidx.test.runner.AndroidJUnitRunner\"\r\n    }\r\n    buildTypes {\r\n        release {\r\n            minifyEnabled false\r\n            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'\r\n        }\r\n    }\r\n    lintOptions {\r\n        abortOnError false\r\n        disable \"Resource Type\"\r\n    }\r\n    defaultConfig {\r\n        vectorDrawables.useSupportLibrary = true\r\n    }\r\n}\r\n\r\n\r\n\r\ndependencies {\r\n    implementation fileTree(dir: 'libs', include: ['*.jar'])\r\n    //implementation 'com.android.support:appcompat-v7:26.1.1'\r\n    implementation \"com.google.android.gms:play-services-location:15.0.1\"\r\n    implementation 'com.google.android.gms:play-services-maps:16.1.0'\r\n    implementation 'androidx.appcompat:appcompat:1.0.2'\r\n    implementation 'androidx.constraintlayout:constraintlayout:1.1.3'\r\n    implementation 'androidx.legacy:legacy-support-v4:1.0.0'\r\n    implementation 'com.google.firebase:firebase-storage:16.0.4'\r\n    implementation 'com.google.firebase:firebase-auth:16.0.5'\r\n    implementation 'com.google.firebase:firebase-database:16.0.4'\r\n    testImplementation 'junit:junit:4.12'\r\n    androidTestImplementation 'androidx.test.ext:junit:1.1.0'\r\n    androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.1'\r\n    implementation 'com.google.android.material:material:1.0.0'\r\n<<<<<<< HEAD\r\n\r\n    implementation 'com.android.support:design:29.0.0'\r\n    implementation 'com.rengwuxian.materialedittext:library:2.1.4'\r\n    implementation 'de.hdodenhof:circleimageview:3.0.0'\r\n    implementation 'com.github.bumptech.glide:glide:4.11.0'\r\n    implementation 'androidx.recyclerview:recyclerview:1.1.0'\r\n    implementation 'com.google.android.material:material:1.3.0'\r\n\r\n    implementation 'com.android.volley:volley:1.1.0'\r\n    implementation 'com.github.VishnuSivadasVS:Advanced-HttpURLConnection:1.2'\r\n=======\r\n    implementation project(':module')\r\n    implementation 'androidx.recyclerview:recyclerview:1.1.0'\r\n    implementation 'com.android.volley:volley:1.1.1'\r\n    implementation 'com.android.support:appcompat-v7:29.0.1'\r\n    implementation 'com.squareup.picasso:picasso:2.71828'\r\n>>>>>>> snoopy\r\n}\r\napply plugin: 'com.google.gms.google-services'\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/build.gradle	(revision d8c2d8e58c44151170f1328b537c8597719b9591)
++++ app/build.gradle	(date 1627199053264)
+@@ -6,15 +6,10 @@
+     buildToolsVersion "29.0.2"
+     defaultConfig {
+         applicationId "com.example.easybus"
+-<<<<<<< HEAD
+-        minSdkVersion 25
+-=======
+         minSdkVersion 16
+->>>>>>> snoopy
+         targetSdkVersion 29
+         versionCode 1
+         versionName "1.0"
+-        vectorDrawables.useSupportLibrary = true
+         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+     }
+     buildTypes {
+@@ -27,45 +22,33 @@
+         abortOnError false
+         disable "Resource Type"
+     }
++    compileOptions {
++        sourceCompatibility JavaVersion.VERSION_1_8
++        targetCompatibility JavaVersion.VERSION_1_8
++    }
+     defaultConfig {
+         vectorDrawables.useSupportLibrary = true
+     }
+ }
+ 
+-
+-
+ dependencies {
+     implementation fileTree(dir: 'libs', include: ['*.jar'])
+     //implementation 'com.android.support:appcompat-v7:26.1.1'
+-    implementation "com.google.android.gms:play-services-location:15.0.1"
+-    implementation 'com.google.android.gms:play-services-maps:16.1.0'
+-    implementation 'androidx.appcompat:appcompat:1.0.2'
+-    implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
++    implementation 'com.google.android.gms:play-services-location:18.0.0'
++    implementation 'com.google.android.gms:play-services-maps:17.0.1'
++    implementation 'androidx.appcompat:appcompat:1.3.0'
++    implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
+     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+-    implementation 'com.google.firebase:firebase-storage:16.0.4'
+-    implementation 'com.google.firebase:firebase-auth:16.0.5'
+-    implementation 'com.google.firebase:firebase-database:16.0.4'
++    implementation 'com.google.firebase:firebase-storage:20.0.0'
++    implementation 'com.google.firebase:firebase-auth:21.0.1'
++    implementation 'com.google.firebase:firebase-database:20.0.0'
+     testImplementation 'junit:junit:4.12'
+-    androidTestImplementation 'androidx.test.ext:junit:1.1.0'
+-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.1'
+-    implementation 'com.google.android.material:material:1.0.0'
+-<<<<<<< HEAD
+-
+-    implementation 'com.android.support:design:29.0.0'
+-    implementation 'com.rengwuxian.materialedittext:library:2.1.4'
+-    implementation 'de.hdodenhof:circleimageview:3.0.0'
+-    implementation 'com.github.bumptech.glide:glide:4.11.0'
+-    implementation 'androidx.recyclerview:recyclerview:1.1.0'
+-    implementation 'com.google.android.material:material:1.3.0'
+-
+-    implementation 'com.android.volley:volley:1.1.0'
+-    implementation 'com.github.VishnuSivadasVS:Advanced-HttpURLConnection:1.2'
+-=======
++    androidTestImplementation 'androidx.test.ext:junit:1.1.3'
++    androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
++    implementation 'com.google.android.material:material:1.4.0'
+     implementation project(':module')
+-    implementation 'androidx.recyclerview:recyclerview:1.1.0'
+-    implementation 'com.android.volley:volley:1.1.1'
++    implementation 'androidx.recyclerview:recyclerview:1.2.1'
++    implementation 'com.android.volley:volley:1.2.0'
+     implementation 'com.android.support:appcompat-v7:29.0.1'
+     implementation 'com.squareup.picasso:picasso:2.71828'
+->>>>>>> snoopy
+ }
+-apply plugin: 'com.google.gms.google-services'
+Index: app/src/main/java/com/example/easybus/SignUp2.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.example.easybus;\r\n\r\nimport androidx.appcompat.app.ActionBar;\r\nimport androidx.appcompat.app.AppCompatActivity;\r\n\r\nimport android.content.Context;\r\nimport android.content.Intent;\r\nimport android.net.wifi.WifiInfo;\r\nimport android.net.wifi.WifiManager;\r\nimport android.os.Bundle;\r\nimport android.os.Handler;\r\nimport android.os.Looper;\r\nimport android.text.TextUtils;\r\nimport android.text.format.Formatter;\r\nimport android.view.View;\r\nimport android.widget.Button;\r\nimport android.widget.EditText;\r\nimport android.widget.ProgressBar;\r\nimport android.widget.RadioButton;\r\nimport android.widget.RadioGroup;\r\nimport android.widget.TextView;\r\nimport android.widget.Toast;\r\nimport android.util.Patterns;\r\n\r\nimport com.vishnusivadas.advanced_httpurlconnection.PutData;\r\n\r\nimport java.net.InetAddress;\r\nimport java.net.NetworkInterface;\r\nimport java.net.SocketException;\r\nimport java.net.UnknownHostException;\r\nimport java.util.ArrayList;\r\nimport java.util.Enumeration;\r\nimport java.util.regex.Pattern;\r\n\r\n\r\n\r\npublic class SignUp2 extends AppCompatActivity {\r\n\r\n    //InetAddress ip;\r\n    EditText mFullname, mPassword, mEmail;\r\n    TextView mRegistertext;\r\n    Button mReg;\r\n    ProgressBar mProgressBar;\r\n    RadioButton mRad1,mRad2;\r\n    RadioGroup mRaG;\r\n    String midentity=\"\";\r\n    String url1,url2,url3,ip;\r\n\r\n    //取得IP\r\n    private String getMyIp(){\r\n        //新增一個WifiManager物件並取得WIFI_SERVICE\r\n        WifiManager wifi_service = (WifiManager)getSystemService(WIFI_SERVICE);\r\n        //取得wifi資訊\r\n        WifiInfo wifiInfo = wifi_service.getConnectionInfo();\r\n        //取得IP，但這會是一個詭異的數字，還要再自己換算才行\r\n        int ipAddress = wifiInfo.getIpAddress();\r\n        //利用位移運算和AND運算計算IP\r\n        String ip = String.format(\"%d.%d.%d.%d\",(ipAddress & 0xff),(ipAddress >> 8 & 0xff),(ipAddress >> 16 & 0xff),(ipAddress >> 24 & 0xff));\r\n        String binStr=Integer.toBinaryString(ipAddress);\r\n        //String ip = Integer.valueOf(binStr,2).toString();\r\n        System.out.println(\"ip    :\"+ip);\r\n        System.out.println(\"二進位:\"+binStr);\r\n        return ip;\r\n    }\r\n\r\n    @Override\r\n    protected void onCreate(Bundle savedInstanceState) {\r\n        super.onCreate(savedInstanceState);\r\n        setContentView(R.layout.activity_sign_up2);\r\n\r\n        ActionBar actionBar = getSupportActionBar();\r\n        actionBar.hide();\r\n\r\n        mFullname=findViewById(R.id.fullname);\r\n        mPassword=findViewById(R.id.password);\r\n        mEmail=findViewById(R.id.Email);\r\n        mRegistertext=findViewById(R.id.Registertext);\r\n        mReg=findViewById(R.id.register);\r\n\r\n        mRaG=findViewById(R.id.RadioGroup);\r\n        mRad1=findViewById(R.id.radioButton1);\r\n        mRad2=findViewById(R.id.radioButton2);\r\n\r\n        mProgressBar=findViewById(R.id.progressBar);\r\n        mProgressBar.setVisibility(View.GONE);\r\n\r\n\r\n\r\n        mRegistertext.setOnClickListener(new View.OnClickListener() {\r\n            @Override\r\n            public void onClick(View v) {\r\n                Intent intent = new Intent(getApplicationContext(),Login2.class);\r\n                startActivity(intent);\r\n                finish();\r\n            }\r\n        });\r\n        //ip = getMyIp();\r\n        GetIP getip = new GetIP();\r\n        //ip = getip(name);\r\n\r\n\r\n        url2 = \"http://10.0.32.218/LoginRegister/signup.php\";\r\n        //Toast.makeText(this,url1,Toast.LENGTH_SHORT).show();\r\n        mReg.setOnClickListener(new View.OnClickListener() {\r\n            @Override\r\n            public void onClick(View v) {\r\n\r\n                final String fullname,email,password,identity;\r\n                fullname = String.valueOf(mFullname.getText());\r\n                email = String.valueOf(mEmail.getText());\r\n                password = String.valueOf(mPassword.getText());\r\n\r\n                switch(mRaG.getCheckedRadioButtonId()){\r\n                    case R.id.radioButton1:\r\n                        midentity = \"需求者\";\r\n                        break;\r\n                    case R.id.radioButton2:\r\n                        midentity = \"照顧者\";\r\n                        break;\r\n                }\r\n                identity = midentity;\r\n                Boolean match = validateEmailAddress(email);\r\n                if (match==true) {\r\n                    if (!fullname.equals(\"\") && !email.equals(\"\") && !password.equals(\"\") && !identity.isEmpty()) {\r\n                        mProgressBar.setVisibility(View.VISIBLE);\r\n                        Handler handler = new Handler(Looper.getMainLooper());\r\n                        handler.post(new Runnable() {\r\n                            @Override\r\n                            public void run() {\r\n                                String[] field = new String[4];\r\n                                field[0] = \"fullname\";\r\n                                field[1] = \"email\";\r\n                                field[2] = \"password\";\r\n                                field[3] = \"identity\";\r\n\r\n                                String[] data = new String[4];\r\n                                data[0] = fullname;\r\n                                data[1] = email;\r\n                                data[2] = password;\r\n                                data[3] = identity;\r\n\r\n\r\n                                PutData putData = new PutData(url2, \"POST\", field, data);//小高電腦的IP\r\n                                if (putData.startPut()) {\r\n                                    if (putData.onComplete()) {\r\n                                        mProgressBar.setVisibility(View.GONE);\r\n                                        String result = putData.getResult();\r\n                                        if (result.equals(\"Sign Up Success\")) {\r\n                                            Toast.makeText(getApplicationContext(), result, Toast.LENGTH_SHORT).show();\r\n                                            Intent intent = new Intent(getApplicationContext(), Login2.class);\r\n                                            startActivity(intent);\r\n                                            finish();\r\n                                        } else {\r\n                                            Toast.makeText(getApplicationContext(), result, Toast.LENGTH_SHORT).show();\r\n                                        }\r\n                                    }\r\n                                }\r\n                            }\r\n                        });\r\n\r\n                    }\r\n                }\r\n                else{\r\n                    Toast.makeText(getApplicationContext(),\"All filed required\",Toast.LENGTH_SHORT).show();\r\n                }\r\n            }\r\n        });\r\n    }\r\n\r\n\r\n    private boolean validateEmailAddress(String email){ //加空值判斷\r\n                String emailInput = email;\r\n\r\n                if(!emailInput.isEmpty() && Patterns.EMAIL_ADDRESS.matcher(emailInput).matches()){\r\n                    //Toast.makeText(this,\"Email Validated Successfully!\",Toast.LENGTH_SHORT).show();\r\n                    return true;\r\n                }else{\r\n                    Toast.makeText(this,\"InValid Email Address!\",Toast.LENGTH_SHORT).show();\r\n                    return false;\r\n                }\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/java/com/example/easybus/SignUp2.java	(revision d8c2d8e58c44151170f1328b537c8597719b9591)
++++ app/src/main/java/com/example/easybus/SignUp2.java	(date 1627114682750)
+@@ -99,7 +99,7 @@
+         //ip = getip(name);
+ 
+ 
+-        url2 = "http://10.0.32.218/LoginRegister/signup.php";
++        url2 = "http://192.168.0.127/LoginRegister/signup.php";
+         //Toast.makeText(this,url1,Toast.LENGTH_SHORT).show();
+         mReg.setOnClickListener(new View.OnClickListener() {
+             @Override
+Index: app/src/main/java/com/example/easybus/Login2.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>  package com.example.easybus;\r\n\r\nimport androidx.appcompat.app.ActionBar;\r\nimport androidx.appcompat.app.AppCompatActivity;\r\n\r\nimport android.content.Intent;\r\nimport android.os.Bundle;\r\nimport android.os.Handler;\r\nimport android.os.Looper;\r\nimport android.view.View;\r\nimport android.widget.Button;\r\nimport android.widget.EditText;\r\nimport android.widget.ImageButton;\r\nimport android.widget.ProgressBar;\r\nimport android.widget.TextView;\r\nimport android.widget.Toast;\r\nimport java.net.InetAddress;\r\nimport java.net.UnknownHostException;\r\n\r\nimport com.vishnusivadas.advanced_httpurlconnection.PutData;\r\n\r\npublic class Login2 extends AppCompatActivity {\r\n\r\n    InetAddress ip;\r\n    EditText mPassword, mEmail;\r\n    TextView mRegistertext,mForgetext;\r\n    ImageButton backBtn;\r\n    Button mLoginBtn;\r\n    ProgressBar mProgressBar;\r\n    String url;\r\n    @Override\r\n    protected void onCreate(Bundle savedInstanceState) {\r\n        super.onCreate(savedInstanceState);\r\n        setContentView(R.layout.activity_login2);\r\n\r\n        //隱藏title bar\r\n        ActionBar actionBar = getSupportActionBar();\r\n        actionBar.hide();\r\n        mPassword=findViewById(R.id.password);\r\n        mEmail=findViewById(R.id.Email);\r\n        mRegistertext=findViewById(R.id.registertext);\r\n        mLoginBtn=findViewById(R.id.login);\r\n        mForgetext=findViewById(R.id.Forgetext);\r\n        backBtn=findViewById(R.id.back);\r\n\r\n        mProgressBar=findViewById(R.id.progressBar);\r\n        mProgressBar.setVisibility(View.GONE);\r\n        //跳到註冊\r\n        mRegistertext.setOnClickListener(new View.OnClickListener() {\r\n            @Override\r\n            public void onClick(View v) {\r\n                Intent intent = new Intent(getApplicationContext(),SignUp2.class);\r\n                startActivity(intent);\r\n                finish();\r\n            }\r\n        });\r\n        //跳到忘記密碼\r\n        mForgetext.setOnClickListener(new View.OnClickListener() {\r\n            @Override\r\n            public void onClick(View v) {\r\n                Intent intent = new Intent(getApplicationContext(),Forgotpassword.class);\r\n                startActivity(intent);\r\n                finish();\r\n            }\r\n        });\r\n\r\n\r\n        mLoginBtn.setOnClickListener(new View.OnClickListener() {\r\n            @Override\r\n            public void onClick(View v) {\r\n                final String email,password;\r\n\r\n                email = String.valueOf(mEmail.getText());\r\n                password = String.valueOf(mPassword.getText());\r\n\r\n                if(!email.equals(\"\") && !password.equals(\"\")) {\r\n                    mProgressBar.setVisibility(View.VISIBLE);\r\n                    Handler handler = new Handler(Looper.getMainLooper());\r\n                    handler.post(new Runnable() {\r\n                        @Override\r\n                        public void run() {\r\n                            String[] field = new String[2];\r\n                            field[0] = \"email\";\r\n                            field[1] = \"password\";\r\n\r\n                            String[] data = new String[2];\r\n                            data[0] = email;\r\n                            data[1] = password;\r\n\r\n                            PutData putData = new PutData(\"http://10.0.32.218/LoginRegister/login.php\", \"POST\", field, data);//小高電腦的IP\r\n                            if (putData.startPut()) {\r\n                                if (putData.onComplete()) {\r\n\r\n                                    mProgressBar.setVisibility(View.GONE);\r\n                                    String result = putData.getResult();\r\n                                    if(result.equals(\"Login Success\")){\r\n                                        //System.out.println(\"幹\"+result);\r\n                                        Toast.makeText(getApplicationContext(),result,Toast.LENGTH_SHORT).show();\r\n                                        Intent intent = new Intent(getApplicationContext(),Page3Activity.class);\r\n                                        startActivity(intent);\r\n                                        finish();\r\n                                    }else{\r\n                                        //System.out.println(result);   ///哈囉\r\n                                        Toast.makeText(getApplicationContext(),result,Toast.LENGTH_SHORT).show();\r\n                                    }\r\n                                }\r\n                            }\r\n                        }\r\n                    });\r\n                }\r\n                else{\r\n                    Toast.makeText(getApplicationContext(),\"All filed required\",Toast.LENGTH_SHORT).show();\r\n                }\r\n            }\r\n        });\r\n    }\r\n\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/java/com/example/easybus/Login2.java	(revision d8c2d8e58c44151170f1328b537c8597719b9591)
++++ app/src/main/java/com/example/easybus/Login2.java	(date 1627114662000)
+@@ -87,7 +87,7 @@
+                             data[0] = email;
+                             data[1] = password;
+ 
+-                            PutData putData = new PutData("http://10.0.32.218/LoginRegister/login.php", "POST", field, data);//小高電腦的IP
++                            PutData putData = new PutData("http:///192.168.0.127LoginRegister/login.php", "POST", field, data);//小高電腦的IP
+                             if (putData.startPut()) {
+                                 if (putData.onComplete()) {
+ 
+Index: app/src/main/java/com/example/easybus/Urls.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.example.easybus;\r\nimport java.net.InetAddress;\r\nimport java.net.UnknownHostException;\r\n\r\npublic class Urls {\r\n    private static InetAddress ip;\r\n     static String url1 ,url2,url3;\r\n    public static void main(String args[]) {\r\n\r\n        try {\r\n            ip = InetAddress.getLocalHost();\r\n            System.out.println(ip.getHostAddress());\r\n        } catch (UnknownHostException e) {\r\n            e.printStackTrace();\r\n        } catch (Exception e) {\r\n            e.printStackTrace();\r\n        }\r\n\r\n         url1 = \"http://\";\r\n         url2 = \"172.20.10.5\";\r\n         url3 = \"/mysql/\";\r\n\r\n\r\n    }\r\n    static String ROOT_URL = url1+url2+url3;\r\n    static String FORGOT_PASSWORD_URL = \"http://192.168.27.107/LoginRegister/\" + \"forgot.php\";\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/java/com/example/easybus/Urls.java	(revision d8c2d8e58c44151170f1328b537c8597719b9591)
++++ app/src/main/java/com/example/easybus/Urls.java	(date 1627114646504)
+@@ -7,21 +7,6 @@
+      static String url1 ,url2,url3;
+     public static void main(String args[]) {
+ 
+-        try {
+-            ip = InetAddress.getLocalHost();
+-            System.out.println(ip.getHostAddress());
+-        } catch (UnknownHostException e) {
+-            e.printStackTrace();
+-        } catch (Exception e) {
+-            e.printStackTrace();
+-        }
+-
+-         url1 = "http://";
+-         url2 = "172.20.10.5";
+-         url3 = "/mysql/";
+-
+ 
+     }
+-    static String ROOT_URL = url1+url2+url3;
+-    static String FORGOT_PASSWORD_URL = "http://192.168.27.107/LoginRegister/" + "forgot.php";
+-}
+\ No newline at end of file
++   }
+\ No newline at end of file
+Index: module/.idea/gradle.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"GradleSettings\">\r\n    <option name=\"linkedExternalProjectsSettings\">\r\n      <GradleProjectSettings>\r\n        <option name=\"distributionType\" value=\"DEFAULT_WRAPPED\" />\r\n        <option name=\"externalProjectPath\" value=\"$PROJECT_DIR$\" />\r\n        <option name=\"resolveModulePerSourceSet\" value=\"false\" />\r\n        <option name=\"testRunner\" value=\"PLATFORM\" />\r\n      </GradleProjectSettings>\r\n    </option>\r\n  </component>\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- module/.idea/gradle.xml	(revision d8c2d8e58c44151170f1328b537c8597719b9591)
++++ module/.idea/gradle.xml	(date 1627117735830)
+@@ -1,12 +1,22 @@
+ <?xml version="1.0" encoding="UTF-8"?>
+ <project version="4">
++  <component name="GradleMigrationSettings" migrationVersion="1" />
+   <component name="GradleSettings">
+     <option name="linkedExternalProjectsSettings">
+       <GradleProjectSettings>
++        <option name="delegatedBuild" value="true" />
++        <option name="testRunner" value="PLATFORM" />
+         <option name="distributionType" value="DEFAULT_WRAPPED" />
+         <option name="externalProjectPath" value="$PROJECT_DIR$" />
++        <option name="gradleJvm" value="1.8" />
++        <option name="modules">
++          <set>
++            <option value="$PROJECT_DIR$" />
++            <option value="$PROJECT_DIR$/app" />
++          </set>
++        </option>
+         <option name="resolveModulePerSourceSet" value="false" />
+-        <option name="testRunner" value="PLATFORM" />
++        <option name="useQualifiedModuleNames" value="true" />
+       </GradleProjectSettings>
+     </option>
+   </component>
+Index: gradle/wrapper/gradle-wrapper.properties
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>#Sun Feb 07 17:27:30 CST 2021\r\ndistributionBase=GRADLE_USER_HOME\r\ndistributionPath=wrapper/dists\r\nzipStoreBase=GRADLE_USER_HOME\r\nzipStorePath=wrapper/dists\r\ndistributionUrl=https\\://services.gradle.org/distributions/gradle-6.5-bin.zip\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>x-windows-950
+===================================================================
+--- gradle/wrapper/gradle-wrapper.properties	(revision d8c2d8e58c44151170f1328b537c8597719b9591)
++++ gradle/wrapper/gradle-wrapper.properties	(date 1627115871262)
+@@ -1,6 +1,6 @@
+-#Sun Feb 07 17:27:30 CST 2021
++#Sat Jul 24 16:37:51 CST 2021
+ distributionBase=GRADLE_USER_HOME
++distributionUrl=https\://services.gradle.org/distributions/gradle-7.1.1-bin.zip
+ distributionPath=wrapper/dists
+-zipStoreBase=GRADLE_USER_HOME
+ zipStorePath=wrapper/dists
+-distributionUrl=https\://services.gradle.org/distributions/gradle-6.5-bin.zip
++zipStoreBase=GRADLE_USER_HOME
+Index: module/build.gradle
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>apply plugin: 'com.android.library'\r\n\r\nandroid {\r\n    compileSdkVersion 29\r\n    buildToolsVersion \"29.0.2\"\r\n\r\n\r\n    defaultConfig {\r\n        minSdkVersion 15\r\n        targetSdkVersion 29\r\n        versionCode 1\r\n        versionName \"1.0\"\r\n\r\n        testInstrumentationRunner \"androidx.test.runner.AndroidJUnitRunner\"\r\n        consumerProguardFiles 'consumer-rules.pro'\r\n    }\r\n\r\n    buildTypes {\r\n        release {\r\n            minifyEnabled false\r\n            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'\r\n        }\r\n    }\r\n\r\n}\r\n\r\ndependencies {\r\n    implementation fileTree(dir: 'libs', include: ['*.jar'])\r\n\r\n    implementation 'androidx.appcompat:appcompat:1.2.0'\r\n    testImplementation 'junit:junit:4.12'\r\n    androidTestImplementation 'androidx.test.ext:junit:1.1.2'\r\n    androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'\r\n    implementation 'com.google.android.gms:play-services-maps:12.0.1'\r\n    implementation 'com.google.maps.android:android-maps-utils:0.5+'\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- module/build.gradle	(revision d8c2d8e58c44151170f1328b537c8597719b9591)
++++ module/build.gradle	(date 1627119009822)
+@@ -21,16 +21,20 @@
+             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+         }
+     }
++    compileOptions {
++        sourceCompatibility JavaVersion.VERSION_1_8
++        targetCompatibility JavaVersion.VERSION_1_8
++    }
+ 
+ }
+ 
+ dependencies {
+     implementation fileTree(dir: 'libs', include: ['*.jar'])
+ 
+-    implementation 'androidx.appcompat:appcompat:1.2.0'
++    implementation 'androidx.appcompat:appcompat:1.3.0'
+     testImplementation 'junit:junit:4.12'
+-    androidTestImplementation 'androidx.test.ext:junit:1.1.2'
+-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
+-    implementation 'com.google.android.gms:play-services-maps:12.0.1'
+-    implementation 'com.google.maps.android:android-maps-utils:0.5+'
++    androidTestImplementation 'androidx.test.ext:junit:1.1.3'
++    androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
++    implementation 'com.google.android.gms:play-services-maps:17.0.1'
++    implementation 'com.google.maps.android:android-maps-utils:0.5'
+ }
+Index: .idea/runConfigurations.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"RunConfigurationProducerService\">\r\n    <option name=\"ignoredProducers\">\r\n      <set>\r\n        <option value=\"org.jetbrains.plugins.gradle.execution.test.runner.AllInPackageGradleConfigurationProducer\" />\r\n        <option value=\"org.jetbrains.plugins.gradle.execution.test.runner.TestClassGradleConfigurationProducer\" />\r\n        <option value=\"org.jetbrains.plugins.gradle.execution.test.runner.TestMethodGradleConfigurationProducer\" />\r\n      </set>\r\n    </option>\r\n  </component>\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- .idea/runConfigurations.xml	(revision d8c2d8e58c44151170f1328b537c8597719b9591)
++++ .idea/runConfigurations.xml	(date 1627198079813)
+@@ -3,6 +3,7 @@
+   <component name="RunConfigurationProducerService">
+     <option name="ignoredProducers">
+       <set>
++        <option value="com.android.tools.idea.compose.preview.runconfiguration.ComposePreviewRunConfigurationProducer" />
+         <option value="org.jetbrains.plugins.gradle.execution.test.runner.AllInPackageGradleConfigurationProducer" />
+         <option value="org.jetbrains.plugins.gradle.execution.test.runner.TestClassGradleConfigurationProducer" />
+         <option value="org.jetbrains.plugins.gradle.execution.test.runner.TestMethodGradleConfigurationProducer" />
