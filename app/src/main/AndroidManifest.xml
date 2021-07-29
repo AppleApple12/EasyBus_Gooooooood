@@ -23,12 +23,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-<<<<<<< HEAD
+
         <activity android:name=".SelectPicPopupWindow"
             tools:ignore="Instantiatable"></activity>
         <activity android:name=".AddFamMember" />
         <activity android:name=".edit" />
-        <activity android:name=".ForgetPassword" />
         <activity android:name=".Page801Activity" />
         <activity android:name=".Page7falseActivity" />
         <activity android:name=".Page7trueActivity" />
@@ -38,10 +37,11 @@
         <activity android:name=".Register" />
         <activity android:name=".Page10Activity" />
         <activity android:name=".Page9Activity" />
-        <activity android:name=".Page501Activity" />
+        <activity android:name=".Page601" />
+        <activity android:name=".Page5012Activity" />
         <activity android:name=".Login2" />
         <activity android:name=".SignUp2" />
-=======
+
         <activity android:name=".Page5011Activity"></activity>
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
@@ -51,12 +51,12 @@
              sign the APK for publishing.
              You can define the keys for the debug and release targets in src/debug/ and src/release/.
         -->
->>>>>>> snoopy
+
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="@string/google_maps_key" />
+            android:value="AIzaSyCr_-3KbvHxSm9Gb38l7M2E_b8qzwHhcTI" />
 
-<<<<<<< HEAD
+
         <provider
             android:name="androidx.core.content.FileProvider"
             android:authorities="com.example.EasyBus.fileprovider"
@@ -68,27 +68,13 @@
                 android:resource="@xml/file_paths" />
         </provider>
 
-=======
-        <activity
-            android:name=".Page501Activity"
-            android:label="@string/title_activity_page501" />
-        <activity android:name=".AddFamMember" />
-        <activity android:name=".edit" />
-        <activity android:name=".ForgetPassword" />
-        <activity android:name=".Page801Activity" />
-        <activity android:name=".Page7falseActivity" />
-        <activity android:name=".Page7trueActivity" />
-        <activity android:name=".Page702Activity" />
-        <activity android:name=".Page701Activity" />
-        <activity android:name=".Login" />
-        <activity android:name=".Register" />
-        <activity android:name=".Page10Activity" />
-        <activity android:name=".Page9Activity" />
->>>>>>> snoopy
+
+
+
         <activity android:name=".Page8Activity" />
         <activity android:name=".Page7Activity" />
         <activity android:name=".Page6Activity" />
-        <activity android:name=".Page5Activity" />
+
         <activity android:name=".Page4Activity" />
         <activity android:name=".Page3Activity" />
         <activity android:name=".Page2Activity" />

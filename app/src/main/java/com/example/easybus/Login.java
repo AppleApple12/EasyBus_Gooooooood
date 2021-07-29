@@ -56,13 +56,13 @@ public class Login extends AppCompatActivity {
             }
         });
 
-        //跳頁到"忘記密碼"
+        /*//跳頁到"忘記密碼"
         mForgetext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(getApplicationContext(),ForgetPassword.class));
             }
-        });
+        });*/
 
         //返回健(回需求者選單)
         backBtn.setOnClickListener(new View.OnClickListener() {

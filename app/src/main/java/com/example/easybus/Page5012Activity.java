@@ -37,7 +37,7 @@ import java.util.ArrayList;
 public class Page5012Activity extends AppCompatActivity {
 
     private static final String DIRECTION_URL_API = "https://maps.googleapis.com/maps/api/directions/json?";
-    private static final String GOOGLE_API_KEY = "AIzaSyA_-6P0XDrkAv02T3ZhnvzztyFokKFx64M";
+    private static final String GOOGLE_API_KEY = "AIzaSyCr_-3KbvHxSm9Gb38l7M2E_b8qzwHhcTI";
     String url,urlOrigin,urlDestination,title2;
     ImageView mImg,mBack,mAdd;
     RecyclerView recyclerView;
@@ -121,7 +121,7 @@ public class Page5012Activity extends AppCompatActivity {
                         businfos.add(businfo);
                     }
                 }catch (JSONException e){
-                    Toast.makeText(Page5012Activity.this,e.getMessage(),Toast.LENGTH_LONG).show();
+                    Toast.makeText(Page5012Activity.this,e.getMessage()+"錯誤1",Toast.LENGTH_LONG).show();
                 }
                 adaptor.setData(businfos);
                 adaptor.notifyDataSetChanged();

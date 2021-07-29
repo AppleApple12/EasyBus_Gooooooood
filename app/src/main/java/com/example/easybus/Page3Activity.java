@@ -62,12 +62,12 @@ public class Page3Activity extends AppCompatActivity {
                 Intent it4 = new Intent(Page3Activity.this,Login2.class);
                 startActivity(it4);
             }
-<<<<<<< HEAD
+
         });
 
-=======
+
         }); */
->>>>>>> snoopy
+
         //浮動按鈕撥打給緊急聯絡人
         FloatingActionButton fab = (FloatingActionButton)findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {

@@ -40,7 +40,7 @@
         android:layout_gravity="center"
         android:layout_marginLeft="13dp"
         android:text="Text"
-        android:textColor="@color/colorPrimary"
+        android:textColor="#FFFFFF"
         app:autoSizeTextType="uniform"
         app:layout_constraintBottom_toBottomOf="@+id/backg"
         app:layout_constraintStart_toEndOf="@+id/img"
