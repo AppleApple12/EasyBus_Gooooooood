@@ -111,7 +111,7 @@ public class Login extends AppCompatActivity {
                     Toast.makeText(Login.this,"登入失敗"+ task.getException().getMessage(),Toast.LENGTH_SHORT).show();
                     mProgressBar.setVisibility(View.GONE);
                 }
-            }//
+            }//小高幹嘛啦
         });
     }
 }
