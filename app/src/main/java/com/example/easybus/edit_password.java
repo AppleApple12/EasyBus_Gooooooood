@@ -1,10 +1,10 @@
 package com.example.easybus;
-
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -18,8 +18,12 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -53,13 +57,9 @@ public class edit_password extends AppCompatActivity {
         btnback.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(edit_password.this, Page8Activity.class);
-                intent.putExtra("email", getmail);
-                startActivity(intent);
-                finish();
+                readUser(email);
             }
         });
-        //Toast.makeText(edit_password.this, getpass, Toast.LENGTH_SHORT).show();
         btnok.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -83,7 +83,7 @@ public class edit_password extends AppCompatActivity {
         });
     }
     public void UpdateUser(final String pass3) {
-        String URL = Urls.url1+"/LoginRegister/edit.php?email=" + getmail;
+        String URL = Urls.url1+"/LoginRegister/edit.php?email="+getmail;
         StringRequest stringRequest = new StringRequest(
                 Request.Method.POST,
                 URL,
@@ -91,7 +91,7 @@ public class edit_password extends AppCompatActivity {
                     @Override
                     public void onResponse(String response) {
                         if(response.equals("Success")){
-                            Intent intent =new Intent(edit_password.this,Login2.class);
+                            Intent intent =new Intent(edit_password.this,Login3.class);
                             Toast.makeText(edit_password.this, "請重新登入", Toast.LENGTH_SHORT).show();
                             startActivity(intent);
                             finish();
@@ -130,5 +130,47 @@ public class edit_password extends AppCompatActivity {
             password = extras.getString("password");
         }
         return password;
+    }
+    public void readUser(final String email){
+        String URL =Urls.url1+"/LoginRegister/fetch.php?email="+email;
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(
+                Request.Method.GET,
+                URL,
+                null,
+                new Response.Listener<JSONObject>() {
+                    String identity;
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        try {
+                            identity = response.getString("identity");
+                            turnpage(identity);
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                            Toast.makeText(edit_password.this, e.toString(), Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(edit_password.this, error.toString(), Toast.LENGTH_SHORT).show();
+                    }
+                }
+        );
+        requestQueue.add(jsonObjectRequest);
+    }
+
+    private void turnpage(String identity) {
+
+        if("requester".equalsIgnoreCase(identity)) {
+            Intent it4 = new Intent(edit_password.this,Page8Activity.class);
+            it4.putExtra("email", email);
+            startActivity(it4);
+        }else if("caregiver".equalsIgnoreCase(identity)){
+            Intent it = new Intent(edit_password.this,Page8Activity_caregiver.class);
+            it.putExtra("email", email);
+            startActivity(it);
+
+        }
     }
 }

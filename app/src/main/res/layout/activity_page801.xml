@@ -95,7 +95,7 @@
         app:layout_constraintVertical_bias="0.432" />
 
     <ImageView
-        android:id="@+id/QRcode"
+        android:id="@+id/editpen"
         android:layout_width="33dp"
         android:layout_height="33dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -118,12 +118,12 @@
         app:srcCompat="@drawable/addnew" />
 
     <TextView
-        android:id="@+id/textView1"
+        android:id="@+id/textView"
         android:layout_width="342dp"
         android:layout_height="55dp"
         android:layout_marginTop="118dp"
         android:text="TextView"
-        app:layout_constraintBottom_toTopOf="@+id/txt2"
+        app:layout_constraintBottom_toTopOf="@+id/textView2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.507"
         app:layout_constraintStart_toStartOf="parent"
@@ -131,18 +131,18 @@
         app:layout_constraintVertical_bias="1.0" />
 
     <TextView
-        android:id="@+id/txt2"
+        android:id="@+id/textView2"
         android:layout_width="342dp"
         android:layout_height="55dp"
         android:layout_marginTop="173dp"
         android:text="TextView"
-        app:layout_constraintBottom_toTopOf="@+id/txt1"
+        app:layout_constraintBottom_toTopOf="@+id/myphone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/background" />
 
     <TextView
-        android:id="@+id/txt1"
+        android:id="@+id/myphone"
         android:layout_width="342dp"
         android:layout_height="55dp"
         android:layout_marginTop="228dp"

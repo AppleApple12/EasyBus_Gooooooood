@@ -49,7 +49,7 @@ public class Page4Activity extends AppCompatActivity {
                 SharedPreferences email = getSharedPreferences("email",MODE_PRIVATE);
                 String email2=email.getString("Email","");
                 if(email2 != "") {
-                    Intent it4 = new Intent(Page4Activity.this, Page8Activity.class);
+                    Intent it4 = new Intent(Page4Activity.this, Page8Activity_caregiver.class);
                     it4.putExtra("email", email2);
                     startActivity(it4);
                 }else{

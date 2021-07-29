@@ -56,15 +56,15 @@ public class my_contact extends AppCompatActivity {
         dialog.setContentView(R.layout.nofriend_dialog);
         //刪除dialog方方的背景
         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-        clickme=dialog.findViewById(R.id.button9);
+        clickme=dialog.findViewById(R.id.button10);
 
         LoadAllfriend();
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         mrecyclerView=findViewById(R.id.recyclerview);
         mrecyclerView.setHasFixedSize(true);
-       // LinearLayoutManager llm = new LinearLayoutManager(this);
+        // LinearLayoutManager llm = new LinearLayoutManager(this);
         //llm.setOrientation(LinearLayoutManager.VERTICAL);
-       //mrecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        //mrecyclerView.setLayoutManager(new LinearLayoutManager(this));
         mrecyclerView.setLayoutManager(linearLayoutManager);
 
         friendList = new ArrayList<>();
@@ -89,7 +89,7 @@ public class my_contact extends AppCompatActivity {
         JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET,URL,null,
                 new Response.Listener<JSONArray>() {
                     @Override
-                    public void onResponse(JSONArray array) {
+                    public void onResponse(JSONArray array) {//////
                         if (array.length()==0){
                             dialog.show();
                             clickme.setOnClickListener(new View.OnClickListener() {
@@ -101,21 +101,21 @@ public class my_contact extends AppCompatActivity {
                                 }
                             });
                         }else
-                        for(int i =0;i<array.length();i++){
-                            try {
-                                JSONObject object = array.getJSONObject(i);
-                                String name = object.getString("F_name").trim();
-                                String phone = object.getString("F_phone").trim();
+                            for(int i =0;i<array.length();i++){
+                                try {
+                                    JSONObject object = array.getJSONObject(i);
+                                    String name = object.getString("F_name").trim();
+                                    String phone = object.getString("F_phone").trim();
 
-                                friend f =new friend();
-                                f.setF_name(name);
-                                f.setF_phone(phone);
-                                friendList.add(f);
+                                    friend f =new friend();
+                                    f.setF_name(name);
+                                    f.setF_phone(phone);
+                                    friendList.add(f);
 
-                            } catch (JSONException e) {
-                                e.printStackTrace();
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
                             }
-                        }
                         friendAdapter = new friendAdapter(my_contact.this,friendList);
                         mrecyclerView.setAdapter(friendAdapter);
 

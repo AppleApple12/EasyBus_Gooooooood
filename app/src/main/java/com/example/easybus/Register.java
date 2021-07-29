@@ -43,7 +43,7 @@ public class Register extends AppCompatActivity {
 
         fAuth=FirebaseAuth.getInstance();
 
-        mFullname=findViewById(R.id.EMname);
+        mFullname=findViewById(R.id.fullname);
         mPassword=findViewById(R.id.password2);
         mEmail=findViewById(R.id.Email);
         mRegistertext=findViewById(R.id.Registertext);

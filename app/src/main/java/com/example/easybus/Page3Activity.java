@@ -3,6 +3,7 @@ package com.example.easybus;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -79,7 +80,7 @@ public class Page3Activity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent it4 = new Intent(Page3Activity.this,Page8Activity.class);
                 it4.putExtra("email",getmail);
-               // Toast.makeText(Page3Activity.this, getmail, Toast.LENGTH_SHORT).show();
+                // Toast.makeText(Page3Activity.this, getmail, Toast.LENGTH_SHORT).show();
                 startActivity(it4);
             }
         });
@@ -94,6 +95,7 @@ public class Page3Activity extends AppCompatActivity {
         });
     }
 
+    @SuppressLint("LongLogTag")
     protected void makeCall(final String phone) {
         //Snackbar.make(v,"打電話給緊急連絡人",Snackbar.LENGTH_LONG).setAction("Action",null).show();
         Intent call = new Intent(Intent.ACTION_DIAL);
@@ -105,12 +107,11 @@ public class Page3Activity extends AppCompatActivity {
             finish();
             Log.i("Finished making a call...", "");
         } catch (android.content.ActivityNotFoundException ex) {
+            Toast.makeText(Page3Activity.this, ex.toString(), Toast.LENGTH_SHORT).show();
             Toast.makeText(Page3Activity.this,
-                    ex.toString(), Toast.LENGTH_SHORT).show();
-           // Toast.makeText(Page3Activity.this,
-                    //"Call faild, please try again later.", Toast.LENGTH_SHORT).show();
+                    "Call faild, please try again later.", Toast.LENGTH_SHORT).show();
         }
-        //startActivity(call);
+        //startActivity(call        );
     }
     public void readUser(){
         String URL =Urls.url1+"/LoginRegister/fetch.php?email="+getmail;
