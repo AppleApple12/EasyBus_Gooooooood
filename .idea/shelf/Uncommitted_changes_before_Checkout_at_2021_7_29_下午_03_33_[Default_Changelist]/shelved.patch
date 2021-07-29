@@ -1,0 +1,45 @@
+Index: app/google-services.json
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>{\r\n  \"project_info\": {\r\n    \"project_number\": \"1066237684460\",\r\n    \"firebase_url\": \"https://easybus-f36e9.firebaseio.com\",\r\n    \"project_id\": \"easybus-f36e9\",\r\n    \"storage_bucket\": \"easybus-f36e9.appspot.com\"\r\n  },\r\n  \"client\": [\r\n    {\r\n      \"client_info\": {\r\n        \"mobilesdk_app_id\": \"1:1066237684460:android:9db6c09bd08528959913c9\",\r\n        \"android_client_info\": {\r\n          \"package_name\": \"com.example.easybus\"\r\n        }\r\n      },\r\n      \"oauth_client\": [\r\n        {\r\n<<<<<<< HEAD\r\n          \"client_id\": \"1066237684460-oqf5ocgp72sepomilq3tb96cm35nlnh4.apps.googleusercontent.com\",\r\n=======\r\n          \"client_id\": \"1066237684460-g03u7ji1cr9o3mj0vjb5ptqsghpg67jb.apps.googleusercontent.com\",\r\n>>>>>>> snoopy\r\n          \"client_type\": 1,\r\n          \"android_info\": {\r\n            \"package_name\": \"com.example.easybus\",\r\n            \"certificate_hash\": \"58807ce5da30fac3b2b973297be286d1743947a3\"\r\n          }\r\n        },\r\n        {\r\n<<<<<<< HEAD\r\n=======\r\n          \"client_id\": \"1066237684460-oqf5ocgp72sepomilq3tb96cm35nlnh4.apps.googleusercontent.com\",\r\n          \"client_type\": 1,\r\n          \"android_info\": {\r\n            \"package_name\": \"com.example.easybus\",\r\n            \"certificate_hash\": \"58807ce5da30fac3b2b973297be286d1743947a3\"\r\n          }\r\n        },\r\n        {\r\n>>>>>>> snoopy\r\n          \"client_id\": \"1066237684460-04u1t8ci16l7p1c0dsq18304o805hn5p.apps.googleusercontent.com\",\r\n          \"client_type\": 3\r\n        }\r\n      ],\r\n      \"api_key\": [\r\n        {\r\n          \"current_key\": \"AIzaSyDRImYvIyRmi4q1XixWy2oqus3QSL_GQNc\"\r\n        }\r\n      ],\r\n      \"services\": {\r\n        \"appinvite_service\": {\r\n          \"other_platform_oauth_client\": [\r\n            {\r\n              \"client_id\": \"1066237684460-04u1t8ci16l7p1c0dsq18304o805hn5p.apps.googleusercontent.com\",\r\n              \"client_type\": 3\r\n            }\r\n          ]\r\n        }\r\n      }\r\n    }\r\n  ],\r\n  \"configuration_version\": \"1\"\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/google-services.json	(revision 209292b9e4d1ec40617443b6b188c0c450cae1d4)
++++ app/google-services.json	(date 1627543252328)
+@@ -15,11 +15,11 @@
+       },
+       "oauth_client": [
+         {
+-<<<<<<< HEAD
+-          "client_id": "1066237684460-oqf5ocgp72sepomilq3tb96cm35nlnh4.apps.googleusercontent.com",
+-=======
++
++
++
+           "client_id": "1066237684460-g03u7ji1cr9o3mj0vjb5ptqsghpg67jb.apps.googleusercontent.com",
+->>>>>>> snoopy
++
+           "client_type": 1,
+           "android_info": {
+             "package_name": "com.example.easybus",
+@@ -27,8 +27,7 @@
+           }
+         },
+         {
+-<<<<<<< HEAD
+-=======
++
+           "client_id": "1066237684460-oqf5ocgp72sepomilq3tb96cm35nlnh4.apps.googleusercontent.com",
+           "client_type": 1,
+           "android_info": {
+@@ -37,7 +36,7 @@
+           }
+         },
+         {
+->>>>>>> snoopy
++
+           "client_id": "1066237684460-04u1t8ci16l7p1c0dsq18304o805hn5p.apps.googleusercontent.com",
+           "client_type": 3
+         }
+diff --git .idea/shelf/Uncommitted_changes_before_Checkout_at_2021_7_28__04_14__Default_Changelist_.xml .idea/shelf/Uncommitted_changes_before_Checkout_at_2021_7_28__04_14__Default_Changelist_.xml
