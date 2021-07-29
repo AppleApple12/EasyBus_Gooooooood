@@ -17,6 +17,7 @@ import android.os.Bundle;
 import android.provider.Settings;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -40,20 +41,21 @@ public class MainActivity extends AppCompatActivity {
     private static final int REQUEST_CODE_ASK_PERMISSION = 1;
     String email2,identity,email;
     RequestQueue requestQueue;
+    ImageView img;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         requestQueue = Volley.newRequestQueue(this);
-        Button btn1 = (Button)findViewById(R.id.btn1);
+        img = findViewById(R.id.imv1);
 
         SharedPreferences email = getSharedPreferences("email",MODE_PRIVATE);
         email2=email.getString("Email","");
         readUser();
-        btn1.setOnClickListener(new View.OnClickListener() {
+        img.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // Toast.makeText(MainActivity.this,identity,Toast.LENGTH_LONG).show();
+                 Toast.makeText(MainActivity.this,identity,Toast.LENGTH_LONG).show();
                 readUser();
                 if(email2 != "") {
                     if("requester".equalsIgnoreCase(identity)) {
@@ -134,8 +136,8 @@ public class MainActivity extends AppCompatActivity {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                       // Toast.makeText(MainActivity.this,"錯誤拉幹\n"+URL,Toast.LENGTH_LONG).show();
-                       // Toast.makeText(MainActivity.this, error.toString(), Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(MainActivity.this,"錯誤拉幹\n"+URL,Toast.LENGTH_LONG).show();
+                       //Toast.makeText(MainActivity.this, error.toString(), Toast.LENGTH_SHORT).show();
                     }
                 }
         );

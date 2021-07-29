@@ -183,7 +183,6 @@ public class qrscanner extends AppCompatActivity {
                            // Toast.makeText(emergency_contact.this, s, Toast.LENGTH_SHORT).show();
                         }else{
                             readUser(f_email);
-
                             btnok.setOnClickListener(new View.OnClickListener() {
                                 @Override
                                 public void onClick(View v) {
@@ -205,6 +204,8 @@ public class qrscanner extends AppCompatActivity {
                             });
 
                             dialog.show();
+
+
                         }
                     }
                 },
@@ -261,6 +262,7 @@ public class qrscanner extends AppCompatActivity {
             //如果聯絡人存在fdialog
             //如果這個聯絡人不存在 -> else readUser() -> dialog.show() -> 點確認 readUser2() ->返回page8
                                                                   //-> 點取消 -> 返回page8
+
         }else{
             Toast.makeText(getApplicationContext(), "掃描失敗", Toast.LENGTH_SHORT).show();
         }
