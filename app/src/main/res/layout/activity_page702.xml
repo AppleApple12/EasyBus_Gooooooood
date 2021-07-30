@@ -17,7 +17,7 @@
         app:layout_constraintBottom_toTopOf="@+id/ib2"/>
 
     <TextView
-        android:id="@+id/txv1"
+        android:id="@+id/gps_time"
         android:layout_width="213dp"
         android:layout_height="60dp"
         android:gravity="center"
@@ -40,7 +40,7 @@
         app:layout_constraintEnd_toEndOf="parent"/>
 
     <TextView
-        android:id="@+id/txv2"
+        android:id="@+id/direction"
         android:layout_width="220dp"
         android:layout_height="60dp"
         android:gravity="center"

@@ -16,6 +16,7 @@ import android.util.AttributeSet;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.Toast;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -154,7 +155,7 @@ public class calendar extends View {
         calendar.setTime(new Date());
 
         currentDay = calendar.get(Calendar.DAY_OF_MONTH);
-        todayWeekIndex = calendar.get(calendar.DAY_OF_WEEK)-1;
+        todayWeekIndex = calendar.get(calendar.DAY_OF_WEEK);
 
         Date cM = str2Date(getMonthStr(new Date()));
 
@@ -244,7 +245,6 @@ public class calendar extends View {
         RectF rect = new RectF(0,0,getWidth(),titleHeight);
         //canvas.drawRect(rect,bgPaint);
         canvas.drawRoundRect(rect,40,40,bgPaint);
-
 
         //繪製月份
         mPaint.setTextSize(mTextSizeMonth);
