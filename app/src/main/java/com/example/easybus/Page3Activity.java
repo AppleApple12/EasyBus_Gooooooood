@@ -45,7 +45,7 @@ public class Page3Activity extends AppCompatActivity {
         btn1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent it1 = new Intent(Page3Activity.this,Page5Activity.class);
+                Intent it1 = new Intent(Page3Activity.this,Page5011Activity.class);
                 it1.putExtra("email",getmail);
                 startActivity(it1);
             }

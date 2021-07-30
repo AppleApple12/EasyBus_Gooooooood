@@ -15,20 +15,14 @@
       },
       "oauth_client": [
         {
-<<<<<<< HEAD
-          "client_id": "1066237684460-oqf5ocgp72sepomilq3tb96cm35nlnh4.apps.googleusercontent.com",
-=======
           "client_id": "1066237684460-g03u7ji1cr9o3mj0vjb5ptqsghpg67jb.apps.googleusercontent.com",
->>>>>>> snoopy
           "client_type": 1,
           "android_info": {
             "package_name": "com.example.easybus",
-            "certificate_hash": "58807ce5da30fac3b2b973297be286d1743947a3"
+            "certificate_hash": "58639c1aa2ef9fac8bc6a1ddf32784960fe17d20"
           }
         },
         {
-<<<<<<< HEAD
-=======
           "client_id": "1066237684460-oqf5ocgp72sepomilq3tb96cm35nlnh4.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
@@ -37,7 +31,6 @@
           }
         },
         {
->>>>>>> snoopy
           "client_id": "1066237684460-04u1t8ci16l7p1c0dsq18304o805hn5p.apps.googleusercontent.com",
           "client_type": 3
         }
