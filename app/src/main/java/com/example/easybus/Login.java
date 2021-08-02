@@ -38,7 +38,7 @@ public class Login extends AppCompatActivity {
         ActionBar actionBar = getSupportActionBar();
         actionBar.hide();
 
-        mPassword=findViewById(R.id.password);
+        mPassword=findViewById(R.id.password2);
         mEmail=findViewById(R.id.Email);
         mRegistertext=findViewById(R.id.registertext);
         mLoginBtn=findViewById(R.id.RegisterBtn);
