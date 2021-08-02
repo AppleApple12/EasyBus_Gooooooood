@@ -108,11 +108,11 @@
         app:layout_constraintVertical_bias="0.523" />
 
     <EditText
-        android:id="@+id/password"
+        android:id="@+id/password2"
         android:layout_width="333dp"
         android:layout_height="55dp"
         android:layout_marginTop="5dip"
-        android:drawableLeft="@drawable/password1"
+        android:drawableLeft="@drawable/pass"
         android:drawablePadding="10dp"
         android:ems="10"
         android:hint="請輸入密碼"

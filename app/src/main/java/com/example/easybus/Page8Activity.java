@@ -1,10 +1,12 @@
 package com.example.easybus;
 
+
 import android.Manifest;
 import android.app.Activity;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -12,14 +14,16 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
+import android.os.Handler;
+import android.os.Looper;
 import android.provider.MediaStore;
+import android.util.Base64;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
@@ -27,38 +31,47 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.core.content.FileProvider;
 
-import com.bumptech.glide.Glide;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+import com.squareup.picasso.Callback;
+import com.squareup.picasso.Picasso;
+import com.vishnusivadas.advanced_httpurlconnection.PutData;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class Page8Activity extends AppCompatActivity {
     SelectPicPopupWindow menuWindow; //自訂義的彈出框類別(SelectPicPopupWindow)
 
-    ImageView backBtn;
+    ImageView backBtn,editpassword,qrcode,emergency,mycontact,logout;
     CircleImageView mPforfilepic;
-    FirebaseAuth fAuth;
-    FirebaseUser fUser;
-    DatabaseReference databaseReference;
-    TextView mEnteredName;
 
+    TextView mEnteredName,myphone;
+    String identity;
     public static final int SELECT_PHOTO=1;
     public static final int TAKE_PHOTO = 3;
     private Uri imageUri;
     private Context mContext;
-
+    public String email,getmail,password,getpass,fullname,pic,phone,encodeimage,img;
+    RequestQueue requestQueue;
+    String url =Urls.url1+"/LoginRegister/savepic.php?fullname="+fullname;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -71,36 +84,88 @@ public class Page8Activity extends AppCompatActivity {
         backBtn=findViewById(R.id.backicon);
         mEnteredName = findViewById(R.id.EnteredName);
         mPforfilepic = findViewById(R.id.profilepic);
+        myphone = findViewById(R.id.txt1);
+        editpassword=findViewById(R.id.frame2);
+        qrcode = findViewById(R.id.frame3);
+        emergency = findViewById(R.id.frame4);
+        mycontact = findViewById(R.id.frame5);
+        logout = findViewById(R.id.frame8);
         mContext = Page8Activity.this;
-        fAuth = FirebaseAuth.getInstance();
-        fUser = fAuth.getCurrentUser();
-        databaseReference = FirebaseDatabase.getInstance().getReference("Users").child(fUser.getUid());
 
-        //獲取username
-        databaseReference.addValueEventListener(new ValueEventListener() {
+        requestQueue = Volley.newRequestQueue(this);
+        getmail=mail();
+        getpass=pass();
+        readUser();
+        fetchimage();
+        ImageRetriveWithPicasso();
+        //我的聯絡人
+        mycontact.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                User user =snapshot.getValue(User.class); //magic 錯誤還跑得動!
-                assert user != null;
-                mEnteredName.setText(user.getFullName());
-                if(user.getImageURL().equals("default")){
-                    mPforfilepic.setImageResource(R.drawable.profile);
-                }else{
-                    Glide.with(getApplicationContext()).load(user.getImageURL()).into(mPforfilepic);
-                }
+            public void onClick(View v) {
+                Intent intent = new Intent(Page8Activity.this,my_contact.class);
+                intent.putExtra("email",getmail);
+                startActivity(intent);
+                finish();
             }
-
+        });
+        //新增緊急聯絡人
+        emergency.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-                Toast.makeText(Page8Activity.this, error.getMessage(), Toast.LENGTH_SHORT).show();
+            public void onClick(View v) {
+                Intent intent = new Intent(Page8Activity.this,emergency_contact.class);
+                intent.putExtra("email",getmail);
+                startActivity(intent);
+                finish();
+            }
+        });
+        //登出
+        logout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SharedPreferences email = getSharedPreferences("email",MODE_PRIVATE);
+                email.edit().clear().commit();
+                Intent it = new Intent(Page8Activity.this,Login3.class);
+                startActivity(it);
             }
         });
 
-        //返回健(回需求者選單)
+        //QRcode
+        qrcode.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Page8Activity.this,qrcode_page.class);
+                intent.putExtra("email",getmail);
+                startActivity(intent);
+                finish();
+            }
+        });
+
+        //修改密碼
+        editpassword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Page8Activity.this,edit_password.class);
+                intent.putExtra("email",getmail);
+                intent.putExtra("password",getpass);
+                startActivity(intent);
+                finish();
+
+            }
+        });
+        //返回健(回選單)
         backBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(getApplicationContext(),Page3Activity.class));
+                if("requester".equalsIgnoreCase(identity)) {
+                    Intent it4 = new Intent(Page8Activity.this, Page3Activity.class);
+                    it4.putExtra("email", getmail);
+                    startActivity(it4);
+                }else if("caregiver".equalsIgnoreCase(identity)){
+                    Intent it = new Intent(Page8Activity.this,Page4Activity.class);
+                    it.putExtra("email",getmail);
+                    startActivity(it);
+                }
+
             }
         });
 
@@ -114,7 +179,124 @@ public class Page8Activity extends AppCompatActivity {
             }
         });
     }
+    //抓取使用者基本資料
+    public void readUser(){
+        String URL =Urls.url1+"/LoginRegister/fetch.php?email="+getmail;
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(
+                Request.Method.GET,
+                URL,
+                null,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        try {
+                            fullname = response.getString("fullname");
+                            phone = response.getString("userphone");
+                            identity = response.getString("identity");
+                            myphone.setText(phone);
+                            mEnteredName.setText(fullname);
+                            img = response.getString("image");
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                            Toast.makeText(Page8Activity.this, e.toString(), Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(Page8Activity.this, error.toString(), Toast.LENGTH_SHORT).show();
+                    }
+                }
+        );
+        requestQueue.add(jsonObjectRequest);
+    }
+    //儲存頭貼
+    private void savepic(){
+        String URL =Urls.url1+"/LoginRegister/upload.php?email="+getmail;
+        StringRequest request = new StringRequest(Request.Method.POST, URL, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                Toast.makeText(Page8Activity.this,response,Toast.LENGTH_SHORT).show();
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(Page8Activity.this,error.getMessage(),Toast.LENGTH_SHORT).show();
+            }
+        }){
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String,String> params = new HashMap<>();
+                params.put("image",encodeimage);
+                return params;
+            }
+        };
+        RequestQueue requestQueue = Volley.newRequestQueue(Page8Activity.this);
+        requestQueue.add(request);
+    }
+    public  void fetchimage(){
+        String URL =Urls.url1+"/LoginRegister/fetchimage.php?email="+getmail;
+        StringRequest request = new StringRequest(Request.Method.GET, URL, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                try {
+                    JSONObject jsonObject = new JSONObject(response);
+                    img  = jsonObject.getString("image");
 
+                    ImageRetriveWithPicasso();
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(Page8Activity.this,error.getMessage(),Toast.LENGTH_SHORT).show();
+            }
+        });
+        RequestQueue requestQueue = Volley.newRequestQueue(Page8Activity.this);
+        requestQueue.add(request);
+    }
+    public void ImageRetriveWithPicasso() {
+        String imgurl = Urls.url1+"/LoginRegister/images/"+img;
+        Picasso.with(this)
+
+                .load(imgurl)
+                .placeholder(R.drawable.profile)
+                .fit()
+               // .error(R.drawable.ic_error_black_24dp)
+                .into(mPforfilepic, new Callback() {
+                    @Override
+                    public void onSuccess() {
+                        // 圖片讀取完成
+                        Toast.makeText(Page8Activity.this, "Success", Toast.LENGTH_SHORT).show();
+                    }
+
+                    @Override
+                    public void onError() {
+                        // 圖片讀取失敗
+                      //  Toast.makeText(Page8Activity.this, "失敗拉幹", Toast.LENGTH_SHORT).show();
+                    }
+                });
+        System.out.println(imgurl);
+    }
+
+
+    public String mail(){
+        Bundle extras = getIntent().getExtras();
+        if (extras!=null){
+            email=extras.getString("email");
+        }
+        return email;
+    }
+    public String pass(){
+        Bundle extras = getIntent().getExtras();
+        if (extras!=null){
+            password=extras.getString("password");
+        }
+        return password;
+    }
     private View.OnClickListener itemsOnClick=new View.OnClickListener(){
         @Override
         public void onClick(View v) {
@@ -198,26 +380,71 @@ public class Page8Activity extends AppCompatActivity {
                     Bitmap bitmap = BitmapFactory.decodeStream(getContentResolver().openInputStream(imageUri));
                     //將圖片顯示出來
                     mPforfilepic.setImageBitmap(bitmap);
+                    if(data!=null){
+                        System.out.println("turi"+imageUri);
+                        System.out.println("tbitmap"+bitmap.toString());
+                        pic=imageUri.toString();
+                        imageStore(bitmap);
+                        savepic();
+                    }else{
+
+                        Intent it4 = new Intent(Page8Activity.this, Page8Activity.class);
+                        it4.putExtra("email",getmail);
+                        readUser();
+                        fetchimage();
+                        ImageRetriveWithPicasso();
+                        startActivity(it4);
+                    }
+
                 }catch(FileNotFoundException e){
                     e.printStackTrace();
                 }
                 break;
 
             case SELECT_PHOTO:
-                Uri uri=data.getData();
-                ContentResolver cr = this.getContentResolver();
                 try {
                     //獲取圖片
-                    Bitmap bitmap = BitmapFactory.decodeStream(cr.openInputStream(uri));
-                    mPforfilepic.setImageBitmap(bitmap);
+                    if(data != null){
+                        Uri uri=data.getData();
+                    if(uri != null){
+                        ContentResolver cr = this.getContentResolver();
+                        Bitmap bitmap = BitmapFactory.decodeStream(cr.openInputStream(uri));
+                        mPforfilepic.setImageBitmap(bitmap);
+                        imageStore(bitmap);
+                        System.out.println("suri"+uri);
+                        System.out.println("sbitmap"+bitmap.toString());
+                        pic=uri.toString();
+                        savepic();
+                    }
+                    }else{
+                        Intent it4 = new Intent(Page8Activity.this, Page8Activity.class);
+                        it4.putExtra("email",getmail);
+                        readUser();
+                        fetchimage();
+                        ImageRetriveWithPicasso();
+                        startActivity(it4);
+                    }
+
                 } catch (FileNotFoundException e) {
+
                     e.printStackTrace();
+
                 }
                 super.onActivityResult(requestCode, resultCode, data);
                 break;
 
             default:
                 break;
+
         }
     }
+
+    private void imageStore(Bitmap bitmap) {
+        ByteArrayOutputStream stream = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.JPEG,100,stream);
+        byte[] imageBytes = stream.toByteArray();
+        encodeimage = android.util.Base64.encodeToString(imageBytes, Base64.DEFAULT);
+    }
+
+
 }
