@@ -21,7 +21,7 @@ import java.net.InetAddress;
 import com.vishnusivadas.advanced_httpurlconnection.PutData;
 
 public class Login2 extends AppCompatActivity {
-
+/////拜託
     InetAddress ip;
     public static EditText mPassword;
     public static EditText mEmail;
