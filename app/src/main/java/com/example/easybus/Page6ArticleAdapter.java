@@ -6,6 +6,7 @@ import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.Toast;
@@ -22,46 +23,16 @@ import java.util.stream.Collectors;
 
 public class Page6ArticleAdapter extends RecyclerView.Adapter<Page6AritcleViewHolder> implements Filterable{
     ArrayList<Page6article> articles1;
-    ArrayList<Page6article> articles1Filter;
+    ArrayList<Page6article> articlesFilter;
     OnItemClickListener listener;
     public Page6ArticleAdapter() {
         articles1 = new ArrayList<>();
-        articles1Filter = new ArrayList<>();
-        articles1Filter.addAll(articles1);
+        articlesFilter = new ArrayList<>();
+        articlesFilter.addAll(articles1);
     }
     public void setData(ArrayList<Page6article> articles1){
         this.articles1 = articles1;
     }
-
-    @Override
-    public Filter getFilter() {
-        return filter;
-    }
-    Filter filter = new Filter() {
-        @Override
-        protected FilterResults performFiltering(CharSequence constraint) {
-            ArrayList<Page6article> filteredList = new ArrayList<>();
-            if(constraint==null||constraint.length()==0){
-                filteredList.addAll(articles1Filter);
-            }else{
-                for(Page6article item:articles1Filter){
-                    if(item.getLine().toLowerCase().contains(constraint.toString().toLowerCase().trim())){
-                        filteredList.add(item);
-                    }
-                }
-            }
-            FilterResults filterResults = new FilterResults();
-            filterResults.values = filteredList;
-            return filterResults;
-        }
-
-        @Override
-        protected void publishResults(CharSequence constraint, FilterResults results) {
-            articles1.clear();
-            articles1.addAll((Collection<? extends Page6article>)results.values);
-            notifyDataSetChanged();
-        }
-    };
 
 
     public interface OnItemClickListener{
@@ -83,8 +54,12 @@ public class Page6ArticleAdapter extends RecyclerView.Adapter<Page6AritcleViewHo
     @Override
     public void onBindViewHolder(@NonNull Page6AritcleViewHolder holder, final int position) {
         final Page6article article = articles1.get(position);
-        holder.txv_line.setText("路線:"+article.line);
-        holder.txv_linename.setText("路線名稱:"+article.line_name);
+        holder.txv_line.setText(article.line);
+        holder.txv_linename.setText(article.line_name);
+        if(article.line.length()>5)
+            holder.txv_line.setTextSize(15);
+        if(article.line_name.length()>22)
+            holder.txv_linename.setTextSize(14);
         //holder.txv_stampnum.setText("站序:"+article.stamp_num);
         //holder.txv_chinesestamp.setText("中文站點名稱:"+article.chinese_stamp);
         //holder.txv_longitude.setText("經度:"+article.longitude);
@@ -107,5 +82,33 @@ public class Page6ArticleAdapter extends RecyclerView.Adapter<Page6AritcleViewHo
         return articles1.size();
     }
 
+    public Filter getFilter(){
+        return filter;
+    }
+    Filter filter = new Filter() {
+        @Override
+        protected FilterResults performFiltering(CharSequence constraint) {
+            ArrayList<Page6article> filteredList = new ArrayList<>();
+            if(constraint==null||constraint.length()==0){
+                filteredList.addAll(articlesFilter);
+            }else{
+                for(Page6article item:articles1){
+                    if(item.getLine().toLowerCase().contains(constraint.toString().toLowerCase())){
+                        filteredList.add(item);
+                    }
+                }
+            }
 
+            FilterResults filterResults = new FilterResults();
+            filterResults.values = filteredList;
+            return filterResults;
+        }
+
+        @Override
+        protected void publishResults(CharSequence constraint, FilterResults results) {
+            articles1.clear();
+            articles1.addAll((Collection<? extends Page6article>)results.values);
+            notifyDataSetChanged();
+        }
+    };
 }

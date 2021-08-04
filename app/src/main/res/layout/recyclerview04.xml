@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_margin="10dp"
+    android:layout_marginBottom="10dp"
+    android:orientation="vertical"
+    android:background="#ffffff">
+
+
+    <TextView
+        android:id="@+id/txv_RouteID"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="RouteID:"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <TextView
+        android:id="@+id/txv_Direction"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Direction:"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txv_RouteID"
+        app:layout_constraintBottom_toTopOf="@id/txv_PlateNumb"/>
+
+    <TextView
+        android:id="@+id/txv_PlateNumb"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="PlateNumb:"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txv_Direction"
+        app:layout_constraintBottom_toTopOf="@id/txv_GPS_Time"/>
+
+    <TextView
+        android:id="@+id/txv_GPS_Time"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="GPS_Time:"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txv_PlateNumb"
+        app:layout_constraintBottom_toTopOf="@id/txv_X"/>
+
+    <TextView
+        android:id="@+id/txv_X"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="X:"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txv_GPS_Time"
+        app:layout_constraintBottom_toTopOf="@id/txv_Y"/>
+
+    <TextView
+        android:id="@+id/txv_Y"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Y:"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txv_GPS_Time"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+</LinearLayout>

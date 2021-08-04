@@ -49,34 +49,41 @@ public class Page601 extends AppCompatActivity {
 
         final String str1[] = txv2.split(" |\n");
         final String str4[] = txv4.split(" |\n");
+        String destination = "";
         for(int i = 0;i<str1.length;i+=2){
             HashMap<String,String> hashMap = new HashMap<>();
             hashMap.put("txv",str1[i]+" "+str1[i+1]);
             arrayList.add(hashMap);
+            destination = str1[i+1];
         }
         final int[] flag = {1};
         final Button btn1 = (Button)findViewById(R.id.btn_change);
+        btn1.setText("往"+destination);
         btn1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (flag[0]==1){
-                    btn1.setText("回程");
+                    String des="";
                     arrayList.clear();
                     for(int i = 0;i<str4.length;i+=2){
                         HashMap<String,String> hashMap1 = new HashMap<>();
                         hashMap1.put("txv",str4[i]+" "+str4[i+1]);
                         arrayList.add(hashMap1);
+                        des=str4[i+1];
                     }
+                    btn1.setText("往"+des);
                     myListAdapter.notifyDataSetChanged();
                     flag[0] = 0;
                 }else{
-                    btn1.setText("去程");
+                    String des="";
                     arrayList.clear();
                     for(int i = 0;i<str1.length;i+=2){
                         HashMap<String,String> hashMap1 = new HashMap<>();
                         hashMap1.put("txv",str1[i]+" "+str1[i+1]);
                         arrayList.add(hashMap1);
+                        des=str1[i+1];
                     }
+                    btn1.setText("往"+des);
                     myListAdapter.notifyDataSetChanged();
                     flag[0] = 1;
                 }
@@ -86,7 +93,7 @@ public class Page601 extends AppCompatActivity {
         //取前頁值
         recyclerView = findViewById(R.id.recyclerview);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        recyclerView.addItemDecoration(new DividerItemDecoration(this,DividerItemDecoration.VERTICAL));
+        //recyclerView.addItemDecoration(new DividerItemDecoration(this,DividerItemDecoration.VERTICAL));
         myListAdapter = new MyListAdapter();
         recyclerView.setAdapter(myListAdapter);
         TextView textView = (TextView)findViewById(R.id.txvtop);
@@ -105,7 +112,10 @@ public class Page601 extends AppCompatActivity {
 
         @Override
         public void onBindViewHolder(@NonNull MyListAdapter.ViewHolder holder, int position) {
-            holder.txv.setText(arrayList.get(position).get("txv"));
+            String str1 = arrayList.get(position).get("txv");
+            String str2[] = str1.split(" ");
+            holder.txv.setText(str2[1]);
+            holder.txv_2.setText(str2[0]);
         }
 
         @Override
@@ -114,10 +124,11 @@ public class Page601 extends AppCompatActivity {
         }
 
         class ViewHolder extends RecyclerView.ViewHolder{
-            private TextView txv;
+            private TextView txv,txv_2;
             public ViewHolder(@NonNull View itemView) {
                 super(itemView);
                 txv = itemView.findViewById(R.id.txv);
+                txv_2 = itemView.findViewById(R.id.txv_line);
             }
         }
 

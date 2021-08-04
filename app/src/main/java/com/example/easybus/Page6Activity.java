@@ -23,6 +23,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.Filter;
 import android.widget.Filterable;
@@ -54,23 +55,33 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class Page6Activity extends AppCompatActivity implements SearchView.OnQueryTextListener{
-    SearchView searchView;
+public class Page6Activity extends AppCompatActivity{
+
     RecyclerView recyclerView;
     Page6ArticleAdapter adapter;
     ArrayList<Page6article> articles;
     ArrayList<Page6article> articles1;
 
-
     String  url = "https://datacenter.taichung.gov.tw/swagger/OpenData/6af70a9e-4afc-4f54-bf56-01dd84ee8972";
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        if(item.getItemId()==android.R.id.home){
+            //Intent it = new Intent(Page6Activity.this,Page61.class);
+            //startActivity(it);
+        }
+        return super.onOptionsItemSelected(item);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_page6);
-        //隱藏title bar
+
         ActionBar actionBar = getSupportActionBar();
-        actionBar.hide();
+        actionBar.setTitle("公車查詢");
+        actionBar.setDisplayHomeAsUpEnabled(true);
+
         recyclerView = findViewById(R.id.rvPrograms);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
@@ -80,6 +91,13 @@ public class Page6Activity extends AppCompatActivity implements SearchView.OnQue
         articles = new ArrayList<>();
         articles1 = new ArrayList<>();
         getData();
+        /*
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                getData();
+            }
+        });*/
         adapter.setOnItemClick(new Page6ArticleAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
@@ -102,12 +120,10 @@ public class Page6Activity extends AppCompatActivity implements SearchView.OnQue
             }
         });
 
-        searchView = findViewById(R.id.searchview);
-        searchView.setOnQueryTextListener(this);
-        searchView.setSubmitButtonEnabled(true);
+
     }
 
-    private void getData() {
+    public void getData(){
         final ProgressDialog progressDialog = new ProgressDialog(this);
         progressDialog.setMessage("Loading......");
         progressDialog.show();
@@ -129,6 +145,7 @@ public class Page6Activity extends AppCompatActivity implements SearchView.OnQue
                         article.setEnglish_stamp(JO.getString("英文站點名稱"));
                         articles.add(article);
 
+
                         if(i==0) {
                             articles1.add(article);
                         }else {
@@ -143,6 +160,7 @@ public class Page6Activity extends AppCompatActivity implements SearchView.OnQue
                                 articles1.add(article);
                             }
                         }
+
 
                     }
                 }catch (JSONException e){
@@ -166,17 +184,23 @@ public class Page6Activity extends AppCompatActivity implements SearchView.OnQue
 
     }
 
+    public boolean onCreateOptionsMenu(Menu menu){
+        getMenuInflater().inflate(R.menu.search,menu);
+        MenuItem menuItem = menu.findItem(R.id.search);
+        SearchView searchView = (SearchView) menuItem.getActionView();
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
 
-    @Override
-    public boolean onQueryTextSubmit(String query) {
-        Toast.makeText(Page6Activity.this,"輸入："+query,Toast.LENGTH_SHORT).show();
-        return false;
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                adapter.getFilter().filter(newText);
+                return false;
+            }
+        });
+        return super.onCreateOptionsMenu(menu);
     }
 
-    @Override
-    public boolean onQueryTextChange(String newText) {
-        adapter.getFilter().filter(newText);
-        return false;
-    }
-    //2021.04.26
 }

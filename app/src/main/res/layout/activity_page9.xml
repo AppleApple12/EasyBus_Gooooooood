@@ -1,7 +1,142 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Page9Activity"/>
+    tools:context=".Page9Activity">
+
+    <View
+        android:id="@+id/top"
+        android:layout_width="match_parent"
+        android:layout_height="95dp"
+        android:background="@drawable/round_button"
+        android:visibility="visible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageButton
+        android:id="@+id/back"
+        android:layout_width="85dp"
+        android:layout_height="85dp"
+        android:layout_marginTop="8dp"
+        android:scaleType="fitCenter"
+        app:layout_constraintEnd_toEndOf="@+id/top"
+        app:layout_constraintHorizontal_bias="0.009"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/back" />
+
+    <ImageView
+        android:id="@+id/iv1"
+        android:layout_width="275dp"
+        android:layout_height="64dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.395"
+        app:layout_constraintStart_toEndOf="@+id/back"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/page5up" />
+
+    <ImageView
+        android:id="@+id/iv2"
+        android:layout_width="42dp"
+        android:layout_height="42dp"
+        app:srcCompat="@drawable/ic_gps"
+        app:layout_constraintTop_toTopOf="@+id/iv1"
+        app:layout_constraintBottom_toBottomOf="@+id/iv1"
+        app:layout_constraintStart_toStartOf="@+id/iv1"
+        app:layout_constraintEnd_toStartOf="@+id/gps_time"
+        tools:layout_editor_absoluteX="122dp"
+        tools:layout_editor_absoluteY="29dp" />
+
+    <TextView
+        android:id="@+id/gps_time"
+        android:layout_width="168dp"
+        android:layout_height="42dp"
+        android:gravity="center"
+        android:text="需求者定位查詢"
+        android:textColor="#000000"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/iv1"
+        app:layout_constraintEnd_toEndOf="@+id/iv1"
+        app:layout_constraintStart_toEndOf="@+id/iv2"
+        app:layout_constraintTop_toTopOf="@+id/iv1" />
+
+
+    <View
+        android:id="@+id/bottom"
+        android:layout_width="match_parent"
+        android:layout_height="570dp"
+        android:layout_marginStart="50dp"
+        android:layout_marginEnd="50dp"
+        android:background="@drawable/round_button"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/top" />
+
+    <fragment
+        android:id="@+id/mapView"
+        android:layout_width="280dp"
+        android:layout_height="400dp"
+        app:layout_constraintEnd_toEndOf="@+id/bottom"
+        app:layout_constraintTop_toTopOf="@+id/bottom"
+        app:layout_constraintStart_toStartOf="@+id/bottom"
+        app:layout_constraintBottom_toTopOf="@+id/address"
+        android:layout_marginTop="20dp"
+        android:name="com.google.android.gms.maps.SupportMapFragment"/>
+
+
+
+    <TextView
+        android:id="@+id/address"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Address:"
+        app:layout_constraintStart_toStartOf="@+id/bottom"
+        app:layout_constraintEnd_toEndOf="@+id/bottom"
+        app:layout_constraintTop_toBottomOf="@id/mapView"
+        app:layout_constraintBottom_toTopOf="@id/btn_intent"
+        android:layout_marginTop="10dp"/>
+
+    <Button
+        android:id="@+id/btn_intent"
+        android:layout_width="140dp"
+        android:layout_height="35dp"
+        android:background="@drawable/page601_btn"
+        android:text="查詢完整路線"
+        android:drawableLeft="@drawable/page9_btn_search"
+        android:textSize="18dp"
+        app:layout_constraintStart_toStartOf="@+id/bottom"
+        app:layout_constraintEnd_toEndOf="@+id/bottom"
+        app:layout_constraintTop_toBottomOf="@id/address"
+        app:layout_constraintBottom_toBottomOf="@+id/bottom"
+        android:clickable="false"/>
+
+    <!--   <RadioGroup
+           android:id="@+id/radiogroup"
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:gravity="center_horizontal|bottom"
+           android:orientation="horizontal"
+           app:layout_constraintBottom_toBottomOf="@+id/bottom"
+           app:layout_constraintTop_toBottomOf="@+id/txvlng"
+           app:layout_constraintStart_toStartOf="@+id/bottom"
+           app:layout_constraintEnd_toEndOf="@+id/bottom"
+           android:layout_marginTop="25dp">
+           <RadioButton
+               android:id="@+id/radioButton1"
+               style="@style/radioButton"
+               android:checked="true"/>
+           <RadioButton
+               android:id="@+id/radioButton2"
+               style="@style/radioButton"/>
+       </RadioGroup>
+       -->
+
+</androidx.constraintlayout.widget.ConstraintLayout>
