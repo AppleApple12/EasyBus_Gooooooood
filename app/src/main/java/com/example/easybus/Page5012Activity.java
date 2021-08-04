@@ -59,7 +59,7 @@ public class Page5012Activity extends AppCompatActivity {
         urlDestination= bundle.getString("destination2");
 
         url=DIRECTION_URL_API+"origin="+urlOrigin+"&destination="+urlDestination+"&mode=transit&transit_mode=bus&language=zh-TW&key="+GOOGLE_API_KEY;
-
+        System.out.println(url);
         mImg=findViewById(R.id.img);
         mBack=findViewById(R.id.backicon);
         mAdd=findViewById(R.id.addIcon);
@@ -311,6 +311,7 @@ public class Page5012Activity extends AppCompatActivity {
                 public void onClick(View view) {
                     choose+=1;
                     if (choose>=2 && choose<=5){ //有選擇照片
+                        System.out.println(choose);
                         dismiss();
                         //將資訊存入資料庫
 
