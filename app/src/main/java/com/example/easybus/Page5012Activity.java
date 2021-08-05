@@ -54,7 +54,7 @@ public class Page5012Activity extends AppCompatActivity {
     RecyclerView recyclerView;
     BusInfoAdaptor adaptor;
     ArrayList<BusInfo> businfos;
-    RequestQueue requestQueue;
+    RequestQueue requestQueue,requestQueue1;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -84,6 +84,7 @@ public class Page5012Activity extends AppCompatActivity {
         SharedPreferences email = getSharedPreferences("email",MODE_PRIVATE);
         getmail=email.getString("Email","");
         requestQueue = Volley.newRequestQueue(this);
+        requestQueue1 = Volley.newRequestQueue(this);
 
         mAdd.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -215,6 +216,7 @@ public class Page5012Activity extends AppCompatActivity {
                 return;
             }else{  //選擇圖片popupwindow
                 //銷毀第一個popupwindow
+                savebusinfo(getmail,title2,url);
                 dismiss();
                 //實例化PopupPhoto
                 popupSelPhoto popupPhoto=new popupSelPhoto(Page5012Activity.this);
@@ -222,6 +224,39 @@ public class Page5012Activity extends AppCompatActivity {
                 //設計彈出框
                 popupPhoto.showAtLocation(v,Gravity.CENTER,0,0);
             }
+        }
+
+        public void savebusinfo(final String email,final String routename,final String route) {
+            String URL = Urls.url1+"/LoginRegister/save_businfo.php";
+            StringRequest stringRequest = new StringRequest(
+                    Request.Method.POST,
+                    URL,
+                    new Response.Listener<String>() {
+                        @Override
+                        public void onResponse(String response) {
+                            if(response.equals("Success")){
+                                finish();
+                            }
+                        }
+                    },
+                    new Response.ErrorListener() {
+                        @Override
+                        public void onErrorResponse(VolleyError error) {
+                            Toast.makeText(Page5012Activity.this, error.toString(), Toast.LENGTH_SHORT).show();
+                        }
+                    }
+            ) {
+                @Nullable
+                @Override
+                protected Map<String, String> getParams() throws AuthFailureError {
+                    Map<String, String> parms = new HashMap<>();
+                    parms.put("email",email);
+                    parms.put("routename",routename);
+                    parms.put("route",route);
+                    return parms;
+                }
+            };
+            requestQueue1.add(stringRequest);
         }
     }
 
