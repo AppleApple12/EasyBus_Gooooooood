@@ -46,7 +46,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Page5012Activity extends AppCompatActivity {
-
+    //12345
     private static final String DIRECTION_URL_API = "https://maps.googleapis.com/maps/api/directions/json?";
     private static final String GOOGLE_API_KEY = "AIzaSyCr_-3KbvHxSm9Gb38l7M2E_b8qzwHhcTI";
     String url,urlOrigin,urlDestination,title2,getmail;
