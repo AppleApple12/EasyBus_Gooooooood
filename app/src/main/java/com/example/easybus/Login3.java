@@ -30,7 +30,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 public class Login3 extends AppCompatActivity {
-    //InetAddress ip;
+    //InetAddress ip;//
     public static EditText mPassword;
     public static EditText mEmail;
     static String Password;
