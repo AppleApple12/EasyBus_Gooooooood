@@ -1,5 +1,6 @@
 package com.example.easybus;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -7,10 +8,14 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
+import android.graphics.Bitmap;
 import android.graphics.ColorMatrix;
 import android.graphics.ColorMatrixColorFilter;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.util.Base64;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -22,28 +27,34 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Page5012Activity extends AppCompatActivity {
 
     private static final String DIRECTION_URL_API = "https://maps.googleapis.com/maps/api/directions/json?";
     private static final String GOOGLE_API_KEY = "AIzaSyCr_-3KbvHxSm9Gb38l7M2E_b8qzwHhcTI";
-    String url,urlOrigin,urlDestination,title2;
+    String url,urlOrigin,urlDestination,title2,getmail;
     ImageView mImg,mBack,mAdd;
     RecyclerView recyclerView;
     BusInfoAdaptor adaptor;
     ArrayList<BusInfo> businfos;
-
+    RequestQueue requestQueue;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -70,6 +81,9 @@ public class Page5012Activity extends AppCompatActivity {
         recyclerView.setAdapter(adaptor);
         businfos=new ArrayList<>();
         getData();
+        SharedPreferences email = getSharedPreferences("email",MODE_PRIVATE);
+        getmail=email.getString("Email","");
+        requestQueue = Volley.newRequestQueue(this);
 
         mAdd.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -79,6 +93,7 @@ public class Page5012Activity extends AppCompatActivity {
                 View view= LayoutInflater.from(Page5012Activity.this).inflate(R.layout.page5012popupwindow,null);
                 //設計彈出框
                 popupWin.showAtLocation(view,Gravity.CENTER,0,0);
+
             }
         });
 
@@ -215,7 +230,7 @@ public class Page5012Activity extends AppCompatActivity {
         View v;
         ImageView mWork,mHome,mPlay,mShopping,mSaveImg;
         int choose=0;
-
+        String img = "";
         public popupSelPhoto(Context mContext2) {
             //動態頁面載入
             v = LayoutInflater.from(mContext2).inflate(R.layout.page5012popupphoto, null);
@@ -263,6 +278,7 @@ public class Page5012Activity extends AppCompatActivity {
                         mHome.setImageResource(R.drawable.home);
                         mPlay.setImageResource(R.drawable.play);
                         mShopping.setImageResource(R.drawable.shopping);
+                        img = "work";
                     }
                 }
             });
@@ -276,6 +292,7 @@ public class Page5012Activity extends AppCompatActivity {
                         mWork.setImageResource(R.drawable.working);
                         mPlay.setImageResource(R.drawable.play);
                         mShopping.setImageResource(R.drawable.shopping);
+                        img = "home";
                     }
                 }
             });
@@ -289,6 +306,7 @@ public class Page5012Activity extends AppCompatActivity {
                         mWork.setImageResource(R.drawable.working);
                         mHome.setImageResource(R.drawable.home);
                         mShopping.setImageResource(R.drawable.shopping);
+                        img = "play";
                     }
                 }
             });
@@ -302,6 +320,7 @@ public class Page5012Activity extends AppCompatActivity {
                         mWork.setImageResource(R.drawable.working);
                         mHome.setImageResource(R.drawable.home);
                         mPlay.setImageResource(R.drawable.play);
+                        img = "shopping";
                     }
                 }
             });
@@ -314,7 +333,8 @@ public class Page5012Activity extends AppCompatActivity {
                         System.out.println(choose);
                         dismiss();
                         //將資訊存入資料庫
-
+                        savepic(img);
+                        System.out.println(img);
                         Toast.makeText(Page5012Activity.this,"路線儲存成功！",Toast.LENGTH_LONG).show();
                     }else{ //沒有選照片
                         Toast.makeText(Page5012Activity.this,"請選擇圖片！",Toast.LENGTH_LONG).show();
@@ -326,6 +346,36 @@ public class Page5012Activity extends AppCompatActivity {
 
         @Override
         public void onClick(View view) {
+        }
+        public void savepic(final String img) {
+            String URL = Urls.url1+"/LoginRegister/savepic.php?email="+getmail;
+            StringRequest stringRequest = new StringRequest(
+                    Request.Method.POST,
+                    URL,
+                    new Response.Listener<String>() {
+                        @Override
+                        public void onResponse(String response) {
+                            if(response.equals("Success")){
+                                finish();
+                            }
+                        }
+                    },
+                    new Response.ErrorListener() {
+                        @Override
+                        public void onErrorResponse(VolleyError error) {
+                            Toast.makeText(Page5012Activity.this, error.toString(), Toast.LENGTH_SHORT).show();
+                        }
+                    }
+            ) {
+                @Nullable
+                @Override
+                protected Map<String, String> getParams() throws AuthFailureError {
+                    Map<String, String> parms = new HashMap<>();
+                    parms.put("image",img);
+                    return parms;
+                }
+            };
+            requestQueue.add(stringRequest);
         }
     }
 
