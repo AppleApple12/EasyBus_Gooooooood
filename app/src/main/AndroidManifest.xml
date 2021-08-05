@@ -72,9 +72,9 @@
         <activity android:name=".Page601" />
         <activity android:name=".Page6Activity" />
         <activity android:name=".Page3Activity" />
-        <activity android:name=".MainActivity" />
+        <activity android:name=".Page4Activity" />
         <activity android:name=".Page2Activity" />
-        <activity android:name=".Page4Activity">
+        <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
