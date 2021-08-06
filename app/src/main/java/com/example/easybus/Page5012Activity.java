@@ -70,7 +70,7 @@ public class Page5012Activity extends AppCompatActivity {
         urlDestination= bundle.getString("destination2");
 
         url=DIRECTION_URL_API+"origin="+urlOrigin+"&destination="+urlDestination+"&mode=transit&transit_mode=bus&language=zh-TW&key="+GOOGLE_API_KEY;
-        System.out.println(url);
+
         mImg=findViewById(R.id.img);
         mBack=findViewById(R.id.backicon);
         mAdd=findViewById(R.id.addIcon);
@@ -216,48 +216,19 @@ public class Page5012Activity extends AppCompatActivity {
                 return;
             }else{  //選擇圖片popupwindow
                 //銷毀第一個popupwindow
-                savebusinfo(getmail,title2,url);
+
                 dismiss();
                 //實例化PopupPhoto
                 popupSelPhoto popupPhoto=new popupSelPhoto(Page5012Activity.this);
                 View v=LayoutInflater.from(Page5012Activity.this).inflate(R.layout.page5012popupphoto,null);
                 //設計彈出框
                 popupPhoto.showAtLocation(v,Gravity.CENTER,0,0);
+                //title2=popupPhoto.title;
+                popupPhoto.title=title2;
             }
         }
 
-        public void savebusinfo(final String email,final String routename,final String route) {
-            String URL = Urls.url1+"/LoginRegister/save_businfo.php";
-            StringRequest stringRequest = new StringRequest(
-                    Request.Method.POST,
-                    URL,
-                    new Response.Listener<String>() {
-                        @Override
-                        public void onResponse(String response) {
-                            if(response.equals("Success")){
-                                Toast.makeText(Page5012Activity.this, "請選擇圖片 !", Toast.LENGTH_SHORT).show();
-                            }
-                        }
-                    },
-                    new Response.ErrorListener() {
-                        @Override
-                        public void onErrorResponse(VolleyError error) {
-                            Toast.makeText(Page5012Activity.this, error.toString(), Toast.LENGTH_SHORT).show();
-                        }
-                    }
-            ) {
-                @Nullable
-                @Override
-                protected Map<String, String> getParams() throws AuthFailureError {
-                    Map<String, String> parms = new HashMap<>();
-                    parms.put("email",email);
-                    parms.put("routename",routename);
-                    parms.put("route",route);
-                    return parms;
-                }
-            };
-            requestQueue1.add(stringRequest);
-        }
+
     }
 
     //標題popupSelPhoto
@@ -265,7 +236,7 @@ public class Page5012Activity extends AppCompatActivity {
         View v;
         ImageView mWork,mHome,mPlay,mShopping,mSaveImg;
         int choose=0;
-        String img = "";
+        String title,img = "";
         public popupSelPhoto(Context mContext2) {
             //動態頁面載入
             v = LayoutInflater.from(mContext2).inflate(R.layout.page5012popupphoto, null);
@@ -366,9 +337,12 @@ public class Page5012Activity extends AppCompatActivity {
                     choose+=1;
                     if (choose>=2 && choose<=5){ //有選擇照片
                         System.out.println(choose);
+                        System.out.println("title : "+title);
+                        System.out.println(url);
                         dismiss();
                         //將資訊存入資料庫
-                        savepic(img);
+                        savebusinfo(getmail,title,url,img);
+
                         System.out.println(img);
                         Toast.makeText(Page5012Activity.this,"路線儲存成功！",Toast.LENGTH_LONG).show();
                     }else{ //沒有選照片
@@ -382,8 +356,8 @@ public class Page5012Activity extends AppCompatActivity {
         @Override
         public void onClick(View view) {
         }
-        public void savepic(final String img) {
-            String URL = Urls.url1+"/LoginRegister/savepic.php?email="+getmail;
+        public void savebusinfo(final String email,final String routename,final String route,final String img) {
+            String URL = Urls.url1+"/LoginRegister/save_businfo.php";
             StringRequest stringRequest = new StringRequest(
                     Request.Method.POST,
                     URL,
@@ -406,11 +380,14 @@ public class Page5012Activity extends AppCompatActivity {
                 @Override
                 protected Map<String, String> getParams() throws AuthFailureError {
                     Map<String, String> parms = new HashMap<>();
+                    parms.put("email",email);
+                    parms.put("routename",routename);
+                    parms.put("route",route);
                     parms.put("image",img);
                     return parms;
                 }
             };
-            requestQueue.add(stringRequest);
+            requestQueue1.add(stringRequest);
         }
     }
 
