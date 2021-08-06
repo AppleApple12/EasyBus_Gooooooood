@@ -54,7 +54,7 @@ public class Page61 extends AppCompatActivity {
             HashMap<String,Integer> hashMap2 = new HashMap<>();
             hashMap2.put("busphoto",image[i]);
             arrayList2.add(hashMap2);
-        }
+        }///
         recyclerView = findViewById(R.id.recyclerview);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         //recyclerView.addItemDecoration(new DividerItemDecoration(this,DividerItemDecoration.VERTICAL));

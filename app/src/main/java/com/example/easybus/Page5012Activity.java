@@ -52,7 +52,7 @@ public class Page5012Activity extends AppCompatActivity {
     String url,urlOrigin,urlDestination,title2,getmail;
     ImageView mImg,mBack,mAdd;
     RecyclerView recyclerView;
-    BusInfoAdaptor adaptor;
+    BusInfoAdaptor adaptor;//
     ArrayList<BusInfo> businfos;
     RequestQueue requestQueue,requestQueue1;
     @Override
