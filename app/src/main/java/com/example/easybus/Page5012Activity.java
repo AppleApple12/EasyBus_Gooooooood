@@ -336,12 +336,12 @@ public class Page5012Activity extends AppCompatActivity {
                 public void onClick(View view) {
                     choose+=1;
                     if (choose>=2 && choose<=5){ //有選擇照片
-                        System.out.println(choose);
+                        System.out.println(urlDestination);
                         System.out.println("title : "+title);
-                        System.out.println(url);
+                        System.out.println(urlOrigin);
                         dismiss();
                         //將資訊存入資料庫
-                        savebusinfo(getmail,title,url,img);
+                        savebusinfo(getmail,title,urlOrigin,urlDestination,img);
 
                         System.out.println(img);
                         Toast.makeText(Page5012Activity.this,"路線儲存成功！",Toast.LENGTH_LONG).show();
@@ -356,7 +356,7 @@ public class Page5012Activity extends AppCompatActivity {
         @Override
         public void onClick(View view) {
         }
-        public void savebusinfo(final String email,final String routename,final String route,final String img) {
+        public void savebusinfo(final String email,final String routename,final String origin,final String destination,final String img) {
             String URL = Urls.url1+"/LoginRegister/save_businfo.php";
             StringRequest stringRequest = new StringRequest(
                     Request.Method.POST,
@@ -382,7 +382,8 @@ public class Page5012Activity extends AppCompatActivity {
                     Map<String, String> parms = new HashMap<>();
                     parms.put("email",email);
                     parms.put("routename",routename);
-                    parms.put("route",route);
+                    parms.put("origin",origin);
+                    parms.put("destination",destination);
                     parms.put("image",img);
                     return parms;
                 }
