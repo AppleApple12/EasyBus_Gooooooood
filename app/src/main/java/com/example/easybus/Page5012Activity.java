@@ -357,7 +357,7 @@ public class Page5012Activity extends AppCompatActivity {
         public void onClick(View view) {
         }
         public void savebusinfo(final String email,final String routename,final String origin,final String destination,final String img) {
-            String URL = Urls.url1+"/LoginRegister/save_businfo.php";
+            String URL = Urls.url1+"/LoginRegister/save_businfo.php";//
             StringRequest stringRequest = new StringRequest(
                     Request.Method.POST,
                     URL,
