@@ -45,8 +45,8 @@ public class Page61 extends AppCompatActivity {
                 arrayList2.clear();
             }
         });
-        int image[] = {R.drawable.busdetails,R.drawable.business};
-        final String text[] = {" 公  車  查  詢 ","   上    班   "};
+        int image[] = {R.drawable.busdetails,R.drawable.business,R.drawable.waitingbus};
+        final String text[] = {" 公  車  查  詢 ","   上    班   ","   搭    車   "};
         for(int i = image.length-1;i>=0;i--){
             HashMap<String,String> hashMap = new HashMap<>();
             hashMap.put("busname",text[i]);
@@ -68,8 +68,13 @@ public class Page61 extends AppCompatActivity {
                     startActivity(it1);
                     arrayList1.clear();
                     arrayList2.clear();
-                }else{
+                }else if (arrayList1.get(position).get("busname").equals("   上    班   ")){
                     Intent it1 = new Intent(Page61.this,Page62.class);
+                    startActivity(it1);
+                    arrayList1.clear();
+                    arrayList2.clear();
+                }else{
+                    Intent it1 = new Intent(Page61.this,take_bus.class);
                     startActivity(it1);
                     arrayList1.clear();
                     arrayList2.clear();
