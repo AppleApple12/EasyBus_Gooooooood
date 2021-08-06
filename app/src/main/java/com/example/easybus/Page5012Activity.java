@@ -235,7 +235,7 @@ public class Page5012Activity extends AppCompatActivity {
                         @Override
                         public void onResponse(String response) {
                             if(response.equals("Success")){
-                                finish();
+                                Toast.makeText(Page5012Activity.this, "請選擇圖片 !", Toast.LENGTH_SHORT).show();
                             }
                         }
                     },
