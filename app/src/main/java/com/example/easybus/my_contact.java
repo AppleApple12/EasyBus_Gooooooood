@@ -68,9 +68,6 @@ public class my_contact extends AppCompatActivity {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         mrecyclerView=findViewById(R.id.recyclerview);
         mrecyclerView.setHasFixedSize(true);
-        // LinearLayoutManager llm = new LinearLayoutManager(this);
-        //llm.setOrientation(LinearLayoutManager.VERTICAL);
-        //mrecyclerView.setLayoutManager(new LinearLayoutManager(this));
         mrecyclerView.setLayoutManager(linearLayoutManager);
 
         friendList = new ArrayList<>();

@@ -68,7 +68,7 @@
         android:background="#66ffffff"
         android:text="新\t\t增\t\t路\t\t線"
         android:textSize="30sp"
-        app:layout_constraintBottom_toBottomOf="@+id/imv1"
+
         app:layout_constraintEnd_toEndOf="@+id/imv01"
         app:layout_constraintHorizontal_bias="0.523"
         app:layout_constraintStart_toStartOf="@+id/imv01"

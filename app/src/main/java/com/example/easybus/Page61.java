@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,21 +17,38 @@ import android.widget.AdapterView;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.Volley;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 public class Page61 extends AppCompatActivity {
     //
     Page61Holder myAdapter;
     static ArrayList<HashMap<String,String>> arrayList1 = new ArrayList<>();
     static ArrayList<HashMap<String,Integer>> arrayList2 = new ArrayList<>();
-    RecyclerView recyclerView;
+    RecyclerView recyclerView,mrecyclerView;
+    String getmail;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_page61);
+        //抓取email
+        SharedPreferences email = getSharedPreferences("email",MODE_PRIVATE);
+        getmail=email.getString("Email","");
         //隱藏title bar
         ActionBar actionBar = getSupportActionBar();
         actionBar.hide();
@@ -45,6 +63,9 @@ public class Page61 extends AppCompatActivity {
                 arrayList2.clear();
             }
         });
+
+
+
         int image[] = {R.drawable.busdetails,R.drawable.business,R.drawable.waitingbus};
         final String text[] = {" 公  車  查  詢 ","   上    班   ","   搭    車   "};
         for(int i = image.length-1;i>=0;i--){
@@ -83,6 +104,5 @@ public class Page61 extends AppCompatActivity {
             }
         });
     }
-
 
 }
