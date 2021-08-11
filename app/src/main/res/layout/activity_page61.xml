@@ -68,7 +68,7 @@
         app:layout_constraintTop_toTopOf="@+id/iv1" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerview"
+        android:id="@+id/take_bus_list"
         android:layout_width="match_parent"
         android:layout_height="630dp"
         android:background="#ffffff"

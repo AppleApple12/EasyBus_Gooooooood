@@ -5,6 +5,7 @@ import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -19,6 +20,7 @@ import java.util.List;
 public class take_bus_Adapter extends RecyclerView.Adapter<take_bus_Adapter.take_bus_Holder>{
     Context context;
     List<take_bus_businfo> takeBusBusinfoList;
+   OnItemClickListener listener;
     public take_bus_Adapter (Context context,List<take_bus_businfo> takeBusBusinfoList){
         this.context = context;
         this.takeBusBusinfoList = takeBusBusinfoList;
@@ -55,6 +57,15 @@ public class take_bus_Adapter extends RecyclerView.Adapter<take_bus_Adapter.take
         }else{
             Glide.with(context).load(R.drawable.business).into(holder.imageView);
         }//
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                if (listener!=null){
+                    listener.onItemClick(v,position);
+                }
+            }
+        });
             //Glide.with(context).load(R.drawable.working).into(holder.imageView);
 
 
@@ -78,5 +89,11 @@ public class take_bus_Adapter extends RecyclerView.Adapter<take_bus_Adapter.take
             routename=itemView.findViewById(R.id.routename);
             imageView=itemView.findViewById(R.id.busimg);
         }
+    }
+    public interface OnItemClickListener{
+        void onItemClick(View view,int position);
+    }
+    public void setOnItemClick(take_bus_Adapter.OnItemClickListener listener){
+        this.listener = listener;
     }
 }

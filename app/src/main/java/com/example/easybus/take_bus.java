@@ -5,8 +5,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -82,8 +84,7 @@ public class take_bus extends AppCompatActivity {
                         } catch (JSONException e) {
                                 e.printStackTrace();
                             }
-                        take_bus_adapter = new take_bus_Adapter(take_bus.this,takeBusBusinfoList);
-                        mrecyclerView.setAdapter(take_bus_adapter);
+
 
                     }
                 }, new Response.ErrorListener() {
@@ -93,10 +94,34 @@ public class take_bus extends AppCompatActivity {
             }
         });
          Volley.newRequestQueue(take_bus.this).add(stringrequest);
+
+
+        take_bus_adapter = new take_bus_Adapter(take_bus.this,takeBusBusinfoList);
+        mrecyclerView.setAdapter(take_bus_adapter);
+        take_bus_adapter.setOnItemClick(new take_bus_Adapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(View view, int position) {
+                if(takeBusBusinfoList.get(position).getRoutename().equals(" 公  車  查  詢 ")){
+                    Intent it1 = new Intent(take_bus.this,Page6Activity.class);
+                    startActivity(it1);
+                    arrayList1.clear();
+                    arrayList2.clear();
+                }else if (takeBusBusinfoList.get(position).getRoutename().equals("   上    班   ")){
+                    Intent it1 = new Intent(take_bus.this,Page62.class);
+                    startActivity(it1);
+                    arrayList1.clear();
+                    arrayList2.clear();
+                }else{
+                    Intent it1 = new Intent(take_bus.this,take_bus.class);
+                    startActivity(it1);
+                    arrayList1.clear();
+                    arrayList2.clear();
+                }
+
+            }
+        });
     }
 
-    private void getbus(){
 
-    }
 
 }
