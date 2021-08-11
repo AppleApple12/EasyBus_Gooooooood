@@ -54,7 +54,7 @@ public class take_bus_Adapter extends RecyclerView.Adapter<take_bus_Adapter.take
             Glide.with(context).load(R.drawable.busdetails).into(holder.imageView);
         }else{
             Glide.with(context).load(R.drawable.business).into(holder.imageView);
-        }
+        }//
             //Glide.with(context).load(R.drawable.working).into(holder.imageView);
 
 
