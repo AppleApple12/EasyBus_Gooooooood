@@ -22,9 +22,12 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class take_bus extends AppCompatActivity {
+    static ArrayList<HashMap<String,String>> arrayList1 = new ArrayList<>();
+    static ArrayList<HashMap<String,String>> arrayList2 = new ArrayList<>();
     List<take_bus_businfo> takeBusBusinfoList;
     take_bus_Adapter take_bus_adapter;
     RecyclerView mrecyclerView;
@@ -45,6 +48,15 @@ public class take_bus extends AppCompatActivity {
         mrecyclerView.setHasFixedSize(true);
         mrecyclerView.setLayoutManager(linearLayoutManager);
         takeBusBusinfoList = new ArrayList<>();
+
+        String image[] = {"busdetails","business"};
+        final String text[] = {" 公  車  查  詢 ","   上    班   "};
+        for(int i = image.length-1;i>=0;i--){
+            take_bus_businfo b =new take_bus_businfo();
+            b.setRoutename(text[i]);
+            b.setImage(image[i]);
+            takeBusBusinfoList.add(b);
+        }///
         //getbus();
 
         String URL =Urls.url1+"/LoginRegister/fetchbusinfo.php?email="+getmail;
@@ -66,7 +78,6 @@ public class take_bus extends AppCompatActivity {
                                 b.setRoutename(routename);
                                 b.setImage(image);
                                 takeBusBusinfoList.add(b);
-
                             }
                         } catch (JSONException e) {
                                 e.printStackTrace();
