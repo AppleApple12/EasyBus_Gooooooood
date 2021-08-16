@@ -43,12 +43,39 @@ public class Page7Activity extends AppCompatActivity {
             }
         });
 
-        //情境一
-        ImageButton ib1 = (ImageButton)findViewById(R.id.ib1);
+        //學習篇
+        ImageButton ib1 = (ImageButton)findViewById(R.id.button);
         ib1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent it1 = new Intent(Page7Activity.this,Page701Activity.class);
+                startActivity(it1);
+            }
+        });
+        //禮儀篇
+        ImageButton ib2 = (ImageButton)findViewById(R.id.button2);
+        ib2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent it1 = new Intent(Page7Activity.this,Page702Activity.class);
+                startActivity(it1);
+            }
+        });
+        //安全篇
+        ImageButton ib3 = (ImageButton)findViewById(R.id.button3);
+        ib3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent it1 = new Intent(Page7Activity.this,Page703Activity.class);
+                startActivity(it1);
+            }
+        });
+        //求救篇
+        ImageButton ib4 = (ImageButton)findViewById(R.id.button4);
+        ib4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent it1 = new Intent(Page7Activity.this,Page704Activity.class);
                 startActivity(it1);
             }
         });

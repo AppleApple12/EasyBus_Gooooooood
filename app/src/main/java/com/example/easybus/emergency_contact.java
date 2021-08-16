@@ -3,6 +3,7 @@ package com.example.easybus;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.appcompat.app.ActionBar;
@@ -38,7 +39,7 @@ public class emergency_contact extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_emergency_contact);
-        getmail = mail();
+        //getmail = mail();
         back = findViewById(R.id.back);
         memergency = findViewById(R.id.emergency_phone);
         madd = findViewById(R.id.add);
@@ -46,6 +47,9 @@ public class emergency_contact extends AppCompatActivity {
         //隱藏title bar///
         ActionBar actionBar = getSupportActionBar();
         actionBar.hide();
+        //抓email
+        SharedPreferences email = getSharedPreferences("email",MODE_PRIVATE);
+        getmail=email.getString("Email","");
         madd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -63,7 +67,7 @@ public class emergency_contact extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent it1 = new Intent(emergency_contact.this, Page8Activity.class);
-                it1.putExtra("email",getmail);
+                //it1.putExtra("email",getmail);
                 startActivity(it1);
             }
         });
@@ -113,11 +117,11 @@ public class emergency_contact extends AppCompatActivity {
         return true;
     }
 
-    public String mail() {
+    /*public String mail() {
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
             email = extras.getString("email");
         }
         return email;
-    }
+    }*/
 }

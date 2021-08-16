@@ -95,7 +95,10 @@ public class Page8Activity_caregiver extends AppCompatActivity {
         mContext = Page8Activity_caregiver.this;
 
         requestQueue = Volley.newRequestQueue(this);
-        getmail=mail();
+        //抓email
+        SharedPreferences email = getSharedPreferences("email",MODE_PRIVATE);
+        getmail=email.getString("Email","");
+        //getmail=mail();
         getpass=pass();
         readUser();
         fetchimage();
@@ -105,7 +108,7 @@ public class Page8Activity_caregiver extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(Page8Activity_caregiver.this,my_contact.class);
-                intent.putExtra("email",getmail);
+                //intent.putExtra("email",getmail);
                 startActivity(intent);
                 finish();
             }
@@ -136,7 +139,7 @@ public class Page8Activity_caregiver extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(Page8Activity_caregiver.this,qrcode_page.class);
-                intent.putExtra("email",getmail);
+                //intent.putExtra("email",getmail);
                 startActivity(intent);
                 finish();
             }
@@ -147,7 +150,7 @@ public class Page8Activity_caregiver extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(Page8Activity_caregiver.this,edit_password.class);
-                intent.putExtra("email",getmail);
+                //intent.putExtra("email",getmail);
                 intent.putExtra("password",getpass);
                 startActivity(intent);
                 finish();
@@ -283,13 +286,13 @@ public class Page8Activity_caregiver extends AppCompatActivity {
     }
 
 
-    public String mail(){
+    /*public String mail(){
         Bundle extras = getIntent().getExtras();
         if (extras!=null){
             email=extras.getString("email");
         }
         return email;
-    }
+    }*/
     public String pass(){
         Bundle extras = getIntent().getExtras();
         if (extras!=null){

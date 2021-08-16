@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.telecom.Call;
@@ -35,7 +36,9 @@ public class Page3Activity extends AppCompatActivity {
         setContentView(R.layout.activity_page3);
 
         requestQueue = Volley.newRequestQueue(this);
-        getmail = mail();
+        //抓email
+        SharedPreferences email = getSharedPreferences("email",MODE_PRIVATE);
+        getmail=email.getString("Email","");
         //隱藏title bar
         ActionBar actionBar = getSupportActionBar();
         actionBar.hide();
@@ -46,7 +49,7 @@ public class Page3Activity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent it1 = new Intent(Page3Activity.this,Page5011Activity.class);
-                it1.putExtra("email",getmail);
+                //it1.putExtra("email",getmail);
                 startActivity(it1);
             }
         });
@@ -57,7 +60,7 @@ public class Page3Activity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent it2 = new Intent(Page3Activity.this,Page61.class);
-                it2.putExtra("email",getmail);
+                //it2.putExtra("email",getmail);
                 startActivity(it2);
             }
         });
@@ -68,7 +71,7 @@ public class Page3Activity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent it3 = new Intent(Page3Activity.this,Page7Activity.class);
-                it3.putExtra("email",getmail);
+                //it3.putExtra("email",getmail);
                 startActivity(it3);
             }
         });
@@ -79,7 +82,7 @@ public class Page3Activity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent it4 = new Intent(Page3Activity.this,Page8Activity.class);
-                it4.putExtra("email",getmail);
+               // it4.putExtra("email",getmail);
                 // Toast.makeText(Page3Activity.this, getmail, Toast.LENGTH_SHORT).show();
                 startActivity(it4);
             }
@@ -141,11 +144,5 @@ public class Page3Activity extends AppCompatActivity {
         );
         requestQueue.add(jsonObjectRequest);
     }
-    public String mail(){
-        Bundle extras = getIntent().getExtras();
-        if (extras!=null){
-            email=extras.getString("email");
-        }
-        return email;
-    }
+
 }

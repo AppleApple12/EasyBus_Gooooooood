@@ -342,7 +342,6 @@ public class Page5012Activity extends AppCompatActivity {
                         dismiss();
                         //將資訊存入資料庫
                         savebusinfo(getmail,title,urlOrigin,urlDestination,img);
-
                         System.out.println(img);
                         Toast.makeText(Page5012Activity.this,"路線儲存成功！",Toast.LENGTH_LONG).show();
                     }else{ //沒有選照片

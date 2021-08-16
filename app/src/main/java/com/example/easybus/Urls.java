@@ -3,8 +3,8 @@ import java.net.InetAddress;
 import java.net.UnknownHostException;
 
 public class Urls {
-    //private static InetAddress ip;/////urllll
-    public static String url1 = "http://172.20.10.3";
+    //private static InetAddress ip;/////
+    public static String url1 = "http://10.0.4.81";
     //public static String url1 = "http://8c708b26959c.ngrok.io";
     public static void main(String args[]) {
 

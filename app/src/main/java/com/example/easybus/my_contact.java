@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.Dialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
@@ -54,7 +55,9 @@ public class my_contact extends AppCompatActivity {
         //隱藏title bar///
         ActionBar actionBar = getSupportActionBar();
         actionBar.hide();
-
+        //抓email
+        SharedPreferences email = getSharedPreferences("email",MODE_PRIVATE);
+        getmail=email.getString("Email","");
         backBtn=findViewById(R.id.backicon);
         mEnteredName = findViewById(R.id.EnteredName);
         dialog = new Dialog(my_contact.this);
@@ -74,7 +77,7 @@ public class my_contact extends AppCompatActivity {
         //friendAdapter = new friendAdapter(my_contact.this,friendList);
         //mrecyclerView.setAdapter(friendAdapter);
         requestQueue = Volley.newRequestQueue(this);
-        getmail=mail();
+        //getmail=mail();
         readUser();
         fetchimage();
         ImageRetriveWithPicasso();
@@ -83,7 +86,7 @@ public class my_contact extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(my_contact.this,Page8Activity.class);
-                intent.putExtra("email",getmail);
+                //intent.putExtra("email",getmail);
                 startActivity(intent);
                 finish();
             }
@@ -101,7 +104,7 @@ public class my_contact extends AppCompatActivity {
                                 @Override
                                 public void onClick(View v) {
                                     Intent intent = new Intent(my_contact.this,qrcode_page.class);
-                                    intent.putExtra("email",getmail);
+                                   // intent.putExtra("email",getmail);
                                     startActivity(intent);
                                 }
                             });
@@ -216,11 +219,11 @@ public class my_contact extends AppCompatActivity {
         System.out.println(imgurl);
     }
 
-    public String mail(){
+    /*public String mail(){
         Bundle extras = getIntent().getExtras();
         if (extras!=null){
             email=extras.getString("email");
         }
         return email;
-    }
+    }*/
 }
