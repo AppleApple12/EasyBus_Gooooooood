@@ -1,0 +1,274 @@
+Index: app/src/main/java/com/example/easybus/Urls.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.example.easybus;\r\nimport java.net.InetAddress;\r\nimport java.net.UnknownHostException;\r\n\r\npublic class Urls {\r\n    //private static InetAddress ip;/////\r\n    public static String url1 = \"http://10.0.4.81\";\r\n    //public static String url1 = \"http://8c708b26959c.ngrok.io\";\r\n    public static void main(String args[]) {\r\n\r\n        /*try {\r\n            ip = InetAddress.getLocalHost();\r\n            System.out.println(ip.getHostAddress());\r\n        } catch (UnknownHostException e) {\r\n            e.printStackTrace();\r\n        } catch (Exception e) {\r\n            e.printStackTrace();\r\n        }*/\r\n\r\n\r\n\r\n    }\r\n    //static String ROOT_URL = url1+url2+url3;\r\n    //static String FORGOT_PASSWORD_URL = \"http://192.168.27.107/LoginRegister/\" + \"forgot.php\";\r\n//搞不清楚 你不是說要用appple 對阿 可是不能merge 現在又說EasyBus 有問題\r\n\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/java/com/example/easybus/Urls.java	(revision bd7246cefa9baefc5e978bd7b21d2543b3a778d2)
++++ app/src/main/java/com/example/easybus/Urls.java	(date 1629107859669)
+@@ -3,8 +3,8 @@
+ import java.net.UnknownHostException;
+ 
+ public class Urls {
+-    //private static InetAddress ip;/////
+-    public static String url1 = "http://10.0.4.81";
++    //private static InetAddress ip;/////urllll
++    public static String url1 = "http://192.168.0.126";
+     //public static String url1 = "http://8c708b26959c.ngrok.io";
+     public static void main(String args[]) {
+ 
+Index: app/src/main/res/layout/cross_dialog.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/res/layout/cross_dialog.xml	(date 1629107859705)
++++ app/src/main/res/layout/cross_dialog.xml	(date 1629107859705)
+@@ -0,0 +1,52 @@
++<?xml version="1.0" encoding="utf-8"?>
++<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
++    xmlns:app="http://schemas.android.com/apk/res-auto"
++    xmlns:tools="http://schemas.android.com/tools"
++    android:layout_width="match_parent"
++    android:layout_height="match_parent">
++
++    <ImageView
++        android:id="@+id/imageView10"
++        android:layout_width="wrap_content"
++        android:layout_height="wrap_content"
++        app:layout_constraintBottom_toBottomOf="parent"
++        app:layout_constraintEnd_toEndOf="parent"
++        app:layout_constraintStart_toStartOf="parent"
++        app:layout_constraintTop_toTopOf="parent"
++        app:srcCompat="@drawable/cross_background" />
++
++    <ImageView
++        android:id="@+id/backbtn"
++        android:layout_width="wrap_content"
++        android:layout_height="wrap_content"
++        app:layout_constraintBottom_toBottomOf="parent"
++        app:layout_constraintEnd_toEndOf="parent"
++        app:layout_constraintStart_toStartOf="parent"
++        app:layout_constraintTop_toTopOf="parent"
++        app:layout_constraintVertical_bias="0.736"
++        app:srcCompat="@drawable/backbtn" />
++
++    <TextView
++        android:id="@+id/content_txt"
++        android:layout_width="wrap_content"
++        android:layout_height="wrap_content"
++        android:text="TextView"
++        app:layout_constraintBottom_toBottomOf="parent"
++        app:layout_constraintEnd_toEndOf="parent"
++        app:layout_constraintHorizontal_bias="0.498"
++        app:layout_constraintStart_toStartOf="parent"
++        app:layout_constraintTop_toTopOf="parent"
++        app:layout_constraintVertical_bias="0.404" />
++
++    <TextView
++        android:id="@+id/back_txt"
++        android:layout_width="wrap_content"
++        android:layout_height="wrap_content"
++        android:text="TextView"
++        app:layout_constraintBottom_toBottomOf="parent"
++        app:layout_constraintEnd_toEndOf="parent"
++        app:layout_constraintHorizontal_bias="0.498"
++        app:layout_constraintStart_toStartOf="parent"
++        app:layout_constraintTop_toTopOf="parent"
++        app:layout_constraintVertical_bias="0.726" />
++</androidx.constraintlayout.widget.ConstraintLayout>
+\ No newline at end of file
+Index: app/src/main/res/layout/correct_dialog.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/res/layout/correct_dialog.xml	(date 1629107859711)
++++ app/src/main/res/layout/correct_dialog.xml	(date 1629107859711)
+@@ -0,0 +1,52 @@
++<?xml version="1.0" encoding="utf-8"?>
++<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
++    xmlns:app="http://schemas.android.com/apk/res-auto"
++    xmlns:tools="http://schemas.android.com/tools"
++    android:layout_width="match_parent"
++             android:layout_height="match_parent">
++
++    <ImageView
++        android:id="@+id/imageView10"
++        android:layout_width="wrap_content"
++        android:layout_height="wrap_content"
++        app:layout_constraintBottom_toBottomOf="parent"
++        app:layout_constraintEnd_toEndOf="parent"
++        app:layout_constraintStart_toStartOf="parent"
++        app:layout_constraintTop_toTopOf="parent"
++        app:srcCompat="@drawable/correct_background" />
++
++    <ImageView
++        android:id="@+id/nextbtn"
++        android:layout_width="wrap_content"
++        android:layout_height="wrap_content"
++        app:layout_constraintBottom_toBottomOf="parent"
++        app:layout_constraintEnd_toEndOf="parent"
++        app:layout_constraintStart_toStartOf="parent"
++        app:layout_constraintTop_toTopOf="parent"
++        app:layout_constraintVertical_bias="0.736"
++        app:srcCompat="@drawable/nextbtn" />
++
++    <TextView
++        android:id="@+id/content_txt"
++        android:layout_width="wrap_content"
++        android:layout_height="wrap_content"
++        android:text="TextView"
++        app:layout_constraintBottom_toBottomOf="parent"
++        app:layout_constraintEnd_toEndOf="parent"
++        app:layout_constraintHorizontal_bias="0.498"
++        app:layout_constraintStart_toStartOf="parent"
++        app:layout_constraintTop_toTopOf="parent"
++        app:layout_constraintVertical_bias="0.404" />
++
++    <TextView
++        android:id="@+id/back_txt"
++        android:layout_width="wrap_content"
++        android:layout_height="wrap_content"
++        android:text="TextView"
++        app:layout_constraintBottom_toBottomOf="parent"
++        app:layout_constraintEnd_toEndOf="parent"
++        app:layout_constraintHorizontal_bias="0.498"
++        app:layout_constraintStart_toStartOf="parent"
++        app:layout_constraintTop_toTopOf="parent"
++        app:layout_constraintVertical_bias="0.726" />
++</androidx.constraintlayout.widget.ConstraintLayout>
+\ No newline at end of file
+Index: .idea/runConfigurations.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"RunConfigurationProducerService\">\r\n    <option name=\"ignoredProducers\">\r\n      <set>\r\n        <option value=\"org.jetbrains.plugins.gradle.execution.test.runner.AllInPackageGradleConfigurationProducer\" />\r\n        <option value=\"org.jetbrains.plugins.gradle.execution.test.runner.TestClassGradleConfigurationProducer\" />\r\n        <option value=\"org.jetbrains.plugins.gradle.execution.test.runner.TestMethodGradleConfigurationProducer\" />\r\n      </set>\r\n    </option>\r\n  </component>\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- .idea/runConfigurations.xml	(revision bd7246cefa9baefc5e978bd7b21d2543b3a778d2)
++++ .idea/runConfigurations.xml	(date 1629181912509)
+@@ -3,6 +3,7 @@
+   <component name="RunConfigurationProducerService">
+     <option name="ignoredProducers">
+       <set>
++        <option value="com.android.tools.idea.compose.preview.runconfiguration.ComposePreviewRunConfigurationProducer" />
+         <option value="org.jetbrains.plugins.gradle.execution.test.runner.AllInPackageGradleConfigurationProducer" />
+         <option value="org.jetbrains.plugins.gradle.execution.test.runner.TestClassGradleConfigurationProducer" />
+         <option value="org.jetbrains.plugins.gradle.execution.test.runner.TestMethodGradleConfigurationProducer" />
+Index: app/src/main/java/com/example/easybus/edit_password.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.example.easybus;\r\nimport androidx.annotation.Nullable;\r\nimport androidx.appcompat.app.ActionBar;\r\nimport androidx.appcompat.app.AppCompatActivity;\r\n\r\nimport android.content.Intent;\r\nimport android.content.SharedPreferences;\r\nimport android.os.Bundle;\r\nimport android.view.View;\r\nimport android.widget.Button;\r\nimport android.widget.EditText;\r\nimport android.widget.ImageView;\r\nimport android.widget.TextView;\r\nimport android.widget.Toast;\r\n\r\nimport com.android.volley.AuthFailureError;\r\nimport com.android.volley.Request;\r\nimport com.android.volley.RequestQueue;\r\nimport com.android.volley.Response;\r\nimport com.android.volley.VolleyError;\r\nimport com.android.volley.toolbox.JsonObjectRequest;\r\nimport com.android.volley.toolbox.StringRequest;\r\nimport com.android.volley.toolbox.Volley;\r\n\r\nimport org.json.JSONException;\r\nimport org.json.JSONObject;\r\n\r\nimport java.util.HashMap;\r\nimport java.util.Map;\r\n\r\npublic class edit_password extends AppCompatActivity {\r\n    String email, getmail, password, getpass;\r\n    EditText pas1, pas2, pas3;\r\n    public String pass1, pass2, pass3;\r\n    RequestQueue requestQueue;\r\n    Button btnok;\r\n    TextView btnback;\r\n\r\n    @Override\r\n    protected void onCreate(Bundle savedInstanceState) {\r\n        super.onCreate(savedInstanceState);\r\n        setContentView(R.layout.activity_edit_password);\r\n\r\n        //隱藏title bar\r\n        ActionBar actionBar = getSupportActionBar();\r\n        actionBar.hide();\r\n        pas1 = findViewById(R.id.password1);\r\n        pas2 = findViewById(R.id.password2);\r\n        pas3 = findViewById(R.id.password3);\r\n        btnok = findViewById(R.id.okBtn);\r\n        btnback = findViewById(R.id.back);\r\n        requestQueue = Volley.newRequestQueue(this);\r\n\r\n        getmail = mail();\r\n        getpass = pass();\r\n\r\n        btnback.setOnClickListener(new View.OnClickListener() {\r\n            @Override\r\n            public void onClick(View v) {\r\n                readUser(email);\r\n            }\r\n        });\r\n        btnok.setOnClickListener(new View.OnClickListener() {\r\n            @Override\r\n            public void onClick(View v) {\r\n                pass1 = pas1.getText().toString().trim();\r\n                pass2 = pas2.getText().toString().trim();\r\n                pass3 = pas3.getText().toString().trim();\r\n                if (pass1.isEmpty() || pass2.isEmpty() || pass3.isEmpty()){\r\n                    Toast.makeText(edit_password.this, \"不可空白\", Toast.LENGTH_SHORT).show();\r\n                }else{\r\n                    if(!pass1.equals(getpass)){\r\n                        Toast.makeText(edit_password.this, \"請輸入正確密碼\", Toast.LENGTH_SHORT).show();\r\n                    }else  if(!pass2.equals(pass3)){\r\n                        Toast.makeText(edit_password.this, \"請輸入相同密碼\", Toast.LENGTH_SHORT).show();\r\n                    }else if(pass2.equals(pass1) && pass3.equals(pass1)){\r\n                        Toast.makeText(edit_password.this, \"不可與原密碼相同\", Toast.LENGTH_SHORT).show();\r\n                    }else{\r\n                        UpdateUser(pass3);\r\n                    }\r\n                }\r\n            }\r\n        });\r\n    }\r\n    public void UpdateUser(final String pass3) {\r\n        String URL = Urls.url1+\"/LoginRegister/edit.php?email=\"+getmail;\r\n        StringRequest stringRequest = new StringRequest(\r\n                Request.Method.POST,\r\n                URL,\r\n                new Response.Listener<String>() {\r\n                    @Override\r\n                    public void onResponse(String response) {\r\n                        if(response.equals(\"Success\")){\r\n                            Intent intent =new Intent(edit_password.this,Login3.class);\r\n                            Toast.makeText(edit_password.this, \"請重新登入\", Toast.LENGTH_SHORT).show();\r\n                            startActivity(intent);\r\n                            finish();\r\n                        }\r\n                    }\r\n                },\r\n                new Response.ErrorListener() {\r\n                    @Override\r\n                    public void onErrorResponse(VolleyError error) {\r\n                        Toast.makeText(edit_password.this, error.toString(), Toast.LENGTH_SHORT).show();\r\n                    }\r\n                }\r\n        ) {\r\n            @Nullable\r\n            @Override\r\n            protected Map<String, String> getParams() throws AuthFailureError {\r\n                Map<String, String> parms = new HashMap<>();\r\n                parms.put(\"password\", pass3);\r\n                return parms;\r\n            }\r\n        };\r\n        requestQueue.add(stringRequest);\r\n    }\r\n\r\n    public String mail() {\r\n        Bundle extras = getIntent().getExtras();\r\n        if (extras != null) {\r\n            email = extras.getString(\"email\");\r\n        }\r\n        return email;\r\n    }\r\n\r\n    public String pass() {\r\n        Bundle extras = getIntent().getExtras();\r\n        if (extras != null) {\r\n            password = extras.getString(\"password\");\r\n        }\r\n        return password;\r\n    }\r\n    public void readUser(final String email){\r\n        String URL =Urls.url1+\"/LoginRegister/fetch.php?email=\"+email;\r\n        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(\r\n                Request.Method.GET,\r\n                URL,\r\n                null,\r\n                new Response.Listener<JSONObject>() {\r\n                    String identity;\r\n                    @Override\r\n                    public void onResponse(JSONObject response) {\r\n                        try {\r\n                            identity = response.getString(\"identity\");\r\n                            turnpage(identity);\r\n                        } catch (JSONException e) {\r\n                            e.printStackTrace();\r\n                            Toast.makeText(edit_password.this, e.toString(), Toast.LENGTH_SHORT).show();\r\n                        }\r\n                    }\r\n                },\r\n                new Response.ErrorListener() {\r\n                    @Override\r\n                    public void onErrorResponse(VolleyError error) {\r\n                        Toast.makeText(edit_password.this, error.toString(), Toast.LENGTH_SHORT).show();\r\n                    }\r\n                }\r\n        );\r\n        requestQueue.add(jsonObjectRequest);\r\n    }\r\n\r\n    private void turnpage(String identity) {\r\n\r\n        if(\"requester\".equalsIgnoreCase(identity)) {\r\n            Intent it4 = new Intent(edit_password.this,Page8Activity.class);\r\n            it4.putExtra(\"email\", email);\r\n            startActivity(it4);\r\n        }else if(\"caregiver\".equalsIgnoreCase(identity)){\r\n            Intent it = new Intent(edit_password.this,Page8Activity_caregiver.class);\r\n            it.putExtra(\"email\", email);\r\n            startActivity(it);\r\n\r\n        }\r\n    }\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/java/com/example/easybus/edit_password.java	(revision bd7246cefa9baefc5e978bd7b21d2543b3a778d2)
++++ app/src/main/java/com/example/easybus/edit_password.java	(date 1629107859720)
+@@ -44,6 +44,9 @@
+         //隱藏title bar
+         ActionBar actionBar = getSupportActionBar();
+         actionBar.hide();
++        //抓取email
++        SharedPreferences email = getSharedPreferences("email",MODE_PRIVATE);
++        getmail=email.getString("Email","");
+         pas1 = findViewById(R.id.password1);
+         pas2 = findViewById(R.id.password2);
+         pas3 = findViewById(R.id.password3);
+@@ -51,13 +54,14 @@
+         btnback = findViewById(R.id.back);
+         requestQueue = Volley.newRequestQueue(this);
+ 
+-        getmail = mail();
+-        getpass = pass();
+-
++        //getmail = mail();
++        //getpass = pass();4
++        readUserpass();
++        System.out.println("pass : "+getpass);
+         btnback.setOnClickListener(new View.OnClickListener() {
+             @Override
+             public void onClick(View v) {
+-                readUser(email);
++                readUser();
+             }
+         });
+         btnok.setOnClickListener(new View.OnClickListener() {
+@@ -101,7 +105,7 @@
+                 new Response.ErrorListener() {
+                     @Override
+                     public void onErrorResponse(VolleyError error) {
+-                        Toast.makeText(edit_password.this, error.toString(), Toast.LENGTH_SHORT).show();
++                        Toast.makeText(edit_password.this, "there : "+error.toString(), Toast.LENGTH_SHORT).show();
+                     }
+                 }
+         ) {
+@@ -116,23 +120,23 @@
+         requestQueue.add(stringRequest);
+     }
+ 
+-    public String mail() {
++    /*public String mail() {
+         Bundle extras = getIntent().getExtras();
+         if (extras != null) {
+             email = extras.getString("email");
+         }
+         return email;
+-    }
++    }*/
+ 
+-    public String pass() {
+-        Bundle extras = getIntent().getExtras();
++    public String pass(String getpass) {
++        /*Bundle extras = getIntent().getExtras();
+         if (extras != null) {
+             password = extras.getString("password");
+-        }
+-        return password;
++        }*/
++        return getpass;
+     }
+-    public void readUser(final String email){
+-        String URL =Urls.url1+"/LoginRegister/fetch.php?email="+email;
++    public void readUser(){
++        String URL =Urls.url1+"/LoginRegister/fetch.php?email="+getmail;
+         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(
+                 Request.Method.GET,
+                 URL,
+@@ -159,6 +163,35 @@
+         );
+         requestQueue.add(jsonObjectRequest);
+     }
++    public void readUserpass(){
++        String URL =Urls.url1+"/LoginRegister/fetch.php?email="+getmail;
++        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(
++                Request.Method.GET,
++                URL,
++                null,
++                new Response.Listener<JSONObject>() {
++                    String mypass;
++                    @Override
++                    public void onResponse(JSONObject response) {
++                        try {
++                            mypass = response.getString("password");
++                            System.out.println(mypass);
++                            getpass = pass(mypass);
++                        } catch (JSONException e) {
++                            e.printStackTrace();
++                            Toast.makeText(edit_password.this, e.toString(), Toast.LENGTH_SHORT).show();
++                        }
++                    }
++                },
++                new Response.ErrorListener() {
++                    @Override
++                    public void onErrorResponse(VolleyError error) {
++                        Toast.makeText(edit_password.this, error.toString(), Toast.LENGTH_SHORT).show();
++                    }
++                }
++        );
++        requestQueue.add(jsonObjectRequest);
++    }
+ 
+     private void turnpage(String identity) {
+ 
