@@ -17,14 +17,18 @@
 
     <application
         android:allowBackup="true"
+        android:hardwareAccelerated="false"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
+        android:largeHeap="true"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:hardwareAccelerated = "false"
-        android:largeHeap = "true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Page704Activity"></activity>
+        <activity android:name=".Page70401Activity"></activity>
+        <activity android:name=".Page70301Activity" />
+        <activity android:name=".Page70201Activity" />
+        <activity android:name=".Page70101Activity" />
+        <activity android:name=".Page704Activity" />
         <activity android:name=".Page703Activity" />
         <activity android:name=".Page702Activity" />
         <activity android:name=".take_bus" />
