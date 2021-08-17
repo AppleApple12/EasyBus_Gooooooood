@@ -90,7 +90,7 @@ public class Page70101Activity extends AppCompatActivity {
                 Tdialog.dismiss();
                 Intent intent = new Intent(Page70101Activity.this,Page7Activity.class);
                 startActivity(intent);
-            }
+            }/////
         });
     }
 }
