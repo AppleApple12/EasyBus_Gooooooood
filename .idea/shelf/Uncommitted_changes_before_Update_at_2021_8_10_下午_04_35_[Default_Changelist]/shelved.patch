@@ -1,0 +1,257 @@
+Index: app/src/main/java/com/example/easybus/Page61.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.example.easybus;\r\n\r\nimport androidx.annotation.NonNull;\r\nimport androidx.appcompat.app.ActionBar;\r\nimport androidx.appcompat.app.AppCompatActivity;\r\nimport androidx.recyclerview.widget.DividerItemDecoration;\r\nimport androidx.recyclerview.widget.LinearLayoutManager;\r\nimport androidx.recyclerview.widget.RecyclerView;\r\n\r\nimport android.content.Intent;\r\nimport android.os.Bundle;\r\nimport android.view.LayoutInflater;\r\nimport android.view.View;\r\nimport android.view.ViewGroup;\r\nimport android.widget.AdapterView;\r\nimport android.widget.ImageButton;\r\nimport android.widget.ImageView;\r\nimport android.widget.TextView;\r\n\r\nimport java.util.ArrayList;\r\nimport java.util.HashMap;\r\n\r\npublic class Page61 extends AppCompatActivity {\r\n    //\r\n    Page61Holder myAdapter;\r\n    static ArrayList<HashMap<String,String>> arrayList1 = new ArrayList<>();\r\n    static ArrayList<HashMap<String,Integer>> arrayList2 = new ArrayList<>();\r\n    RecyclerView recyclerView;\r\n\r\n    @Override\r\n    protected void onCreate(Bundle savedInstanceState) {\r\n        super.onCreate(savedInstanceState);\r\n        setContentView(R.layout.activity_page61);\r\n        //隱藏title bar\r\n        ActionBar actionBar = getSupportActionBar();\r\n        actionBar.hide();\r\n        //跳回主頁\r\n        ImageButton btn2 = (ImageButton)findViewById(R.id.back);\r\n        btn2.setOnClickListener(new View.OnClickListener() {\r\n            @Override\r\n            public void onClick(View v) {\r\n                Intent it1 = new Intent(Page61.this,Page3Activity.class);\r\n                startActivity(it1);\r\n                arrayList1.clear();\r\n                arrayList2.clear();\r\n            }\r\n        });\r\n        int image[] = {R.drawable.busdetails,R.drawable.business};\r\n        final String text[] = {\" 公  車  查  詢 \",\"   上    班   \"};\r\n        for(int i = image.length-1;i>=0;i--){\r\n            HashMap<String,String> hashMap = new HashMap<>();\r\n            hashMap.put(\"busname\",text[i]);\r\n            arrayList1.add(hashMap);\r\n            HashMap<String,Integer> hashMap2 = new HashMap<>();\r\n            hashMap2.put(\"busphoto\",image[i]);\r\n            arrayList2.add(hashMap2);\r\n        }\r\n        recyclerView = findViewById(R.id.recyclerview);\r\n        recyclerView.setLayoutManager(new LinearLayoutManager(this));\r\n        //recyclerView.addItemDecoration(new DividerItemDecoration(this,DividerItemDecoration.VERTICAL));\r\n        myAdapter = new Page61Holder();\r\n        recyclerView.setAdapter(myAdapter);\r\n        myAdapter.setOnItemClick(new Page61Holder.OnItemClickListener() {\r\n            @Override\r\n            public void onItemClick(View view, int position) {\r\n                if(arrayList1.get(position).get(\"busname\").equals(\" 公  車  查  詢 \")){\r\n                    Intent it1 = new Intent(Page61.this,Page6Activity.class);\r\n                    startActivity(it1);\r\n                    arrayList1.clear();\r\n                    arrayList2.clear();\r\n                }else{\r\n                    Intent it1 = new Intent(Page61.this,Page62.class);\r\n                    startActivity(it1);\r\n                    arrayList1.clear();\r\n                    arrayList2.clear();\r\n                }\r\n\r\n            }\r\n        });\r\n    }\r\n\r\n\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/java/com/example/easybus/Page61.java	(revision 646d560f243ba13082003645ee1d44e85fc74f46)
++++ app/src/main/java/com/example/easybus/Page61.java	(date 1628579498411)
+@@ -8,6 +8,8 @@
+ import androidx.recyclerview.widget.RecyclerView;
+ 
+ import android.content.Intent;
++import android.content.SharedPreferences;
++import android.media.Image;
+ import android.os.Bundle;
+ import android.view.LayoutInflater;
+ import android.view.View;
+@@ -16,17 +18,37 @@
+ import android.widget.ImageButton;
+ import android.widget.ImageView;
+ import android.widget.TextView;
++import android.widget.Toast;
++
++import com.android.volley.Request;
++import com.android.volley.RequestQueue;
++import com.android.volley.Response;
++import com.android.volley.VolleyError;
++import com.android.volley.toolbox.JsonObjectRequest;
++import com.android.volley.toolbox.Volley;
++
++import org.json.JSONArray;
++import org.json.JSONException;
++import org.json.JSONObject;
+ 
+ import java.util.ArrayList;
+ import java.util.HashMap;
++import java.util.List;
+ 
+ public class Page61 extends AppCompatActivity {
+     //
+     Page61Holder myAdapter;
+     static ArrayList<HashMap<String,String>> arrayList1 = new ArrayList<>();
+-    static ArrayList<HashMap<String,Integer>> arrayList2 = new ArrayList<>();
++    static ArrayList<HashMap<String,ImageView>> arrayList2 = new ArrayList<>();
+     RecyclerView recyclerView;
+ 
++    String getmail,image,routename,origin,destination;
++    RequestQueue requestQueue;
++    ImageView image0,image1,image2,image3,image4;
++    String name0,name1,name2,name3,name4;
++    private List<mybus> mybuses;
++    //ImageView image[] = {image0,image1,image2,image3,image4};
++    final String text[] = {name0,name1,name2,name3,name4};
+     @Override
+     protected void onCreate(Bundle savedInstanceState) {
+         super.onCreate(savedInstanceState);
+@@ -34,27 +56,37 @@
+         //隱藏title bar
+         ActionBar actionBar = getSupportActionBar();
+         actionBar.hide();
++        SharedPreferences email = getSharedPreferences("email",MODE_PRIVATE);
++        getmail=email.getString("Email","");
++        requestQueue = Volley.newRequestQueue(this);
++        readUser();
+         //跳回主頁
+         ImageButton btn2 = (ImageButton)findViewById(R.id.back);
+         btn2.setOnClickListener(new View.OnClickListener() {
+             @Override
+             public void onClick(View v) {
+                 Intent it1 = new Intent(Page61.this,Page3Activity.class);
++                it1.putExtra("email",getmail);
+                 startActivity(it1);
+                 arrayList1.clear();
+                 arrayList2.clear();
+             }
+         });
+-        int image[] = {R.drawable.busdetails,R.drawable.business};
+-        final String text[] = {" 公  車  查  詢 ","   上    班   "};
+-        for(int i = image.length-1;i>=0;i--){
++
++
++
++
++
++
++
++        /*for(int i = image.length-1;i>=0;i--){
+             HashMap<String,String> hashMap = new HashMap<>();
+             hashMap.put("busname",text[i]);
+             arrayList1.add(hashMap);
+-            HashMap<String,Integer> hashMap2 = new HashMap<>();
++            HashMap<String,ImageView> hashMap2 = new HashMap<>();
+             hashMap2.put("busphoto",image[i]);
+             arrayList2.add(hashMap2);
+-        }
++        }*/
+         recyclerView = findViewById(R.id.recyclerview);
+         recyclerView.setLayoutManager(new LinearLayoutManager(this));
+         //recyclerView.addItemDecoration(new DividerItemDecoration(this,DividerItemDecoration.VERTICAL));
+@@ -78,6 +110,45 @@
+             }
+         });
+     }
++    public void readUser(){
++        String URL =Urls.url1+"/LoginRegister/fetchbusinfo.php?email="+getmail;
++        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(
++                Request.Method.GET,
++                URL,
++                null,
++                new Response.Listener<JSONObject>() {
++
++                    @Override
++                    public void onResponse(JSONObject response) {
++                        try {
++                            JSONArray array = new JSONArray(response);
++                            for(int i=0;i<array.length();i++){
++                                JSONObject object =array.getJSONObject(i);
++                                routename=object.getString("routename");
++                                image = object.getString("image");
++
++                                mybus mybus = new mybus(routename,image);
++                                mybuses.add(mybus);
++                            }
++
+ 
++                        } catch (JSONException e) {
++                            e.printStackTrace();
++                            Toast.makeText(Page61.this, e.toString(), Toast.LENGTH_SHORT).show();
++                        }
++                        myAdapter = new Page61Holder();
++                        recyclerView.setAdapter(myAdapter);
++                    }
++                },
++                new Response.ErrorListener() {
++                    @Override
++                    public void onErrorResponse(VolleyError error) {
++                        Toast.makeText(Page61.this, error.toString(), Toast.LENGTH_SHORT).show();
++                    }
++                }
++        );
++
++        requestQueue.add(jsonObjectRequest);
++    }
+ 
+ }
+\ No newline at end of file
+Index: app/src/main/java/com/example/easybus/Page61Holder.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.example.easybus;\r\n\r\nimport android.view.LayoutInflater;\r\nimport android.view.View;\r\nimport android.view.ViewGroup;\r\nimport android.widget.ImageView;\r\nimport android.widget.TextView;\r\n\r\nimport androidx.annotation.NonNull;\r\nimport androidx.recyclerview.widget.RecyclerView;\r\n\r\npublic class Page61Holder extends RecyclerView.Adapter<Page61Holder.ViewHolder>{\r\n    OnItemClickListener listener;\r\n    @NonNull\r\n    @Override\r\n    public Page61Holder.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {\r\n        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.recyclerview03,parent,false);\r\n        return new ViewHolder(view);\r\n    }\r\n\r\n    @Override\r\n    public void onBindViewHolder(@NonNull Page61Holder.ViewHolder holder, final int position) {\r\n        holder.imageView.setImageResource(Page61.arrayList2.get(position).get(\"busphoto\"));\r\n        holder.txv.setText(Page61.arrayList1.get(position).get(\"busname\"));\r\n        holder.itemView.setOnClickListener(new View.OnClickListener() {\r\n            @Override\r\n            public void onClick(View v) {\r\n                if (listener!=null){\r\n                    listener.onItemClick(v,position);\r\n                }\r\n            }\r\n        });\r\n    }\r\n\r\n    @Override\r\n    public int getItemCount() {\r\n        return Page61.arrayList1.size();\r\n    }\r\n\r\n    public class ViewHolder extends RecyclerView.ViewHolder {\r\n        private ImageView imageView;\r\n        private TextView txv;\r\n        public ViewHolder(@NonNull View itemView) {\r\n            super(itemView);\r\n            imageView = itemView.findViewById(R.id.imageView);\r\n            txv = itemView.findViewById(R.id.txv);\r\n        }\r\n    }\r\n\r\n    public interface OnItemClickListener{\r\n        void onItemClick(View view,int position);\r\n    }\r\n    public void setOnItemClick(Page61Holder.OnItemClickListener listener){\r\n        this.listener = listener;\r\n    }\r\n\r\n\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/java/com/example/easybus/Page61Holder.java	(revision 646d560f243ba13082003645ee1d44e85fc74f46)
++++ app/src/main/java/com/example/easybus/Page61Holder.java	(date 1628583820680)
+@@ -9,8 +9,11 @@
+ import androidx.annotation.NonNull;
+ import androidx.recyclerview.widget.RecyclerView;
+ 
++import com.squareup.picasso.Picasso;
++
+ public class Page61Holder extends RecyclerView.Adapter<Page61Holder.ViewHolder>{
+     OnItemClickListener listener;
++    String img;
+     @NonNull
+     @Override
+     public Page61Holder.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+@@ -20,7 +23,7 @@
+ 
+     @Override
+     public void onBindViewHolder(@NonNull Page61Holder.ViewHolder holder, final int position) {
+-        holder.imageView.setImageResource(Page61.arrayList2.get(position).get("busphoto"));
++        //holder.imageView.setImageResource(Page61.arrayList2.get(position).get("busphoto"));
+         holder.txv.setText(Page61.arrayList1.get(position).get("busname"));
+         holder.itemView.setOnClickListener(new View.OnClickListener() {
+             @Override
+Index: app/src/main/java/com/example/easybus/Urls.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.example.easybus;\r\nimport java.net.InetAddress;\r\nimport java.net.UnknownHostException;\r\n\r\npublic class Urls {\r\n    //private static InetAddress ip;/////\r\n    public static String url1 = \"http://192.168.0.126\";\r\n    //public static String url1 = \"http://8c708b26959c.ngrok.io\";\r\n    public static void main(String args[]) {\r\n\r\n        /*try {\r\n            ip = InetAddress.getLocalHost();\r\n            System.out.println(ip.getHostAddress());\r\n        } catch (UnknownHostException e) {\r\n            e.printStackTrace();\r\n        } catch (Exception e) {\r\n            e.printStackTrace();\r\n        }*/\r\n\r\n\r\n\r\n    }\r\n    //static String ROOT_URL = url1+url2+url3;\r\n    //static String FORGOT_PASSWORD_URL = \"http://192.168.27.107/LoginRegister/\" + \"forgot.php\";\r\n//搞不清楚 你不是說要用appple 對阿 可是不能merge 現在又說EasyBus 有問題\r\n\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/java/com/example/easybus/Urls.java	(revision 646d560f243ba13082003645ee1d44e85fc74f46)
++++ app/src/main/java/com/example/easybus/Urls.java	(date 1628240662277)
+@@ -4,7 +4,7 @@
+ 
+ public class Urls {
+     //private static InetAddress ip;/////
+-    public static String url1 = "http://192.168.0.126";
++    public static String url1 = "http://10.0.4.81";
+     //public static String url1 = "http://8c708b26959c.ngrok.io";
+     public static void main(String args[]) {
+ 
+Index: app/src/main/java/com/example/easybus/mybus.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/java/com/example/easybus/mybus.java	(date 1628579498417)
++++ app/src/main/java/com/example/easybus/mybus.java	(date 1628579498417)
+@@ -0,0 +1,49 @@
++package com.example.easybus;
++
++public class mybus {
++
++    private String routename,origin,destination,image;
++
++
++    public mybus(String routename,String image){
++
++        this.routename = routename;
++        this.origin = origin;
++        this.destination = destination;
++        this.image = image;
++    }
++    public String getRoutename() {
++        return routename;
++    }
++
++    public void setRoutename(String routename) {
++        this.routename = routename;
++    }
++
++    public String getOrigin() {
++        return origin;
++    }
++
++    public void setOrigin(String origin) {
++        this.origin = origin;
++    }
++
++    public String getDestination() {
++        return destination;
++    }
++
++    public void setDestination(String destination) {
++        this.destination = destination;
++    }
++    public String getImage() {
++        return image;
++    }
++
++    public void setImage(String image) {
++        this.image = image;
++    }
++
++
++
++
++}
+diff --git .idea/shelf/Uncommitted_changes_before_Checkout_at_2021_8_6__04_08__Default_Changelist_.xml .idea/shelf/Uncommitted_changes_before_Checkout_at_2021_8_6__04_08__Default_Changelist_.xml
+diff --git .idea/shelf/Uncommitted_changes_before_Merge_at_2021_8_5__04_51__Default_Changelist_.xml .idea/shelf/Uncommitted_changes_before_Merge_at_2021_8_5__04_51__Default_Changelist_.xml
+diff --git .idea/shelf/Uncommitted_changes_before_Checkout_at_2021_8_5__04_50__Default_Changelist_.xml .idea/shelf/Uncommitted_changes_before_Checkout_at_2021_8_5__04_50__Default_Changelist_.xml
+diff --git .idea/shelf/Uncommitted_changes_before_Merge_at_2021_8_4__02_20__Default_Changelist_.xml .idea/shelf/Uncommitted_changes_before_Merge_at_2021_8_4__02_20__Default_Changelist_.xml
+diff --git .idea/shelf/Uncommitted_changes_before_Checkout_at_2021_8_4__02_19__Default_Changelist_.xml .idea/shelf/Uncommitted_changes_before_Checkout_at_2021_8_4__02_19__Default_Changelist_.xml
