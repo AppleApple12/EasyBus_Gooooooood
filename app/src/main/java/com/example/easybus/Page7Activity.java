@@ -42,8 +42,7 @@ public class Page7Activity extends AppCompatActivity {
                 startActivity(back);
             }
         });
-
-        //學習篇
+        //學習篇123
         ImageButton ib1 = (ImageButton)findViewById(R.id.button);
         ib1.setOnClickListener(new View.OnClickListener() {
             @Override
