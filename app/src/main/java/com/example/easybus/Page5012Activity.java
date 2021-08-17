@@ -8,14 +8,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.ProgressDialog;
 import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.Bitmap;
-import android.graphics.ColorMatrix;
-import android.graphics.ColorMatrixColorFilter;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-import android.util.Base64;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -40,7 +35,6 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -165,7 +159,7 @@ public class Page5012Activity extends AppCompatActivity {
             //動態頁面載入
             view = LayoutInflater.from(mContext).inflate(R.layout.page5012popupwindow, null);
             mTitle = view.findViewById(R.id.title);
-            mNext = view.findViewById(R.id.next);
+            mNext = view.findViewById(R.id.nexttxt);
             //下一步前檢查是否有輸入標題
             mNext.setOnClickListener(new View.OnClickListener() {
                 @Override
