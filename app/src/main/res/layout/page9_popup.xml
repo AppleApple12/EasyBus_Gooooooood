@@ -163,7 +163,7 @@
         android:layout_marginTop="12dp"/>
 
     <ImageView
-        android:id="@+id/imageView3"
+        android:id="@+id/imga"
         android:layout_width="40dp"
         android:layout_height="40dp"
         app:srcCompat="@drawable/ic_baseline_directions_walk_24"
@@ -211,7 +211,7 @@
         android:layout_height="40dp"
         app:srcCompat="@drawable/ic_baseline_directions_walk_24"
         android:background="@drawable/dot_greay"
-        app:layout_constraintTop_toBottomOf="@+id/imageView3"
+        app:layout_constraintTop_toBottomOf="@+id/imga"
         app:layout_constraintStart_toStartOf="@id/view_background"
         android:layout_marginLeft="18dp"
         android:layout_marginTop="18dp"
@@ -249,7 +249,7 @@
         android:layout_marginTop="12dp"/>
 
     <ImageView
-        android:id="@+id/imageView6"
+        android:id="@+id/imgb"
         android:layout_width="40dp"
         android:layout_height="40dp"
         app:srcCompat="@drawable/ic_baseline_directions_walk_24"
