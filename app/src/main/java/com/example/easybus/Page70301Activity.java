@@ -10,6 +10,7 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -17,6 +18,7 @@ public class Page70301Activity extends AppCompatActivity {
     TextView question,ans1,ans2,ans3,number,content,nexttxt,backtxt,fcontent;
     String getmail;
     ImageView imga,imgb,imgc,nextbtn,backbtn;
+
     Dialog Tdialog,Fdialog;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,7 +45,14 @@ public class Page70301Activity extends AppCompatActivity {
         backbtn=Fdialog.findViewById(R.id.backbtn);
         fcontent=Fdialog.findViewById(R.id.cross_content);
 
-
+        ImageButton back = (ImageButton)findViewById(R.id.back);
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent back = new Intent(Page70301Activity.this,Page7Activity.class);
+                startActivity(back);
+            }
+        });
         question = findViewById(R.id.question);
         number=findViewById(R.id.number);
         ans1 = findViewById(R.id.ans1);

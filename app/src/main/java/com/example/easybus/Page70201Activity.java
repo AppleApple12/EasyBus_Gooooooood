@@ -10,6 +10,7 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -53,6 +54,14 @@ public class Page70201Activity extends AppCompatActivity {
         imgb = findViewById(R.id.imgb);
         imgc = findViewById(R.id.imgc);
         q1("小豪鼻子想打噴嚏時，\n該怎麼做才好呢?","1/2","直接大聲打噴嚏","對著窗戶打噴嚏沒關係","遮住口鼻後，\n再打噴嚏",imga,imgb,imgc);
+        ImageButton back = (ImageButton)findViewById(R.id.back);
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent back = new Intent(Page70201Activity.this,Page7Activity.class);
+                startActivity(back);
+            }
+        });
     }
     ////////正確的 dialog text內容
     private void showTdialog(final String T,final String next){

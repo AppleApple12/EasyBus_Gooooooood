@@ -12,6 +12,7 @@ import android.media.TimedMetaData;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -55,7 +56,14 @@ public class Page70101Activity extends AppCompatActivity {
         imgb = findViewById(R.id.imgb);
         imgc = findViewById(R.id.imgc);
         q1("小美在等待公車來時，\n應該注意甚麼呢 ?","1/2","繞過汽車查看公車","在候車線內等待","滑手機不注意公車",imga,imgb,imgc);
-
+        ImageButton back = (ImageButton)findViewById(R.id.back);
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent back = new Intent(Page70101Activity.this,Page7Activity.class);
+                startActivity(back);
+            }
+        });
     }
     //正確的 dialog text內容
     private void showTdialog(final String T,final String next){
@@ -98,7 +106,7 @@ public class Page70101Activity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Tdialog.dismiss();
-                q2("當要上公車時，\n小美應該怎麼做呢 ?\n","2/2","搶先跑上車","等到車上的人下車後\n再排隊上車","覺得搭公車很有趣，\n所以用跳的上車",imga,imgb,imgc);
+                q2("當要上公車時，\n小美應該怎麼做呢 ?","2/2","搶先跑上車","等到車上的人下車後\n再排隊上車","覺得搭公車很有趣，\n所以用跳的上車",imga,imgb,imgc);
             }
         });
         backbtn.setOnClickListener(new View.OnClickListener() {

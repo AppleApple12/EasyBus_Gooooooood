@@ -17,6 +17,7 @@ public class Page70401Activity extends AppCompatActivity {
     Dialog corrdialog,crossdialog;
     ImageView imga,imgb,imgc,nextbtn,backbtn;
     TextView correct_content,nexttxt,cross_content;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,7 +54,7 @@ public class Page70401Activity extends AppCompatActivity {
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent back = new Intent(Page70401Activity.this,Page704Activity.class);
+                Intent back = new Intent(Page70401Activity.this,Page7Activity.class);
                 startActivity(back);
             }
         });
