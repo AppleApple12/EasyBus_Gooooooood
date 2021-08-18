@@ -4,7 +4,7 @@ import java.net.UnknownHostException;
 
 public class Urls {
     //private static InetAddress ip;/////
-    public static String url1 = "http://172.20.10.3";
+    public static String url1 = "http://192.168.0.126";
     //public static String url1 = "http://8c708b26959c.ngrok.io";
     public static void main(String args[]) {
 
