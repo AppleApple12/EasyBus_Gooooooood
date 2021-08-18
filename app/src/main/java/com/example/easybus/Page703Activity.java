@@ -43,13 +43,13 @@ public class Page703Activity extends AppCompatActivity {
                 return false;
             }
         });
-        /*videoView.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+        videoView.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
             @Override
             public void onCompletion(MediaPlayer mp) {
                 Intent it = new Intent(Page703Activity.this,Page70301Activity.class);
                 startActivity(it);
             }
-        });*/
+        });
 
     }
 

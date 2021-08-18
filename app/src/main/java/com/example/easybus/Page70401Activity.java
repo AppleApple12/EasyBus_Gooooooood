@@ -66,8 +66,7 @@ public class Page70401Activity extends AppCompatActivity {
                 backbtn.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Intent back = new Intent(Page70401Activity.this,Page70401Activity.class);
-                        startActivity(back);
+                        crossdialog.dismiss();
                     }
                 });
 
@@ -92,7 +91,7 @@ public class Page70401Activity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 corrdialog.show();
-                correct_content.setText("立刻找旁邊的乘客幫忙");
+                correct_content.setText("真棒!\n答對了!");
                 nexttxt.setText("恭喜你完成挑戰");
                 nextbtn.setOnClickListener(new View.OnClickListener() {
                     @Override
