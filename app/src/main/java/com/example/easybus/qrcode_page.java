@@ -41,19 +41,22 @@ public class qrcode_page extends AppCompatActivity {
         //隱藏title bar
         ActionBar actionBar = getSupportActionBar();
         actionBar.hide();
+        //抓email
+        SharedPreferences email = getSharedPreferences("email",MODE_PRIVATE);
+        getmail=email.getString("Email","");
         qrscan = findViewById(R.id.qrscan_btn);
         qrcode=findViewById(R.id.qrimage);
         back=findViewById(R.id.back);
         requestQueue = Volley.newRequestQueue(this);
-        getmail = mail();
-        getfullname=fullname();
+        //getmail = mail();
+        //getfullname=fullname();
         readUser();
         //前往掃描
         qrscan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(qrcode_page.this,qrscanner.class);
-                intent.putExtra("email",getmail);
+                //intent.putExtra("email",getmail);
                 startActivity(intent);
                 finish();
             }
@@ -80,7 +83,7 @@ public class qrcode_page extends AppCompatActivity {
         }
 
     }
-    public String mail(){
+    /*public String mail(){
         Bundle extras = getIntent().getExtras();
         if (extras!=null){
             email=extras.getString("email");
@@ -93,9 +96,9 @@ public class qrcode_page extends AppCompatActivity {
             fullname=extras.getString("fullname");
         }
         return fullname;
-    }
+    }*/
     public void readUser(){
-        String URL =Urls.url1+"/LoginRegister/fetch.php?email="+email;
+        String URL =Urls.url1+"/LoginRegister/fetch.php?email="+getmail;
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(
                 Request.Method.GET,
                 URL,
@@ -126,12 +129,12 @@ public class qrcode_page extends AppCompatActivity {
 
         if("requester".equalsIgnoreCase(identity)) {
             Intent it4 = new Intent(qrcode_page.this,Page8Activity.class);
-            it4.putExtra("email", email);
+            it4.putExtra("email", getmail);
             startActivity(it4);
             finish();
         }else if("caregiver".equalsIgnoreCase(identity)){
             Intent it = new Intent(qrcode_page.this,Page8Activity_caregiver.class);
-            it.putExtra("email", email);
+            it.putExtra("email", getmail);
             startActivity(it);
             finish();
         }

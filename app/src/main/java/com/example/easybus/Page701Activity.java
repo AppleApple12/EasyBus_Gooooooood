@@ -31,16 +31,7 @@ public class Page701Activity extends AppCompatActivity {
         videoView.setVideoURI(Uri.parse("android.resource://"+getPackageName()+"/"+R.raw.one));
         videoView.requestFocus();
         videoView.start();
-
-
-        videoView.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
-            @Override
-            public void onCompletion(MediaPlayer mp) {
-                Toast.makeText(Page701Activity.this,"影片播完了！",Toast.LENGTH_SHORT).show();
-                Intent it = new Intent(Page701Activity.this,Page702Activity.class);
-                startActivity(it);
-            }
-        });
+        long duration = videoView.getDuration();
 
         //影片播放時發生錯誤時觸發的方法
         videoView.setOnErrorListener(new MediaPlayer.OnErrorListener() {
@@ -48,6 +39,13 @@ public class Page701Activity extends AppCompatActivity {
             public boolean onError(MediaPlayer mp, int what, int extra) {
                 Log.i("通知","播放中出現錯誤");
                 return false;
+            }
+        });
+        videoView.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+            @Override
+            public void onCompletion(MediaPlayer mp) {
+                Intent it = new Intent(Page701Activity.this,Page70101Activity.class);
+                startActivity(it);
             }
         });
 

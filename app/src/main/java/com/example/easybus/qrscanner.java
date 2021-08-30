@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Dialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
@@ -43,20 +44,22 @@ public class qrscanner extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_qrscanner);
-
+        //抓email
+        SharedPreferences email = getSharedPreferences("email",MODE_PRIVATE);
+        mygetmail=email.getString("Email","");
         back=findViewById(R.id.back);
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(qrscanner.this,Page8Activity.class);
-                intent.putExtra("email",mygetmail);
+               // intent.putExtra("email",mygetmail);
                 startActivity(intent);
             }
         });
 
         ActionBar actionBar = getSupportActionBar();
         actionBar.hide();
-        mygetmail=mail();
+        //mygetmail=mail();
         requestQueue1 = Volley.newRequestQueue(this);
         requestQueue = Volley.newRequestQueue(this);
         //Initialize intent integrator
@@ -266,12 +269,12 @@ public class qrscanner extends AppCompatActivity {
         }
     }
 
-    public String mail(){
+    /*public String mail(){
         Bundle extras = getIntent().getExtras();
         if (extras!=null){
             email=extras.getString("email");
         }
         return email;
-    }
+    }*/
 //悲劇
 }

@@ -4,9 +4,15 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.media.MediaPlayer;
+import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.Menu;
 import android.view.View;
-import android.widget.ImageButton;
+import android.widget.Button;
+import android.widget.MediaController;
+import android.widget.VideoView;
 
 public class Page702Activity extends AppCompatActivity {
 
@@ -17,26 +23,34 @@ public class Page702Activity extends AppCompatActivity {
         //隱藏title bar
         ActionBar actionBar = getSupportActionBar();
         actionBar.hide();
+        //跳選擇頁   耶!!!  //  哈哈
 
-        //跳頁到回答錯誤的頁面
-        ImageButton ib1 = (ImageButton)findViewById(R.id.ib1);
-        ib1.setOnClickListener(new View.OnClickListener() {
+        //播放video
+        VideoView videoView = (VideoView)this.findViewById(R.id.videoView);
+        MediaController mc = new MediaController(this);
+        videoView.setMediaController(mc);
+
+        videoView.setVideoURI(Uri.parse("android.resource://"+getPackageName()+"/"+R.raw.two));
+        videoView.requestFocus();
+        videoView.start();
+        long duration = videoView.getDuration();
+
+        //影片播放時發生錯誤時觸發的方法
+        videoView.setOnErrorListener(new MediaPlayer.OnErrorListener() {
             @Override
-            public void onClick(View v) {
-                Intent it1 = new Intent(Page702Activity.this,Page7falseActivity.class);
-                startActivity(it1);
+            public boolean onError(MediaPlayer mp, int what, int extra) {
+                Log.i("通知","播放中出現錯誤");
+                return false;
             }
         });
-
-        //跳頁到回答正確的頁面
-        ImageButton ib2 = (ImageButton)findViewById(R.id.ib2);
-        ib2.setOnClickListener(new View.OnClickListener() {
+        videoView.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
             @Override
-            public void onClick(View v) {
-                Intent it2 = new Intent(Page702Activity.this,Page7trueActivity.class);
-                startActivity(it2);
+            public void onCompletion(MediaPlayer mp) {
+                Intent it = new Intent(Page702Activity.this,Page70201Activity.class);
+                startActivity(it);
             }
         });
 
     }
+
 }

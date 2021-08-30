@@ -9,8 +9,11 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.squareup.picasso.Picasso;
+
 public class Page61Holder extends RecyclerView.Adapter<Page61Holder.ViewHolder>{
     OnItemClickListener listener;
+    String img;
     @NonNull
     @Override
     public Page61Holder.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {

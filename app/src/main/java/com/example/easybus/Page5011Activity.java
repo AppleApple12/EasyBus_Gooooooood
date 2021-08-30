@@ -4,8 +4,10 @@ import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.FragmentActivity;
 
 import android.Manifest;
+import android.app.ActionBar;
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -38,7 +40,7 @@ import tw.edu.pu.s1071481.module.Route;
 
 public class Page5011Activity extends FragmentActivity implements OnMapReadyCallback, DirectionFinderListener{
 
-    String origin,destination;
+    String origin,destination,getmail;
     private static final String TAG = "Page5011Activity";
     private GoogleMap mMap;
     private EditText mEtOrigin,mEtDestination;
@@ -51,7 +53,12 @@ public class Page5011Activity extends FragmentActivity implements OnMapReadyCall
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_page5011);
+
+        //抓email
+        SharedPreferences email = getSharedPreferences("email",MODE_PRIVATE);
+        getmail=email.getString("Email","");
 
         mBtnFindPath=(ImageButton)findViewById(R.id.btnFindPath);
         mBusInfo=(ImageButton)findViewById(R.id.busInfo);

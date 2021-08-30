@@ -28,7 +28,7 @@ import java.util.Map;
 
 public class calendar extends View {
     private  String TAG = "CustomerCalendar";
-
+    int nextlastLineNum=0;
     private Date month,year;//當前月份
     private boolean isCurrentMonth;//展示的月份是否是當前月
     private int currentDay,selectDay,lastSelectDay;//當前日期.選中日期.上一次選中的日期
@@ -75,8 +75,12 @@ public class calendar extends View {
     private float titleHeight,weekHeight,dayHeight,preHeight,oneHeight;
     private int columnWidth;//每列寬度
 
-    public String y,m;//年份
-
+    public String y,m;
+    Date day;
+    String[] Mtoday,Ytoday;
+    String cDateStr,cYearStr,cDayStr; //默認當前 年、月 小高寫的年月日
+    int mm;
+    Calendar calendar = Calendar.getInstance();
     public calendar(Context context){
         this(context,null);
     }
@@ -138,24 +142,58 @@ public class calendar extends View {
 
         initcompute();
     }
+    //小高設置的年月日
+    /**day**/
+    private String getDayStr(Date day){
+        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+        return df.format(day);
+    }
+    private Date str2Day(String str){
+        try{
+            SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+            return df.parse(str);
+        }catch (Exception e){
+            e.printStackTrace();
+            return null;
+        }
+    }
+    public void setDay(String Day){
+        day = str2Day(Day);
 
+        calendar.setTime(day);
+        String[] today = new String[3];
+        today=Day.split("-");
+        for(int i=0;i<today.length;i++){
+            System.out.print(today[i]+"/");
+        }
+        System.out.println();
+        System.out.println("day : "+day);//Date
+        System.out.println("Day : "+Day);//String
+    }
+    //小高end
     /**設置年份**/
     private  void setYear(String Year){
         year = str2DateYear(Year);
+        Ytoday=Year.split("-");
+        //Calendar calendar = Calendar.getInstance();
+        //calendar.set(calendar.YEAR,Integer.parseInt(Ytoday[0]));
+       // calendar.set(calendar.MONTH,Integer.parseInt(Ytoday[1]));
+        System.out.println("yyy : "+year.toString());
 
-        Calendar calendar = Calendar.getInstance();
-        calendar.setTime(year);
     }
     /**設置月份**/
     private  void setMonth(String Month){
         //設置的月份
+        //Calendar calendar = Calendar.getInstance();
         month = str2Date(Month);
+        Mtoday=Month.split("-");
 
-        Calendar calendar = Calendar.getInstance();
-        calendar.setTime(new Date());
+        //mm=Integer.parseInt(today[1]);
+        Date date = calendar.getTime();
+        //calendar.setTime(new Date());
 
         currentDay = calendar.get(Calendar.DAY_OF_MONTH);
-        todayWeekIndex = calendar.get(calendar.DAY_OF_WEEK);
+        todayWeekIndex = calendar.get(calendar.DAY_OF_WEEK)-1;
 
         Date cM = str2Date(getMonthStr(new Date()));
 
@@ -169,9 +207,15 @@ public class calendar extends View {
         }
 
         Log.d(TAG,"設置月份:"+month+"   今天"+currentDay+"號,是否為當前月:"+isCurrentMonth);
+        //calendar.set(calendar.YEAR,Integer.parseInt(Mtoday[0]));
+        //calendar.set(calendar.MONTH,Integer.parseInt(Mtoday[1]));
+        Mtoday[1]=Mtoday[1]+"月";
         calendar.setTime(month);
-        dayOfMonth = calendar.getActualMaximum(Calendar.DAY_OF_MONTH);
+        dayOfMonth = calendar.getActualMaximum(Calendar.DAY_OF_MONTH);//這個月總共有n天
         //第一行的1號是星期幾
+        //日 一 二 三 四 五 六
+        // 1 2 3  4  5  6  7
+        // 0 1 2  3  4  5  6
         firstIndex = calendar.get(Calendar.DAY_OF_WEEK)-1;
         lineNum = 1;
         //第一行能展示的天數
@@ -186,7 +230,7 @@ public class calendar extends View {
             lineNum++;
             lastLineNum = shengyu;
         }
-        Log.i(TAG,getMonthStr(month)+"一共有"+dayOfMonth+"天，第一天的索引是："+firstIndex+"   有"+lineNum+"行，第一行"+firstLineNum+"個，最後一行"+lastLineNum+"個");
+        Log.i(TAG,month+"一共有"+dayOfMonth+"天，第一天的索引是："+firstIndex+"   有"+lineNum+"行，第一行"+firstLineNum+"個，最後一行"+lastLineNum+"個");
     }
     /***計算相關常量，構造方法中適用*/
     private  void initcompute(){
@@ -212,13 +256,17 @@ public class calendar extends View {
         oneHeight = mLineSpac + dayHeight +mTextSpac;
 
         //默認當前月分
-        String cDateStr = getMonthStr(new Date());
+        cDateStr = getMonthStr(new Date());
+        System.out.println("cDateStr : "+cDateStr);
         setMonth(cDateStr);
-
         //默認當前年分
-        String cYearStr = getYearStr(new Date());
+        cYearStr = getYearStr(new Date());
+        System.out.println("cYearStr : "+cYearStr);
         setYear(cYearStr);
-
+        //小高寫的年月日
+        cDayStr = getDayStr(new Date());
+        System.out.println("cDayStr : "+cDayStr);
+        setDay(cDayStr);
     }
 
     @Override
@@ -228,7 +276,7 @@ public class calendar extends View {
         columnWidth = widthSize/7;
         //高度 = 標題高度+星期高度+日期高度*每行高度
         float height = titleHeight+weekHeight+(lineNum*oneHeight);
-        Log.v(TAG,"標題高度"+titleHeight+"星期高度："+weekHeight+" 每行高度："+oneHeight+"行數："+lineNum+" \n控建高度："+height);
+        //Log.v(TAG,"標題高度"+titleHeight+"星期高度："+weekHeight+" 每行高度："+oneHeight+"行數："+lineNum+" \n控建高度："+height);
         setMeasuredDimension(getDefaultSize(getSuggestedMinimumHeight(),widthMeasureSpec),(int)height);
     }
     @Override
@@ -249,9 +297,10 @@ public class calendar extends View {
         //繪製月份
         mPaint.setTextSize(mTextSizeMonth);
         mPaint.setColor(mTextColorMonth);
-        float textLen = FontUtil.getFontlength(mPaint,getMonthStr(month));
+        float textLen = FontUtil.getFontlength(mPaint,Mtoday[1]);
+        //System.out.println("today[1] : "+today[1]);
         float textStart = (getWidth()-textLen)/2;
-        switch (getMonthStr(month)){
+        switch (Mtoday[1]){
             case "01月":
                 m = "JAN";
                 break;
@@ -290,7 +339,7 @@ public class calendar extends View {
                 break;
         }
         //canvas.drawText(m,getWidth()-FontUtil.getFontlength(mPaint,getMonthStr(month)),mMonthRowSpac+FontUtil.getFontLeading(mPaint),mPaint);
-        canvas.drawText(m,getWidth()-FontUtil.getFontlength(mPaint,getMonthStr(month)),275,mPaint);
+        canvas.drawText(m,getWidth()-FontUtil.getFontlength(mPaint,Mtoday[1]),275,mPaint);
         mPaint.setShadowLayer(5f,2,2,Color.GRAY);   //增加陰影
 
         /*繪製年份
@@ -343,8 +392,8 @@ public class calendar extends View {
                 mPaint.setColor(mTextColorWeek);
             }
             int len = (int)FontUtil.getFontlength(mPaint,WEEK_STR[i]);
-            int x = i*columnWidth + rowWidth;
-            //int x = i*columnWidth + (columnWidth-len)/2;
+            //int x = i*columnWidth + rowWidth;
+            int x = i*columnWidth + (columnWidth-len)/2;
             canvas.drawText(WEEK_STR[i],x,titleHeight+FontUtil.getFontLeading(mPaint),mPaint);
         }
 
@@ -354,6 +403,7 @@ public class calendar extends View {
         //某行開始繪製的Y座標，第一行開始的座標為標題高度+星期部分高度
         float top = titleHeight+weekHeight;
         //行
+        // Log.i(TAG,getMonthStr(month)+"一共有"+dayOfMonth+"天，第一天的索引是："+firstIndex+"   有"+lineNum+"行，第一行"+firstLineNum+"個，最後一行"+lastLineNum+"個");
         for(int line = 0;line<lineNum;line++){
             if(line==0){
                 //第一行
@@ -367,6 +417,10 @@ public class calendar extends View {
                 drawDayAndPre(canvas,top,7,firstLineNum+(line-1)*7,0);
             }
         }
+        nextlastLineNum=lastLineNum;
+        if(lastLineNum==7)
+            nextlastLineNum=0;
+        System.out.println("nextlastLineNum : "+nextlastLineNum);
     }
 
     /**\
@@ -471,19 +525,19 @@ public class calendar extends View {
 
     /**月份標題**/
     public String getMonthStr(Date month){
-        SimpleDateFormat df = new SimpleDateFormat("MM月");
+        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM");
         return  df.format(month);
     }
+    //將str 轉換成Date
     private Date str2Date(String str){
         try{
-            SimpleDateFormat df = new SimpleDateFormat("MM月");
+            SimpleDateFormat df = new SimpleDateFormat("yyyy-MM");
             return df.parse(str);
         }catch (Exception e){
             e.printStackTrace();
             return null;
         }
     }
-
     /**年份標題**/
     private String getYearStr(Date year){
         SimpleDateFormat df = new SimpleDateFormat("yyyy");
@@ -498,6 +552,7 @@ public class calendar extends View {
             return null;
         }
     }
+
 
 
     /**********事件處理**********/
@@ -534,7 +589,7 @@ public class calendar extends View {
                     Log.w(TAG,"點擊右箭頭");
                     listener.onRightRowClick();
                 }else if(point.x>rowLStart && point.x<rowRStart){
-                    listener.onTitleClick(getMonthStr(month),month);
+                    listener.onTitleClick(Mtoday[1],month);
                 }
             }
         }else if (point.y<=(titleHeight+weekHeight)){
@@ -617,7 +672,7 @@ public class calendar extends View {
         invalidate();
         if(listener!=null && eventEnd && responseWhenEnd && lastSelectDay!=selectDay){
             lastSelectDay = selectDay;
-            listener.onDayClick(selectDay,getMonthStr(month)+selectDay+"日",map.get(selectDay));
+            listener.onDayClick(selectDay,Mtoday[1]+getMonthStr(month)+selectDay+"日",map.get(selectDay));
         }
         responseWhenEnd = !eventEnd;
     }
@@ -632,8 +687,8 @@ public class calendar extends View {
     /************接口API**********/
     private Map<Integer,Page10Activity.DayFinish> map;
     public void setRenwu(String year,String month, List<Page10Activity.DayFinish> list){
-        setMonth(month);
         setYear(year);
+        setMonth(month);
         if (list!=null && list.size()>0){
             map.clear();
             for(Page10Activity.DayFinish finish:list)
@@ -653,7 +708,7 @@ public class calendar extends View {
 
     /**月份增減**/
     public void monthChange(int change){
-        Calendar calendar = Calendar.getInstance();
+       // Calendar calendar = Calendar.getInstance();
         calendar.setTime(month);
         calendar.add(Calendar.MONTH,change);
         setMonth(getMonthStr(calendar.getTime()));
@@ -662,10 +717,12 @@ public class calendar extends View {
     }
     /**年份增減**/
     public void yearChange(int change){
-        Calendar calendar = Calendar.getInstance();
+        //Calendar calendar = Calendar.getInstance();
         calendar.setTime(year);
         calendar.add(Calendar.YEAR,change);
+        setDay(getDayStr(calendar.getTime()));
         setYear(getYearStr(calendar.getTime()));
+        System.out.println("getYearStr(calendar.getTime()) : "+getYearStr(calendar.getTime()));
         map.clear();
         invalidate();
     }

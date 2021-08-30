@@ -80,7 +80,9 @@ public class Page8Activity extends AppCompatActivity {
         //隱藏title bar
         ActionBar actionBar = getSupportActionBar();
         actionBar.hide();
-
+        //抓email
+        SharedPreferences email = getSharedPreferences("email",MODE_PRIVATE);
+        getmail=email.getString("Email","");
         backBtn=findViewById(R.id.backicon);
         mEnteredName = findViewById(R.id.EnteredName);
         mPforfilepic = findViewById(R.id.profilepic);
@@ -93,7 +95,7 @@ public class Page8Activity extends AppCompatActivity {
         mContext = Page8Activity.this;
 
         requestQueue = Volley.newRequestQueue(this);
-        getmail=mail();
+
         getpass=pass();
         readUser();
         fetchimage();
@@ -103,7 +105,7 @@ public class Page8Activity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(Page8Activity.this,my_contact.class);
-                intent.putExtra("email",getmail);
+                //intent.putExtra("email",getmail);
                 startActivity(intent);
                 finish();
             }
@@ -113,7 +115,7 @@ public class Page8Activity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(Page8Activity.this,emergency_contact.class);
-                intent.putExtra("email",getmail);
+                //intent.putExtra("email",getmail);
                 startActivity(intent);
                 finish();
             }
@@ -145,7 +147,7 @@ public class Page8Activity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(Page8Activity.this,edit_password.class);
-                intent.putExtra("email",getmail);
+                //intent.putExtra("email",getmail);
                 intent.putExtra("password",getpass);
                 startActivity(intent);
                 finish();
@@ -158,11 +160,11 @@ public class Page8Activity extends AppCompatActivity {
             public void onClick(View v) {
                 if("requester".equalsIgnoreCase(identity)) {
                     Intent it4 = new Intent(Page8Activity.this, Page3Activity.class);
-                    it4.putExtra("email", getmail);
+                    //it4.putExtra("email", getmail);
                     startActivity(it4);
                 }else if("caregiver".equalsIgnoreCase(identity)){
                     Intent it = new Intent(Page8Activity.this,Page4Activity.class);
-                    it.putExtra("email",getmail);
+                   // it.putExtra("email",getmail);
                     startActivity(it);
                 }
 
@@ -283,13 +285,13 @@ public class Page8Activity extends AppCompatActivity {
     }
 
 
-    public String mail(){
+   /* public String mail(){
         Bundle extras = getIntent().getExtras();
         if (extras!=null){
             email=extras.getString("email");
         }
         return email;
-    }
+    }*/
     public String pass(){
         Bundle extras = getIntent().getExtras();
         if (extras!=null){
@@ -418,7 +420,7 @@ public class Page8Activity extends AppCompatActivity {
                     }
                     }else{
                         Intent it4 = new Intent(Page8Activity.this, Page8Activity.class);
-                        it4.putExtra("email",getmail);
+                        //it4.putExtra("email",getmail);
                         readUser();
                         fetchimage();
                         ImageRetriveWithPicasso();

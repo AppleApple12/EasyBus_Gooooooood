@@ -35,7 +35,7 @@ public class edit_password extends AppCompatActivity {
     RequestQueue requestQueue;
     Button btnok;
     TextView btnback;
-
+//
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,20 +44,24 @@ public class edit_password extends AppCompatActivity {
         //隱藏title bar
         ActionBar actionBar = getSupportActionBar();
         actionBar.hide();
+        //抓email
+        SharedPreferences email = getSharedPreferences("email",MODE_PRIVATE);
+        getmail=email.getString("Email","");
         pas1 = findViewById(R.id.password1);
         pas2 = findViewById(R.id.password2);
         pas3 = findViewById(R.id.password3);
         btnok = findViewById(R.id.okBtn);
         btnback = findViewById(R.id.back);
         requestQueue = Volley.newRequestQueue(this);
-
-        getmail = mail();
-        getpass = pass();
+        readPassword();
+        System.out.println("1:"+getpass);
+        // getmail = mail();
+        //  getpass = pass();
 
         btnback.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                readUser(email);
+                readUser();
             }
         });
         btnok.setOnClickListener(new View.OnClickListener() {
@@ -116,23 +120,23 @@ public class edit_password extends AppCompatActivity {
         requestQueue.add(stringRequest);
     }
 
-    public String mail() {
+    /*public String mail() {
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
             email = extras.getString("email");
         }
         return email;
-    }
+    }*/
 
-    public String pass() {
-        Bundle extras = getIntent().getExtras();
+    public String pass(final String pa) {
+       /* Bundle extras = getIntent().getExtras();
         if (extras != null) {
             password = extras.getString("password");
-        }
-        return password;
+        }*/
+        return pa;
     }
-    public void readUser(final String email){
-        String URL =Urls.url1+"/LoginRegister/fetch.php?email="+email;
+    public void readUser(){
+        String URL =Urls.url1+"/LoginRegister/fetch.php?email="+getmail;
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(
                 Request.Method.GET,
                 URL,
@@ -144,6 +148,36 @@ public class edit_password extends AppCompatActivity {
                         try {
                             identity = response.getString("identity");
                             turnpage(identity);
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                            Toast.makeText(edit_password.this, e.toString(), Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(edit_password.this, error.toString(), Toast.LENGTH_SHORT).show();
+                    }
+                }
+        );
+        requestQueue.add(jsonObjectRequest);
+    }
+    public void readPassword(){
+        String URL =Urls.url1+"/LoginRegister/fetch.php?email="+getmail;
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(
+                Request.Method.GET,
+                URL,
+                null,
+                new Response.Listener<JSONObject>() {
+                    String mypass;
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        try {
+                            mypass = response.getString("password");
+                            getpass = pass(mypass);
+                            System.out.println("2:"+getpass);
+                            System.out.println("3mypass:"+mypass);
                         } catch (JSONException e) {
                             e.printStackTrace();
                             Toast.makeText(edit_password.this, e.toString(), Toast.LENGTH_SHORT).show();
