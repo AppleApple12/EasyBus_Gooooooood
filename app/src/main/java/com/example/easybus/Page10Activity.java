@@ -23,7 +23,7 @@ import java.util.List;
 public class Page10Activity extends AppCompatActivity {
 
     private calendar cal;
-
+    public Date yyyy,mm;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,6 +31,20 @@ public class Page10Activity extends AppCompatActivity {
         //隱藏title bar
         ActionBar actionBar = getSupportActionBar();
         actionBar.hide();
+
+      //  List<String> d = new ArrayList<>();
+        Date date = new Date();
+        SimpleDateFormat ysdf=new SimpleDateFormat("yyyy");
+        SimpleDateFormat Msdf=new SimpleDateFormat("yyyy-MM");
+        String ydate=ysdf.format(date);
+        //yyyy = str2Date(ydate);
+        //System.out.println("yyyyyyyyyy :"+yyyy);
+        String Mdate=Msdf.format(date);
+        //mm = str2Date(Mdate);
+       // System.out.println("ydate : "+ydate);
+       // for(String retval:date.split("-"))
+         //   d.add(retval);
+
         //跳頁回家長主頁
         ImageButton back = (ImageButton)findViewById(R.id.back);
         back.setOnClickListener(new View.OnClickListener() {
@@ -80,8 +94,15 @@ public class Page10Activity extends AppCompatActivity {
         list.add(new DayFinish(29,2,2));
         list.add(new DayFinish(30,2,2));
         list.add(new DayFinish(31,2,2));
-
-        cal.setRenwu("2020","8月",list);
+        /*String nowday[]=new String[2];
+        int n = d.size();
+        int i=1;
+        while (n==0){
+            nowday[n]=d.toString();
+            n--;
+        }
+        System.out.println("nowday : "+nowday);*/
+        cal.setRenwu(ydate,Mdate,list);//已2020/8為開頭
         cal.setOnClickListen(new calendar.onClickListener() {
             @Override
             public void onLeftRowClick() {
@@ -152,6 +173,8 @@ public class Page10Activity extends AppCompatActivity {
             }
         });
     }
+
+
 
     class DayFinish{
         int day,all,finish;
