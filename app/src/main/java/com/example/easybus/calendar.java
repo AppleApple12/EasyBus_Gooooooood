@@ -170,7 +170,7 @@ public class calendar extends View {
         System.out.println("day : "+day);//Date
         System.out.println("Day : "+Day);//String
     }
-    //小高end
+    //小高end //小高好棒
     /**設置年份**/
     private  void setYear(String Year){
         year = str2DateYear(Year);
