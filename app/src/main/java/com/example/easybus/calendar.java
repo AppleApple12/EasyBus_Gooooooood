@@ -142,7 +142,7 @@ public class calendar extends View {
 
         initcompute();
     }
-    //小高設置的年月日
+    //小高設置的年月日  小高超級棒
     /**day**/
     private String getDayStr(Date day){
         SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
