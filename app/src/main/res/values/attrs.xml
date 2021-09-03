@@ -47,4 +47,43 @@
         <attr name="mLineSpac" format="dimension"/>         <!--日期行間距-->
         <attr name="mTextSpac" format="dimension"/>         <!--日期和任務次數自己上下間距-->
     </declare-styleable>
+
+    <declare-styleable name = "calendar2">
+        <!--月份,星期.日期.任務的背景色-->
+        <attr name="mBgMonth2" format="color"/>
+        <attr name="mBgWeek2" format="color"/>
+        <attr name="mBgDay2" format="color"/>
+        <attr name="mBgPre2" format="color"/>
+
+        <attr name="mTextColorMonth2" format="color"/>       <!--標題字體顏色-->
+        <attr name="mTextColorWeek2" format="color"/>        <!--星期字體顏色-->
+        <attr name="mTextColorYear2" format="color"/>        <!--年份字體顏色-->
+        <attr name="mSelectWeekTextColor2" format="color"/>  <!--當前星期字體顏色-->
+        <attr name="mTextColorDay2" format="color"/>         <!--日期字體顏色-->
+        <attr name="mTextColorPreFinish2" format="color"/>   <!--任務次數字體-->
+        <attr name="mTextColorPreUnFinish2" format="color"/>
+        <attr name="mTextColorPreNull2" format="color"/>
+
+        <attr name="mTextSizeMonth2" format="dimension"/>    <!--標題字體大小-->
+        <attr name="mTextSizeWeek2" format="dimension"/>     <!--星期字體大小-->
+        <attr name="mTextSizeDay2" format="dimension"/>      <!--日期字體大小-->
+        <attr name="mTextSizePre2" format="dimension"/>      <!--任務次數字體大小-->
+        <attr name="mTextSizeYear2" format="dimension"/>     <!--年份字體大小-->
+
+        <attr name="mMonthRowL2" format="reference"/>        <!--月份箭頭-->
+        <attr name="mMonthRowR2" format="reference"/>        <!--月份箭頭-->
+        <attr name="mMonthRowSpac2" format="dimension"/>
+
+        <attr name="mSelectTextColor2" format="color"/>      <!--選中日期字體艷色-->
+        <attr name="mSelectBg2" format="color"/>             <!--選中日期背景-->
+        <attr name="mSelectRadius2" format="dimension"/>     <!--選中日期背景半徑-->
+        <attr name="mCurrentBg2" format="color"/>            <!--當天日期背景-->
+        <attr name="mCurrentBgStrokeWidth2" format="dimension"/>     <!--當天日期背景虛線寬度-->
+        <attr name="mCurrentBgDashPath2" format="reference"/>        <!--當天日期背景虛線組數-->
+
+        <attr name="mYearSpac2" format="dimension"/>         <!--標題年份上下間格-->
+        <attr name="mMonthSpac2" format="dimension"/>        <!--標題月份上下間格-->
+        <attr name="mLineSpac2" format="dimension"/>         <!--日期行間距-->
+        <attr name="mTextSpac2" format="dimension"/>         <!--日期和任務次數自己上下間距-->
+    </declare-styleable>
 </resources>

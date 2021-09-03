@@ -45,6 +45,7 @@ public class my_contact extends AppCompatActivity {
     RecyclerView mrecyclerView;
     friendAdapter friendAdapter;
     List<friend> friendList;
+    List<ImageList> imageList;
     Dialog dialog;
     Button clickme;
     CircleImageView mPforfilepic;
@@ -74,6 +75,7 @@ public class my_contact extends AppCompatActivity {
         mrecyclerView.setLayoutManager(linearLayoutManager);
 
         friendList = new ArrayList<>();
+        imageList = new ArrayList<>();
         //friendAdapter = new friendAdapter(my_contact.this,friendList);
         //mrecyclerView.setAdapter(friendAdapter);
         requestQueue = Volley.newRequestQueue(this);
@@ -114,11 +116,16 @@ public class my_contact extends AppCompatActivity {
                                     JSONObject object = array.getJSONObject(i);
                                     String name = object.getString("F_name").trim();
                                     String phone = object.getString("F_phone").trim();
-
+                                    //String femail = object.getString("F_email").trim();
+                                    //String imgurl = fetchfriendemail(String femail);
                                     friend f =new friend();
+                                    ImageList img =new ImageList();
+                                    //img.setFemail(femail);
+                                    //img.setImageUrl(imgurl);
                                     f.setF_name(name);
                                     f.setF_phone(phone);
                                     friendList.add(f);
+                                    //imageList.add(img);
 
                                 } catch (JSONException e) {
                                     e.printStackTrace();

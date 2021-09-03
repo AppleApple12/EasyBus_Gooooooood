@@ -26,7 +26,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class calendar extends View {
+public class calendar2 extends View {
     private  String TAG = "CustomerCalendar";
     int nextlastLineNum=0;
     private Date month,year;//當前月份
@@ -72,7 +72,7 @@ public class calendar extends View {
     private Paint mPaint;
     private Paint bgPaint;
 
-    private float titleHeight,weekHeight,dayHeight,preHeight,oneHeight;
+    private float titleHeight,weekHeight,dayHeight,preHeight,oneHeight,rectcolumnWidth;
     private int columnWidth;//每列寬度
 
     public String y,m;
@@ -80,47 +80,47 @@ public class calendar extends View {
     String[] Mtoday,Ytoday;
     String cDateStr,cYearStr,cDayStr; //默認當前 年、月 小高寫的年月日
 
-    Calendar calendar = Calendar.getInstance();
-    Date date = calendar.getTime();
-    public calendar(Context context){
+    Calendar calendar2 = Calendar.getInstance();
+    Date date = calendar2.getTime();
+    public calendar2(Context context){
         this(context,null);
     }
-    public calendar(Context context, AttributeSet attrs){
+    public calendar2(Context context, AttributeSet attrs){
         this(context,attrs,0);
     }
-    public calendar(Context context,AttributeSet attrs,int defStyleAttr){
+    public calendar2(Context context,AttributeSet attrs,int defStyleAttr){
         super(context,attrs,defStyleAttr);
 
-        TypedArray a = context.getTheme().obtainStyledAttributes(attrs,R.styleable.calendar,defStyleAttr,0);
+        TypedArray a = context.getTheme().obtainStyledAttributes(attrs,R.styleable.calendar2,defStyleAttr,0);
 
-        mBgMonth = a.getColor(R.styleable.calendar_mBgMonth, Color.TRANSPARENT);
-        mBgWeek = a.getColor(R.styleable.calendar_mBgWeek,Color.TRANSPARENT);
-        mBgDay = a.getColor(R.styleable.calendar_mBgDay,Color.TRANSPARENT);
-        //mBgpre = a.getColor(R.styleable.calendar_mBgPre,Color.TRANSPARENT);
+        mBgMonth = a.getColor(R.styleable.calendar2_mBgMonth2, Color.TRANSPARENT);
+        mBgWeek = a.getColor(R.styleable.calendar2_mBgWeek2,Color.TRANSPARENT);
+        mBgDay = a.getColor(R.styleable.calendar2_mBgDay2,Color.TRANSPARENT);
+        //mBgpre = a.getColor(R.styleable.calendar2_mBgPre,Color.TRANSPARENT);
 
-        mMonthRowL = a.getResourceId(R.styleable.calendar_mMonthRowL,R.drawable.custom_calendar_row_left);
-        mMonthRowR = a.getResourceId(R.styleable.calendar_mMonthRowR,R.drawable.custom_calendar_row_right);
-        mMonthRowSpac = a.getDimension(R.styleable.calendar_mMonthRowSpac,50);
-        mTextColorMonth = a.getColor(R.styleable.calendar_mTextColorMonth,Color.BLACK);
-        mTextSizeMonth = a.getDimension(R.styleable.calendar_mTextSizeMonth,50);
-        mMonthSpac = a.getDimension(R.styleable.calendar_mMonthSpac,20);
+        mMonthRowL = a.getResourceId(R.styleable.calendar2_mMonthRowL2,R.drawable.custom_calendar_row_left);
+        mMonthRowR = a.getResourceId(R.styleable.calendar2_mMonthRowR2,R.drawable.custom_calendar_row_right);
+        mMonthRowSpac = a.getDimension(R.styleable.calendar2_mMonthRowSpac2,50);
+        mTextColorMonth = a.getColor(R.styleable.calendar2_mTextColorMonth2,Color.BLACK);
+        mTextSizeMonth = a.getDimension(R.styleable.calendar2_mTextSizeMonth2,50);
+        mMonthSpac = a.getDimension(R.styleable.calendar2_mMonthSpac2,20);
 
-        mTextSizeYear = a.getDimension(R.styleable.calendar_mTextSizeYear,100);
-        mTextColorYear = a.getColor(R.styleable.calendar_mTextColorYear,Color.BLACK);
-        mYearSpac = a.getDimension(R.styleable.calendar_mYearSpac,20);
+        mTextSizeYear = a.getDimension(R.styleable.calendar2_mTextSizeYear2,100);
+        mTextColorYear = a.getColor(R.styleable.calendar2_mTextColorYear2,Color.BLACK);
+        mYearSpac = a.getDimension(R.styleable.calendar2_mYearSpac2,20);
 
-        mTextColorWeek = a.getColor(R.styleable.calendar_mTextColorWeek,Color.BLACK);
-        mSelectWeekTextColor = a.getColor(R.styleable.calendar_mSelectWeekTextColor,Color.BLACK);
+        mTextColorWeek = a.getColor(R.styleable.calendar2_mTextColorWeek2,Color.BLACK);
+        mSelectWeekTextColor = a.getColor(R.styleable.calendar2_mSelectWeekTextColor2,Color.BLACK);
 
-        mTextSizeWeek = a.getDimension(R.styleable.calendar_mTextSizeWeek,70);
-        mTextColorDay = a.getColor(R.styleable.calendar_mTextColorDay,Color.GRAY);
-        mTextSizeDay = a.getDimension(R.styleable.calendar_mTextSizeDay,70);
-        //mTextColorPreFinish = a.getColor(R.styleable.calendar_mTextColorPreFinish,Color.BLUE);
-        //mTextColorPreUnFinish = a.getColor(R.styleable.calendar_mTextColorPreUnFinish,Color.BLUE);
-        //mTextColorPreNull = a.getColor(R.styleable.calendar_mTextColorPreNull,Color.BLUE);
-        //mTextSizePre = a.getDimension(R.styleable.calendar_mTextSizePre,40);
-        mSelectTextColor = a.getColor(R.styleable.calendar_mSelectTextColor,Color.YELLOW);
-        mCurrentBg = a.getColor(R.styleable.calendar_mCurrentBg,Color.GRAY);
+        mTextSizeWeek = a.getDimension(R.styleable.calendar2_mTextSizeWeek2,70);
+        mTextColorDay = a.getColor(R.styleable.calendar2_mTextColorDay2,Color.GRAY);
+        mTextSizeDay = a.getDimension(R.styleable.calendar2_mTextSizeDay2,70);
+        //mTextColorPreFinish = a.getColor(R.styleable.calendar2_mTextColorPreFinish,Color.BLUE);
+        //mTextColorPreUnFinish = a.getColor(R.styleable.calendar2_mTextColorPreUnFinish,Color.BLUE);
+        //mTextColorPreNull = a.getColor(R.styleable.calendar2_mTextColorPreNull,Color.BLUE);
+        //mTextSizePre = a.getDimension(R.styleable.calendar2_mTextSizePre,40);
+        mSelectTextColor = a.getColor(R.styleable.calendar2_mSelectTextColor2,Color.YELLOW);
+        mCurrentBg = a.getColor(R.styleable.calendar2_mCurrentBg2,Color.GRAY);
 
         try{
             int dashPathId = a.getResourceId(R.styleable.calendar_mCurrentBgDashPath,R.array.calendar_currentDay_bg_DashPath);
@@ -134,16 +134,16 @@ public class calendar extends View {
             mCurrentBgDahPath = new float[]{2,3,2,3};
         }
 
-        mSelectBg = a.getColor(R.styleable.calendar_mSelectBg,Color.YELLOW);
-        mSelectRadius = a.getDimension(R.styleable.calendar_mSelectRadius,20);
-        mCurrentBgStrokeWidth = a.getDimension(R.styleable.calendar_mCurrentBgStrokeWidth,5);
-        mLineSpac = a.getDimension(R.styleable.calendar_mLineSpac,20);
-        mTextSpac = a.getDimension(R.styleable.calendar_mTextSpac,20);
+        mSelectBg = a.getColor(R.styleable.calendar2_mSelectBg2,Color.YELLOW);
+        mSelectRadius = a.getDimension(R.styleable.calendar2_mSelectRadius2,20);
+        mCurrentBgStrokeWidth = a.getDimension(R.styleable.calendar2_mCurrentBgStrokeWidth2,5);
+        mLineSpac = a.getDimension(R.styleable.calendar2_mLineSpac2,20);
+        mTextSpac = a.getDimension(R.styleable.calendar2_mTextSpac2,20);
         a.recycle();    //注意回收
 
         initcompute();
-        currentDay = calendar.get(calendar.DAY_OF_MONTH);
-        todayWeekIndex = calendar.get(calendar.DAY_OF_WEEK)-1;
+        currentDay = calendar2.get(calendar2.DAY_OF_MONTH);
+        todayWeekIndex = calendar2.get(calendar2.DAY_OF_WEEK)-1;
     }
     //小高設置的年月日  小高超級棒
     /**day**/
@@ -163,7 +163,7 @@ public class calendar extends View {
     public void setDay(String Day){
         day = str2Day(Day);
 
-        calendar.setTime(day);
+        calendar2.setTime(day);
         String[] today = new String[3];
         today=Day.split("-");
         for(int i=0;i<today.length;i++){
@@ -178,25 +178,25 @@ public class calendar extends View {
     private  void setYear(String Year){
         year = str2DateYear(Year);
         Ytoday=Year.split("-");
-        //Calendar calendar = Calendar.getInstance();
-        //calendar.set(calendar.YEAR,Integer.parseInt(Ytoday[0]));
-       // calendar.set(calendar.MONTH,Integer.parseInt(Ytoday[1]));
+        //Calendar calendar2 = Calendar.getInstance();
+        //calendar2.set(calendar2.YEAR,Integer.parseInt(Ytoday[0]));
+        // calendar2.set(calendar2.MONTH,Integer.parseInt(Ytoday[1]));
         System.out.println("yyy : "+year.toString());
 
     }
     /**設置月份**/
     private  void setMonth(String Month){
         //設置的月份
-        //Calendar calendar = Calendar.getInstance();
+        //Calendar calendar2 = Calendar.getInstance();
         month = str2Date(Month);
         Mtoday=Month.split("-");
 
         //mm=Integer.parseInt(today[1]);
 
-        //calendar.setTime(new Date());
+        //calendar2.setTime(new Date());
 
-        //currentDay = calendar.get(calendar.DAY_OF_MONTH);
-        //todayWeekIndex = calendar.get(calendar.DAY_OF_WEEK)-1;
+        //currentDay = calendar2.get(calendar2.DAY_OF_MONTH);
+        //todayWeekIndex = calendar2.get(calendar2.DAY_OF_WEEK)-1;
 
         Date cM = str2Date(getMonthStr(new Date()));
 
@@ -210,16 +210,16 @@ public class calendar extends View {
         }
         System.out.println("selectDay : "+selectDay);
         Log.d(TAG,"設置月份:"+month+"   今天"+currentDay+"號,是否為當前月:"+isCurrentMonth);
-        //calendar.set(calendar.YEAR,Integer.parseInt(Mtoday[0]));
-        //calendar.set(calendar.MONTH,Integer.parseInt(Mtoday[1]));
+        //calendar2.set(calendar2.YEAR,Integer.parseInt(Mtoday[0]));
+        //calendar2.set(calendar2.MONTH,Integer.parseInt(Mtoday[1]));
         Mtoday[1]=Mtoday[1]+"月";
-        calendar.setTime(month);
-        dayOfMonth = calendar.getActualMaximum(Calendar.DAY_OF_MONTH);//這個月總共有n天
+        calendar2.setTime(month);
+        dayOfMonth = calendar2.getActualMaximum(Calendar.DAY_OF_MONTH);//這個月總共有n天
         //第一行的1號是星期幾
         //日 一 二 三 四 五 六
         // 1 2 3  4  5  6  7
         // 0 1 2  3  4  5  6
-        firstIndex = calendar.get(Calendar.DAY_OF_WEEK)-1;
+        firstIndex = calendar2.get(Calendar.DAY_OF_WEEK)-1;
         lineNum = 1;
         //第一行能展示的天數
         firstLineNum = 7-firstIndex;
@@ -244,9 +244,9 @@ public class calendar extends View {
 
         map = new HashMap<>();
         //標題高度
-        mPaint.setTextSize(mTextSizeMonth);
-        mPaint.setTextSize(mTextSizeYear);
-        titleHeight = FontUtil.getFontHeight(mPaint)+2*mMonthRowSpac+2*mYearSpac;
+        //mPaint.setTextSize(mTextSizeMonth);
+        //mPaint.setTextSize(mTextSizeYear);
+        //titleHeight = FontUtil.getFontHeight(mPaint)+2*mMonthRowSpac+2*mYearSpac;
         //星期高度
         mPaint.setTextSize(mTextSizeWeek);
         weekHeight = FontUtil.getFontHeight(mPaint);
@@ -277,6 +277,7 @@ public class calendar extends View {
         //寬度 = 填充父窗體
         int widthSize = MeasureSpec.getSize(widthMeasureSpec);  //獲取寬的尺寸
         columnWidth = widthSize/7;
+       // System.out.println("columnWidth : "+columnWidth);
         //高度 = 標題高度+星期高度+日期高度*每行高度
         float height = titleHeight+weekHeight+(lineNum*oneHeight);
         //Log.v(TAG,"標題高度"+titleHeight+"星期高度："+weekHeight+" 每行高度："+oneHeight+"行數："+lineNum+" \n控建高度："+height);
@@ -292,17 +293,17 @@ public class calendar extends View {
     /***繪製月份*/
     private void drawMonth(Canvas canvas){
         //背景
-        bgPaint.setColor(mBgMonth);
+        bgPaint.setColor(Color.BLUE);
         RectF rect = new RectF(0,0,getWidth(),titleHeight);
         //canvas.drawRect(rect,bgPaint);
         canvas.drawRoundRect(rect,40,40,bgPaint);
 
         //繪製月份
-        mPaint.setTextSize(mTextSizeMonth);
+       /* mPaint.setTextSize(mTextSizeMonth);
         mPaint.setColor(mTextColorMonth);
-        float textLen = FontUtil.getFontlength(mPaint,Mtoday[1]);
+
         //System.out.println("today[1] : "+today[1]);
-        float textStart = (getWidth()-textLen)/2;
+
         switch (Mtoday[1]){
             case "01月":
                 m = "JAN";
@@ -343,7 +344,7 @@ public class calendar extends View {
         }
         //canvas.drawText(m,getWidth()-FontUtil.getFontlength(mPaint,getMonthStr(month)),mMonthRowSpac+FontUtil.getFontLeading(mPaint),mPaint);
         canvas.drawText(m,getWidth()-FontUtil.getFontlength(mPaint,Mtoday[1]),275,mPaint);
-        mPaint.setShadowLayer(5f,2,2,Color.GRAY);   //增加陰影
+        mPaint.setShadowLayer(5f,2,2,Color.GRAY);   //增加陰影*/
 
         /*繪製年份
         mPaint.setTextSize(mTextSizeYear);
@@ -353,53 +354,92 @@ public class calendar extends View {
         y = String.valueOf(year);
         float textYear = FontUtil.getFontlength(mPaint,y);
         float textYearStart = (getWidth()-textYear)/2;
-        canvas.drawText(y,mYearSpac,mYearSpac+FontUtil.getFontLeading(mPaint),mPaint);*/
+        canvas.drawText(y,mYearSpac,mYearSpac+FontUtil.getFontLeading(mPaint),mPaint);
 
         //繪製年份
         mPaint.setTextSize(mTextSizeYear);
         mPaint.setColor(mTextColorYear);
         float textYear = FontUtil.getFontlength(mPaint,getYearStr(year));
         //float textYearStart = (getWidth()-textYear)/2;
-        canvas.drawText(getYearStr(year),mYearSpac,mYearSpac+FontUtil.getFontLeading(mPaint),mPaint);
+        canvas.drawText(getYearStr(year),mYearSpac,mYearSpac+FontUtil.getFontLeading(mPaint),mPaint);*/
 
 
         //繪製左右箭頭
-        Bitmap bitmap = BitmapFactory.decodeResource(getResources(),mMonthRowL);    //獲取圖片
+        float textLen = FontUtil.getFontlength(mPaint,Mtoday[1]);
+        float textStart = (getWidth()-textLen)/2;
+        Bitmap bitmap = BitmapFactory.decodeResource(getResources(),mMonthRowL);//獲取左箭頭圖片
         int h = bitmap.getHeight(); //箭頭的圖片高
         rowWidth = bitmap.getWidth();   //箭頭的圖片寬
 
         //float left,float top;
         rowLStart= (int)(textStart-2*mMonthRowSpac-rowWidth);
         //canvas.drawBitmap(bitmap,rowLStart+mMonthRowSpac,(titleHeight-h)/2,new Paint());
-        canvas.drawBitmap(bitmap,40,320,new Paint());
+        canvas.drawBitmap(bitmap,40,110,new Paint());//設置左箭頭
+        //canvas.drawBitmap(bitmap,40,titleHeight,new Paint());//設置左箭頭
         //canvas.drawBitmap(bitmap,10,(titleHeight+weekHeight+(lineNum*oneHeight))/2,new Paint());
-        bitmap = BitmapFactory.decodeResource(getResources(), mMonthRowR);
-        rowRStart = (int)(textStart+textLen);
+        bitmap = BitmapFactory.decodeResource(getResources(), mMonthRowR);//獲取右箭頭圖片
+        rowRStart = (int)(textStart+textLen)+200;
         //canvas.drawBitmap(bitmap,rowRStart+mMonthSpac,(titleHeight-h)/2,new Paint());
-        canvas.drawBitmap(bitmap,rowRStart+mMonthSpac+70,320,new Paint());
+        canvas.drawBitmap(bitmap,rowRStart+mMonthSpac+70,110,new Paint());
+        //canvas.drawBitmap(bitmap,rowRStart+mMonthSpac+70,titleHeight,new Paint());
         //canvas.drawBitmap(bitmap,getWidth()-10,(titleHeight+weekHeight+(lineNum*oneHeight))/2,new Paint());
     }
     /**繪製星期*/
     private  void drawWeek(Canvas canvas){
         //背景
         bgPaint.setColor(mBgWeek);
-        RectF rect = new RectF(0,titleHeight,getWidth(),titleHeight+weekHeight);
-        canvas.drawRect(rect,bgPaint);
+        //bgPaint.setColor(Color.RED);
+        RectF rect = new RectF(70+rowWidth,titleHeight,rowRStart+mMonthSpac+70,titleHeight+weekHeight);
+        //System.out.println("titleHeight : "+titleHeight); //0.0
+       // System.out.println("weekHeight : "+weekHeight);  //52.29492
+        //System.out.println("getWidth() : "+getWidth());   //851
+
+        //System.out.println("rectcolumnWidth : "+rectcolumnWidth);
         //繪製星期：七天
-        mPaint.setTextSize(mTextSizeWeek);
-
+        bgPaint.setTextSize(mTextSizeWeek);
+        int total = 0;
         for(int i = 0;i<WEEK_STR.length;i++){
-            if(todayWeekIndex == i && isCurrentMonth){
-                mPaint.setColor(mSelectWeekTextColor);
-            }else{
-                mPaint.setColor(mTextColorWeek);
-            }
-            int len = (int)FontUtil.getFontlength(mPaint,WEEK_STR[i]);
-            //int x = i*columnWidth + rowWidth;
-            int x = i*columnWidth + (columnWidth-len)/2;
-            canvas.drawText(WEEK_STR[i],x,titleHeight+FontUtil.getFontLeading(mPaint),mPaint);
-
+            total = total+(int)FontUtil.getFontlength(bgPaint,WEEK_STR[i]);
         }
+        float rectwidthSize = rect.width(); //獲取寬的尺寸
+        rectcolumnWidth =(rectwidthSize-total)/7;
+        canvas.drawRect(rect,bgPaint);
+        //System.out.println("total/7 : "+(total/7));
+        for(int i = 0;i<WEEK_STR.length;i++) {
+            if (todayWeekIndex == i && isCurrentMonth) {
+                //mPaint.setColor(mSelectWeekTextColor);
+                bgPaint.setColor(mTextColorWeek);
+            } else {
+                bgPaint.setColor(mTextColorWeek);
+            }
+            int len = (int) FontUtil.getFontlength(bgPaint, WEEK_STR[i]);
+
+            //int x = i*99;
+            float x = i * rectcolumnWidth + (rectcolumnWidth - len) / 2;
+        }
+            /*System.out.println("len : "+len);
+            System.out.println("x : "+x);
+            System.out.println("70+rowWidth+x :"+(70+rowWidth+x));*/
+        int lennnn=0;
+        for(int i =0;i<WEEK_STR.length;i++) {
+            if (i == 0)
+                canvas.drawText(WEEK_STR[i], 70 + rowWidth, titleHeight + FontUtil.getFontLeading(bgPaint), bgPaint);
+            else {
+                lennnn = lennnn + (int) FontUtil.getFontlength(bgPaint, WEEK_STR[i - 1]);
+                canvas.drawText(WEEK_STR[i], 70 + rowWidth + rectcolumnWidth*i + lennnn, titleHeight + FontUtil.getFontLeading(bgPaint), bgPaint);
+            }
+        }
+            //canvas.drawText(WEEK_STR[i],70+rowWidth+x,titleHeight+FontUtil.getFontLeading(mPaint),mPaint);
+           /* canvas.drawText(WEEK_STR[0],70+rowWidth,titleHeight+FontUtil.getFontLeading(bgPaint),bgPaint); //102 0
+            canvas.drawText(WEEK_STR[1],70+rowWidth+rectcolumnWidth+(int)FontUtil.getFontlength(bgPaint,WEEK_STR[0]),titleHeight+FontUtil.getFontLeading(bgPaint),bgPaint);//+len*(i-1)  102+
+            canvas.drawText(WEEK_STR[2],70+rowWidth+rectcolumnWidth*2+(int)FontUtil.getFontlength(bgPaint,WEEK_STR[1])+(int)FontUtil.getFontlength(bgPaint,WEEK_STR[0]),titleHeight+FontUtil.getFontLeading(bgPaint),bgPaint);
+            canvas.drawText(WEEK_STR[3],70+rowWidth+rectcolumnWidth*3+(int)FontUtil.getFontlength(bgPaint,WEEK_STR[2])+(int)FontUtil.getFontlength(bgPaint,WEEK_STR[1])+(int)FontUtil.getFontlength(bgPaint,WEEK_STR[0]),titleHeight+FontUtil.getFontLeading(bgPaint),bgPaint);*/
+            //canvas.drawText(WEEK_STR[3],70+rowWidth+(int)FontUtil.getFontlength(bgPaint,WEEK_STR[2]),titleHeight+FontUtil.getFontLeading(mPaint),mPaint);
+            //canvas.drawText(WEEK_STR[4],70+rowWidth+(int)FontUtil.getFontlength(bgPaint,WEEK_STR[3]),titleHeight+FontUtil.getFontLeading(mPaint),mPaint);
+            //canvas.drawText(WEEK_STR[5],70+rowWidth+(int)FontUtil.getFontlength(bgPaint,WEEK_STR[4]),titleHeight+FontUtil.getFontLeading(mPaint),mPaint);
+            //System.out.println("x() : "+x); //17,132,262,501,634,747,
+           // System.out.println("y() : "+titleHeight+FontUtil.getFontLeading(mPaint)); //0.041.400146
+
 
     }
     /**繪製日期.次數*/
@@ -437,11 +477,17 @@ public class calendar extends View {
         //背景
         float topPre = top+mLineSpac+dayHeight;
         bgPaint.setColor(mBgDay);
-        RectF rect = new RectF(0,top,getWidth(),topPre);
+        //bgPaint.setColor(Color.BLUE);
+        RectF rect = new RectF(70 + rowWidth,top,rowRStart+mMonthSpac+70,topPre);
         canvas.drawRect(rect,bgPaint);
 
+        int total = 0;
+        for(int i = 0;i<WEEK_STR.length;i++){ total = total+(int)FontUtil.getFontlength(bgPaint,WEEK_STR[i]); }
+        float rectwidthSize = rect.width(); //獲取寬的尺寸
+        rectcolumnWidth =rectwidthSize/7;
+
         bgPaint.setColor(mBgpre);
-        rect = new RectF(0,topPre,getWidth(),topPre+mTextSpac+dayHeight);
+        rect = new RectF(70 + rowWidth,topPre,rowRStart+mMonthSpac+70,topPre+mTextSpac+dayHeight);
         canvas.drawRect(rect,bgPaint);
 
         mPaint.setTextSize(mTextSizeDay);
@@ -450,7 +496,8 @@ public class calendar extends View {
         float preTextLeading = FontUtil.getFontLeading(mPaint);
         //Log.v(TAG,"當前日期："+currentDay+"  選擇日期："+selectDay+"  是否為當前月："+isCurrentMonth);
         for(int i = 0;i<count;i++){
-            int left = (startIndex+i)*columnWidth;
+            //int left = (startIndex+i)*columnWidth;
+            int left = (startIndex+i)*(int)rectcolumnWidth;
             int day = (overDay+i+1);
 
             mPaint.setTextSize(mTextSizeDay);
@@ -464,7 +511,8 @@ public class calendar extends View {
                 bgPaint.setPathEffect(effect);  //設置畫筆曲線間隔
                 bgPaint.setStrokeWidth(mCurrentBgStrokeWidth);  //畫筆寬度
                 //繪製空心圓背景
-                canvas.drawCircle(left+columnWidth/2,top+mLineSpac+dayHeight/2,mSelectRadius-mCurrentBgStrokeWidth,bgPaint);
+                //canvas.drawCircle(left+columnWidth/2,top+mLineSpac+dayHeight/2,mSelectRadius-mCurrentBgStrokeWidth,bgPaint);
+                canvas.drawCircle(70+ rowWidth+left+(int)rectcolumnWidth/2,top+mLineSpac+dayHeight/2,mSelectRadius-mCurrentBgStrokeWidth,bgPaint);
             }
             //繪製完後將畫筆還原，避免髒筆
             bgPaint.setPathEffect(null);
@@ -476,51 +524,20 @@ public class calendar extends View {
                 mPaint.setColor(mSelectTextColor);
                 bgPaint.setColor(mSelectBg);
                 //繪製橙色圓背景，參數一是中心點的x軸，參數二是中心點的y軸，參數三是半徑，參數四是Paint對象;
-                canvas.drawCircle(left+columnWidth/2,top+mLineSpac+dayHeight/2,mSelectRadius,bgPaint);
-
+                //canvas.drawCircle(left+columnWidth/2,top+mLineSpac+dayHeight/2,mSelectRadius,bgPaint);
+                canvas.drawCircle(70+rowWidth+left+(int)rectcolumnWidth/2,top+mLineSpac+dayHeight/2,mSelectRadius,bgPaint);
+                System.out.println("紅x : "+70+rowWidth+left+(int)rectcolumnWidth/2);
+                System.out.println("紅y : "+top+mLineSpac+dayHeight/2);
             }else{
                 mPaint.setColor(mTextColorDay);
             }
 
             int len = (int)FontUtil.getFontlength(mPaint,day+"");
-            int x = left+(columnWidth-len)/2;
-            canvas.drawText(day+"",x,top+mLineSpac+dayTextLeading,mPaint);
+            //int x = left+(columnWidth-len)/2;
+            int x = left+((int)rectcolumnWidth-len)/2;
+            //int x =left-37;
+            canvas.drawText(day+"",70+ rowWidth+x,top+mLineSpac+dayTextLeading,mPaint);
 
-            /*繪製次數
-            mPaint.setTextSize(mTextSizePre);
-            Page10Activity.DayFinish finish = map.get(day);
-            String preStr = "0/0";
-            if(isCurrentMonth){
-                if(day>currentDay){
-                    mPaint.setColor(mTextColorPreNull);
-                }else if (finish!=null){
-                    //區分完成.未完成
-                    if(finish.finish>=finish.all){
-                        mPaint.setColor(mTextColorPreFinish);
-                    }else{
-                        mPaint.setColor(mTextColorPreUnFinish);
-                    }
-                    preStr = finish.finish+"/"+finish.all;
-                }else{
-                    mPaint.setColor(mTextColorPreNull);
-                }
-            }else {
-                if(finish!=null){
-                    //區分完成.未完成
-                    if(finish.finish>=finish.all){
-                        mPaint.setColor(mTextColorPreFinish);
-                    }else{
-                        mPaint.setColor(mTextColorPreUnFinish);
-                    }
-                    preStr = finish.finish+"/"+finish.all;
-                }else{
-                    mPaint.setColor(mTextColorPreNull);
-                }
-            }
-
-            len = (int)FontUtil.getFontlength(mPaint,preStr);
-            x = left+(columnWidth-len)/2;
-            canvas.drawText(preStr,x,topPre+mTextSpac+preTextLeading,mPaint);*/
         }
     }
 
@@ -596,10 +613,15 @@ public class calendar extends View {
         }else if (point.y<=(titleHeight+weekHeight)){
             //事件在星期的部分
             if (eventEnd && listener!=null){
-                //根據x座標找到具體的焦點日期
+                //根據x座標找到具體的焦點日期 (int)rectcolumnWidth
+                /*int xIndex = (int)point.x/(int)rectcolumnWidth;
+                Log.e(TAG,"列寬："+(int)rectcolumnWidth+"   x座標餘數："+(point.x/(int)rectcolumnWidth));
+                if ((point.x/(int)rectcolumnWidth-xIndex)>0)*/
+                int avg =(columnWidth+(int)rectcolumnWidth);
                 int xIndex = (int)point.x/columnWidth;
-                Log.e(TAG,"列寬："+columnWidth+"   x座標餘數："+(point.x/columnWidth));
-                if ((point.x/columnWidth-xIndex)>0){
+                Log.i(TAG,"列寬："+columnWidth+"   x座標餘數："+(point.x/columnWidth));
+                if ((point.x/columnWidth-xIndex)>0)
+                {
                     xIndex+=1;
                 }
                 if(listener!=null){
@@ -629,9 +651,13 @@ public class calendar extends View {
             focusLine++;
         }
         if(availabitlity){
-            //根據x座標找到具體的焦點日期
+            //根據x座標找到具體的焦點日期(int)rectcolumnWidth
+            /*int xIndex = (int)point.x/(int)rectcolumnWidth;
+            if((point.x/(int)rectcolumnWidth-xIndex)>0)*/
+            int avg =(columnWidth+(int)rectcolumnWidth);
             int xIndex = (int)point.x/columnWidth;
-            if((point.x/columnWidth-xIndex)>0){
+            if((point.x/columnWidth-xIndex)>0)
+            {
                 xIndex+=1;
             }
             //Log.e(TAG,"列寬："+columnWidth+"   x座標餘數："+(point.x/columnWidth));
@@ -673,7 +699,7 @@ public class calendar extends View {
         invalidate();
         if(listener!=null && eventEnd && responseWhenEnd && lastSelectDay!=selectDay){
             lastSelectDay = selectDay;
-            listener.onDayClick(selectDay,getMonthStr(month)+"-"+selectDay,map.get(selectDay));
+            listener.onDayClick(selectDay,Mtoday[1]+getMonthStr(month)+selectDay,map.get(selectDay));
         }
         responseWhenEnd = !eventEnd;
 
@@ -687,22 +713,22 @@ public class calendar extends View {
 
 
     /************接口API**********/
-    private Map<Integer,Page10Activity.DayFinish> map;
-    public void setRenwu(String year,String month, List<Page10Activity.DayFinish> list){
+    private Map<Integer,page1001Activity.DayFinish2> map;
+    public void setRenwu(String year,String month, List<page1001Activity.DayFinish2> list){
         setYear(year);
         setMonth(month);
         if (list!=null && list.size()>0){
             map.clear();
-            for(Page10Activity.DayFinish finish:list)
+            for(page1001Activity.DayFinish2 finish:list)
                 map.put(finish.day,finish);
         }
         invalidate();
     }
 
-    public void setRenwu(List<Page10Activity.DayFinish> list){
+    public void setRenwu(List<page1001Activity.DayFinish2> list){
         if(list!=null && list.size()>0){
             map.clear();    //重置map
-            for (Page10Activity.DayFinish finish:list)
+            for (page1001Activity.DayFinish2 finish:list)
                 map.put(finish.day,finish);
         }
         invalidate();
@@ -710,22 +736,22 @@ public class calendar extends View {
 
     /**月份增減**/
     public void monthChange(int change){
-       // Calendar calendar = Calendar.getInstance();
-        //calendar.setTime(month);
-        calendar.add(Calendar.MONTH,change);
-        //setDay(getDayStr(calendar.getTime()));
-       setMonth(getMonthStr(calendar.getTime()));
+        // Calendar calendar2 = Calendar.getInstance();
+        //calendar2.setTime(month);
+        calendar2.add(Calendar.MONTH,change);
+        //setDay(getDayStr(calendar2.getTime()));
+        setMonth(getMonthStr(calendar2.getTime()));
         map.clear();
         invalidate();
     }
     /**年份增減**/
     public void yearChange(int change){
-        //Calendar calendar = Calendar.getInstance();
-        calendar.setTime(year);
-        calendar.add(Calendar.YEAR,change);
-        setDay(getDayStr(calendar.getTime()));
-        setYear(getYearStr(calendar.getTime()));
-        System.out.println("getYearStr(calendar.getTime()) : "+getYearStr(calendar.getTime()));
+        //Calendar calendar2 = Calendar.getInstance();
+        calendar2.setTime(year);
+        calendar2.add(Calendar.YEAR,change);
+        //setDay(getDayStr(calendar2.getTime()));
+        setYear(getYearStr(calendar2.getTime()));
+        System.out.println("getYearStr(calendar2.getTime()) : "+getYearStr(calendar2.getTime()));
         map.clear();
         invalidate();
     }
@@ -739,6 +765,6 @@ public class calendar extends View {
         public abstract void onRightRowClick();
         public abstract void onTitleClick(String monStr,Date month);
         public abstract void onWeekClick(int weekIndex,String weekStr);
-        public abstract void onDayClick(int day,String dayStr,Page10Activity.DayFinish finish);
+        public abstract void onDayClick(int day,String dayStr,page1001Activity.DayFinish2 finish);
     }
 }
