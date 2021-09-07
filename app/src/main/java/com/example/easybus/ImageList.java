@@ -2,13 +2,11 @@ package com.example.easybus;
 
 public class ImageList {
     private String imageUrl;
+    private String femail;
 
-    public  ImageList(String imageUrl){
-        this.imageUrl=imageUrl;
-    }
+    public String getFemail(){return femail;}
+    public void setFemail(String femail){this.femail=femail;}
 
-    public ImageList(){
-    }
     public String getImageUrl(){
         return imageUrl;
     }
