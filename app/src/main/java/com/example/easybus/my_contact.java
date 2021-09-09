@@ -38,7 +38,7 @@ import java.util.List;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class my_contact extends AppCompatActivity {
-    String email,getmail,img,img2,imgUrl;
+    String email,getmail,img,img2,imgUrl;//
     String femail;
     String phone;
     TextView mEnteredName;
