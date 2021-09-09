@@ -82,16 +82,13 @@ public class Page9Activity extends AppCompatActivity implements OnMapReadyCallba
                 View content = window.getContentView();
                 content.measure(makeDropDownMeasureSpec(window.getWidth()),makeDropDownMeasureSpec(window.getHeight()));
                 //Math.abs 回傳絕對值
-                int offset_x = Math.abs(window.getContentView().getMeasuredWidth()-btn.getWidth())/2;
-                int offset_y = -(window.getContentView().getMeasuredHeight()+btn.getHeight()+10);
+                int offset_x= mWindow.getContentView().getMeasuredWidth()-btn.getWidth()/5*3;
+                int offset_y = -(window.getContentView().getMeasuredHeight()+btn.getHeight()+30);
                 PopupWindowCompat.showAsDropDown(mWindow,btn,offset_x,offset_y,Gravity.NO_GRAVITY);
-
-
             }
         });
 
         gc = new Geocoder(this, Locale.TRADITIONAL_CHINESE);
-
     }
 
     public class TestPopupWindow extends PopupWindow{

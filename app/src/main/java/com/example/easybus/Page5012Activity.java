@@ -131,7 +131,7 @@ public class Page5012Activity extends AppCompatActivity {
                         businfos.add(businfo);
                     }
                 }catch (JSONException e){
-                    Toast.makeText(Page5012Activity.this,e.getMessage()+"錯誤1",Toast.LENGTH_LONG).show();
+                    Toast.makeText(Page5012Activity.this,e.getMessage(),Toast.LENGTH_LONG).show();
                 }
                 adaptor.setData(businfos);
                 adaptor.notifyDataSetChanged();
