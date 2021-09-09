@@ -40,6 +40,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class my_contact extends AppCompatActivity {
     String email,getmail,img,img2,imgUrl;
     String femail;
+    String phone;
     TextView mEnteredName;
     ImageView backBtn;
     RequestQueue requestQueue;
@@ -124,13 +125,15 @@ public class my_contact extends AppCompatActivity {
                                 try {
                                     JSONObject object = array.getJSONObject(i);
                                     String name = object.getString("F_name").trim();
-                                    String phone = object.getString("F_phone").trim();
+                                    phone = object.getString("F_phone").trim();
                                     femail = object.getString("F_email").trim();
+
                                     friend f =new friend();
                                     f.setF_name(name);
                                     f.setF_phone(phone);
                                     friendList.add(f);
                                     fetchfimage();
+
                                 } catch (JSONException e) {
                                     e.printStackTrace();
                                 }
@@ -151,7 +154,7 @@ public class my_contact extends AppCompatActivity {
 
     //抓朋友頭像
     public  void fetchfimage(){
-        String URL =Urls.url1+"/LoginRegister/fetchimage.php?email="+femail;
+        String URL =Urls.url1+"/LoginRegister/fetchfriendimg.php?email="+femail+"&F_phone="+phone;
         StringRequest request = new StringRequest(Request.Method.GET, URL, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
@@ -160,8 +163,10 @@ public class my_contact extends AppCompatActivity {
                     img2  = jsonObject.getString("image");
                     ImageList img =new ImageList();
                     img.setFemail(femail);
+                    img.setFphone(phone);
                     imgUrl = imgurlString(img2);
                     img.setImageUrl(imgUrl);
+                    System.out.println(imgUrl);
                     imageLists.add(img);
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -225,7 +230,6 @@ public class my_contact extends AppCompatActivity {
                 try {
                     JSONObject jsonObject = new JSONObject(response);
                     img  = jsonObject.getString("image");
-
                     ImageRetriveWithPicasso();
                 } catch (JSONException e) {
                     e.printStackTrace();
