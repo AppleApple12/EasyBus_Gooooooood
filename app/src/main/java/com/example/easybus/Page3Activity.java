@@ -88,6 +88,16 @@ public class Page3Activity extends AppCompatActivity {
             }
         });
 
+        //跳頁到公車動態(測試)
+        Button mTestBtn=(Button)findViewById(R.id.testBtn);
+        mTestBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent itTest=new Intent(Page3Activity.this,BusTest.class);
+                startActivity(itTest);
+            }
+        });
+
         //浮動按鈕撥打給緊急聯絡人
         FloatingActionButton fab = (FloatingActionButton)findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
