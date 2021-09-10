@@ -417,10 +417,6 @@ public class calendar extends View {
                 drawDayAndPre(canvas,top,7,firstLineNum+(line-1)*7,0);
             }
         }
-        nextlastLineNum=lastLineNum;
-        if(lastLineNum==7)
-            nextlastLineNum=0;
-        System.out.println("nextlastLineNum : "+nextlastLineNum);
     }
 
     /**\
