@@ -16,5 +16,5 @@ public class FontUtil {
         Paint.FontMetrics fm = paint.getFontMetrics();
         return fm.leading-fm.ascent;
     }
-
+    //念婷
 }
