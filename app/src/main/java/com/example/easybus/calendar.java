@@ -60,7 +60,7 @@ public class calendar extends View {
     //選中文本的顏色
     private int mSelectTextColor;
     //選中背景
-    private int mSelectBg,mCurrentBg;//
+    private int mSelectBg,mCurrentBg;
     private float mSelectRadius,mCurrentBgStrokeWidth;
     private float[] mCurrentBgDahPath;
 
