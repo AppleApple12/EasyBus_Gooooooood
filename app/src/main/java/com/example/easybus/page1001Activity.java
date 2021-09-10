@@ -26,6 +26,7 @@ public class page1001Activity extends AppCompatActivity {
         actionBar.hide();
 
         Intent intent = getIntent();
+        //從PAGE10傳過來的 年月日
         dayStr = intent.getStringExtra("dayStr");
         System.out.println("dayStr : "+dayStr);
         //跳頁回家長主頁
@@ -77,7 +78,7 @@ public class page1001Activity extends AppCompatActivity {
         list.add(new page1001Activity.DayFinish2(29,2,2));
         list.add(new page1001Activity.DayFinish2(30,2,2));
         list.add(new page1001Activity.DayFinish2(31,2,2));//跳頁回家長主頁
-
+        
         cal2.setRenwu("2021","2021-09",list);
         cal2.setOnClickListen(new calendar2.onClickListener() {
             @Override
