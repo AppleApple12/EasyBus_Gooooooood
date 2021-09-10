@@ -59,7 +59,7 @@ public class Page9Activity extends AppCompatActivity implements OnMapReadyCallba
         setContentView(R.layout.activity_page9);
         //隱藏title bar
         ActionBar actionBar = getSupportActionBar();
-        actionBar.hide();//
+        actionBar.hide();
 
         SupportMapFragment mapFragment = (SupportMapFragment)getSupportFragmentManager()
                 .findFragmentById(R.id.mapView);
