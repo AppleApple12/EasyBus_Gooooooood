@@ -78,10 +78,10 @@ public class my_contact extends AppCompatActivity {
         mrecyclerView.setHasFixedSize(true);
         mrecyclerView.setLayoutManager(linearLayoutManager);
 
-        LinearLayoutManager ImageLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
+        /*LinearLayoutManager ImageLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         imgrecyclerView=findViewById(R.id.imgrecyclerview);
         imgrecyclerView.setHasFixedSize(true);
-        imgrecyclerView.setLayoutManager(ImageLayoutManager);
+        imgrecyclerView.setLayoutManager(ImageLayoutManager);*/
 
         friendList = new ArrayList<>();
         imageLists =new ArrayList<>();
@@ -132,12 +132,12 @@ public class my_contact extends AppCompatActivity {
                                     f.setF_name(name);
                                     f.setF_phone(phone);
                                     f.setF_image(fimage);
-                                    ImageList img = new ImageList();
+                                    //ImageList img = new ImageList();
 
-                                    img.setFemail(femail);
+                                    f.setFemail(femail);
                                     imgUrl = imgurlString(fimage);
-                                    img.setImageUrl(imgUrl);
-                                    imageLists.add(img);
+                                    f.setImageUrl(imgUrl);
+                                    //imageLists.add(img);
                                     System.out.println(imgUrl);
                                     //fetchfimage();
                                     friendList.add(f);
@@ -147,10 +147,11 @@ public class my_contact extends AppCompatActivity {
                                     e.printStackTrace();
                                 }
                             }
-                        friendAdapter = new friendAdapter(my_contact.this,friendList);
+                        friendAdapter = new friendAdapter(my_contact.this,friendList,imageLists);
                         mrecyclerView.setAdapter(friendAdapter);
-                        imageListAdapter = new ImageListAdapter(my_contact.this, imageLists);
-                        imgrecyclerView.setAdapter(imageListAdapter);
+                        /*imageListAdapter = new ImageListAdapter(my_contact.this, imageLists);
+                        mrecyclerView.setAdapter(imageListAdapter);
+                        //imgrecyclerView.setAdapter(imageListAdapter);*/
 
                     }
                 }, new Response.ErrorListener() {
