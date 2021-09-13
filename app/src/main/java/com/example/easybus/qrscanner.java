@@ -52,7 +52,7 @@ public class qrscanner extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(qrscanner.this,Page8Activity.class);
-               // intent.putExtra("email",mygetmail);
+                // intent.putExtra("email",mygetmail);
                 startActivity(intent);
             }
         });
@@ -94,7 +94,7 @@ public class qrscanner extends AppCompatActivity {
 
 
     }
-    public void addfriend(final String f_name,final String f_email,final String f_phone){
+    public void addfriend(final String f_name,final String f_email,final String f_phone,final String f_image){
         String URL =Urls.url1+"/LoginRegister/addfriend.php?email="+mygetmail;
         //
         StringRequest stringRequest = new StringRequest(
@@ -126,6 +126,7 @@ public class qrscanner extends AppCompatActivity {
                 parms.put("f_name", f_name);
                 parms.put("f_email", f_email);
                 parms.put("f_phone", f_phone);
+                parms.put("f_image",f_image);
                 return parms;
             }
         };
@@ -139,13 +140,14 @@ public class qrscanner extends AppCompatActivity {
                 URL,
                 null,
                 new Response.Listener<JSONObject>() {
-                    String f_name,f_phone;
+                    String f_name,f_phone,f_image;
                     @Override
                     public void onResponse(JSONObject response) {
                         try {
                             f_name = response.getString("fullname");
                             f_phone = response.getString("userphone");
-                            addfriend(f_name,f_email,f_phone);
+                            f_image = response.getString("image");
+                            addfriend(f_name,f_email,f_phone,f_image);
                         } catch (JSONException e) {
                             e.printStackTrace();
                             Toast.makeText(qrscanner.this, e.toString(), Toast.LENGTH_SHORT).show();
@@ -183,7 +185,7 @@ public class qrscanner extends AppCompatActivity {
                                 }
                             });
                             fdialog.show();
-                           // Toast.makeText(emergency_contact.this, s, Toast.LENGTH_SHORT).show();
+                            // Toast.makeText(emergency_contact.this, s, Toast.LENGTH_SHORT).show();
                         }else{
                             readUser(f_email);
 
@@ -263,7 +265,7 @@ public class qrscanner extends AppCompatActivity {
             friendexist(f_email);
             //如果聯絡人存在fdialog
             //如果這個聯絡人不存在 -> else readUser() -> dialog.show() -> 點確認 readUser2() ->返回page8
-                                                                  //-> 點取消 -> 返回page8
+            //-> 點取消 -> 返回page8
         }else{
             Toast.makeText(getApplicationContext(), "掃描失敗", Toast.LENGTH_SHORT).show();
         }

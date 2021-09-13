@@ -38,14 +38,18 @@ import java.util.List;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class my_contact extends AppCompatActivity {
-    String email,getmail,img;
+    String email,getmail,img,img2,imgUrl,fimage;//
+    String femail;
+    String phone;
     TextView mEnteredName;
     ImageView backBtn;
     RequestQueue requestQueue;
     RecyclerView mrecyclerView;
+    RecyclerView imgrecyclerView;
     friendAdapter friendAdapter;
+    ImageListAdapter imageListAdapter;
+    List<ImageList>imageLists;
     List<friend> friendList;
-    List<ImageList> imageList;
     Dialog dialog;
     Button clickme;
     CircleImageView mPforfilepic;
@@ -74,15 +78,19 @@ public class my_contact extends AppCompatActivity {
         mrecyclerView.setHasFixedSize(true);
         mrecyclerView.setLayoutManager(linearLayoutManager);
 
+        LinearLayoutManager ImageLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
+        imgrecyclerView=findViewById(R.id.imgrecyclerview);
+        imgrecyclerView.setHasFixedSize(true);
+        imgrecyclerView.setLayoutManager(ImageLayoutManager);
+
         friendList = new ArrayList<>();
-        imageList = new ArrayList<>();
+        imageLists =new ArrayList<>();
         //friendAdapter = new friendAdapter(my_contact.this,friendList);
         //mrecyclerView.setAdapter(friendAdapter);
         requestQueue = Volley.newRequestQueue(this);
         //getmail=mail();
         readUser();
-        fetchimage();
-        ImageRetriveWithPicasso();
+        readfriend();
         //返回我的資料
         backBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -93,20 +101,21 @@ public class my_contact extends AppCompatActivity {
                 finish();
             }
         });
-
+    }
+    public void readfriend(){
         String URL =Urls.url1+"/LoginRegister/my_contact.php?email="+getmail;
         //Request.Method.GET,URL,null我自己加的
         JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET,URL,null,
                 new Response.Listener<JSONArray>() {
                     @Override
-                    public void onResponse(JSONArray array) {//////
+                    public void onResponse(JSONArray array) {
                         if (array.length()==0){
                             dialog.show();
                             clickme.setOnClickListener(new View.OnClickListener() {
                                 @Override
                                 public void onClick(View v) {
                                     Intent intent = new Intent(my_contact.this,qrcode_page.class);
-                                   // intent.putExtra("email",getmail);
+                                    // intent.putExtra("email",getmail);
                                     startActivity(intent);
                                 }
                             });
@@ -115,17 +124,24 @@ public class my_contact extends AppCompatActivity {
                                 try {
                                     JSONObject object = array.getJSONObject(i);
                                     String name = object.getString("F_name").trim();
-                                    String phone = object.getString("F_phone").trim();
-                                    //String femail = object.getString("F_email").trim();
-                                    //String imgurl = fetchfriendemail(String femail);
+                                    phone = object.getString("F_phone").trim();
+                                    femail = object.getString("F_email").trim();
+                                    fimage = object.getString("F_image").trim();
+
                                     friend f =new friend();
-                                    ImageList img =new ImageList();
-                                    //img.setFemail(femail);
-                                    //img.setImageUrl(imgurl);
                                     f.setF_name(name);
                                     f.setF_phone(phone);
+                                    f.setF_image(fimage);
+                                    ImageList img = new ImageList();
+
+                                    img.setFemail(femail);
+                                    imgUrl = imgurlString(fimage);
+                                    img.setImageUrl(imgUrl);
+                                    imageLists.add(img);
+                                    System.out.println(imgUrl);
+                                    //fetchfimage();
                                     friendList.add(f);
-                                    //imageList.add(img);
+
 
                                 } catch (JSONException e) {
                                     e.printStackTrace();
@@ -133,6 +149,8 @@ public class my_contact extends AppCompatActivity {
                             }
                         friendAdapter = new friendAdapter(my_contact.this,friendList);
                         mrecyclerView.setAdapter(friendAdapter);
+                        imageListAdapter = new ImageListAdapter(my_contact.this, imageLists);
+                        imgrecyclerView.setAdapter(imageListAdapter);
 
                     }
                 }, new Response.ErrorListener() {
@@ -143,7 +161,10 @@ public class my_contact extends AppCompatActivity {
         });
         RequestQueue requestQueue2 = Volley.newRequestQueue(my_contact.this);
         requestQueue2.add(request);
+    }
 
+    public String imgurlString(final String img2){
+        return Urls.url1+"/LoginRegister/images/"+img2;
     }
 
     private void LoadAllfriend() {
@@ -164,6 +185,7 @@ public class my_contact extends AppCompatActivity {
                         try {
                             fullname = response.getString("fullname");
                             mEnteredName.setText(fullname);
+                            fetchimage();
                         } catch (JSONException e) {
                             e.printStackTrace();
                             Toast.makeText(my_contact.this, e.toString(), Toast.LENGTH_SHORT).show();
@@ -187,7 +209,6 @@ public class my_contact extends AppCompatActivity {
                 try {
                     JSONObject jsonObject = new JSONObject(response);
                     img  = jsonObject.getString("image");
-
                     ImageRetriveWithPicasso();
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -225,12 +246,4 @@ public class my_contact extends AppCompatActivity {
                 });
         System.out.println(imgurl);
     }
-
-    /*public String mail(){
-        Bundle extras = getIntent().getExtras();
-        if (extras!=null){
-            email=extras.getString("email");
-        }
-        return email;
-    }*/
 }
