@@ -9,6 +9,7 @@
         android:id="@+id/view_background"
         android:layout_width="314dp"
         android:layout_height="471dp"
+
         android:background="@drawable/page601_txv2"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
