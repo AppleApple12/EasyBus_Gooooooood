@@ -24,7 +24,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Page70401Activity"></activity>
+        <activity android:name=".page1001Activity"></activity>
+        <activity android:name=".Page70401Activity" />
         <activity android:name=".Page70301Activity" />
         <activity android:name=".Page70201Activity" />
         <activity android:name=".Page70101Activity" />

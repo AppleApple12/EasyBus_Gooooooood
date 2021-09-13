@@ -102,7 +102,7 @@ public class Page10Activity extends AppCompatActivity {
             n--;
         }
         System.out.println("nowday : "+nowday);*/
-        cal.setRenwu(ydate,Mdate,list);//已2020/8為開頭
+        cal.setRenwu(ydate,Mdate,list);
         cal.setOnClickListen(new calendar.onClickListener() {
             @Override
             public void onLeftRowClick() {
@@ -164,12 +164,16 @@ public class Page10Activity extends AppCompatActivity {
             @Override
             public void onWeekClick(int weekIndex, String weekStr) {
                 Toast.makeText(Page10Activity.this,"點擊了星期："+weekStr,Toast.LENGTH_SHORT).show();
+
             }
 
             @Override
             public void onDayClick(int day, String dayStr, DayFinish finish) {
                 Toast.makeText(Page10Activity.this,"點擊了日期："+dayStr,Toast.LENGTH_SHORT).show();
                 Log.w("","點擊了日期："+dayStr);
+                Intent intent =new Intent(Page10Activity.this,page1001Activity.class);
+                intent.putExtra("dayStr",dayStr);
+                startActivity(intent);
             }
         });
     }

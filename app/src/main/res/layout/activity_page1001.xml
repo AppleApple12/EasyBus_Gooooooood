@@ -4,9 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Page10Activity">
-
-
+    tools:context=".page1001Activity">
     <View
         android:id="@+id/top"
         android:layout_width="405dp"
@@ -84,41 +82,40 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <com.example.easybus.calendar
-                android:id="@+id/cal"
+            <com.example.easybus.calendar2
+                android:id="@+id/cal2"
                 android:layout_width="match_parent"
                 android:layout_height="301dp"
 
-                app:mCurrentBg="#6E6E6E"
-                app:mCurrentBgDashPath="@array/calendar_currentDay_bg_DashPath"
-                app:mCurrentBgStrokeWidth="1.5dip"
+                app:mCurrentBg2="#6E6E6E"
+                app:mCurrentBgDashPath2="@array/calendar_currentDay_bg_DashPath"
+                app:mCurrentBgStrokeWidth2="1.5dip"
 
-                app:mLineSpac="12dip"
-                app:mMonthRowL="@drawable/custom_calendar_row_left"
-                app:mMonthRowR="@drawable/custom_calendar_row_right"
-                app:mMonthRowSpac="50dip"
+                app:mLineSpac2="12dip"
+                app:mMonthRowL2="@drawable/custom_calendar_row_left"
+                app:mMonthRowR2="@drawable/custom_calendar_row_right"
+                app:mMonthRowSpac2="50dip"
 
-                app:mMonthSpac="10dip"
-                app:mSelectBg="#ff0000"
-                app:mSelectRadius="15dip"
-                app:mSelectTextColor="#ffffff"
-                app:mSelectWeekTextColor="#ff0000"
-                app:mTextColorDay="#000000"
-                app:mTextColorMonth="#000000"
-                app:mTextColorPreFinish="#fc7451"
-                app:mTextColorYear="#000000"
+                app:mMonthSpac2="10dip"
+                app:mSelectBg2="#ff0000"
+                app:mSelectRadius2="15dip"
+                app:mSelectTextColor2="#ffffff"
+                app:mSelectWeekTextColor2="#ff0000"
+                app:mTextColorDay2="#000000"
+                app:mTextColorMonth2="#000000"
+                app:mTextColorPreFinish2="#fc7451"
+                app:mTextColorPreNull2="#cecdcd"
 
-                app:mTextColorPreNull="#cecdcd"
-                app:mTextColorPreUnFinish="#60ba8d"
-                app:mTextColorWeek="#000000"
+                app:mTextColorPreUnFinish2="#60ba8d"
+                app:mTextColorWeek2="#000000"
+                app:mTextColorYear2="#000000"
 
-                app:mTextSizeYear="70sp"
-                app:mTextSizeDay="17sp"
-                app:mTextSizeMonth="70sp"
-                app:mTextSizePre="10sp"
-                app:mTextSizeWeek="17sp"
-                app:mTextSpac="8dip" />
-
+                app:mTextSizeDay2="17sp"
+                app:mTextSizeMonth2="70sp"
+                app:mTextSizePre2="10sp"
+                app:mTextSizeWeek2="17sp"
+                app:mTextSizeYear2="70sp"
+                app:mTextSpac2="8dip" />
         </LinearLayout>
     </ScrollView>
 
