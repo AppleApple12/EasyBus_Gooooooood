@@ -93,8 +93,8 @@ public class Page3Activity extends AppCompatActivity {
         mTestBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent itTest=new Intent(Page3Activity.this,BusTest.class);
-                startActivity(itTest);
+                //Intent itTest=new Intent(Page3Activity.this,BusTest.class);
+               // startActivity(itTest);
             }
         });
 
