@@ -40,7 +40,7 @@ public class ImageListAdapter extends RecyclerView.Adapter<ImageListAdapter.imag
     public int getItemCount() {
         return imageLists.size();
     }
-    public class imagelistHolder extends RecyclerView.ViewHolder{
+    public static class imagelistHolder extends RecyclerView.ViewHolder{
         ImageView img;
         public imagelistHolder(@NonNull View itemView) {
             super(itemView);

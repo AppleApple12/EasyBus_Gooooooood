@@ -38,7 +38,7 @@ import java.util.List;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class my_contact extends AppCompatActivity {
-    String email,getmail,img,img2,imgUrl;//
+    String email,getmail,img,img2,imgUrl,fimage;//
     String femail;
     String phone;
     TextView mEnteredName;
@@ -90,7 +90,6 @@ public class my_contact extends AppCompatActivity {
         requestQueue = Volley.newRequestQueue(this);
         //getmail=mail();
         readUser();
-        fetchimage();
         readfriend();
         //返回我的資料
         backBtn.setOnClickListener(new View.OnClickListener() {
@@ -127,12 +126,22 @@ public class my_contact extends AppCompatActivity {
                                     String name = object.getString("F_name").trim();
                                     phone = object.getString("F_phone").trim();
                                     femail = object.getString("F_email").trim();
+                                    fimage = object.getString("F_image").trim();
 
                                     friend f =new friend();
                                     f.setF_name(name);
                                     f.setF_phone(phone);
+                                    f.setF_image(fimage);
+                                    ImageList img = new ImageList();
+
+                                    img.setFemail(femail);
+                                    imgUrl = imgurlString(fimage);
+                                    img.setImageUrl(imgUrl);
+                                    imageLists.add(img);
+                                    System.out.println(imgUrl);
+                                    //fetchfimage();
                                     friendList.add(f);
-                                    fetchfimage();
+
 
                                 } catch (JSONException e) {
                                     e.printStackTrace();
@@ -140,6 +149,8 @@ public class my_contact extends AppCompatActivity {
                             }
                         friendAdapter = new friendAdapter(my_contact.this,friendList);
                         mrecyclerView.setAdapter(friendAdapter);
+                        imageListAdapter = new ImageListAdapter(my_contact.this, imageLists);
+                        imgrecyclerView.setAdapter(imageListAdapter);
 
                     }
                 }, new Response.ErrorListener() {
@@ -150,39 +161,6 @@ public class my_contact extends AppCompatActivity {
         });
         RequestQueue requestQueue2 = Volley.newRequestQueue(my_contact.this);
         requestQueue2.add(request);
-    }
-
-    //抓朋友頭像
-    public  void fetchfimage(){
-        String URL =Urls.url1+"/LoginRegister/fetchfriendimg.php?email="+femail+"&F_phone="+phone;
-        StringRequest request = new StringRequest(Request.Method.GET, URL, new Response.Listener<String>() {
-            @Override
-            public void onResponse(String response) {
-                try {
-                    JSONObject jsonObject = new JSONObject(response);
-                    img2  = jsonObject.getString("image");
-                    ImageList img =new ImageList();
-                    img.setFemail(femail);
-                    img.setFphone(phone);
-                    imgUrl = imgurlString(img2);
-                    img.setImageUrl(imgUrl);
-                    System.out.println(imgUrl);
-                    imageLists.add(img);
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-                imageListAdapter = new ImageListAdapter(my_contact.this,imageLists);
-                imgrecyclerView.setAdapter(imageListAdapter);
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                Toast.makeText(my_contact.this,error.getMessage(),Toast.LENGTH_SHORT).show();
-            }
-        });
-
-        RequestQueue requestQueue = Volley.newRequestQueue(my_contact.this);
-        requestQueue.add(request);
     }
 
     public String imgurlString(final String img2){
@@ -207,6 +185,7 @@ public class my_contact extends AppCompatActivity {
                         try {
                             fullname = response.getString("fullname");
                             mEnteredName.setText(fullname);
+                            fetchimage();
                         } catch (JSONException e) {
                             e.printStackTrace();
                             Toast.makeText(my_contact.this, e.toString(), Toast.LENGTH_SHORT).show();

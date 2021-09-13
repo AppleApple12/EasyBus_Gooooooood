@@ -94,7 +94,7 @@ public class qrscanner extends AppCompatActivity {
 
 
     }
-    public void addfriend(final String f_name,final String f_email,final String f_phone){
+    public void addfriend(final String f_name,final String f_email,final String f_phone,final String f_image){
         String URL =Urls.url1+"/LoginRegister/addfriend.php?email="+mygetmail;
         //
         StringRequest stringRequest = new StringRequest(
@@ -126,6 +126,7 @@ public class qrscanner extends AppCompatActivity {
                 parms.put("f_name", f_name);
                 parms.put("f_email", f_email);
                 parms.put("f_phone", f_phone);
+                parms.put("f_image",f_image);
                 return parms;
             }
         };
@@ -139,13 +140,14 @@ public class qrscanner extends AppCompatActivity {
                 URL,
                 null,
                 new Response.Listener<JSONObject>() {
-                    String f_name,f_phone;
+                    String f_name,f_phone,f_image;
                     @Override
                     public void onResponse(JSONObject response) {
                         try {
                             f_name = response.getString("fullname");
                             f_phone = response.getString("userphone");
-                            addfriend(f_name,f_email,f_phone);
+                            f_image = response.getString("image");
+                            addfriend(f_name,f_email,f_phone,f_image);
                         } catch (JSONException e) {
                             e.printStackTrace();
                             Toast.makeText(qrscanner.this, e.toString(), Toast.LENGTH_SHORT).show();
