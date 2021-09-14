@@ -2,6 +2,8 @@ package com.example.easybus;
 
 public class friend {
     String F_name,F_phone,F_image;
+    private String imageUrl;
+    private String femail;
 
     public String getF_phone() {
         return F_phone;
@@ -26,6 +28,14 @@ public class friend {
     public void setF_image(String f_image) {
         F_image = f_image;
     }
+    public String getFemail(){return femail;}
+    public void setFemail(String femail){this.femail=femail;}
 
+    public String getImageUrl(){
+        return imageUrl;
+    }
+    public  void  setImageUrl(String imageUrl){
+        this.imageUrl = imageUrl;
+    }
 
 }
