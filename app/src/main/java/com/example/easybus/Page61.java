@@ -63,7 +63,7 @@ public class Page61 extends AppCompatActivity {
             @Override
             public void onItemClick(View view, int position) {
                 if(arrayList1.get(position).get("busname").equals(" 公  車  查  詢 ")){
-                    Intent it1 = new Intent(Page61.this,Page6Activity.class);
+                    Intent it1 = new Intent(Page61.this,Page62.class);
                     startActivity(it1);
                     arrayList1.clear();
                     arrayList2.clear();
