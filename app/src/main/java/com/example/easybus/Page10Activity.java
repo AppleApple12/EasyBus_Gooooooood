@@ -178,8 +178,6 @@ public class Page10Activity extends AppCompatActivity {
         });
     }
 
-
-
     class DayFinish{
         int day,all,finish;
         public DayFinish(int day,int finish,int all){
