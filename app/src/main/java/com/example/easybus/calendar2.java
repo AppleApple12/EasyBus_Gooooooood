@@ -28,7 +28,7 @@ import java.util.Map;
 
 public class calendar2 extends View {
     private  String TAG = "CustomerCalendar";
-    int nextlastLineNum=0;
+    int nextlastLineNum=0;//
     private Date month,year;//當前月份
     private boolean isCurrentMonth;//展示的月份是否是當前月
     private int currentDay,selectDay,lastSelectDay;//當前日期.選中日期.上一次選中的日期
