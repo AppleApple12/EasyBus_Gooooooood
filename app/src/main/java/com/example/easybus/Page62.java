@@ -28,7 +28,7 @@ public class Page62 extends AppCompatActivity {
     String  url = "https://datacenter.taichung.gov.tw/swagger/OpenData/5e48458d-6141-4002-a2de-4af48a683623";
     RecyclerView recyclerView;
     Page62Adapter adapter;
-    ArrayList<Page62bus> arrayList;
+    ArrayList<Page62bus> arrayList;//
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
