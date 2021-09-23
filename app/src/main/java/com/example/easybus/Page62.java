@@ -56,6 +56,7 @@ interface AsyncResponse{
 }
 
 public class Page62 extends AppCompatActivity {
+    //new
     RecyclerView recyclerView;
     Page6ArticleAdapter adapter;
     ArrayList<Page6article> articles;
@@ -127,11 +128,15 @@ public class Page62 extends AppCompatActivity {
                                             String spare[] = value.split(" ");
                                             if(spare[0].equals("0")&&spare[1].indexOf(articles.get(i).chinese_stamp)!=-1){
                                                 flag = true;
-                                                int num = Integer.parseInt(resultArrayList.get(j).get(value))/60;
-                                                if(num<=1){
-                                                    str2 +="即將到站 " + articles.get(i).chinese_stamp + "\n";
+                                                if(resultArrayList.get(j).get(value).equals("末班駛離")||resultArrayList.get(j).get(value).indexOf(":")!=-1){
+                                                    str2 +=resultArrayList.get(j).get(value)+" " + articles.get(i).chinese_stamp + "\n";
                                                 }else {
-                                                    str2 += num + "分 " + articles.get(i).chinese_stamp + "\n";
+                                                    int num = Integer.parseInt(resultArrayList.get(j).get(value)) / 60;
+                                                    if (num <= 1) {
+                                                        str2 += "即將到站 " + articles.get(i).chinese_stamp + "\n";
+                                                    } else {
+                                                        str2 += num + "分 " + articles.get(i).chinese_stamp + "\n";
+                                                    }
                                                 }
                                                 break;
                                             }
@@ -154,11 +159,15 @@ public class Page62 extends AppCompatActivity {
                                             String spare[] = value.split(" ");
                                             if(spare[0].equals("1")&&spare[1].indexOf(articles.get(i).chinese_stamp)!=-1){
                                                 flag = true;
-                                                int num = Integer.parseInt(resultArrayList.get(j).get(value))/60;
-                                                if(num<=1){
-                                                    str4+="即將到站 "+articles.get(i).chinese_stamp+"\n";
-                                                }else{
-                                                    str4+=num+"分 "+articles.get(i).chinese_stamp+"\n";
+                                                if(resultArrayList.get(j).get(value).equals("末班駛離")||resultArrayList.get(j).get(value).indexOf(":")!=-1){
+                                                    str4+=resultArrayList.get(j).get(value)+" "+articles.get(i).chinese_stamp+"\n";
+                                                }else {
+                                                    int num = Integer.parseInt(resultArrayList.get(j).get(value)) / 60;
+                                                    if (num <= 1) {
+                                                        str4 += "即將到站 " + articles.get(i).chinese_stamp + "\n";
+                                                    } else {
+                                                        str4 += num + "分 " + articles.get(i).chinese_stamp + "\n";
+                                                    }
                                                 }
                                                 break;
                                             }
@@ -373,7 +382,7 @@ public class Page62 extends AppCompatActivity {
         protected void onPostExecute(Void aVoid) {
             super.onPostExecute(aVoid);
             pd.dismiss();
-            Toast.makeText(getApplicationContext(),"Connection successful!",Toast.LENGTH_LONG).show();
+            //Toast.makeText(getApplicationContext(),"Connection successful!",Toast.LENGTH_LONG).show();
             try {
                 if(response!=null && !response.equals("")){
                     JSONArray jsonArray = new JSONArray(response);
@@ -395,6 +404,37 @@ public class Page62 extends AppCompatActivity {
                                 hashMap.put(destination+" "+stopname,estimate);
                                 nameArrayList.add(hashMap);
                             }
+                            if(jsonObject.getString("StopStatus").equals("1")) {
+                                //站名
+                                JSONObject jsonObject1 = jsonObject.getJSONObject("StopName");
+                                String stopname = jsonObject1.getString("Zh_tw");
+                                int destination =jsonObject.getInt("Direction");
+
+                                //車牌,預估時間
+                                //testName.setEstimate(jsonObject.getString("EstimateTime"));
+                                //testName.setPlateNumb(jsonObject.getString("PlateNumb"));
+                                String string = jsonObject.getString("NextBusTime");
+                                int beginIndex = string.indexOf("T");
+                                int middle = string.indexOf(":");
+                                int endIndex = string.indexOf(":",middle+1);
+                                String estimate = string.substring(beginIndex+1,endIndex);
+                                hashMap.put(destination+" "+stopname,estimate);
+                                nameArrayList.add(hashMap);
+                            }
+                            if(jsonObject.getString("StopStatus").equals("3")) {
+                                //站名
+                                JSONObject jsonObject1 = jsonObject.getJSONObject("StopName");
+                                String stopname = jsonObject1.getString("Zh_tw");
+                                int destination =jsonObject.getInt("Direction");
+
+                                //車牌,預估時間
+                                //testName.setEstimate(jsonObject.getString("EstimateTime"));
+                                //testName.setPlateNumb(jsonObject.getString("PlateNumb"));
+                                String estimate = "末班駛離";
+                                hashMap.put(destination+" "+stopname,estimate);
+                                nameArrayList.add(hashMap);
+                            }
+
                         }
                         asyncResponse.onDataReceviedSuccess(nameArrayList);
                     }
