@@ -23,7 +23,6 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".Page62_combination"></activity>
-        <activity android:name=".DetailActivity" />
         <activity android:name=".page62_test" />
         <activity android:name=".Page62" />
         <activity android:name=".Page61" />
@@ -40,8 +39,6 @@
         <activity android:name=".qrcode_page" />
         <activity android:name=".Forgotpassword" />
         <activity android:name=".Page801Activity" />
-        <activity android:name=".Page7falseActivity" />
-        <activity android:name=".Page7trueActivity" />
         <activity android:name=".Page702Activity" />
         <activity android:name=".Page701Activity" />
         <activity android:name=".Login" />
@@ -75,9 +72,9 @@
         <activity android:name=".Page601" />
         <activity android:name=".Page6Activity" />
         <activity android:name=".Page4Activity" />
-        <activity android:name=".MainActivity" />
+        <activity android:name=".Page3Activity" />
         <activity android:name=".Page2Activity" />
-        <activity android:name=".Page3Activity">
+        <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

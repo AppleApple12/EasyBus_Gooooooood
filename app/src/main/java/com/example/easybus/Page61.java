@@ -44,8 +44,10 @@ public class Page61 extends AppCompatActivity {
                 arrayList2.clear();
             }
         });
-        int image[] = {R.drawable.busdetails,R.drawable.business};
-        final String text[] = {" 公  車  查  詢 ","   上    班   "};
+        int image[] = {R.drawable.busdetails};
+        //int image[] = {R.drawable.busdetails,R.drawable.business};
+        //final String text[] = {" 公  車  查  詢 ","   上    班   "};
+        final String text[] = {" 公  車  查  詢 "};
         for(int i = image.length-1;i>=0;i--){
             HashMap<String,String> hashMap = new HashMap<>();
             hashMap.put("busname",text[i]);
@@ -54,7 +56,7 @@ public class Page61 extends AppCompatActivity {
             hashMap2.put("busphoto",image[i]);
             arrayList2.add(hashMap2);
         }
-        recyclerView = findViewById(R.id.recyclerview);
+        recyclerView = findViewById(R.id.take_bus_list);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         //recyclerView.addItemDecoration(new DividerItemDecoration(this,DividerItemDecoration.VERTICAL));
         myAdapter = new Page61Holder();
