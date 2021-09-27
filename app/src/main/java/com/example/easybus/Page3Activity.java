@@ -1,6 +1,7 @@
 package com.example.easybus;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
@@ -8,25 +9,37 @@ import androidx.core.content.ContextCompat;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
+import android.app.AlarmManager;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
 import android.content.IntentSender;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Looper;
 import android.telecom.Call;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.android.gms.common.api.ResolvableApiException;
 import com.google.android.gms.location.FusedLocationProviderClient;
@@ -42,42 +55,108 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
+import com.karumi.dexter.Dexter;
+import com.karumi.dexter.PermissionToken;
+import com.karumi.dexter.listener.PermissionDeniedResponse;
+import com.karumi.dexter.listener.PermissionGrantedResponse;
+import com.karumi.dexter.listener.PermissionRequest;
+import com.karumi.dexter.listener.single.PermissionListener;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.DecimalFormat;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.TimeZone;
+
+import static android.Manifest.permission.ACCESS_COARSE_LOCATION;
+import static android.Manifest.permission.ACCESS_FINE_LOCATION;
+
 public class Page3Activity extends AppCompatActivity {
-    String email, getmail;
+    TextView test;
+    String email, getmail, dateString;
     RequestQueue requestQueue;
     com.example.easybus.FloatingActionButton f;
 
+    LocationManager locationManager;               //宣告定位管理控制
+
+    private String provider;
+
+    double latitude, longitude;
     String TAG = "Page3Activity";
-    int LOCATION_REQUEST_CODE = 10001;
+    //int LOCATION_REQUEST_CODE = 10001;
     FusedLocationProviderClient fusedLocationProviderClient;
     LocationRequest locationRequest;
-    LocationCallback locationCallback = new LocationCallback() {
+
+    static Page3Activity instance;
+
+    public static Page3Activity getInstance() {
+        return instance;
+    }
+
+
+    /*final LocationCallback locationCallback = new LocationCallback() {
         @Override
         public void onLocationResult(@NonNull LocationResult locationResult) {
-            if(locationResult == null){
+            if (locationResult == null) {
                 return;
             }
-            for(Location location: locationResult.getLocations()){
-                Log.d(TAG,"onLocationResult : "+location.toString());
-                Log.d(TAG,"getLongitude : "+location.getLongitude());
-                Log.d(TAG,"getLatitude : "+location.getLatitude());
+            int i =0;
+            for (Location location : locationResult.getLocations()) {
+                Log.d(TAG, "onLocationResult : " + location.toString());
+                Log.d(TAG,"getLongitude : "+location.getLongitude());//經度
+                Log.d(TAG,"getLatitude : "+location.getLatitude());//緯度
+                latitude1 = location.getLatitude();
+                longitude1 = location.getLongitude();
+                //if(position.size()<1)
+                   // position.add( new Position(latitude1,longitude1));
             }
         }
-    };
+    };*/
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_page3);
+        //test = findViewById(R.id.test);
+        instance = this;
+
+        Dexter.withActivity(this)
+                .withPermission(ACCESS_FINE_LOCATION)
+                .withListener(new PermissionListener() {
+                    @Override
+                    public void onPermissionGranted(PermissionGrantedResponse response) {
+
+                        updataLocation();
+
+                    }
+
+                    @Override
+                    public void onPermissionDenied(PermissionDeniedResponse response) {
+                        Toast.makeText(Page3Activity.this, "You must accept this location .", Toast.LENGTH_SHORT).show();
+                    }
+
+                    @Override
+                    public void onPermissionRationaleShouldBeShown(PermissionRequest permission, PermissionToken token) {
+
+                    }
+                }).check();
+
+
 
         requestQueue = Volley.newRequestQueue(this);
         //抓email
         SharedPreferences email = getSharedPreferences("email", MODE_PRIVATE);
         getmail = email.getString("Email", "");
+        //dateString = date();
         //隱藏title bar
         ActionBar actionBar = getSupportActionBar();
         actionBar.hide();
@@ -135,96 +214,100 @@ public class Page3Activity extends AppCompatActivity {
                 readUser();
             }
         });
+        //取得定位權限
+        //locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
 
+
+        //locationRequest = LocationRequest.create();
+
+        // init();
+
+    }
+
+    private void updataLocation() {
+        buildLocationRequest();
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
-        locationRequest = LocationRequest.create();
-        locationRequest.setInterval(4000);
-        locationRequest.setFastestInterval(2000);
-        locationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
-    }
-    protected void onStop(){
-        super.onStop();
-        stopLocationUpdates();
-    }
-    protected void onStart() {
-        super.onStart();
-        if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
-                == PackageManager.PERMISSION_GRANTED) {
-            checkSettingsAndStartLocationUpdates();
-        } else {
-            askLocationPermission();
-        }
-    }
-
-    private void checkSettingsAndStartLocationUpdates() {
-        LocationSettingsRequest locationSettingsRequest = new LocationSettingsRequest.Builder()
-                .addLocationRequest(locationRequest).build();
-        SettingsClient client = LocationServices.getSettingsClient(this);
-        Task<LocationSettingsResponse> locationSettingsResponseTask = client.checkLocationSettings(locationSettingsRequest);
-        locationSettingsResponseTask.addOnSuccessListener(new OnSuccessListener<LocationSettingsResponse>() {
-            @Override
-            public void onSuccess(LocationSettingsResponse locationSettingsResponse) {
-                //Setting of device one satisfied and we can start location updates
-                startLocationUpdates();
-            }
-        });
-        locationSettingsResponseTask.addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-                if (e instanceof ResolvableApiException) {
-                    ResolvableApiException resolvableApiException = (ResolvableApiException) e;
-                    try {
-                        resolvableApiException.startResolutionForResult(Page3Activity.this, 1001);
-                    } catch (IntentSender.SendIntentException sendIntentException) {
-                        sendIntentException.printStackTrace();
-                    }
-                }
-            }
-        });
-    }
-
-    private void startLocationUpdates() {
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            // TODO: Consider calling
-            //    ActivityCompat#requestPermissions
-            // here to request the missing permissions, and then overriding
-            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-            //                                          int[] grantResults)
-            // to handle the case where the user grants the permission. See the documentation
-            // for ActivityCompat#requestPermissions for more details.
+            // if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
+            //       && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            System.out.println("return : return");
             return;
         }
-        fusedLocationProviderClient.requestLocationUpdates(locationRequest, locationCallback, Looper.getMainLooper());
+        fusedLocationProviderClient.requestLocationUpdates(locationRequest, getPendingIntent());
+        // System.out.println("fusedLocationProviderClient : fusedLocationProviderClient");
     }
-    private void  stopLocationUpdates(){
-        fusedLocationProviderClient.removeLocationUpdates(locationCallback);
-    }
-    private void  getLastLocation(){
 
+    private PendingIntent getPendingIntent() {
+        Intent intent = new Intent(Page3Activity.this,MyLocationService.class);
+        intent.setAction(MyLocationService.ACTION_PROCESS_UPDATE);
+        return PendingIntent.getBroadcast(this,0,intent,PendingIntent.FLAG_UPDATE_CURRENT);
     }
-    //要求定位權限
-    private void askLocationPermission(){
-        if(ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
-                == PackageManager.PERMISSION_GRANTED){
-            if(ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.ACCESS_FINE_LOCATION)){
-                Log.d(TAG,"askLocationPermission: you should show an alert dialog");
-                ActivityCompat.requestPermissions(this,new String[]{Manifest.permission.ACCESS_FINE_LOCATION},LOCATION_REQUEST_CODE);
-            }else{
-                ActivityCompat.requestPermissions(this,new String[]{Manifest.permission.ACCESS_FINE_LOCATION},LOCATION_REQUEST_CODE);
+
+    private void buildLocationRequest() {
+        locationRequest = new LocationRequest();
+        locationRequest.setInterval(10*1000); //設置活動位置更新所需的時間間隔，以毫秒為單位
+        locationRequest.setFastestInterval(2000); //顯式設置位置更新的最快間隔，以毫秒為單位
+        locationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY); //設置請求的優先級
+        locationRequest.setSmallestDisplacement(10f); //以米為單位設置位置更新之間的最小位移，要float 10米 = 1km
+    }
+    public  void UpdateUser2(final String email,final double longitude,final double latitude){
+        Page3Activity.this.runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                // test.setText(value);
+                dateString = date();
+                String URL = Urls.url1+"/LoginRegister/save_perhistory.php";
+                StringRequest stringRequest = new StringRequest(
+                        Request.Method.POST,
+                        URL,
+                        new Response.Listener<String>() {
+                            @Override
+                            public void onResponse(String response) {
+                                if(response.equals("Success")){
+                                    // String s ="已將 "+phone+" 設為緊急聯絡電話";
+                                    // Toast.makeText(Page3Activity.this, s, Toast.LENGTH_SHORT).show();
+
+                                }
+                            }
+                        },
+                        new Response.ErrorListener() {
+                            @Override
+                            public void onErrorResponse(VolleyError error) {
+                                Toast.makeText(Page3Activity.this, error.toString(), Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                ) {
+                    @Nullable
+                    @Override
+                    protected Map<String, String> getParams() throws AuthFailureError {
+                        Map<String, String> parms = new HashMap<>();
+                        parms.put("email", email);
+                        parms.put("date", dateString);
+                        parms.put("longitude", Double.toString(longitude));
+                        parms.put("latitude", Double.toString(latitude));
+                        return parms;
+                    }
+                };
+                requestQueue.add(stringRequest);
+
+                Toast.makeText(Page3Activity.this, latitude+" / "+longitude, Toast.LENGTH_SHORT).show();
             }
-        }
+        });
     }
 
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        if(requestCode == LOCATION_REQUEST_CODE){
-            if(grantResults.length>0 && grantResults[0] == PackageManager.PERMISSION_GRANTED){
-                checkSettingsAndStartLocationUpdates();
-            }else{
-
-            }
-        }
+    private  String  date(){
+        //目前時間
+        Date date = new Date();
+        //設定日期格式
+        @SuppressLint("SimpleDateFormat")
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        sdf.setTimeZone(TimeZone.getTimeZone("GMT+08:00"));  //加上J個
+        //進行轉換
+        dateString = sdf.format(date);
+        System.out.println(dateString);
+        return dateString;
     }
+
 
     @SuppressLint("LongLogTag")
     protected void makeCall(final String phone) {

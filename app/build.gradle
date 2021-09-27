@@ -53,11 +53,18 @@ dependencies {
 
 
 
+
+    implementation 'com.google.android.gms:play-services-location:18.0.0'
+
+
+
+
     implementation 'androidx.recyclerview:recyclerview:1.2.1'
 
     implementation 'com.squareup.picasso:picasso:2.5.2'
     implementation 'com.journeyapps:zxing-android-embedded:3.4.0'
     implementation 'com.github.VishnuSivadasVS:Advanced-HttpURLConnection:1.2'
     implementation 'com.google.android.gms:play-services-location:18.0.0'
+    implementation 'com.karumi:dexter:6.0.2'
 }
 apply plugin: 'com.google.gms.google-services'
