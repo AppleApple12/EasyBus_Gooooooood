@@ -120,14 +120,6 @@ public class edit_password extends AppCompatActivity {
         requestQueue.add(stringRequest);
     }
 
-    /*public String mail() {
-        Bundle extras = getIntent().getExtras();
-        if (extras != null) {
-            email = extras.getString("email");
-        }
-        return email;
-    }*/
-
     public String pass(final String pa) {
        /* Bundle extras = getIntent().getExtras();
         if (extras != null) {

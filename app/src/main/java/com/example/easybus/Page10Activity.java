@@ -171,7 +171,7 @@ public class Page10Activity extends AppCompatActivity {
             public void onDayClick(int day, String dayStr, DayFinish finish) {
                 Toast.makeText(Page10Activity.this,"點擊了日期："+dayStr,Toast.LENGTH_SHORT).show();
                 Log.w("","點擊了日期："+dayStr);
-                Intent intent =new Intent(Page10Activity.this,Page11Activity.class);
+                Intent intent =new Intent(Page10Activity.this,Page11Activiy.class);
                 intent.putExtra("dayStr",dayStr);
                 startActivity(intent);
             }

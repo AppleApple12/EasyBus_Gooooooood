@@ -45,6 +45,8 @@ public class Page61 extends AppCompatActivity {
     List<take_bus_businfo> takeBusBusinfoList;
     take_bus_Adapter take_bus_adapter;
     RecyclerView mrecyclerView;
+    RequestQueue requestQueue;
+    //RequestQueue requestQueue;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,6 +58,8 @@ public class Page61 extends AppCompatActivity {
         //隱藏title bar
         ActionBar actionBar = getSupportActionBar();
         actionBar.hide();
+
+        requestQueue = Volley.newRequestQueue(this);
         //跳回主頁
         ImageButton btn2 = (ImageButton) findViewById(R.id.back);
         btn2.setOnClickListener(new View.OnClickListener() {
@@ -120,16 +124,16 @@ public class Page61 extends AppCompatActivity {
             takeBusBusinfoList.add(b);
         }///
         //getbus();
+        Toast.makeText(Page61.this, getmail, Toast.LENGTH_SHORT).show();
 
         String URL =Urls.url1+"/LoginRegister/fetchbusinfo.php?email="+getmail;
         //Request.Method.GET,URL,null我自己加的
-        StringRequest stringrequest = new StringRequest(Request.Method.GET,URL,
-                new Response.Listener<String>() {
+        JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET,URL,null,
+                new Response.Listener<JSONArray>() {
                     @Override
-                    public void onResponse(String reponse) {//////
-
+                    public void onResponse(JSONArray array) {
                         try {
-                            JSONArray array =new JSONArray(reponse);
+                            //JSONArray array =new JSONArray(reponse);
                             for(int i =0;i<array.length();i++){
                                 JSONObject object = array.getJSONObject(i);
 
@@ -144,8 +148,21 @@ public class Page61 extends AppCompatActivity {
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
-                       // take_bus_adapter = new take_bus_Adapter(Page61.this,takeBusBusinfoList);
-                        //mrecyclerView.setAdapter(take_bus_adapter);
+                        take_bus_adapter = new take_bus_Adapter(Page61.this,takeBusBusinfoList);
+                        mrecyclerView.setAdapter(take_bus_adapter);
+                        take_bus_adapter.setOnItemClick(new take_bus_Adapter.OnItemClickListener() {
+                            @Override
+                            public void onItemClick(View view, int position) {
+                                if(takeBusBusinfoList.get(position).getRoutename().equals(" 公  車  查  詢 ")){
+                                    Intent it1 = new Intent(Page61.this,Page6Activity.class);
+                                    startActivity(it1);
+                                }else if (takeBusBusinfoList.get(position).getRoutename().equals("   上    班   ")){
+                                    Intent it1 = new Intent(Page61.this,Page62.class);
+                                    startActivity(it1);
+                                }
+//
+                            }
+                        });
 
                     }
                 }, new Response.ErrorListener() {
@@ -154,23 +171,11 @@ public class Page61 extends AppCompatActivity {
                 Toast.makeText(Page61.this, error.toString(), Toast.LENGTH_SHORT).show();
             }
         });
-        Volley.newRequestQueue(Page61.this).add(stringrequest);
+        requestQueue = Volley.newRequestQueue(Page61.this);
+        requestQueue.add(request);
 
-        take_bus_adapter = new take_bus_Adapter(Page61.this,takeBusBusinfoList);
-        mrecyclerView.setAdapter(take_bus_adapter);
-        take_bus_adapter.setOnItemClick(new take_bus_Adapter.OnItemClickListener() {
-            @Override
-            public void onItemClick(View view, int position) {
-                if(takeBusBusinfoList.get(position).getRoutename().equals(" 公  車  查  詢 ")){
-                    Intent it1 = new Intent(Page61.this,Page6Activity.class);
-                    startActivity(it1);
-                }else if (takeBusBusinfoList.get(position).getRoutename().equals("   上    班   ")){
-                    Intent it1 = new Intent(Page61.this,Page62.class);
-                    startActivity(it1);
-                }
-//
-            }
-        });
+
+
     }
     }
 

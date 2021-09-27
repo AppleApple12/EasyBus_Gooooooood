@@ -135,7 +135,7 @@ public class Page3Activity extends AppCompatActivity {
                     @Override
                     public void onPermissionGranted(PermissionGrantedResponse response) {
 
-                        updataLocation();
+                    updataLocation();
 
                     }
 
@@ -216,25 +216,21 @@ public class Page3Activity extends AppCompatActivity {
         });
         //取得定位權限
         //locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-
-
         //locationRequest = LocationRequest.create();
-
-        // init();
-
+       // init();
     }
 
     private void updataLocation() {
         buildLocationRequest();
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            // if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
-            //       && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            System.out.println("return : return");
+       // if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
+         //       && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+
             return;
         }
         fusedLocationProviderClient.requestLocationUpdates(locationRequest, getPendingIntent());
-        // System.out.println("fusedLocationProviderClient : fusedLocationProviderClient");
+
     }
 
     private PendingIntent getPendingIntent() {
@@ -245,16 +241,17 @@ public class Page3Activity extends AppCompatActivity {
 
     private void buildLocationRequest() {
         locationRequest = new LocationRequest();
-        locationRequest.setInterval(10*1000); //設置活動位置更新所需的時間間隔，以毫秒為單位
-        locationRequest.setFastestInterval(2000); //顯式設置位置更新的最快間隔，以毫秒為單位
+        locationRequest.setInterval(1000*10); //設置活動位置更新所需的時間間隔，以毫秒為單位
+        locationRequest.setFastestInterval(1000*10); //顯式設置位置更新的最快間隔，以毫秒為單位
         locationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY); //設置請求的優先級
-        locationRequest.setSmallestDisplacement(10f); //以米為單位設置位置更新之間的最小位移，要float 10米 = 1km
+        locationRequest.setSmallestDisplacement(10f); //以米為單位設置位置更新之間的最小位移
+
     }
     public  void UpdateUser2(final String email,final double longitude,final double latitude){
         Page3Activity.this.runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                // test.setText(value);
+               // test.setText(value);
                 dateString = date();
                 String URL = Urls.url1+"/LoginRegister/save_perhistory.php";
                 StringRequest stringRequest = new StringRequest(
@@ -290,7 +287,15 @@ public class Page3Activity extends AppCompatActivity {
                 };
                 requestQueue.add(stringRequest);
 
-                Toast.makeText(Page3Activity.this, latitude+" / "+longitude, Toast.LENGTH_SHORT).show();
+
+            }
+        });
+    }
+    public void updateToast(final String value){
+        Page3Activity.this.runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                Toast.makeText(Page3Activity.this, value, Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -304,7 +309,7 @@ public class Page3Activity extends AppCompatActivity {
         sdf.setTimeZone(TimeZone.getTimeZone("GMT+08:00"));  //加上J個
         //進行轉換
         dateString = sdf.format(date);
-        System.out.println(dateString);
+
         return dateString;
     }
 
