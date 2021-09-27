@@ -96,7 +96,7 @@ public class Page8Activity extends AppCompatActivity {
 
         requestQueue = Volley.newRequestQueue(this);
 
-        getpass=pass();
+        //getpass=pass();
         readUser();
         fetchimage();
         ImageRetriveWithPicasso();
@@ -195,6 +195,7 @@ public class Page8Activity extends AppCompatActivity {
                             fullname = response.getString("fullname");
                             phone = response.getString("userphone");
                             identity = response.getString("identity");
+                            turnpage(identity);
                             myphone.setText(phone);
                             mEnteredName.setText(fullname);
                             img = response.getString("image");
@@ -285,20 +286,13 @@ public class Page8Activity extends AppCompatActivity {
     }
 
 
-   /* public String mail(){
-        Bundle extras = getIntent().getExtras();
-        if (extras!=null){
-            email=extras.getString("email");
-        }
-        return email;
-    }*/
-    public String pass(){
+   /* public String pass(){
         Bundle extras = getIntent().getExtras();
         if (extras!=null){
             password=extras.getString("password");
         }
         return password;
-    }
+    }*/
     private View.OnClickListener itemsOnClick=new View.OnClickListener(){
         @Override
         public void onClick(View v) {
@@ -447,6 +441,18 @@ public class Page8Activity extends AppCompatActivity {
         byte[] imageBytes = stream.toByteArray();
         encodeimage = android.util.Base64.encodeToString(imageBytes, Base64.DEFAULT);
     }
+    private void turnpage(String identity) {
 
+        /*if("requester".equalsIgnoreCase(identity)) {
+            Intent it4 = new Intent(Page8Activity.this,Page8Activity.class);
+            //it4.putExtra("email", email);
+            startActivity(it4);
+        }else */if("caregiver".equalsIgnoreCase(identity)){
+            Intent it = new Intent(Page8Activity.this,Page8Activity_caregiver.class);
+            //it.putExtra("email", email);
+            startActivity(it);
+
+        }
+    }
 
 }

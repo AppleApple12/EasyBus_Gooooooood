@@ -271,12 +271,5 @@ public class qrscanner extends AppCompatActivity {
         }
     }
 
-    /*public String mail(){
-        Bundle extras = getIntent().getExtras();
-        if (extras!=null){
-            email=extras.getString("email");
-        }
-        return email;
-    }*/
 //悲劇
 }
