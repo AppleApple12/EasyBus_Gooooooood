@@ -12,6 +12,7 @@ import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -38,7 +39,8 @@ public class qrscanner extends AppCompatActivity {
     Dialog dialog,fdialog;
     //判斷是否加好友、判斷是否存在
     Button btnok,btncancle,btngo;
-    TextView maddfriend,friendname,myfriend,back;
+    TextView maddfriend,friendname,myfriend;
+    ImageButton back;
     //private PopupWindow popupWindow = null;
     @Override
     protected void onCreate(Bundle savedInstanceState) {

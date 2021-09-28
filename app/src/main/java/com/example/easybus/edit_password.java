@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -34,7 +35,7 @@ public class edit_password extends AppCompatActivity {
     public String pass1, pass2, pass3;
     RequestQueue requestQueue;
     Button btnok;
-    TextView btnback;
+    //TextView btnback;
 //
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,19 +52,28 @@ public class edit_password extends AppCompatActivity {
         pas2 = findViewById(R.id.password2);
         pas3 = findViewById(R.id.password3);
         btnok = findViewById(R.id.okBtn);
-        btnback = findViewById(R.id.back);
+        //btnback = findViewById(R.id.back);
         requestQueue = Volley.newRequestQueue(this);
         readPassword();
         System.out.println("1:"+getpass);
         // getmail = mail();
         //  getpass = pass();
 
-        btnback.setOnClickListener(new View.OnClickListener() {
+        /*btnback.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                readUser();
+            }
+        });*/
+
+        ImageButton back = (ImageButton)findViewById(R.id.back);
+        back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 readUser();
             }
         });
+
         btnok.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

@@ -7,42 +7,63 @@
     android:background="#FFFFFF"
     tools:context=".qrscanner">
 
-    <TextView
-        android:id="@+id/title"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="35dp"
-        android:layout_marginTop="5dp"
-        android:text="QR掃描器"
-        android:textColor="@android:color/black"
-        android:textSize="40dp"
-        android:textStyle="bold"
+    <View
+        android:id="@+id/top"
+        android:layout_width="405dp"
+        android:layout_height="95dp"
+        android:background="@drawable/round_button"
+        android:visibility="visible"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.172"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/logo" />
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageButton
+        android:id="@+id/back"
+        android:layout_width="85dp"
+        android:layout_height="85dp"
+        android:layout_marginTop="8dp"
+        android:scaleType="fitCenter"
+        app:layout_constraintEnd_toEndOf="@+id/top"
+        app:layout_constraintHorizontal_bias="0.009"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/back" />
 
     <ImageView
-        android:id="@+id/logo"
-        android:layout_width="wrap_content"
-        android:layout_height="75dp"
-        android:layout_marginTop="4dp"
+        android:id="@+id/iv1"
+        android:layout_width="275dp"
+        android:layout_height="64dp"
+        android:layout_marginTop="16dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintHorizontal_bias="0.395"
+        app:layout_constraintStart_toEndOf="@+id/back"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/logo" />
+        app:srcCompat="@drawable/page5up" />
+
+    <ImageView
+        android:id="@+id/iv2"
+        android:layout_width="63dp"
+        android:layout_height="42dp"
+        app:srcCompat="@drawable/qrcode"
+        app:layout_constraintTop_toTopOf="@+id/iv1"
+        app:layout_constraintBottom_toBottomOf="@+id/iv1"
+        app:layout_constraintStart_toStartOf="@+id/iv1"
+        app:layout_constraintEnd_toStartOf="@+id/gps_time"
+        tools:layout_editor_absoluteX="122dp"
+        tools:layout_editor_absoluteY="29dp" />
 
     <TextView
-        android:id="@+id/back"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="返回上一頁"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.865"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.862" />
+        android:id="@+id/gps_time"
+        android:layout_width="168dp"
+        android:layout_height="42dp"
+        android:gravity="center"
+        android:text="QR掃描器"
+        android:textColor="#000000"
+        android:textSize="22sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/iv1"
+        app:layout_constraintEnd_toEndOf="@+id/iv1"
+        app:layout_constraintStart_toEndOf="@+id/iv2"
+        app:layout_constraintTop_toTopOf="@+id/iv1" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

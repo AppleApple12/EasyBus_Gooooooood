@@ -3,20 +3,15 @@ package com.example.easybus;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Context;
 import android.content.Intent;
-import android.graphics.Paint;
 import android.os.Bundle;
-import android.util.AttributeSet;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -171,7 +166,7 @@ public class Page10Activity extends AppCompatActivity {
             public void onDayClick(int day, String dayStr, DayFinish finish) {
                 Toast.makeText(Page10Activity.this,"點擊了日期："+dayStr,Toast.LENGTH_SHORT).show();
                 Log.w("","點擊了日期："+dayStr);
-                Intent intent =new Intent(Page10Activity.this,Page11Activiy.class);
+                Intent intent =new Intent(Page10Activity.this, Page11Activity.class);
                 intent.putExtra("dayStr",dayStr);
                 startActivity(intent);
             }
