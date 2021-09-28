@@ -6,6 +6,12 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Toast;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.Volley;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -24,6 +30,11 @@ import com.google.android.gms.maps.model.Polyline;
 import com.google.android.gms.maps.model.PolylineOptions;
 import com.google.android.gms.maps.model.RoundCap;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 /**
@@ -33,12 +44,13 @@ import java.util.List;
 public class Page11Activiy extends AppCompatActivity
         implements
         OnMapReadyCallback,
-        GoogleMap.OnPolylineClickListener,
-        GoogleMap.OnPolygonClickListener{
+        GoogleMap.OnPolylineClickListener{
+        //GoogleMap.OnPolygonClickListener{
     private GoogleMap mMap;
-
-
-    String dayStr;
+    ArrayList<history> historyArrayList = new ArrayList<history>();
+    String getmail="asdf@gmail.com";
+    String dayStr,date,la,lo;
+    Double latitude,longitude;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,6 +65,54 @@ public class Page11Activiy extends AppCompatActivity
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.r_map);
         mapFragment.getMapAsync(this);
+        fetch_history();
+        Get();
+        System.out.println("Get()");
+    }
+    public void fetch_history(){
+        String URL =Urls.url1+"/LoginRegister/fetch_perhistory.php?email="+getmail;
+        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, URL, null,
+                new Response.Listener<JSONArray>() {
+                    @Override
+                    public void onResponse(JSONArray array) {
+                        for(int i =0;i<array.length();i++){
+                            try{
+                                JSONObject object = array.getJSONObject(i);
+                                date = object.getString("date").trim();
+                                la = object.getString("latitude").trim();
+                                lo = object.getString("longitude").trim();
+                                latitude=Double.parseDouble(la);
+                                longitude=Double.parseDouble(lo);
+
+                                history h =new history();
+                                h.setDate(date);
+                                h.setLatitude(latitude);
+                                h.setLongitude(longitude);
+                                historyArrayList.add(h);
+
+                                System.out.println("date :"+date);
+                                System.out.println("latitude :"+latitude);
+                                System.out.println("longitude :"+longitude);
+                            } catch (JSONException e) {
+                                System.out.println("JSONException e :"+e.toString());
+                            }
+                        }
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(Page11Activiy.this, error.toString(), Toast.LENGTH_SHORT).show();
+            }
+        });
+        RequestQueue requestQueue2 = Volley.newRequestQueue(Page11Activiy.this);
+        requestQueue2.add(jsonArrayRequest);
+    }
+    public void Get(){
+        for(history mh :historyArrayList){
+            System.out.println("getDate :"+mh.getDate());
+            System.out.println("getLatitude :"+mh.getLatitude());
+            System.out.println("getLongitude :"+mh.getLongitude());
+        }
     }
     /**
      * Manipulates the map when it's available.
@@ -68,7 +128,8 @@ public class Page11Activiy extends AppCompatActivity
         Polyline polyline1 = googleMap.addPolyline(new PolylineOptions()
                 .clickable(true)
                 .add(
-                        new LatLng(-35.016, 143.321),
+                        // 把抓到的資料 丟到這邊
+                        new LatLng(-35.016, 143.321),//緯度 經度
                         new LatLng(-34.747, 145.592),
                         new LatLng(-34.364, 147.891),
                         new LatLng(-33.501, 150.217),
@@ -79,7 +140,7 @@ public class Page11Activiy extends AppCompatActivity
         // Style the polyline.
         stylePolyline(polyline1);
 
-        Polyline polyline2 = googleMap.addPolyline(new PolylineOptions()
+        /*Polyline polyline2 = googleMap.addPolyline(new PolylineOptions()
                 .clickable(true)
                 .add(
                         new LatLng(-29.501, 119.700),
@@ -89,9 +150,9 @@ public class Page11Activiy extends AppCompatActivity
                         new LatLng(-28.848, 124.229),
                         new LatLng(-28.215, 123.938)));
         polyline2.setTag("B");
-        stylePolyline(polyline2);
+        stylePolyline(polyline2);*/
 
-        // Add polygons to indicate areas on the map.
+        /*// Add polygons to indicate areas on the map.
         Polygon polygon1 = googleMap.addPolygon(new PolygonOptions()
                 .clickable(true)
                 .add(
@@ -112,7 +173,7 @@ public class Page11Activiy extends AppCompatActivity
                         new LatLng(-17.785, 122.258),
                         new LatLng(-12.4258, 130.7932)));
         polygon2.setTag("beta");
-        stylePolygon(polygon2);
+        stylePolygon(polygon2);*/
 
         // Position the map's camera near Alice Springs in the center of Australia,
         // and set the zoom factor so most of Australia shows on the screen.
@@ -120,7 +181,7 @@ public class Page11Activiy extends AppCompatActivity
 
         // Set listeners for click events.
         googleMap.setOnPolylineClickListener(this);
-        googleMap.setOnPolygonClickListener(this);
+        //googleMap.setOnPolygonClickListener(this);
     }
 
     private static final int COLOR_BLACK_ARGB = 0xff000000;
@@ -130,25 +191,10 @@ public class Page11Activiy extends AppCompatActivity
      * @param polyline2 The polyline object that needs styling.
      */
     private void stylePolyline(Polyline polyline2) {
-        String type = "";
-        // Get the data object stored with the polyline.
-        if (polyline2.getTag() != null) {
-            type = polyline2.getTag().toString();
-        }
+        // Use a round cap at the start of the line.
+        polyline2.setStartCap(new RoundCap());
 
-        switch (type) {
-            // If no type is given, allow the API to use the default.
-            case "A":
-                // Use a custom bitmap as the cap at the start of the line.
-                polyline2.setStartCap(
-                        new CustomCap(
-                                BitmapDescriptorFactory.fromResource(R.drawable.back), 10));
-                break;
-            case "B":
-                // Use a round cap at the start of the line.
-                polyline2.setStartCap(new RoundCap());
-                break;
-    }
+
         polyline2.setEndCap(new RoundCap());
         polyline2.setWidth(POLYLINE_STROKE_WIDTH_PX);
         polyline2.setColor(COLOR_BLACK_ARGB);
@@ -167,11 +213,11 @@ public class Page11Activiy extends AppCompatActivity
 
     @Override
     public void onPolylineClick(Polyline polyline) {
-        // Flip from solid stroke to dotted stroke pattern.
+        // Flip from solid stroke to dotted stroke pattern. 從實心筆劃翻轉為虛線筆劃圖案
         if ((polyline.getPattern() == null) || (!polyline.getPattern().contains(DOT))) {
             polyline.setPattern(PATTERN_POLYLINE_DOTTED);
         } else {
-            // The default pattern is a solid stroke.
+            // The default pattern is a solid stroke. 默認圖案是實心筆劃。
             polyline.setPattern(null);
         }
 
@@ -184,7 +230,7 @@ public class Page11Activiy extends AppCompatActivity
      * @param polygon The polygon object that the user has clicked.
      */
 
-    @Override
+   /* @Override
     public void onPolygonClick(Polygon polygon) {
         // Flip the values of the red, green, and blue components of the polygon's color.
         int color = polygon.getStrokeColor() ^ 0x00ffffff;
@@ -194,7 +240,7 @@ public class Page11Activiy extends AppCompatActivity
 
         Toast.makeText(this, "Area type " + polygon.getTag().toString(), Toast.LENGTH_SHORT).show();
 
-    }
+    }*/
     private static final int COLOR_WHITE_ARGB = 0xffffffff;
     private static final int COLOR_GREEN_ARGB = 0xff388E3C;
     private static final int COLOR_PURPLE_ARGB = 0xff81C784;
@@ -216,7 +262,7 @@ public class Page11Activiy extends AppCompatActivity
      * Styles the polygon, based on type.
      * @param polygon2 The polygon object that needs styling.
      */
-    private void stylePolygon(Polygon polygon2) {
+    /*private void stylePolygon(Polygon polygon2) {
         String type = "";
         // Get the data object stored with the polygon.
         if (polygon2.getTag() != null) {
@@ -247,7 +293,7 @@ public class Page11Activiy extends AppCompatActivity
         polygon2.setStrokeWidth(POLYGON_STROKE_WIDTH_PX);
         polygon2.setStrokeColor(strokeColor);
         polygon2.setFillColor(fillColor);
-    }
+    }*/
 
 
 
