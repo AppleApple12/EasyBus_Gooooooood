@@ -1,5 +1,6 @@
 package com.example.easybus;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -45,27 +46,40 @@ public class Page11Activity extends AppCompatActivity
         GoogleMap.OnPolylineClickListener{
         //GoogleMap.OnPolygonClickListener{
     private GoogleMap mMap;
-    ArrayList<history> historyArrayList = new ArrayList<history>();
-    String getmail;
+    ArrayList<String> dateArrayList = new ArrayList<String>();
+    String d[]=new String[100];
+    String getmail="asdf@gmail.com";
     String dayStr,date,la,lo;
     Double latitude,longitude;
+    Double mlatitude,mlongitude;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_page11);
+        fetch_history();
 
         Intent intent = getIntent();
         //從PAGE10傳過來的 年月日
         dayStr = intent.getStringExtra("dayStr");
         System.out.println("dayStr : "+dayStr);
-
+        //隱藏title bar
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.hide();
         // Get the SupportMapFragment and request notification when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.r_map);
         mapFragment.getMapAsync(this);
-        fetch_history();
-        Get();
-        System.out.println("Get()");
+        System.out.println("mlatitude:"+mlatitude);
+        //System.out.println("historyArrayList :"+historyArrayList.size());
+        System.out.println("1d."+d.length);
+        System.out.println("2d."+d.length);
+        for(int j=0;j<d.length;j++){
+            System.out.println("---++++---- :"+d[j]);
+        }
+        System.out.println("1dateArrayList.size() :"+dateArrayList.size());
+        for(String datee :dateArrayList){
+            System.out.println("1date : "+datee);
+        }
 
         //跳頁回家長主頁
         ImageButton back = (ImageButton)findViewById(R.id.back);
@@ -92,16 +106,19 @@ public class Page11Activity extends AppCompatActivity
                                 lo = object.getString("longitude").trim();
                                 latitude=Double.parseDouble(la);
                                 longitude=Double.parseDouble(lo);
-
-                                history h =new history();
+                                //mlatitude=GetLa(latitude);
+                                d[i]=date;
+                                getdate(date);
+                               /* history h =new history();
                                 h.setDate(date);
                                 h.setLatitude(latitude);
                                 h.setLongitude(longitude);
-                                historyArrayList.add(h);
+                                historyArrayList.add(h);*/
 
-                                System.out.println("date :"+date);
-                                System.out.println("latitude :"+latitude);
-                                System.out.println("longitude :"+longitude);
+                                System.out.println("Get()");
+                                //System.out.println("date :"+date);
+                                //System.out.println("latitude :"+latitude);
+                                //System.out.println("longitude :"+longitude);
                             } catch (JSONException e) {
                                 System.out.println("JSONException e :"+e.toString());
                             }
@@ -110,20 +127,21 @@ public class Page11Activity extends AppCompatActivity
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Toast.makeText(Page11Activity.this, error.toString(), Toast.LENGTH_SHORT).show();
+               // Toast.makeText(Page11Activity.this, error.toString(), Toast.LENGTH_SHORT).show();
             }
         });
         RequestQueue requestQueue2 = Volley.newRequestQueue(Page11Activity.this);
         requestQueue2.add(jsonArrayRequest);
     }
-    public void Get(){
-        for(history mh :historyArrayList){
-            System.out.println("getDate :"+mh.getDate());
-            System.out.println("getLatitude :"+mh.getLatitude());
-            System.out.println("getLongitude :"+mh.getLongitude());
-        }
+    public void getdate(final String d){
+
     }
-    /**
+
+    /**  for(history mh :historyArrayList){
+     System.out.println("getDate :"+mh.getDate());
+     System.out.println("getLatitude :"+mh.getLatitude());
+     System.out.println("getLongitude :"+mh.getLongitude());
+     }
      * Manipulates the map when it's available.
      * The API invokes this callback when the map is ready to be used.
      * This is where we can add markers or lines, add listeners or move the camera.
@@ -131,7 +149,15 @@ public class Page11Activity extends AppCompatActivity
      */
     @Override
     public void onMapReady(GoogleMap googleMap) {
-
+        //Get();
+        System.out.println("2dateArrayList.size() :"+dateArrayList.size());
+        for(String datee :dateArrayList){
+            System.out.println("2date : "+datee);
+        }
+        System.out.println("2d."+d.length);
+        for(int j=0;j<d.length;j++){
+            System.out.println("------- :"+d[j]);
+        }
         // Add polylines to the map.
         // Polylines are useful to show a route or some other connection between points.
         Polyline polyline1 = googleMap.addPolyline(new PolylineOptions()
