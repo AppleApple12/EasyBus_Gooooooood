@@ -26,6 +26,7 @@ import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.Polyline;
 import com.google.android.gms.maps.model.PolylineOptions;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
@@ -77,6 +78,7 @@ public class Page5011Activity extends FragmentActivity implements OnMapReadyCall
                 sendRequest2();
             }
         });
+
     }
 
     public void sendRequest(){

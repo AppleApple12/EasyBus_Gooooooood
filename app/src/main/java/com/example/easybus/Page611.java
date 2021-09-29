@@ -9,7 +9,6 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
@@ -33,7 +32,7 @@ public class Page611 extends AppCompatActivity {
     String Routename,urlOrigin,urlDestination,getmail,url;
     Page611InfoAdaptor adaptor;
     ArrayList<Page611Info> page611infos;
-    TextView mOrides;
+    TextView mOri2,mDes2;
     private static final String DIRECTION_URL_API = "https://maps.googleapis.com/maps/api/directions/json?";
     private static final String GOOGLE_API_KEY = "AIzaSyCr_-3KbvHxSm9Gb38l7M2E_b8qzwHhcTI";
 
@@ -41,7 +40,8 @@ public class Page611 extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_page611);
-        mOrides=(TextView)findViewById(R.id.orides);
+        mOri2=(TextView)findViewById(R.id.ori);
+        mDes2=(TextView)findViewById(R.id.des);
         TextView mTxvId=(TextView)findViewById(R.id.txvId);
         ImageButton mBack=(ImageButton)findViewById(R.id.back);
         RecyclerView recyclerView=findViewById(R.id.page611Info);
@@ -107,7 +107,8 @@ public class Page611 extends AppCompatActivity {
         final ProgressDialog progressDialog=new ProgressDialog(this);
         progressDialog.setMessage("載入中...");
         progressDialog.show();
-        mOrides.setText(urlOrigin+" -> "+urlDestination);
+        mOri2.setText(urlOrigin);
+        mDes2.setText(urlDestination);
         
         final JsonObjectRequest jsonObjectRequest2=new JsonObjectRequest(url,null, new Response.Listener<JSONObject>() {
             @Override
