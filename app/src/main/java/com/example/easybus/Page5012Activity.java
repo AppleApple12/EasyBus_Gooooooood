@@ -40,19 +40,22 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Page5012Activity extends AppCompatActivity {
-    //12345
+
     private static final String DIRECTION_URL_API = "https://maps.googleapis.com/maps/api/directions/json?";
     private static final String GOOGLE_API_KEY = "AIzaSyCr_-3KbvHxSm9Gb38l7M2E_b8qzwHhcTI";
     String url,urlOrigin,urlDestination,title2,getmail;
-    ImageView mImg,mBack,mAdd;
+    ImageView mBack,mAdd;
     RecyclerView recyclerView;
-    BusInfoAdaptor adaptor;//
+    BusInfoAdaptor adaptor;
     ArrayList<BusInfo> businfos;
     RequestQueue requestQueue,requestQueue1;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_page5012);
+        mBack=findViewById(R.id.backicon);
+        mAdd=findViewById(R.id.addIcon);
+        recyclerView=findViewById(R.id.page611Info);
 
         //隱藏title bar
         ActionBar actionBar = getSupportActionBar();
@@ -65,15 +68,11 @@ public class Page5012Activity extends AppCompatActivity {
 
         url=DIRECTION_URL_API+"origin="+urlOrigin+"&destination="+urlDestination+"&mode=transit&transit_mode=bus&language=zh-TW&key="+GOOGLE_API_KEY;
 
-        mImg=findViewById(R.id.img);
-        mBack=findViewById(R.id.backicon);
-        mAdd=findViewById(R.id.addIcon);
-        recyclerView=findViewById(R.id.busInfo);
-
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         adaptor=new BusInfoAdaptor();
         recyclerView.setAdapter(adaptor);
         businfos=new ArrayList<>();
+
         getData();
         SharedPreferences email = getSharedPreferences("email",MODE_PRIVATE);
         getmail=email.getString("Email","");

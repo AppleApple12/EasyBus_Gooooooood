@@ -4,7 +4,6 @@ import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.FragmentActivity;
 
 import android.Manifest;
-import android.app.ActionBar;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -15,7 +14,6 @@ import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -29,7 +27,6 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.Polyline;
 import com.google.android.gms.maps.model.PolylineOptions;
 
-import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
@@ -61,7 +58,7 @@ public class Page5011Activity extends FragmentActivity implements OnMapReadyCall
         getmail=email.getString("Email","");
 
         mBtnFindPath=(ImageButton)findViewById(R.id.btnFindPath);
-        mBusInfo=(ImageButton)findViewById(R.id.busInfo);
+        mBusInfo=(ImageButton)findViewById(R.id.page611Info);
         mEtOrigin=(EditText)findViewById(R.id.etOrigin);
         mEtDestination=(EditText)findViewById(R.id.etDestination);
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
