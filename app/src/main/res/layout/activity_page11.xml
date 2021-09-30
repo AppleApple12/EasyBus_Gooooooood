@@ -4,9 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FFFFFF"
-    tools:context=".qrscanner">
-
+    tools:context=".Page11Activity">
     <View
         android:id="@+id/top"
         android:layout_width="405dp"
@@ -44,7 +42,7 @@
         android:id="@+id/iv2"
         android:layout_width="63dp"
         android:layout_height="42dp"
-        app:srcCompat="@drawable/qrcode"
+        app:srcCompat="@drawable/calendar"
         app:layout_constraintTop_toTopOf="@+id/iv1"
         app:layout_constraintBottom_toBottomOf="@+id/iv1"
         app:layout_constraintStart_toStartOf="@+id/iv1"
@@ -57,7 +55,7 @@
         android:layout_width="168dp"
         android:layout_height="42dp"
         android:gravity="center"
-        android:text="QR掃描器"
+        android:text="需求者歷史足跡"
         android:textColor="#000000"
         android:textSize="22sp"
         android:textStyle="bold"
@@ -65,5 +63,16 @@
         app:layout_constraintEnd_toEndOf="@+id/iv1"
         app:layout_constraintStart_toEndOf="@+id/iv2"
         app:layout_constraintTop_toTopOf="@+id/iv1" />
+
+    <fragment
+        android:id="@+id/r_map"
+        android:name="com.google.android.gms.maps.SupportMapFragment"
+        android:layout_width="355dp"
+        android:layout_height="554dp"
+        android:layout_marginTop="80dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -8,6 +8,7 @@ import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -30,7 +31,8 @@ import org.json.JSONObject;
 public class qrcode_page extends AppCompatActivity {
     String email,getmail,fullname,getfullname;
     ImageView qrcode,backBtn,qrscan;
-    TextView back;
+    //TextView back;
+    ImageButton back;
     String identity;
     RequestQueue requestQueue;
     @Override

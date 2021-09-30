@@ -196,6 +196,7 @@ public class Page8Activity_caregiver extends AppCompatActivity {
                             fullname = response.getString("fullname");
                             phone = response.getString("userphone");
                             identity = response.getString("identity");
+                            //turnpage(identity);
                             myphone.setText(phone);
                             mEnteredName.setText(fullname);
                             img = response.getString("image");
@@ -448,5 +449,7 @@ public class Page8Activity_caregiver extends AppCompatActivity {
         byte[] imageBytes = stream.toByteArray();
         encodeimage = android.util.Base64.encodeToString(imageBytes, Base64.DEFAULT);
     }
+
+
 }
 ////
