@@ -7,14 +7,22 @@ import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -44,52 +52,7 @@ public class Page601 extends AppCompatActivity {
         });
         Intent in1 = getIntent();
         txv1 = in1.getStringExtra("txv1");
-        txv2 = in1.getStringExtra("txv2");
-        txv4 = in1.getStringExtra("txv4");
 
-        final String str1[] = txv2.split(" |\n");
-        final String str4[] = txv4.split(" |\n");
-        String destination = "";
-        for(int i = 0;i<str1.length;i+=2){
-            HashMap<String,String> hashMap = new HashMap<>();
-            hashMap.put("txv",str1[i]+" "+str1[i+1]);
-            arrayList.add(hashMap);
-            destination = str1[i+1];
-        }
-        final int[] flag = {1};
-        final Button btn1 = (Button)findViewById(R.id.btn_change);
-        btn1.setText("往"+destination);
-        btn1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (flag[0]==1){
-                    String des="";
-                    arrayList.clear();
-                    for(int i = 0;i<str4.length;i+=2){
-                        HashMap<String,String> hashMap1 = new HashMap<>();
-                        hashMap1.put("txv",str4[i]+" "+str4[i+1]);
-                        arrayList.add(hashMap1);
-                        des=str4[i+1];
-                    }
-                    btn1.setText("往"+des);
-                    myListAdapter.notifyDataSetChanged();
-                    flag[0] = 0;
-                }else{
-                    String des="";
-                    arrayList.clear();
-                    for(int i = 0;i<str1.length;i+=2){
-                        HashMap<String,String> hashMap1 = new HashMap<>();
-                        hashMap1.put("txv",str1[i]+" "+str1[i+1]);
-                        arrayList.add(hashMap1);
-                        des=str1[i+1];
-                    }
-                    btn1.setText("往"+des);
-                    myListAdapter.notifyDataSetChanged();
-                    flag[0] = 1;
-                }
-
-            }
-        });
         //取前頁值
         recyclerView = findViewById(R.id.recyclerview);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -99,10 +62,16 @@ public class Page601 extends AppCompatActivity {
         TextView textView = (TextView)findViewById(R.id.txvtop);
         textView.setText(txv1);
 
+        new fetchDetail().execute();
+
     }
 
     public class MyListAdapter extends RecyclerView.Adapter<MyListAdapter.ViewHolder>{
+        ArrayList<HashMap<String,String>> hashMapArrayList;
 
+        public MyListAdapter(){
+            hashMapArrayList = new ArrayList<>();
+        }
         @NonNull
         @Override
         public MyListAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -112,7 +81,7 @@ public class Page601 extends AppCompatActivity {
 
         @Override
         public void onBindViewHolder(@NonNull MyListAdapter.ViewHolder holder, int position) {
-            String str1 = arrayList.get(position).get("txv");
+            String str1 = hashMapArrayList.get(position).get("txv");
             String str2[] = str1.split(" ");
             holder.txv.setText(str2[1]);
             holder.txv_2.setText(str2[0]);
@@ -120,7 +89,11 @@ public class Page601 extends AppCompatActivity {
 
         @Override
         public int getItemCount() {
-            return arrayList.size();
+            return hashMapArrayList.size();
+        }
+
+        public void setData(ArrayList<HashMap<String,String>> hashMapArrayList){
+            this.hashMapArrayList = hashMapArrayList;
         }
 
         class ViewHolder extends RecyclerView.ViewHolder{
@@ -132,5 +105,68 @@ public class Page601 extends AppCompatActivity {
             }
         }
 
+    }
+    public class fetchDetail extends AsyncTask<Void,Void,Void> {
+        ProgressDialog pd;
+        String API1 = "https://ptx.transportdata.tw/MOTC/v2/Bus/DisplayStopOfRoute/City/Taichung/"+txv1+"?$format=JSON";
+        String result1;
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            pd = new ProgressDialog(Page601.this);
+            pd.setCancelable(false);
+            pd.setMessage("Downloading...Please wait!");
+            pd.setProgress(0);
+            pd.show();
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            super.onPostExecute(aVoid);
+            pd.dismiss();
+            Toast.makeText(getApplicationContext(),"Connection successful!",Toast.LENGTH_LONG).show();
+            try{
+                if(result1!=null || !result1.equals("")){
+                    arrayList.clear();
+                    JSONArray jsonArray  = new JSONArray(API1);
+                    if(jsonArray.length()>0){
+                        Log.d("Page6_array", String.valueOf(jsonArray.length()));
+                        JSONObject jsonObject;
+                        for(int i = 0;i<jsonArray.length();i++){
+                            jsonObject = jsonArray.getJSONObject(i);
+                            HashMap<String,String> hashMap = new HashMap<>();
+                            if(jsonObject.getString("Direction").equals("0")){
+                                JSONArray jsonArray1 = jsonObject.getJSONArray("Stops");
+                                if(jsonArray1.length()>0){
+                                    for(int j = 0;j<jsonArray1.length();j++){
+                                        JSONObject jsonObject1 = jsonArray1.getJSONObject(j);
+
+                                        JSONObject jsonObject2 = jsonObject1.getJSONObject("StopName");
+                                        String stopName = jsonObject2.getString("Zh_tw");
+
+                                        String stopSequence = jsonObject1.getString("StopSequence");
+                                        hashMap.put("txv",stopSequence+" "+stopName);
+                                        arrayList.add(hashMap);
+                                    }
+                                    myListAdapter.setData(arrayList);
+                                    myListAdapter.notifyDataSetChanged();
+                                    break;
+                                }
+                            }
+                        }
+
+
+                    }
+                }
+            }catch (JSONException e){
+                Log.d("Page6_error",Log.getStackTraceString(e));
+            }
+        }
+
+        @Override
+        protected Void doInBackground(Void... voids) {
+            result1 = Page62.connect(API1);
+            return null;
+        }
     }
 }

@@ -68,7 +68,7 @@ public class Page61 extends AppCompatActivity {
                     arrayList1.clear();
                     arrayList2.clear();
                 }else{
-                    Intent it1 = new Intent(Page61.this,Page62.class);
+                    Intent it1 = new Intent(Page61.this,Page6Activity.class);
                     startActivity(it1);
                     arrayList1.clear();
                     arrayList2.clear();
