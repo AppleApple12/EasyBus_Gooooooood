@@ -452,10 +452,5 @@ public class Page62 extends AppCompatActivity {
             response = connect(APIUrl);
             return null;
         }
-
-
     }
-
-
-
 }

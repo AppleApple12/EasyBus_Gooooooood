@@ -186,13 +186,10 @@ public class Page62_combination extends AppCompatActivity {
         public void onBindViewHolder(@NonNull MyAdapter.ViewHolder holder, int position) {
             String str1 = arrayList.get(position).get("txv");
             String str2[] = str1.split(" ");
-            if(holder.txv.getText().equals("已過站") && str2[1].equals("末班駛離")){
-                holder.txv.setText("已過站");
-            }else{
-                holder.txv.setText(str2[1]);
-            }
+            holder.txv.setText(str2[1]);
 
-            if(str2[0].equals("已過站")){
+
+            if(str2[0].equals("已過站")||str2[0].indexOf(":")!=-1){
                 holder.txv_2.setTextColor(Color.parseColor("#ffffff"));
                 holder.txv_2.setBackgroundResource(R.drawable.bus_pass);
             }else if(str2[0].equals("即將到站")){
