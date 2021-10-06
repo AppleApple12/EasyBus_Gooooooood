@@ -94,7 +94,7 @@ public class Page62 extends AppCompatActivity {
         ActionBar actionBar = getSupportActionBar();
         actionBar.setTitle("公車查詢");
         actionBar.setDisplayHomeAsUpEnabled(true);
-/////
+
         recyclerView = findViewById(R.id.rvPrograms);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
