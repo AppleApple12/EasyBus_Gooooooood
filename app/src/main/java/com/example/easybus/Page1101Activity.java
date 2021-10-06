@@ -117,7 +117,15 @@ public class Page1101Activity extends AppCompatActivity {
                         /*imageListAdapter = new ImageListAdapter(my_contact.this, imageLists);
                         mrecyclerView.setAdapter(imageListAdapter);
                         //imgrecyclerView.setAdapter(imageListAdapter);*/
-
+                        historyAdapter.setOnItemClick(new HistoryAdapter.OnItemClickListener() {
+                            @Override
+                            public void onItemClick(View view, int position) {
+                                Intent intent = new Intent(Page1101Activity.this,Page11Activity.class);
+                                //intent.putExtra("email",getmail);
+                                startActivity(intent);
+                                finish();
+                            }
+                        });
                     }
                 }, new Response.ErrorListener() {
             @Override
