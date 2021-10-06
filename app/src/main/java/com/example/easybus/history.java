@@ -8,11 +8,11 @@ public class history {
     double longitude;   //景點店家經度
 
 
-    public history(String date,double latitude,double longitude){
+   /* public history(String date,double latitude,double longitude){
         date=this.date;
         latitude=this.latitude;
         longitude=this.longitude;
-    }
+    }*/
     public String getDate() {
         return date;
     }

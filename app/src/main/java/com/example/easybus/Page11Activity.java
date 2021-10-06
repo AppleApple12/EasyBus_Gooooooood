@@ -42,21 +42,29 @@ import java.util.List;
  */
 public class Page11Activity extends AppCompatActivity
         implements
+        FH,
         OnMapReadyCallback,
         GoogleMap.OnPolylineClickListener{
         //GoogleMap.OnPolygonClickListener{
     private GoogleMap mMap;
-    ArrayList<String> dateArrayList = new ArrayList<String>();
-    String d[]=new String[100];
+    ArrayList<String> dateArrayList;
+    ArrayList<history> historyArrayList = new ArrayList<>();
+   // historyAdapter historyAdapter;
     String getmail="asdf@gmail.com";
     String dayStr,date,la,lo;
     Double latitude,longitude;
     Double mlatitude,mlongitude;
+    RequestQueue requestQueue2;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_page11);
+        Page11Activity page11Activity =new Page11Activity();
+        dateArrayList =  new ArrayList<>();
+
         fetch_history();
+        System.out.println("historyArrayList :"+historyArrayList.size());
 
         Intent intent = getIntent();
         //從PAGE10傳過來的 年月日
@@ -65,21 +73,15 @@ public class Page11Activity extends AppCompatActivity
         //隱藏title bar
         ActionBar actionBar = getSupportActionBar();
         actionBar.hide();
+
+
+        // page11Activity.fetch_H();
         // Get the SupportMapFragment and request notification when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.r_map);
         mapFragment.getMapAsync(this);
-        System.out.println("mlatitude:"+mlatitude);
-        //System.out.println("historyArrayList :"+historyArrayList.size());
-        System.out.println("1d."+d.length);
-        System.out.println("2d."+d.length);
-        for(int j=0;j<d.length;j++){
-            System.out.println("---++++---- :"+d[j]);
-        }
-        System.out.println("1dateArrayList.size() :"+dateArrayList.size());
-        for(String datee :dateArrayList){
-            System.out.println("1date : "+datee);
-        }
+        requestQueue2 = Volley.newRequestQueue(Page11Activity.this);
+       // requestQueue2.add(jsonArrayRequest);
 
         //跳頁回家長主頁
         ImageButton back = (ImageButton)findViewById(R.id.back);
@@ -107,22 +109,23 @@ public class Page11Activity extends AppCompatActivity
                                 latitude=Double.parseDouble(la);
                                 longitude=Double.parseDouble(lo);
                                 //mlatitude=GetLa(latitude);
-                                d[i]=date;
-                                getdate(date);
-                               /* history h =new history();
+                                System.out.println("Get()");
+                                System.out.println("date :"+date);
+                                System.out.println("latitude :"+latitude);
+                                System.out.println("longitude :"+longitude);
+
+                                history h =new history();
                                 h.setDate(date);
                                 h.setLatitude(latitude);
                                 h.setLongitude(longitude);
-                                historyArrayList.add(h);*/
+                                historyArrayList.add(h);
 
-                                System.out.println("Get()");
-                                //System.out.println("date :"+date);
-                                //System.out.println("latitude :"+latitude);
-                                //System.out.println("longitude :"+longitude);
+
                             } catch (JSONException e) {
                                 System.out.println("JSONException e :"+e.toString());
                             }
                         }
+                       // historyAdapter =  new historyAdapter(Page11Activity.this,historyArrayList);
                     }
                 }, new Response.ErrorListener() {
             @Override
@@ -132,9 +135,6 @@ public class Page11Activity extends AppCompatActivity
         });
         RequestQueue requestQueue2 = Volley.newRequestQueue(Page11Activity.this);
         requestQueue2.add(jsonArrayRequest);
-    }
-    public void getdate(final String d){
-
     }
 
     /**  for(history mh :historyArrayList){
@@ -149,15 +149,8 @@ public class Page11Activity extends AppCompatActivity
      */
     @Override
     public void onMapReady(GoogleMap googleMap) {
-        //Get();
-        System.out.println("2dateArrayList.size() :"+dateArrayList.size());
-        for(String datee :dateArrayList){
-            System.out.println("2date : "+datee);
-        }
-        System.out.println("2d."+d.length);
-        for(int j=0;j<d.length;j++){
-            System.out.println("------- :"+d[j]);
-        }
+
+        
         // Add polylines to the map.
         // Polylines are useful to show a route or some other connection between points.
         Polyline polyline1 = googleMap.addPolyline(new PolylineOptions()
@@ -292,6 +285,52 @@ public class Page11Activity extends AppCompatActivity
     // Create a stroke pattern of a dot followed by a gap, a dash, and another gap.
     private static final List<PatternItem> PATTERN_POLYGON_BETA =
             Arrays.asList(DOT, GAP, DASH, GAP);
+
+    @Override
+    public void fetch_H() {
+        System.out.println("fetch_H");
+        String URL =Urls.url1+"/LoginRegister/fetch_perhistory.php?email="+getmail;
+        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, URL, null,
+                new Response.Listener<JSONArray>() {
+                    @Override
+                    public void onResponse(JSONArray array) {
+                        for(int i =0;i<array.length();i++){
+                            try{
+                                JSONObject object = array.getJSONObject(i);
+                                date = object.getString("date").trim();
+                                la = object.getString("latitude").trim();
+                                lo = object.getString("longitude").trim();
+                                latitude=Double.parseDouble(la);
+                                longitude=Double.parseDouble(lo);
+                                //mlatitude=GetLa(latitude);
+
+
+                                history h =new history();
+                                h.setDate(date);
+                                h.setLatitude(latitude);
+                                h.setLongitude(longitude);
+                                historyArrayList.add(h);
+
+                                //System.out.println("Get()");
+                                System.out.println("date :"+date);
+                                System.out.println("latitude :"+latitude);
+                                System.out.println("longitude :"+longitude);
+                            } catch (JSONException e) {
+                                System.out.println("JSONException e :"+e.toString());
+                            }
+                        }
+                        // historyAdapter =  new historyAdapter(Page11Activity.this,historyArrayList);
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                // Toast.makeText(Page11Activity.this, error.toString(), Toast.LENGTH_SHORT).show();
+            }
+        });
+        requestQueue2 = Volley.newRequestQueue(Page11Activity.this);
+        requestQueue2.add(jsonArrayRequest);
+
+    }
 
     /**
      * Styles the polygon, based on type.

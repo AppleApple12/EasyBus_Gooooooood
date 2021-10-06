@@ -85,12 +85,12 @@ public class my_contact extends AppCompatActivity {
 
         friendList = new ArrayList<>();
         imageLists =new ArrayList<>();
-        //friendAdapter = new friendAdapter(my_contact.this,friendList);
-        //mrecyclerView.setAdapter(friendAdapter);
+
         requestQueue = Volley.newRequestQueue(this);
-        //getmail=mail();
+
         readUser();
         readfriend();
+        //System.out.println("friendList :"+friendList.size());
         //返回我的資料
         backBtn.setOnClickListener(new View.OnClickListener() {
             @Override
