@@ -88,6 +88,8 @@
         <activity android:name=".Page8Activity" />
         <activity android:name=".Page7Activity" />
         <activity android:name=".Page601" />
+        <activity android:name=".Page611" />
+        <activity android:name=".Page62_combination" />
         <activity android:name=".Page6Activity" />
         <activity android:name=".Page3Activity" />
         <activity android:name=".Page4Activity" />

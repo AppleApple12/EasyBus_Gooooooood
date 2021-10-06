@@ -103,7 +103,7 @@ public class Register extends AppCompatActivity {
                                     mProgressBar.setVisibility(View.GONE);
                                     if(task.isSuccessful()){
                                         Toast.makeText(Register.this,"註冊成功", Toast.LENGTH_SHORT).show(); //和影片不一樣
-                                        Intent intent = new Intent(Register.this,Login.class);
+                                        Intent intent = new Intent(Register.this,Login3.class);
                                         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK); // 加得莫名其妙
                                         startActivity(intent);
 
@@ -129,7 +129,7 @@ public class Register extends AppCompatActivity {
         mRegistertext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(getApplicationContext(),Login.class));
+                startActivity(new Intent(getApplicationContext(),Login3.class));
 
             }
         });

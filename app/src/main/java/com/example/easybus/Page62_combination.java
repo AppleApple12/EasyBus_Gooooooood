@@ -6,9 +6,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
@@ -21,6 +24,14 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -60,7 +71,8 @@ public class Page62_combination extends AppCompatActivity {
     ArrayList<HashMap<String,String>> arrayList = new ArrayList<>();
     ArrayList<HashMap<String,String>> nameArrayList = new ArrayList<>();
     ArrayList<HashMap<String,String>> resultArrayList = new ArrayList<>();
-    //FetchInfo fetchInfo;
+    RequestQueue requestQueue2;
+    String getmail;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,6 +82,11 @@ public class Page62_combination extends AppCompatActivity {
         //隱藏action bar
         ActionBar actionBar = getSupportActionBar();
         actionBar.hide();
+
+        //抓取email
+        SharedPreferences email = getSharedPreferences("email", MODE_PRIVATE);
+        getmail = email.getString("Email", "");
+
         //回前頁
         ImageButton btn = (ImageButton)findViewById(R.id.back);
         btn.setOnClickListener(new View.OnClickListener() {
@@ -77,6 +94,16 @@ public class Page62_combination extends AppCompatActivity {
             public void onClick(View v) {
                 Intent in2 = new Intent(Page62_combination.this,Page62.class);
                 startActivity(in2);
+            }
+        });
+
+        requestQueue2 = Volley.newRequestQueue(this);
+        //浮動按鈕撥打給緊急聯絡人
+        com.google.android.material.floatingactionbutton.FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                readUser();
             }
         });
 
@@ -297,6 +324,53 @@ public class Page62_combination extends AppCompatActivity {
         }
 
         return response;
+    }
+
+    @SuppressLint("LongLogTag")
+    protected void makeCall(final String phone) {
+        //Snackbar.make(v,"打電話給緊急連絡人",Snackbar.LENGTH_LONG).setAction("Action",null).show();
+        Intent call = new Intent(Intent.ACTION_DIAL);
+        Uri u = Uri.parse("tel:"+phone);
+        call.setData(u);
+
+        try {
+            startActivity(call);
+            finish();
+            Log.i("Finished making a call...", "");
+        } catch (android.content.ActivityNotFoundException ex) {
+            Toast.makeText(Page62_combination.this, ex.toString(), Toast.LENGTH_SHORT).show();
+            Toast.makeText(Page62_combination.this,
+                    "Call faild, please try again later.", Toast.LENGTH_SHORT).show();
+        }
+        //startActivity(call        );
+    }
+    public void readUser(){
+        String URL =Urls.url1+"/LoginRegister/fetch.php?email="+getmail;
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(
+                Request.Method.GET,
+                URL,
+                null,
+                new Response.Listener<JSONObject>() {
+                    String emergency_phone;
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        try {
+                            emergency_phone = response.getString("emergency_contact");
+                            makeCall(emergency_phone);
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                            Toast.makeText(Page62_combination.this, e.toString(), Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(Page62_combination.this, error.toString(), Toast.LENGTH_SHORT).show();
+                    }
+                }
+        );
+        requestQueue2.add(jsonObjectRequest);
     }
 /*
     public class FetchInfo extends AsyncTask<Void, Void, Void> {
