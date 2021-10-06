@@ -1,0 +1,54 @@
+<changelist name="Uncommitted_changes_before_Checkout_at_2021_9_29_下午_04_30_[Default_Changelist]" date="1632904270863" recycled="true" deleted="true">
+  <option name="PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2021_9_29_下午_04_30_[Default_Changelist]/shelved.patch" />
+  <option name="DESCRIPTION" value="Uncommitted changes before Checkout at 2021/9/29 下午 04:30 [Default Changelist]" />
+  <binary>
+    <option name="BEFORE_PATH" value="module/build/intermediates/javac/debug/classes/tw/edu/pu/s1071481/module/DirectionFinder.class" />
+    <option name="AFTER_PATH" value="module/build/intermediates/javac/debug/classes/tw/edu/pu/s1071481/module/DirectionFinder.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2021_9_29_下午_04_30_[Default_Changelist]/DirectionFinder.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="module/build/intermediates/javac/debug/classes/tw/edu/pu/s1071481/module/DirectionFinderListener.class" />
+    <option name="AFTER_PATH" value="module/build/intermediates/javac/debug/classes/tw/edu/pu/s1071481/module/DirectionFinderListener.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2021_9_29_下午_04_30_[Default_Changelist]/DirectionFinderListener.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="module/build/intermediates/javac/debug/classes/tw/edu/pu/s1071481/module/Route.class" />
+    <option name="AFTER_PATH" value="module/build/intermediates/javac/debug/classes/tw/edu/pu/s1071481/module/Route.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2021_9_29_下午_04_30_[Default_Changelist]/Route.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="module/build/intermediates/javac/debug/classes/tw/edu/pu/s1071481/module/DirectionFinder$1.class" />
+    <option name="AFTER_PATH" value="module/build/intermediates/javac/debug/classes/tw/edu/pu/s1071481/module/DirectionFinder$1.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2021_9_29_下午_04_30_[Default_Changelist]/DirectionFinder$1.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="module/build/intermediates/javac/debug/classes/tw/edu/pu/s1071481/module/DirectionFinder$DownloadRawData.class" />
+    <option name="AFTER_PATH" value="module/build/intermediates/javac/debug/classes/tw/edu/pu/s1071481/module/DirectionFinder$DownloadRawData.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2021_9_29_下午_04_30_[Default_Changelist]/DirectionFinder$DownloadRawData.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="module/build/intermediates/compile_library_classes/debug/classes.jar" />
+    <option name="AFTER_PATH" value="module/build/intermediates/compile_library_classes/debug/classes.jar" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2021_9_29_下午_04_30_[Default_Changelist]/classes.jar" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="module/build/intermediates/compile_only_not_namespaced_r_class_jar/debug/R.jar" />
+    <option name="AFTER_PATH" value="module/build/intermediates/compile_only_not_namespaced_r_class_jar/debug/R.jar" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2021_9_29_下午_04_30_[Default_Changelist]/R.jar" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="module/build/intermediates/javac/debug/classes/tw/edu/pu/s1071481/module/Distance.class" />
+    <option name="AFTER_PATH" value="module/build/intermediates/javac/debug/classes/tw/edu/pu/s1071481/module/Distance.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2021_9_29_下午_04_30_[Default_Changelist]/Distance.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="module/build/intermediates/javac/debug/classes/tw/edu/pu/s1071481/module/Duration.class" />
+    <option name="AFTER_PATH" value="module/build/intermediates/javac/debug/classes/tw/edu/pu/s1071481/module/Duration.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2021_9_29_下午_04_30_[Default_Changelist]/Duration.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="module/build/intermediates/javac/debug/classes/tw/edu/pu/s1071481/module/BuildConfig.class" />
+    <option name="AFTER_PATH" value="module/build/intermediates/javac/debug/classes/tw/edu/pu/s1071481/module/BuildConfig.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2021_9_29_下午_04_30_[Default_Changelist]/BuildConfig.class" />
+  </binary>
+</changelist>
