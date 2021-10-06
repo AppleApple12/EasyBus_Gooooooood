@@ -141,7 +141,7 @@ public class Page3Activity extends AppCompatActivity {
 
                     @Override
                     public void onPermissionDenied(PermissionDeniedResponse response) {
-                        Toast.makeText(Page3Activity.this, "You must accept this location .", Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(Page3Activity.this, "You must accept this location .", Toast.LENGTH_SHORT).show();
                     }
 
                     @Override
@@ -270,7 +270,7 @@ public class Page3Activity extends AppCompatActivity {
                         new Response.ErrorListener() {
                             @Override
                             public void onErrorResponse(VolleyError error) {
-                                Toast.makeText(Page3Activity.this, error.toString(), Toast.LENGTH_SHORT).show();
+                               // Toast.makeText(Page3Activity.this, error.toString(), Toast.LENGTH_SHORT).show();
                             }
                         }
                 ) {
@@ -295,7 +295,7 @@ public class Page3Activity extends AppCompatActivity {
         Page3Activity.this.runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                Toast.makeText(Page3Activity.this, value, Toast.LENGTH_SHORT).show();
+                //.makeText(Page3Activity.this, value, Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -326,7 +326,7 @@ public class Page3Activity extends AppCompatActivity {
             finish();
             Log.i("Finished making a call...", "");
         } catch (android.content.ActivityNotFoundException ex) {
-            Toast.makeText(Page3Activity.this, ex.toString(), Toast.LENGTH_SHORT).show();
+            //Toast.makeText(Page3Activity.this, ex.toString(), Toast.LENGTH_SHORT).show();
             Toast.makeText(Page3Activity.this,
                     "Call faild, please try again later.", Toast.LENGTH_SHORT).show();
         }
@@ -347,14 +347,14 @@ public class Page3Activity extends AppCompatActivity {
                             makeCall(emergency_phone);
                         } catch (JSONException e) {
                             e.printStackTrace();
-                            Toast.makeText(Page3Activity.this, e.toString(), Toast.LENGTH_SHORT).show();
+                            //Toast.makeText(Page3Activity.this, e.toString(), Toast.LENGTH_SHORT).show();
                         }
                     }
                 },
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(Page3Activity.this, error.toString(), Toast.LENGTH_SHORT).show();
+                       // Toast.makeText(Page3Activity.this, error.toString(), Toast.LENGTH_SHORT).show();
                     }
                 }
         );
