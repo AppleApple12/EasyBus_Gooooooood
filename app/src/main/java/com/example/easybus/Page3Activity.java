@@ -82,7 +82,7 @@ import static android.Manifest.permission.ACCESS_FINE_LOCATION;
 
 public class Page3Activity extends AppCompatActivity {
     TextView test;
-    String email, getmail, dateString;
+    String email, getmail, dateString;//
     RequestQueue requestQueue;
     com.example.easybus.FloatingActionButton f;
 
