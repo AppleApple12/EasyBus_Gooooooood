@@ -1,7 +1,6 @@
 package com.example.easybus;
 
 import android.content.Context;
-import android.content.Intent;
 import android.content.res.TypedArray;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -16,17 +15,14 @@ import android.util.AttributeSet;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
-import android.widget.Toast;
-
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class calendar extends View {
+public class calendar extends View{
     private  String TAG = "CustomerCalendar";
     int nextlastLineNum=0;
     private Date month,year;//當前月份
@@ -38,7 +34,7 @@ public class calendar extends View {
     private int todayWeekIndex;//今天星期幾
     private int firstLineNum,lastLineNum;//第一行.最後一行能展示多少日期
     private int lineNum;    //日期行數
-    private  String[] WEEK_STR = new String[]{"SUN","MON","TUE","WED","THU","FRI","SAT"};
+    private  String[] WEEK_STR = new String[]{"日","一","二","三","四","五","六"};
 
 
     private int mBgMonth,mBgWeek,mBgDay,mBgpre;//各部分背景
@@ -79,6 +75,11 @@ public class calendar extends View {
     Date day;
     String[] Mtoday,Ytoday;
     String cDateStr,cYearStr,cDayStr; //默認當前 年、月 小高寫的年月日
+
+    //點擊範圍圓的中心及半徑
+    int Center_x;
+    int Center_y;
+    int r;
 
     Calendar calendar = Calendar.getInstance();
     Date date = calendar.getTime();
@@ -362,7 +363,6 @@ public class calendar extends View {
         //float textYearStart = (getWidth()-textYear)/2;
         canvas.drawText(getYearStr(year),mYearSpac,mYearSpac+FontUtil.getFontLeading(mPaint),mPaint);
 
-
         //繪製左右箭頭
         Bitmap bitmap = BitmapFactory.decodeResource(getResources(),mMonthRowL);    //獲取圖片
         int h = bitmap.getHeight(); //箭頭的圖片高
@@ -452,7 +452,6 @@ public class calendar extends View {
         for(int i = 0;i<count;i++){
             int left = (startIndex+i)*columnWidth;
             int day = (overDay+i+1);
-
             mPaint.setTextSize(mTextSizeDay);
 
             //如果是當前月，當天日期需要做處理
@@ -477,6 +476,10 @@ public class calendar extends View {
                 bgPaint.setColor(mSelectBg);
                 //繪製橙色圓背景，參數一是中心點的x軸，參數二是中心點的y軸，參數三是半徑，參數四是Paint對象;
                 canvas.drawCircle(left+columnWidth/2,top+mLineSpac+dayHeight/2,mSelectRadius,bgPaint);
+               //點擊範圍圓中心與半徑
+                Center_x=left+columnWidth/2;
+                Center_y= (int) (top+mLineSpac+dayHeight/2);
+                r= (int) mSelectRadius;
 
             }else{
                 mPaint.setColor(mTextColorDay);
@@ -539,6 +542,7 @@ public class calendar extends View {
             return null;
         }
     }
+
     /**年份標題**/
     private String getYearStr(Date year){
         SimpleDateFormat df = new SimpleDateFormat("yyyy");
@@ -553,8 +557,6 @@ public class calendar extends View {
             return null;
         }
     }
-
-
 
     /**********事件處理**********/
     //焦點座標
@@ -608,7 +610,12 @@ public class calendar extends View {
             }
         }else{
             /**日期部分按下和滑動時重繪**/
-            touchDay(point,eventEnd);
+            touchDay(point, eventEnd);
+            //計算點擊是否在圓內
+            /*if(!((Center_x-point.x)*(Center_x-point.x)+(Center_y-point.y)*(Center_y-point.y)>r*r)) {
+                Log.e(TAG, "座標範圍：(" + (Center_x - point.x) * (Center_x - point.x) + " ，" + (Center_y - point.y) * (Center_y - point.y) + ")");
+                Log.e(TAG, "圓: " + (r * r));
+            }*/
         }
     }
     //控制事件是否響應
@@ -676,7 +683,6 @@ public class calendar extends View {
             listener.onDayClick(selectDay,getMonthStr(month)+"-"+selectDay,map.get(selectDay));
         }
         responseWhenEnd = !eventEnd;
-
     }
 
     @Override

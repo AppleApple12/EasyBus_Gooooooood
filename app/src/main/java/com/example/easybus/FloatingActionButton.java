@@ -38,9 +38,9 @@ public class FloatingActionButton extends AppCompatActivity {
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                User user =snapshot.getValue(User.class);
-                assert user != null;
-                mEMphone.setText(user.getEmPhone());
+               // User user =snapshot.getValue(User.class);
+                //assert user != null;
+                //mEMphone.setText(user.getEmPhone());
             }
 
             @Override

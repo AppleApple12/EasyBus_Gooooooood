@@ -79,13 +79,27 @@
         app:srcCompat="@drawable/page50129" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/busInfo"
+        android:id="@+id/page611Info"
         android:layout_width="wrap_content"
         android:layout_height="520dp"
         app:layout_constraintBottom_toBottomOf="@+id/background2"
         app:layout_constraintEnd_toEndOf="@+id/background2"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="@+id/background2"
-        app:layout_constraintTop_toBottomOf="@+id/textView3"
+        app:layout_constraintTop_toBottomOf="@+id/txvtoptext"
         app:layout_constraintVertical_bias="0.84" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        app:srcCompat="@drawable/ic_priority_high_black_24dp"
+        app:backgroundTint="#FD0318"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.971"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.971" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -6,11 +6,15 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.drawable.ColorDrawable;
+import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -30,6 +34,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -40,19 +45,23 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Page5012Activity extends AppCompatActivity {
-    //12345
+
     private static final String DIRECTION_URL_API = "https://maps.googleapis.com/maps/api/directions/json?";
     private static final String GOOGLE_API_KEY = "AIzaSyCr_-3KbvHxSm9Gb38l7M2E_b8qzwHhcTI";
     String url,urlOrigin,urlDestination,title2,getmail;
-    ImageView mImg,mBack,mAdd;
+    ImageView mBack,mAdd;
     RecyclerView recyclerView;
-    BusInfoAdaptor adaptor;//
+    BusInfoAdaptor adaptor;
     ArrayList<BusInfo> businfos;
-    RequestQueue requestQueue,requestQueue1;
+    RequestQueue requestQueue,requestQueue1,requestQueue2;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_page5012);
+        mBack=findViewById(R.id.backicon);
+        mAdd=findViewById(R.id.addIcon);
+        recyclerView=findViewById(R.id.page611Info);
 
         //隱藏title bar
         ActionBar actionBar = getSupportActionBar();
@@ -65,15 +74,11 @@ public class Page5012Activity extends AppCompatActivity {
 
         url=DIRECTION_URL_API+"origin="+urlOrigin+"&destination="+urlDestination+"&mode=transit&transit_mode=bus&language=zh-TW&key="+GOOGLE_API_KEY;
 
-        mImg=findViewById(R.id.img);
-        mBack=findViewById(R.id.backicon);
-        mAdd=findViewById(R.id.addIcon);
-        recyclerView=findViewById(R.id.busInfo);
-
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         adaptor=new BusInfoAdaptor();
         recyclerView.setAdapter(adaptor);
         businfos=new ArrayList<>();
+
         getData();
         SharedPreferences email = getSharedPreferences("email",MODE_PRIVATE);
         getmail=email.getString("Email","");
@@ -91,11 +96,20 @@ public class Page5012Activity extends AppCompatActivity {
 
             }
         });
-
         mBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 finish();
+            }
+        });
+
+        requestQueue2 = Volley.newRequestQueue(this);
+        //浮動按鈕撥打給緊急聯絡人
+        com.google.android.material.floatingactionbutton.FloatingActionButton fab = (FloatingActionButton)findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                readUser();
             }
         });
     }
@@ -131,7 +145,7 @@ public class Page5012Activity extends AppCompatActivity {
                         businfos.add(businfo);
                     }
                 }catch (JSONException e){
-                    Toast.makeText(Page5012Activity.this,e.getMessage()+"錯誤1",Toast.LENGTH_LONG).show();
+                    Toast.makeText(Page5012Activity.this,e.getMessage(),Toast.LENGTH_LONG).show();
                 }
                 adaptor.setData(businfos);
                 adaptor.notifyDataSetChanged();
@@ -383,6 +397,53 @@ public class Page5012Activity extends AppCompatActivity {
             };
             requestQueue1.add(stringRequest);
         }
+    }
+
+    @SuppressLint("LongLogTag")
+    protected void makeCall(final String phone) {
+        //Snackbar.make(v,"打電話給緊急連絡人",Snackbar.LENGTH_LONG).setAction("Action",null).show();
+        Intent call = new Intent(Intent.ACTION_DIAL);
+        Uri u = Uri.parse("tel:"+phone);
+        call.setData(u);
+
+        try {
+            startActivity(call);
+            finish();
+            Log.i("Finished making a call...", "");
+        } catch (android.content.ActivityNotFoundException ex) {
+            Toast.makeText(Page5012Activity.this, ex.toString(), Toast.LENGTH_SHORT).show();
+            Toast.makeText(Page5012Activity.this,
+                    "Call faild, please try again later.", Toast.LENGTH_SHORT).show();
+        }
+        //startActivity(call        );
+    }
+    public void readUser(){
+        String URL =Urls.url1+"/LoginRegister/fetch.php?email="+getmail;
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(
+                Request.Method.GET,
+                URL,
+                null,
+                new Response.Listener<JSONObject>() {
+                    String emergency_phone;
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        try {
+                            emergency_phone = response.getString("emergency_contact");
+                            makeCall(emergency_phone);
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                            Toast.makeText(Page5012Activity.this, e.toString(), Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(Page5012Activity.this, error.toString(), Toast.LENGTH_SHORT).show();
+                    }
+                }
+        );
+        requestQueue2.add(jsonObjectRequest);
     }
 
 }

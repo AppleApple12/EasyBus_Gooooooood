@@ -8,7 +8,7 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraint"
-        android:layout_width="50dp"
+        android:layout_width="80dp"
         android:layout_height="60dp">
 
         <View
@@ -23,14 +23,13 @@
 
         <TextView
             android:id="@+id/txv_line"
-            android:layout_width="30dp"
+            android:layout_width="65dp"
             android:layout_height="30dp"
             android:text="1"
-            android:textSize="19dp"
+            android:textSize="15dp"
             android:gravity="center"
-            android:textStyle="bold"
             android:textColor="#000000"
-            android:background="@drawable/page601_txv"
+            android:background="@drawable/page601_btn"
             app:layout_constraintBottom_toBottomOf="@+id/constraint"
             app:layout_constraintCircleRadius="10dp"
             app:layout_constraintEnd_toEndOf="@+id/constraint"
@@ -40,10 +39,10 @@
 
     <TextView
         android:id="@+id/txv"
-        android:layout_width="280dp"
+        android:layout_width="250dp"
         android:layout_height="30dp"
         android:layout_marginTop="15dp"
-        android:layout_marginLeft="3dp"
+        android:layout_marginLeft="10dp"
         android:text="台中國際機場"
         android:gravity="center"
         android:textColor="#000000"

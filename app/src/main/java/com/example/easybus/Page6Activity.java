@@ -15,6 +15,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.HandlerThread;
+import android.util.Base64;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -45,6 +46,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.BufferedInputStream;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -52,23 +54,29 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.security.SignatureException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashMap;
+import java.util.Locale;
+import java.util.TimeZone;
+
+import javax.crypto.Mac;
+import javax.crypto.spec.SecretKeySpec;
 
 public class Page6Activity extends AppCompatActivity{
 
     RecyclerView recyclerView;
     Page6ArticleAdapter adapter;
-    ArrayList<Page6article> articles;
+    ArrayList<Page6article> articles = new ArrayList<>(); ;
     ArrayList<Page6article> articles1;
-
-    String  url = "https://datacenter.taichung.gov.tw/swagger/OpenData/6af70a9e-4afc-4f54-bf56-01dd84ee8972";
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         if(item.getItemId()==android.R.id.home){
-            //Intent it = new Intent(Page6Activity.this,Page61.class);
-            //startActivity(it);
+            Intent it = new Intent(Page6Activity.this,Page61.class);
+            startActivity(it);
         }
         return super.onOptionsItemSelected(item);
     }
@@ -88,34 +96,18 @@ public class Page6Activity extends AppCompatActivity{
         adapter = new Page6ArticleAdapter();
         recyclerView.setAdapter(adapter);
 
-        articles = new ArrayList<>();
+        //articles = new ArrayList<>();
         articles1 = new ArrayList<>();
-        getData();
-        /*
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                getData();
-            }
-        });*/
+        new fetchData().execute();
+
         adapter.setOnItemClick(new Page6ArticleAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
                 Intent it1 = new Intent(Page6Activity.this,Page601.class);
+                Log.d("Page6", String.valueOf(articles1.size()));
+                //String str1 = adapter.getItemId(position);
                 String str1 = articles1.get(position).line;
-                String str2 = "";
-                String str4 = "";
-                for(int i = 0;i<articles.size();i++){
-                    if(articles.get(i).line.equals(str1)&&articles.get(i).come_back.equals("去程")){
-                        str2+=articles.get(i).stamp_num+" "+articles.get(i).chinese_stamp+"\n";
-                    }
-                    if(articles.get(i).line.equals(str1)&&articles.get(i).come_back.equals("回程")){
-                        str4+=articles.get(i).stamp_num+" "+articles.get(i).chinese_stamp+"\n";
-                    }
-                }
                 it1.putExtra("txv1",str1);
-                it1.putExtra("txv2",str2);
-                it1.putExtra("txv4",str4);
                 startActivity(it1);
             }
         });
@@ -123,67 +115,59 @@ public class Page6Activity extends AppCompatActivity{
 
     }
 
-    public void getData(){
-        final ProgressDialog progressDialog = new ProgressDialog(this);
-        progressDialog.setMessage("Loading......");
-        progressDialog.show();
+    public class fetchData extends AsyncTask<Void,Void,Void>{
+        ProgressDialog pd;
+        String result;
+        String API = "https://ptx.transportdata.tw/MOTC/v2/Bus/Route/City/Taichung?$format=JSON";
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            pd = new ProgressDialog(Page6Activity.this);
+            pd.setCancelable(false);
+            pd.setMessage("Downloading...Please wait!");
+            pd.setProgress(0);
+            pd.show();
+        }
 
-        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(url, new Response.Listener<JSONArray>() {
-            @Override
-            public void onResponse(JSONArray response) {
-                try {
-                    for(int i = 0;i<response.length();i++) {
-                        JSONObject JO = response.getJSONObject(i);
-                        Page6article article = new Page6article();
-                        article.setLine(JO.getString("路線"));
-                        article.setLine_name(JO.getString("路線名稱"));
-                        article.setStamp_num(JO.getString("站序"));
-                        article.setChinese_stamp(JO.getString("中文站點名稱"));
-                        article.setLongitude(JO.getString("經度"));
-                        article.setLatitude(JO.getString("緯度"));
-                        article.setCome_back(JO.getString("去回"));
-                        article.setEnglish_stamp(JO.getString("英文站點名稱"));
-                        articles.add(article);
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            super.onPostExecute(aVoid);
+            pd.dismiss();
+            Toast.makeText(getApplicationContext(),"Connection successful!",Toast.LENGTH_LONG).show();
+            try{
+                if(result!=null && !result.equals("")){
+                    JSONArray jsonArray = new JSONArray(result);
+                    if(jsonArray.length()>0){
+                        JSONObject jsonObject;
+                        for(int i = 0;i<jsonArray.length();i++){
+                            jsonObject = jsonArray.getJSONObject(i);
+                            Page6article article = new Page6article();
 
+                            JSONObject jsonObject1 = jsonObject.getJSONObject("RouteName");
+                            String routename = jsonObject1.getString("Zh_tw");
+                            article.setLine(routename);
 
-                        if(i==0) {
-                            articles1.add(article);
-                        }else {
-                            String string= JO.getString("路線");
-                            Boolean flag = true;
-                            for(int j = 0;j<articles1.size();j++){
-                                if(articles1.get(j).getLine().equals(string)){
-                                    flag = false;
-                                }
-                            }
-                            if(flag){
-                                articles1.add(article);
-                            }
+                            String departureStopName = jsonObject.getString("DepartureStopNameZh");
+                            String destinationName = jsonObject.getString("DestinationStopNameZh");
+                            article.setLine_name(departureStopName+" - "+destinationName);
+                            articles.add(article);
                         }
-
-
+                        adapter.setData(articles);
+                        adapter.notifyDataSetChanged();
                     }
-                }catch (JSONException e){
-                    Toast.makeText(Page6Activity.this,"JSON is not valid!",Toast.LENGTH_LONG).show();
                 }
-                adapter.setData(articles1);
-                adapter.notifyDataSetChanged();
-
-                progressDialog.dismiss();
+            }catch (JSONException e) {
+                e.printStackTrace();
+                Log.d("page62_json",Log.getStackTraceString(e));
             }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                progressDialog.dismiss();
-                Toast.makeText(Page6Activity.this,"Error occurred!",Toast.LENGTH_LONG).show();
-            }
-        });
+        }
 
-        RequestQueue requestQueue = Volley.newRequestQueue(this);
-        requestQueue.add(jsonArrayRequest);
-
+        @Override
+        protected Void doInBackground(Void... voids) {
+            result = Page62.connect(API);
+            return null;
+        }
     }
-
     public boolean onCreateOptionsMenu(Menu menu){
         getMenuInflater().inflate(R.menu.search,menu);
         MenuItem menuItem = menu.findItem(R.id.search);

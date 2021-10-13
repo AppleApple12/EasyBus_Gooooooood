@@ -55,7 +55,7 @@ public class Page4Activity extends AppCompatActivity {
                     //it4.putExtra("email", email2);
                     startActivity(it4);
                 }else{
-                    Intent it = new Intent(Page4Activity.this,Login2.class);
+                    Intent it = new Intent(Page4Activity.this,Login3.class);
                     startActivity(it);
                 }
             }

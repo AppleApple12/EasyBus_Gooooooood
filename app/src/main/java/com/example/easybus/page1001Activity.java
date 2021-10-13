@@ -5,8 +5,10 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -20,6 +22,7 @@ public class page1001Activity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_page1001);
+        final TextView mDate=(TextView)findViewById(R.id.date);
 
         //隱藏title bar
         ActionBar actionBar = getSupportActionBar();
@@ -28,7 +31,8 @@ public class page1001Activity extends AppCompatActivity {
         Intent intent = getIntent();
         //從PAGE10傳過來的 年月日
         dayStr = intent.getStringExtra("dayStr");
-        System.out.println("dayStr : "+dayStr);
+        mDate.setText("< "+dayStr.substring(0,4)+" - "+dayStr.substring(5,7)+" - "+dayStr.substring(8,10)+" >");
+
         //跳頁回家長主頁
         ImageButton back = (ImageButton)findViewById(R.id.back);
         back.setOnClickListener(new View.OnClickListener() {
@@ -79,7 +83,7 @@ public class page1001Activity extends AppCompatActivity {
         list.add(new page1001Activity.DayFinish2(30,2,2));
         list.add(new page1001Activity.DayFinish2(31,2,2));//跳頁回家長主頁
         
-        cal2.setRenwu("2021","2021-09",list);
+        cal2.setRenwu(dayStr.substring(0,4),dayStr.substring(0,7),list);
         cal2.setOnClickListen(new calendar2.onClickListener() {
             @Override
             public void onLeftRowClick() {
@@ -143,7 +147,6 @@ public class page1001Activity extends AppCompatActivity {
 
             @Override
             public void onDayClick(int day, String dayStr, DayFinish2 finish) {
-
             }
         });
     }

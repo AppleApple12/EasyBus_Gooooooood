@@ -38,7 +38,7 @@ public class calendar2 extends View {
     private int todayWeekIndex;//今天星期幾
     private int firstLineNum,lastLineNum;//第一行.最後一行能展示多少日期
     private int lineNum;    //日期行數
-    private  String[] WEEK_STR = new String[]{"SUN","MON","TUE","WED","THU","FRI","SAT"};
+    private  String[] WEEK_STR = new String[]{"日","一","二","三","四","五","六"};
 
 
     private int mBgMonth,mBgWeek,mBgDay,mBgpre;//各部分背景
@@ -298,12 +298,6 @@ public class calendar2 extends View {
         //canvas.drawRect(rect,bgPaint);
         canvas.drawRoundRect(rect,40,40,bgPaint);
 
-        //繪製月份
-       /* mPaint.setTextSize(mTextSizeMonth);
-        mPaint.setColor(mTextColorMonth);
-
-        //System.out.println("today[1] : "+today[1]);
-
         switch (Mtoday[1]){
             case "01月":
                 m = "JAN";
@@ -346,23 +340,6 @@ public class calendar2 extends View {
         canvas.drawText(m,getWidth()-FontUtil.getFontlength(mPaint,Mtoday[1]),275,mPaint);
         mPaint.setShadowLayer(5f,2,2,Color.GRAY);   //增加陰影*/
 
-        /*繪製年份
-        mPaint.setTextSize(mTextSizeYear);
-        mPaint.setColor(mTextColorYear);
-        Calendar mCalender = new GregorianCalendar();
-        int year = mCalender.get(Calendar.YEAR);
-        y = String.valueOf(year);
-        float textYear = FontUtil.getFontlength(mPaint,y);
-        float textYearStart = (getWidth()-textYear)/2;
-        canvas.drawText(y,mYearSpac,mYearSpac+FontUtil.getFontLeading(mPaint),mPaint);
-
-        //繪製年份
-        mPaint.setTextSize(mTextSizeYear);
-        mPaint.setColor(mTextColorYear);
-        float textYear = FontUtil.getFontlength(mPaint,getYearStr(year));
-        //float textYearStart = (getWidth()-textYear)/2;
-        canvas.drawText(getYearStr(year),mYearSpac,mYearSpac+FontUtil.getFontLeading(mPaint),mPaint);*/
-
 
         //繪製左右箭頭
         float textLen = FontUtil.getFontlength(mPaint,Mtoday[1]);
@@ -373,28 +350,18 @@ public class calendar2 extends View {
 
         //float left,float top;
         rowLStart= (int)(textStart-2*mMonthRowSpac-rowWidth);
-        //canvas.drawBitmap(bitmap,rowLStart+mMonthRowSpac,(titleHeight-h)/2,new Paint());
-        canvas.drawBitmap(bitmap,40,110,new Paint());//設置左箭頭
-        //canvas.drawBitmap(bitmap,40,titleHeight,new Paint());//設置左箭頭
-        //canvas.drawBitmap(bitmap,10,(titleHeight+weekHeight+(lineNum*oneHeight))/2,new Paint());
+        canvas.drawBitmap(bitmap,0,titleHeight,new Paint());//設置左箭頭
         bitmap = BitmapFactory.decodeResource(getResources(), mMonthRowR);//獲取右箭頭圖片
         rowRStart = (int)(textStart+textLen)+200;
-        //canvas.drawBitmap(bitmap,rowRStart+mMonthSpac,(titleHeight-h)/2,new Paint());
-        canvas.drawBitmap(bitmap,rowRStart+mMonthSpac+70,110,new Paint());
-        //canvas.drawBitmap(bitmap,rowRStart+mMonthSpac+70,titleHeight,new Paint());
-        //canvas.drawBitmap(bitmap,getWidth()-10,(titleHeight+weekHeight+(lineNum*oneHeight))/2,new Paint());
+        canvas.drawBitmap(bitmap,rowRStart+mMonthSpac+70,titleHeight,new Paint());
     }
     /**繪製星期*/
     private  void drawWeek(Canvas canvas){
         //背景
         bgPaint.setColor(mBgWeek);
         //bgPaint.setColor(Color.RED);
-        RectF rect = new RectF(70+rowWidth,titleHeight,rowRStart+mMonthSpac+70,titleHeight+weekHeight);
-        //System.out.println("titleHeight : "+titleHeight); //0.0
-       // System.out.println("weekHeight : "+weekHeight);  //52.29492
-        //System.out.println("getWidth() : "+getWidth());   //851
+        RectF rect = new RectF(40+rowWidth,titleHeight,rowRStart+mMonthSpac+40,titleHeight+weekHeight);
 
-        //System.out.println("rectcolumnWidth : "+rectcolumnWidth);
         //繪製星期：七天
         bgPaint.setTextSize(mTextSizeWeek);
         int total = 0;
@@ -423,10 +390,10 @@ public class calendar2 extends View {
         int lennnn=0;
         for(int i =0;i<WEEK_STR.length;i++) {
             if (i == 0)
-                canvas.drawText(WEEK_STR[i], 70 + rowWidth, titleHeight + FontUtil.getFontLeading(bgPaint), bgPaint);
+                canvas.drawText(WEEK_STR[i], 80 + rowWidth, titleHeight + FontUtil.getFontLeading(bgPaint), bgPaint);
             else {
                 lennnn = lennnn + (int) FontUtil.getFontlength(bgPaint, WEEK_STR[i - 1]);
-                canvas.drawText(WEEK_STR[i], 70 + rowWidth + rectcolumnWidth*i + lennnn, titleHeight + FontUtil.getFontLeading(bgPaint), bgPaint);
+                canvas.drawText(WEEK_STR[i], 80 + rowWidth + rectcolumnWidth*i + lennnn, titleHeight + FontUtil.getFontLeading(bgPaint), bgPaint);
             }
         }
             //canvas.drawText(WEEK_STR[i],70+rowWidth+x,titleHeight+FontUtil.getFontLeading(mPaint),mPaint);
@@ -571,8 +538,6 @@ public class calendar2 extends View {
         }
     }
 
-
-
     /**********事件處理**********/
     //焦點座標
     private PointF focusPoint = new PointF();
@@ -596,36 +561,16 @@ public class calendar2 extends View {
     /**焦點滑動**/
     public void touchFocusMove(final PointF point,boolean eventEnd){
         Log.e(TAG,"點擊座標：("+point.x+" ，"+point.y+")，事件是否結束："+eventEnd);
-        /**標題和星期只有在事件結束後才響應**/
-        if(point.y<=titleHeight){
-            //事件在標題上
-            if(eventEnd && listener!=null){
-                if(point.x>=rowLStart && point.x<(rowLStart+2*mMonthRowSpac+rowWidth)){
-                    Log.w(TAG,"點擊左箭頭");
-                    listener.onLeftRowClick();
-                }else if (point.x>rowRStart && point.x<(rowRStart+2*mMonthRowSpac+rowWidth)){
-                    Log.w(TAG,"點擊右箭頭");
-                    listener.onRightRowClick();
-                }else if(point.x>rowLStart && point.x<rowRStart){
-                    listener.onTitleClick(Mtoday[1],month);
-                }
-            }
-        }else if (point.y<=(titleHeight+weekHeight)){
+        /**星期只有在事件結束後才響應**/
+        if (point.y<=weekHeight){
             //事件在星期的部分
             if (eventEnd && listener!=null){
-                //根據x座標找到具體的焦點日期 (int)rectcolumnWidth
-                /*int xIndex = (int)point.x/(int)rectcolumnWidth;
-                Log.e(TAG,"列寬："+(int)rectcolumnWidth+"   x座標餘數："+(point.x/(int)rectcolumnWidth));
-                if ((point.x/(int)rectcolumnWidth-xIndex)>0)*/
-                int avg =(columnWidth+(int)rectcolumnWidth);
-                int xIndex = (int)point.x/columnWidth;
-                Log.i(TAG,"列寬："+columnWidth+"   x座標餘數："+(point.x/columnWidth));
-                if ((point.x/columnWidth-xIndex)>0)
-                {
-                    xIndex+=1;
-                }
-                if(listener!=null){
-                    listener.onWeekClick(xIndex-1,WEEK_STR[xIndex-1]);
+                if(point.x>=0 && point.x<(40+rowWidth)){
+                    Log.w(TAG,"點擊左箭頭");
+                    listener.onLeftRowClick();
+                }else if (point.x>rowRStart+mMonthSpac+70 && point.x<(rowRStart+mMonthRowSpac+rowWidth)){
+                    Log.w(TAG,"點擊右箭頭");
+                    listener.onRightRowClick();
                 }
             }
         }else{

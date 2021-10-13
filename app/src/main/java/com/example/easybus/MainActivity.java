@@ -98,7 +98,7 @@ public class MainActivity extends AppCompatActivity {
             case REQUEST_CODE_ASK_PERMISSION:
                 for (int i=0; i<permissions.length; i++) {
                     if (grantResults[i] == PackageManager.PERMISSION_GRANTED) {
-                        Toast.makeText(MainActivity.this, "!!!!!!"+permissions[i], Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(MainActivity.this, "!!!!!!"+permissions[i], Toast.LENGTH_SHORT).show();
                     } else {
                         Toast.makeText(MainActivity.this, "本App需允許授權，才能 "+permissions[i], Toast.LENGTH_SHORT).show();
                         Intent it = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
@@ -127,7 +127,7 @@ public class MainActivity extends AppCompatActivity {
                             identity = response.getString("identity");
                         } catch (JSONException e) {
                             e.printStackTrace();
-                            Toast.makeText(MainActivity.this, e.toString(), Toast.LENGTH_SHORT).show();
+                           // Toast.makeText(MainActivity.this, e.toString(), Toast.LENGTH_SHORT).show();
                         }
                     }
                 },
