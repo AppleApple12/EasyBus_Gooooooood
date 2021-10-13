@@ -88,7 +88,7 @@ public class Page11Activity extends AppCompatActivity
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent it1 = new Intent(Page11Activity.this,Page10Activity.class);
+                Intent it1 = new Intent(Page11Activity.this,Page1101Activity.class);
                 startActivity(it1);
             }
         });

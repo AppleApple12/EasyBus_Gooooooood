@@ -123,7 +123,7 @@ public class Page1101Activity extends AppCompatActivity {
                                 Intent intent = new Intent(Page1101Activity.this,Page11Activity.class);
                                 //intent.putExtra("email",getmail);
                                 startActivity(intent);
-                                finish();  
+                                finish();
                             }
                         });
                     }
