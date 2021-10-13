@@ -215,7 +215,7 @@ public class Page8Activity extends AppCompatActivity {
         requestQueue.add(jsonObjectRequest);
     }
     //儲存頭貼
-    private void savepic(){
+    private void savepic(){//
         String URL =Urls.url1+"/LoginRegister/upload.php?email="+getmail;
         StringRequest request = new StringRequest(Request.Method.POST, URL, new Response.Listener<String>() {
             @Override
