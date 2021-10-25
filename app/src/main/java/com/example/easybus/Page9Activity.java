@@ -80,7 +80,7 @@ public class Page9Activity extends AppCompatActivity implements OnMapReadyCallba
         if(checkPermissions()){
             init();
         }
-        btn = (Button)findViewById(R.id.btn_intent);
+        /*btn = (Button)findViewById(R.id.btn_intent);
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -96,7 +96,7 @@ public class Page9Activity extends AppCompatActivity implements OnMapReadyCallba
                 int offset_y = -(window.getContentView().getMeasuredHeight()+btn.getHeight()+30);
                 PopupWindowCompat.showAsDropDown(mWindow,btn,offset_x,offset_y,Gravity.NO_GRAVITY);
             }
-        });
+        });*/
 
         gc = new Geocoder(this, Locale.TRADITIONAL_CHINESE);
     }
