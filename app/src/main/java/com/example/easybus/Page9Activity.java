@@ -29,12 +29,22 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.widget.PopupWindowCompat;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.Volley;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -50,7 +60,7 @@ public class Page9Activity extends AppCompatActivity implements OnMapReadyCallba
     private GoogleMap mMap;
     private TextView txvAdd;
     private  LocationManager locationManager = null;
-    private  String provider;
+    private  String provider,getmail,la,lo;
     private Double latitude,longitude;
     String city = "";
     Button btn;
@@ -71,6 +81,7 @@ public class Page9Activity extends AppCompatActivity implements OnMapReadyCallba
                 startActivity(back);
             }
         });
+        fetch_latlong();
         SupportMapFragment mapFragment = (SupportMapFragment)getSupportFragmentManager()
                 .findFragmentById(R.id.mapView);
         mapFragment.getMapAsync(this);
@@ -80,6 +91,11 @@ public class Page9Activity extends AppCompatActivity implements OnMapReadyCallba
         if(checkPermissions()){
             init();
         }
+        Intent intent = getIntent();
+        //從PAGE1101 傳過來的 朋友email
+        getmail = intent.getStringExtra("email");
+        System.out.println("email : "+getmail);
+
         /*btn = (Button)findViewById(R.id.btn_intent);
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -249,6 +265,38 @@ public class Page9Activity extends AppCompatActivity implements OnMapReadyCallba
             }
         }
         return true;
+    }
+
+    public void fetch_latlong(){
+        String URL =Urls.url1+"/LoginRegister/fetch_latlong.php?email="+getmail;
+        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, URL, null,
+                new Response.Listener<JSONArray>() {
+                    @Override
+                    public void onResponse(JSONArray array) {
+                        for(int i =0;i<array.length();i++){
+                            try{
+                                JSONObject object = array.getJSONObject(i);
+                                la = object.getString("latitude").trim();
+                                lo = object.getString("longitude").trim();
+                                latitude=Double.parseDouble(la);
+                                longitude=Double.parseDouble(lo);
+                                System.out.println("latitude :"+latitude);
+                                System.out.println("longitude :"+longitude);
+
+                            } catch (JSONException e) {
+                                System.out.println("JSONException e :"+e.toString());
+                            }
+                        }
+                        // historyAdapter =  new historyAdapter(Page11Activity.this,historyArrayList);
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                // Toast.makeText(Page11Activity.this, error.toString(), Toast.LENGTH_SHORT).show();
+            }
+        });
+        RequestQueue requestQueue2 = Volley.newRequestQueue(Page9Activity.this);
+        requestQueue2.add(jsonArrayRequest);
     }
 
     @Override

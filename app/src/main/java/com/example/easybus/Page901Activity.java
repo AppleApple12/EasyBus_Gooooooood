@@ -26,7 +26,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Page1101Activity extends AppCompatActivity {
+public class Page901Activity extends AppCompatActivity {
     String email,getmail,img,img2,imgUrl,fimage;//
     String femail,dayStr;
     String phone;
@@ -37,10 +37,11 @@ public class Page1101Activity extends AppCompatActivity {
     List<friend> friendList;
 
     ArrayList<String> femailList = new ArrayList<>();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_page1101);
+        setContentView(R.layout.activity_page901);
 
 
         //隱藏title bar///
@@ -59,17 +60,14 @@ public class Page1101Activity extends AppCompatActivity {
         friendList = new ArrayList<>();
         requestQueue = Volley.newRequestQueue(this);
 
-        Intent intent = getIntent();
-        //從PAGE10傳過來的 年月日
-        dayStr = intent.getStringExtra("dayStr");
-        System.out.println("dayStr : "+dayStr);
+
         readfriend();
 
         //返回我的資料
         backBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(Page1101Activity.this,Page4Activity.class);
+                Intent intent = new Intent(Page901Activity.this,Page4Activity.class);
                 //intent.putExtra("email",getmail);
                 startActivity(intent);
                 finish();
@@ -117,7 +115,7 @@ public class Page1101Activity extends AppCompatActivity {
                                     e.printStackTrace();
                                 }
                             }
-                        historyAdapter = new HistoryAdapter(Page1101Activity.this,friendList);
+                        historyAdapter = new HistoryAdapter(Page901Activity.this,friendList);
                         mrecyclerView.setAdapter(historyAdapter);
                         /*imageListAdapter = new ImageListAdapter(my_contact.this, imageLists);
                         mrecyclerView.setAdapter(imageListAdapter);
@@ -129,9 +127,8 @@ public class Page1101Activity extends AppCompatActivity {
                                 String myfemail  = friendList.get(position).getFemail();
                                 System.out.println("myfemail : " + myfemail);
 
-                                Intent intent = new Intent(Page1101Activity.this,Page11Activity.class);
+                                Intent intent = new Intent(Page901Activity.this,Page9Activity.class);
                                 intent.putExtra("email",myfemail);
-                                intent.putExtra("dayStr",dayStr);
                                 startActivity(intent);
                                 finish();
                             }
@@ -140,10 +137,10 @@ public class Page1101Activity extends AppCompatActivity {
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Toast.makeText(Page1101Activity.this, error.toString(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(Page901Activity.this, error.toString(), Toast.LENGTH_SHORT).show();
             }
         });
-        RequestQueue requestQueue2 = Volley.newRequestQueue(Page1101Activity.this);
+        RequestQueue requestQueue2 = Volley.newRequestQueue(Page901Activity.this);
         requestQueue2.add(request);
     }
     public String imgurlString(final String img2){

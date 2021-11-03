@@ -1,10 +1,20 @@
 package com.example.easybus;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.Manifest;
+import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
+import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.Toast;
@@ -42,15 +52,15 @@ import java.util.List;
  */
 public class Page11Activity extends AppCompatActivity
         implements
-        FH,
         OnMapReadyCallback,
         GoogleMap.OnPolylineClickListener{
-        //GoogleMap.OnPolygonClickListener{
+    private static final String TAG = "Page11Activity";
+    //GoogleMap.OnPolygonClickListener{
     private GoogleMap mMap;
     ArrayList<String> dateArrayList;
     ArrayList<history> historyArrayList = new ArrayList<>();
    // historyAdapter historyAdapter;
-    String getmail="asdf@gmail.com";
+    String getmail;
     String dayStr,date,la,lo;
     Double latitude,longitude;
     Double mlatitude,mlongitude;
@@ -63,16 +73,18 @@ public class Page11Activity extends AppCompatActivity
         Page11Activity page11Activity =new Page11Activity();
         dateArrayList =  new ArrayList<>();
 
-        fetch_history();
-        System.out.println("historyArrayList :"+historyArrayList.size());
+
 
         Intent intent = getIntent();
-        //從PAGE10傳過來的 年月日
+        //從PAGE1101 傳過來的 年月日
         dayStr = intent.getStringExtra("dayStr");
         System.out.println("dayStr : "+dayStr);
         //隱藏title bar
         ActionBar actionBar = getSupportActionBar();
         actionBar.hide();
+        //從PAGE1101 傳過來的 朋友email
+        getmail = intent.getStringExtra("email");
+        System.out.println("email : "+getmail);
 
 
         // page11Activity.fetch_H();
@@ -88,12 +100,14 @@ public class Page11Activity extends AppCompatActivity
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent it1 = new Intent(Page11Activity.this,Page1101Activity.class);
+                Intent it1 = new Intent(Page11Activity.this,Page4Activity.class);
                 startActivity(it1);
             }
         });
+        fetch_history();
 
     }
+
     public void fetch_history(){
         String URL =Urls.url1+"/LoginRegister/fetch_perhistory.php?email="+getmail;
         JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, URL, null,
@@ -286,51 +300,7 @@ public class Page11Activity extends AppCompatActivity
     private static final List<PatternItem> PATTERN_POLYGON_BETA =
             Arrays.asList(DOT, GAP, DASH, GAP);
 
-    @Override
-    public void fetch_H() {
-        System.out.println("fetch_H");
-        String URL =Urls.url1+"/LoginRegister/fetch_perhistory.php?email="+getmail;
-        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, URL, null,
-                new Response.Listener<JSONArray>() {
-                    @Override
-                    public void onResponse(JSONArray array) {
-                        for(int i =0;i<array.length();i++){
-                            try{
-                                JSONObject object = array.getJSONObject(i);
-                                date = object.getString("date").trim();
-                                la = object.getString("latitude").trim();
-                                lo = object.getString("longitude").trim();
-                                latitude=Double.parseDouble(la);
-                                longitude=Double.parseDouble(lo);
-                                //mlatitude=GetLa(latitude);
 
-
-                                history h =new history();
-                                h.setDate(date);
-                                h.setLatitude(latitude);
-                                h.setLongitude(longitude);
-                                historyArrayList.add(h);
-
-                                //System.out.println("Get()");
-                                System.out.println("date :"+date);
-                                System.out.println("latitude :"+latitude);
-                                System.out.println("longitude :"+longitude);
-                            } catch (JSONException e) {
-                                System.out.println("JSONException e :"+e.toString());
-                            }
-                        }
-                        // historyAdapter =  new historyAdapter(Page11Activity.this,historyArrayList);
-                    }
-                }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                // Toast.makeText(Page11Activity.this, error.toString(), Toast.LENGTH_SHORT).show();
-            }
-        });
-        requestQueue2 = Volley.newRequestQueue(Page11Activity.this);
-        requestQueue2.add(jsonArrayRequest);
-
-    }
 
     /**
      * Styles the polygon, based on type.
