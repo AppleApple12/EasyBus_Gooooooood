@@ -57,14 +57,12 @@
         <activity android:name=".Forgotpassword" />
         <activity android:name=".Page801Activity" />
         <activity android:name=".Page701Activity" />
-        <activity android:name=".Login" />
-        <activity android:name=".Register" />
+
         <activity android:name=".Page10Activity" />
         <activity android:name=".Page9Activity" />
         <activity android:name=".Page5011Activity" />
         <activity android:name=".Page5012Activity" />
-        <activity android:name=".Login2" />
-        <activity android:name=".SignUp2" />
+
         <activity android:name=".Login3" />
         <activity android:name=".Signup3" />
 

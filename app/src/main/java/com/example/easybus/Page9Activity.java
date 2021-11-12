@@ -255,6 +255,8 @@ public class Page9Activity extends AppCompatActivity implements OnMapReadyCallba
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
         //LatLng school = new LatLng(24.225431, 120.577063);
+        System.out.println("latitude: "+latitude);
+        System.out.println("longitude: "+longitude);
         LatLng school = new LatLng(latitude, longitude);
         mMap.addMarker(new MarkerOptions().position(school)
                 .title("靜宜大學").snippet("Providence University"));

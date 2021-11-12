@@ -90,7 +90,7 @@ public class my_contact extends AppCompatActivity {
 
         readUser();
         readfriend();
-        //System.out.println("friendList :"+friendList.size());
+
         //返回我的資料
         backBtn.setOnClickListener(new View.OnClickListener() {
             @Override
