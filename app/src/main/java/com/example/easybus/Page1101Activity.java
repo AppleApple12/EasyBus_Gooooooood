@@ -130,8 +130,12 @@ public class Page1101Activity extends AppCompatActivity {
                                 System.out.println("myfemail : " + myfemail);
 
                                 Intent intent = new Intent(Page1101Activity.this,Page11Activity.class);
-                                intent.putExtra("email",myfemail);
-                                intent.putExtra("dayStr",dayStr);
+                                Bundle bundle = new Bundle();
+                                bundle.putString("email",myfemail);
+                                bundle.putString("dayStr",dayStr);
+//                                intent.putExtra("email",myfemail);
+//                                intent.putExtra("dayStr",dayStr);
+                                intent.putExtras(bundle);
                                 startActivity(intent);
                                 finish();
                             }
