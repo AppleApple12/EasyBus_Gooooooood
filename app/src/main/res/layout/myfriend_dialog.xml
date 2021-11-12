@@ -39,7 +39,7 @@
                 android:layout_width="302dp"
                 android:layout_height="58dp"
                 android:layout_marginTop="1dp"
-                android:background="#ffffff"
+                android:background="@drawable/contact_round"
                 android:text="點我!!立即前往我的聯絡人"
                 android:textSize="18sp"
                 app:layout_constraintBottom_toBottomOf="parent"

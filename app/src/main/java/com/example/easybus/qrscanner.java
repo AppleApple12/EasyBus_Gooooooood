@@ -107,8 +107,8 @@ public class qrscanner extends AppCompatActivity {
                     public void onResponse(String response) {
                         if(response.equals("Success")){
                             Toast.makeText(qrscanner.this, "加入成功 !", Toast.LENGTH_SHORT).show();
-                        }else{
-                            Toast.makeText(qrscanner.this, "已為聯絡人", Toast.LENGTH_SHORT).show();
+                        }else {
+                            Toast.makeText(qrscanner.this, response, Toast.LENGTH_SHORT).show();
                         }
                     }
                 },
