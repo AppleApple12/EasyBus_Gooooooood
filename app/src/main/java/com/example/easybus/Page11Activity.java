@@ -56,14 +56,12 @@ public class Page11Activity extends AppCompatActivity implements OnMapReadyCallb
 
     ArrayList<history> historyArrayList;
 
-    String getmail = "asdf@gmail.com";
-    String dayStr, date, la, lo;
+
+    String dayStr, date, la, lo,getmail;
     Double latitude, longitude;
 
 
     private GoogleMap googleMap;
-    Polyline polyline1;
-    JSONArray contacts;
 
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,6 +74,12 @@ public class Page11Activity extends AppCompatActivity implements OnMapReadyCallb
         //隱藏title bar
         ActionBar actionBar = getSupportActionBar();
         actionBar.hide();
+        Intent intent = getIntent();
+        //從PAGE1101 傳過來的 年月日
+        dayStr = intent.getStringExtra("dayStr");
+        getmail = intent.getStringExtra("email");
+        System.out.println("dayStr : "+dayStr);
+        System.out.println("email : "+getmail);
 
         // Get the SupportMapFragment and request notification when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
@@ -104,10 +108,10 @@ public class Page11Activity extends AppCompatActivity implements OnMapReadyCallb
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray array) {
-                        contacts = array;
+
                         for (int i = 0; i < array.length(); i++) {
                             try {
-                                //contacts = jonObject.getJSONObject("XML_Head").getJSONObject("Infos").getJSONArray("Info");
+
                                 JSONObject object = array.getJSONObject(i);
                                 date = object.getString("date").trim();
                                 la = object.getString("latitude").trim();
