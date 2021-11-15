@@ -146,4 +146,4 @@ public class Page901Activity extends AppCompatActivity {
     public String imgurlString(final String img2){
         return Urls.url1+"/LoginRegister/images/"+img2;
     }
-}
+} 
