@@ -144,7 +144,7 @@ public class Page9Activity extends AppCompatActivity implements OnMapReadyCallba
                                 System.out.println("longitude :"+longitude);
 
 
-                                history hh = new history(latitude, longitude);
+                                history hh = new history("",latitude, longitude);
                                 historyArrayList.add(hh);
 
                             } catch (JSONException e) {
