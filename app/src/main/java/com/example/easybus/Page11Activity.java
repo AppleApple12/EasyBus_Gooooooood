@@ -2,14 +2,19 @@ package com.example.easybus;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 
+import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.Canvas;
 import android.graphics.Color;
-import android.os.AsyncTask;
+import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
@@ -19,55 +24,31 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
+import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
-import com.google.android.gms.maps.model.CameraPosition;
-import com.google.android.gms.maps.model.Dash;
-import com.google.android.gms.maps.model.Dot;
-import com.google.android.gms.maps.model.Gap;
+import com.google.android.gms.maps.model.BitmapDescriptor;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
-import com.google.android.gms.maps.model.PatternItem;
-import com.google.android.gms.maps.model.Polyline;
 import com.google.android.gms.maps.model.PolylineOptions;
-
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-/**
- * An activity that displays a Google map with polylines to represent paths or routes,
- * and polygons to represent areas.
- */
 public class Page11Activity extends AppCompatActivity implements OnMapReadyCallback{
-
     ArrayList<history> historyArrayList;
-
 
     String dayStr, date, la, lo,getmail;
     Double latitude, longitude;
-
-
     private GoogleMap googleMap;
-
-
+    Dialog dialog;
+    Button nodatabtn;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_page11);
-
 
         historyArrayList = new ArrayList<>();
 
@@ -78,28 +59,30 @@ public class Page11Activity extends AppCompatActivity implements OnMapReadyCallb
         //從PAGE1101 傳過來的 年月日
         dayStr = intent.getStringExtra("dayStr");
         getmail = intent.getStringExtra("email");
-        System.out.println("dayStr : "+dayStr);
+        System.out.println("dayStr :"+dayStr);
         System.out.println("email : "+getmail);
 
         // Get the SupportMapFragment and request notification when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.r_map);
-        mapFragment.getMapAsync((OnMapReadyCallback) this);
+        mapFragment.getMapAsync( this);
 
-
+        dialog = new Dialog(Page11Activity.this);
+        dialog.setContentView(R.layout.nodata_dialog);
+        //刪除dialog方方的背景
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        nodatabtn = dialog.findViewById(R.id.nodatabtn);
         //跳頁回家長主頁
         ImageButton back = (ImageButton) findViewById(R.id.back);
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent it1 = new Intent(Page11Activity.this, Page1101Activity.class);
+                Intent it1 = new Intent(Page11Activity.this, Page10Activity.class);
                 startActivity(it1);
             }
         });
 
     }
-
-
 
 
     public void fetch_history(){
@@ -111,21 +94,26 @@ public class Page11Activity extends AppCompatActivity implements OnMapReadyCallb
 
                         for (int i = 0; i < array.length(); i++) {
                             try {
-
+                                String[] selectday;
                                 JSONObject object = array.getJSONObject(i);
                                 date = object.getString("date").trim();
+                                selectday = date.split(" ");
                                 la = object.getString("latitude").trim();
                                 lo = object.getString("longitude").trim();
                                 latitude = Double.parseDouble(la);
                                 longitude = Double.parseDouble(lo);
-
-
-                                history hh = new history(latitude, longitude);
-
-                                historyArrayList.add(hh);
+                               System.out.println("selectdate[0] :"+selectday[0]);
+//                                System.out.println("selectdate[1] :"+selectdate[1]);
+                                if(selectday[0].equals(dayStr)) {
+                                    System.out.println("TRUE");
+                                    history hh = new history(selectday[1],latitude, longitude);
+                                    //hh.setDate(selectday[1]);
+                                    historyArrayList.add(hh);
+                                }else{
+                                    continue;
+                                }
 
 //                                System.out.println("Get()");
-//                                System.out.println("date :"+date);
 //                                System.out.println("latitude :"+latitude);
 //                                System.out.println("longitude :"+longitude);
 
@@ -134,12 +122,26 @@ public class Page11Activity extends AppCompatActivity implements OnMapReadyCallb
                             }
                         }
                         System.out.println("historyArrayList :"+historyArrayList.size());
+                        if(historyArrayList.size()==0){
+                            dialog.show();
+                            nodatabtn.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    dialog.dismiss();
+                                    Intent intent = new Intent(Page11Activity.this,Page10Activity.class);
+                                    startActivity(intent);
+                                }
+                            });
+                        }
                         //PolylineOptions polylineOpt = new PolylineOptions();
                         ArrayList<LatLng> points = new ArrayList<>();
                         for(history h : historyArrayList){
                             LatLng latlng = new LatLng(h.getLatitude(), h.getLongitude());
-                            googleMap.addMarker(new  MarkerOptions().position(latlng).title("hiiiiii"));
+                            googleMap.addMarker(new  MarkerOptions().position(latlng).title(h.getDate())
+                            .icon(bitmapDescriptorFromVector(getApplicationContext(),R.drawable.ic_baseline_brightness_1_24)));
                             points.add(latlng);
+
+                            googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latlng,14));
                         }
                         PolylineOptions polylineOptions = new PolylineOptions().width(3);
                         for(int i = 0;i<points.size();i++){
@@ -151,7 +153,7 @@ public class Page11Activity extends AppCompatActivity implements OnMapReadyCallb
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                //Toast.makeText(Page11Activity.this, error.toString(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(Page11Activity.this, error.toString(), Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -160,10 +162,19 @@ public class Page11Activity extends AppCompatActivity implements OnMapReadyCallb
     }
     @Override public void onMapReady(GoogleMap mMap) {
         googleMap = mMap;
-        LatLng schoollatlng = new LatLng(24.225431, 120.577063);
-        mMap.addMarker(new MarkerOptions().
-                position(schoollatlng).title("MyLocation"));
+
         fetch_history();
 
     }
+    private BitmapDescriptor bitmapDescriptorFromVector (Context context, int vectorResId){
+        Drawable vectorDrawable=ContextCompat.getDrawable(context,vectorResId);
+        vectorDrawable.setBounds(0,0,vectorDrawable.getIntrinsicWidth(),
+                vectorDrawable.getIntrinsicHeight());
+        Bitmap bitmap = Bitmap.createBitmap(vectorDrawable.getIntrinsicWidth(),
+                vectorDrawable.getIntrinsicHeight(),Bitmap.Config.ARGB_8888);
+        Canvas canvas = new Canvas(bitmap);
+        vectorDrawable.draw(canvas);
+        return BitmapDescriptorFactory.fromBitmap(bitmap);
+    }
+
 }

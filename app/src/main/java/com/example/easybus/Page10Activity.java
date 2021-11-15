@@ -165,9 +165,15 @@ public class Page10Activity extends AppCompatActivity {
             @Override
             public void onDayClick(int day, String dayStr, DayFinish finish) {
                 Toast.makeText(Page10Activity.this,"點擊了日期："+dayStr,Toast.LENGTH_SHORT).show();
-                Log.w("","點擊了日期："+dayStr);
+                String selectday[];
+                String clickday;
+                selectday = dayStr.split("-");
+                if(Integer.parseInt(selectday[2])<10)
+                    selectday[2]="0"+selectday[2];
+                clickday =selectday[0]+"-"+selectday[1]+"-"+selectday[2];
+                Log.w("","點擊了日期："+clickday);
                 Intent intent =new Intent(Page10Activity.this, Page1101Activity.class);
-                intent.putExtra("dayStr",dayStr);
+                intent.putExtra("dayStr",clickday);
                 startActivity(intent);
             }
         });

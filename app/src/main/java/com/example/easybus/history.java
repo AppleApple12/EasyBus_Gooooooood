@@ -22,10 +22,12 @@ public class history extends Application {
     double latitude;      //緯度
     double longitude;     //經度
     public history(){}
-    public history( double latitude, double longitude) {
+    public history( String date,double latitude, double longitude) {
+        this.date = date;
         this.latitude = latitude;
         this.longitude = longitude;
     }
+
 
     public String getDate() {
         return date;
