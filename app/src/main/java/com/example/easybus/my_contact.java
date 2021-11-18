@@ -68,6 +68,7 @@ public class my_contact extends AppCompatActivity {
         dialog = new Dialog(my_contact.this);
         mPforfilepic = findViewById(R.id.profilepic);
         dialog.setContentView(R.layout.nofriend_dialog);
+
         //刪除dialog方方的背景
         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         clickme=dialog.findViewById(R.id.button10);
@@ -175,10 +176,7 @@ public class my_contact extends AppCompatActivity {
     //抓取使用者基本資料
     private void readUser(){
         String URL =Urls.url1+"/LoginRegister/fetch.php?email="+getmail;
-        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(
-                Request.Method.GET,
-                URL,
-                null,
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, URL, null,
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {

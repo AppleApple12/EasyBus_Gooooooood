@@ -24,6 +24,7 @@ import java.util.stream.Collectors;
 public class Page6ArticleAdapter extends RecyclerView.Adapter<Page6AritcleViewHolder> implements Filterable{
     ArrayList<Page6article> articles1;
     ArrayList<Page6article> articlesFilter;
+
     OnItemClickListener listener;
     public Page6ArticleAdapter() {
         articles1 = new ArrayList<>();
@@ -33,7 +34,6 @@ public class Page6ArticleAdapter extends RecyclerView.Adapter<Page6AritcleViewHo
     public void setData(ArrayList<Page6article> articles1){
         this.articles1 = articles1;
     }
-
 
     public interface OnItemClickListener{
         void onItemClick(View view,int position);
@@ -60,12 +60,6 @@ public class Page6ArticleAdapter extends RecyclerView.Adapter<Page6AritcleViewHo
             holder.txv_line.setTextSize(15);
         if(article.line_name.length()>22)
             holder.txv_linename.setTextSize(14);
-        //holder.txv_stampnum.setText("站序:"+article.stamp_num);
-        //holder.txv_chinesestamp.setText("中文站點名稱:"+article.chinese_stamp);
-        //holder.txv_longitude.setText("經度:"+article.longitude);
-        //holder.txv_latitude.setText("緯度:"+article.latitude);
-        //holder.txv_comeback.setText("去回:"+article.come_back);
-        //holder.txv_englishstamp.setText("英文站點名稱:"+article.english_stamp);
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override

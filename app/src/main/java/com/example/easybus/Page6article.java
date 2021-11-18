@@ -9,6 +9,33 @@ public class Page6article {
     String latitude;
     String come_back;
     String english_stamp;
+    String previous;
+    String current;
+    String time;
+
+    public String getTime() {
+        return time;
+    }
+
+    public void setTime(String time) {
+        this.time = time;
+    }
+
+    public String getPrevious() {
+        return previous;
+    }
+
+    public void setPrevious(String previous) {
+        this.previous = previous;
+    }
+
+    public String getCurrent() {
+        return current;
+    }
+
+    public void setCurrent(String current) {
+        this.current = current;
+    }
 
     public Page6article() {
     }
@@ -76,7 +103,5 @@ public class Page6article {
     public  void setEnglish_stamp(String english_stamp) {
         this.english_stamp = english_stamp;
     }
-
-
 
 }

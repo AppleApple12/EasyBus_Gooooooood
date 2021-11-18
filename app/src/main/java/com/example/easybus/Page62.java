@@ -68,9 +68,7 @@ public class Page62 extends AppCompatActivity {
     ArrayList<Page6article> articles;
     ArrayList<Page6article> articles1;
     String getmail;
-
     String  url = "https://datacenter.taichung.gov.tw/swagger/OpenData/6af70a9e-4afc-4f54-bf56-01dd84ee8972";
-
     ArrayList<HashMap<String,String>> nameArrayList = new ArrayList<>();
     ArrayList<HashMap<String,String>> resultArrayList = new ArrayList<>();
     RequestQueue requestQueue2;
@@ -118,17 +116,12 @@ public class Page62 extends AppCompatActivity {
         articles = new ArrayList<>();
         articles1 = new ArrayList<>();
         getData();
-        /*
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                getData();
-            }
-        });*/
+
         adapter.setOnItemClick(new Page6ArticleAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
-                txv1 = articles1.get(position).line;
+                txv1 = articles1.get(position).line; //點擊哪條路線(300/301...)
+
                 try {
                     fetchInfo= new FetchInfo();
                     fetchInfo.execute();
@@ -221,12 +214,8 @@ public class Page62 extends AppCompatActivity {
                 }catch (Exception e){
                     Log.d("Page62_interfaceError",Log.getStackTraceString(e));
                 }
-
-
             }
         });
-
-
     }
 
     public void getData(){
@@ -251,7 +240,6 @@ public class Page62 extends AppCompatActivity {
                         article.setEnglish_stamp(JO.getString("英文站點名稱"));
                         articles.add(article);
 
-
                         if(i==0) {
                             articles1.add(article);
                         }else {
@@ -266,8 +254,6 @@ public class Page62 extends AppCompatActivity {
                                 articles1.add(article);
                             }
                         }
-
-
                     }
                 }catch (JSONException e){
                     Toast.makeText(Page62.this,"JSON is not valid!",Toast.LENGTH_LONG).show();
@@ -287,7 +273,6 @@ public class Page62 extends AppCompatActivity {
 
         RequestQueue requestQueue = Volley.newRequestQueue(this);
         requestQueue.add(jsonArrayRequest);
-
     }
 
     public boolean onCreateOptionsMenu(Menu menu){
@@ -371,13 +356,11 @@ public class Page62 extends AppCompatActivity {
             }
             response = jsonData.toString();
 
-
         } catch (MalformedURLException e) {
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
         }
-
         return response;
     }
 
@@ -468,7 +451,6 @@ public class Page62 extends AppCompatActivity {
                 asyncResponse.onDataReceivedFaild();
             }
         }
-
         @Override
         protected Void doInBackground(Void... voids) {
             response = connect(APIUrl);
@@ -476,6 +458,7 @@ public class Page62 extends AppCompatActivity {
         }
     }
 
+    //緊急按鈕
     @SuppressLint("LongLogTag")
     protected void makeCall(final String phone) {
         //Snackbar.make(v,"打電話給緊急連絡人",Snackbar.LENGTH_LONG).setAction("Action",null).show();

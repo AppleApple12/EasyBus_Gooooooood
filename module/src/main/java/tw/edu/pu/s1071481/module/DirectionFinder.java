@@ -25,13 +25,13 @@ import java.util.List;
 public class DirectionFinder {
 
     private static final String DIRECTION_URL_API = "https://maps.googleapis.com/maps/api/directions/json?";
-    private static final String GOOGLE_API_KEY = "AIzaSyCr_-3KbvHxSm9Gb38l7M2E_b8qzwHhcTI";
+    private static final String GOOGLE_API_KEY = "AIzaSyAR3ZSrF2IrlUPdjjAIlXNRaMEJU-wN3CI";
     private DirectionFinderListener listener;
     private String origin;
     private String destination;
 
     public DirectionFinder( DirectionFinderListener listener, String origin, String destination){
-        this.listener = listener;//
+        this.listener = listener;
         this.origin = origin;
         this.destination = destination;
     }
@@ -44,7 +44,7 @@ public class DirectionFinder {
     private String createUrl() throws UnsupportedEncodingException{
         String urlOrigin = URLEncoder.encode(origin,"utf-8");
         String urlDestination = URLEncoder.encode(destination,"utf-8");
-        return DIRECTION_URL_API+"origin="+urlOrigin+"&destination="+urlDestination+"&key="+GOOGLE_API_KEY;
+        return DIRECTION_URL_API+"origin="+urlOrigin+"&destination="+urlDestination+"&mode=walking&key="+GOOGLE_API_KEY;
     }
 
     private class DownloadRawData extends AsyncTask<String,Void,String> {

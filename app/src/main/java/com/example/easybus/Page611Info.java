@@ -2,14 +2,14 @@ package com.example.easybus;
 
 public class Page611Info {
     String htmlinstructions;
-    String shortname;
+    String travelMode2;
 
-    public String getShortname() {
-        return shortname;
+    public String getTravelMode2() {
+        return travelMode2;
     }
 
-    public void setShortname(String shortname) {
-        this.shortname = shortname;
+    public void setTravelMode2(String travelMode2) {
+        this.travelMode2 = travelMode2;
     }
 
     public String getHtmlinstructions() {

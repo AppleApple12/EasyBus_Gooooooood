@@ -25,7 +25,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Page1101Activity"></activity>
+        <activity android:name=".Page6121"></activity>
+        <activity android:name=".Page612" />
+        <activity android:name=".Page1101Activity" />
         <activity android:name=".Page11Activity" />
 
         <receiver
@@ -57,20 +59,17 @@
         <activity android:name=".Forgotpassword" />
         <activity android:name=".Page801Activity" />
         <activity android:name=".Page701Activity" />
-        <activity android:name=".Login" />
         <activity android:name=".Register" />
         <activity android:name=".Page10Activity" />
         <activity android:name=".Page9Activity" />
         <activity android:name=".Page5011Activity" />
         <activity android:name=".Page5012Activity" />
-        <activity android:name=".Login2" />
-        <activity android:name=".SignUp2" />
         <activity android:name=".Login3" />
         <activity android:name=".Signup3" />
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="@string/google_maps_key" />
+            android:value="AIzaSyAR3ZSrF2IrlUPdjjAIlXNRaMEJU-wN3CI" />
         <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
