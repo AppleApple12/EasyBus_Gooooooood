@@ -1,4 +1,4 @@
-package com.example.easybus;/////
+package com.example.easybus;
 
 public class BusInfo {
     String htmlinstructions;
