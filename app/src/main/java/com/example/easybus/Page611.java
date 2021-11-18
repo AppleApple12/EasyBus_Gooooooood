@@ -33,13 +33,13 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 
 public class Page611 extends AppCompatActivity {
-    String Routename,urlOrigin,urlDestination,getmail,url;
+    String Routename,urlOrigin,urlDestination,getmail,url,urlRoutename,previous,current;
     Page611InfoAdaptor adaptor;
     ArrayList<Page611Info> page611infos;
     TextView mOri2,mDes2;
     RequestQueue requestQueue2;
     private static final String DIRECTION_URL_API = "https://maps.googleapis.com/maps/api/directions/json?";
-    private static final String GOOGLE_API_KEY = "AIzaSyCr_-3KbvHxSm9Gb38l7M2E_b8qzwHhcTI";
+    private static final String GOOGLE_API_KEY = "AIzaSyAR3ZSrF2IrlUPdjjAIlXNRaMEJU-wN3CI";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,6 +64,16 @@ public class Page611 extends AppCompatActivity {
         SharedPreferences email = getSharedPreferences("email", MODE_PRIVATE);
         getmail = email.getString("Email", "");
 
+        requestQueue2 = Volley.newRequestQueue(this);
+        //浮動按鈕撥打給緊急聯絡人
+        FloatingActionButton fab = (FloatingActionButton)findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                readUser();
+            }
+        });
+
         //返回搭車列表(page61)
         mBack.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -73,17 +83,7 @@ public class Page611 extends AppCompatActivity {
             }
         });
 
-        requestQueue2 = Volley.newRequestQueue(this);
-        //浮動按鈕撥打給緊急聯絡人
-        com.google.android.material.floatingactionbutton.FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                readUser();
-            }
-        });
-
-        //傳值(路線名稱)
+        //取值(路線名稱)
         Bundle bundle = getIntent().getExtras();
         Routename= bundle.getString("routename");
         mTxvId.setText(Routename);
@@ -93,7 +93,6 @@ public class Page611 extends AppCompatActivity {
 
     private void fetchOriDes() {
         String URL =Urls.url1+"/LoginRegister/FetchRouteDetail.php?email="+getmail+"&routename="+Routename;
-        //Request.Method.GET,URL,null我自己加的
         StringRequest stringrequest3 = new StringRequest(Request.Method.GET,URL,
                 new Response.Listener<String>() {
                     @Override
@@ -101,10 +100,11 @@ public class Page611 extends AppCompatActivity {
                         try {
                             JSONArray array =new JSONArray(reponse);
                             JSONObject object = array.getJSONObject(0);
+                            urlRoutename = object.getString("routename").trim();
                             urlOrigin = object.getString("origin").trim();
                             urlDestination = object.getString("destination").trim();
                             url=DIRECTION_URL_API+"origin="+urlOrigin+"&destination="+urlDestination+"&mode=transit&transit_mode=bus&language=zh-TW&key="+GOOGLE_API_KEY;
-                            getData(url,urlOrigin,urlDestination);
+                            getData(url,urlOrigin,urlDestination,urlRoutename);
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
@@ -118,13 +118,13 @@ public class Page611 extends AppCompatActivity {
         Volley.newRequestQueue(Page611.this).add(stringrequest3);
     }
 
-    private void getData(final String url, String urlOrigin, final String urlDestination) { //抓公車JSON
+    private void getData(final String url, String urlOrigin, final String urlDestinatione,final String urlRoutename) { //抓公車JSON
         final ProgressDialog progressDialog=new ProgressDialog(this);
         progressDialog.setMessage("載入中...");
         progressDialog.show();
         mOri2.setText(urlOrigin);
         mDes2.setText(urlDestination);
-        
+
         final JsonObjectRequest jsonObjectRequest2=new JsonObjectRequest(url,null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
@@ -142,10 +142,17 @@ public class Page611 extends AppCompatActivity {
                             b.setHtmlinstructions(urlDestination);
                         }else if(travelMode.equals("WALKING")){
                             String Htmlinstructions=ObjSteps.getString("html_instructions");
+                            if(Htmlinstructions.equals("永豐棧麗致酒店"))
+                                Htmlinstructions="步行到永豐棧酒店";
                             b.setHtmlinstructions(Htmlinstructions.substring(3));
                         }else{
-                            b.setHtmlinstructions (ObjSteps.getJSONObject("transit_details").getJSONObject("arrival_stop").getString("name"));
+                            String Htmlinstructions=ObjSteps.getJSONObject("transit_details").getJSONObject("arrival_stop").getString("name");
+                            if(Htmlinstructions.equals("永豐棧麗致酒店")){
+                                Htmlinstructions="永豐棧酒店";
+                            }
+                            b.setHtmlinstructions(Htmlinstructions);
                         }
+                        b.setTravelMode2(travelMode);
                         page611infos.add(b);
                     }
                 }catch (JSONException e){
@@ -154,6 +161,40 @@ public class Page611 extends AppCompatActivity {
                 adaptor.setData(page611infos);
                 adaptor.notifyDataSetChanged();
                 progressDialog.dismiss();
+
+                //點擊item
+                adaptor.setOnItemClick(new Page611InfoAdaptor.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(View view, int position) {
+                        current=page611infos.get(position).getHtmlinstructions();
+                        if(position!=0)
+                            previous = page611infos.get(position - 1).getHtmlinstructions();
+
+                        if(page611infos.get(position).getTravelMode2().equals("WALKING")) {
+                            Intent it6121 = new Intent(Page611.this, Page6121.class);
+                            Bundle bundle = new Bundle();
+                            //傳值(routename)
+                            if(position!=0) {
+                                bundle.putString("routename", urlRoutename);
+                                bundle.putString("Previous", previous);
+                                bundle.putString("Current", current);
+                            }
+                            it6121.putExtras(bundle);
+                            startActivity(it6121);
+                        }else{
+                            Intent it612 = new Intent(Page611.this, Page612.class);
+                            Bundle bundle = new Bundle();
+                            //傳值(routename)
+                            if(position!=0) {
+                                bundle.putString("routename", urlRoutename);
+                                bundle.putString("Previous", previous);
+                                bundle.putString("Current", current);
+                            }
+                            it612.putExtras(bundle);
+                            startActivity(it612);
+                        }
+                    }
+                });
             }
         }, new Response.ErrorListener() {
             @Override
@@ -182,7 +223,6 @@ public class Page611 extends AppCompatActivity {
             Toast.makeText(Page611.this,
                     "Call faild, please try again later.", Toast.LENGTH_SHORT).show();
         }
-        //startActivity(call        );
     }
     public void readUser(){
         String URL =Urls.url1+"/LoginRegister/fetch.php?email="+getmail;

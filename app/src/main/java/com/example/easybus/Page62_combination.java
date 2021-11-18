@@ -121,34 +121,7 @@ public class Page62_combination extends AppCompatActivity {
             arrayList.add(hashMap);
             destination = str1[i+1];
         }
-        /*
-        try {
-            fetchInfo= new FetchInfo();
-            fetchInfo.execute();
-            fetchInfo.setOnAsyncResponse(new AsyncResponse() {
-                @Override
-                public void onDataReceviedSuccess(ArrayList<HashMap<String, String>> hashMapArrayList) {
-                    resultArrayList = hashMapArrayList;
-                    for (int i = 0;i<resultArrayList.size();i++){
-                        Set<String> key = resultArrayList.get(i).keySet();
-                        for(String value:key){
-                            String spare[] = value.split(" ");
-                            Log.d("Page62",i+":  destination: "+spare[0]+",stopname: "+spare[1]+"    /   "+resultArrayList.get(i).get(value));
-                        }
 
-                    }
-                }
-
-                @Override
-                public void onDataReceivedFaild() {
-                    Log.d("Page62_interface","Failed!");
-                }
-            });
-        }catch (Exception e){
-            Log.d("Page62_interfaceError",Log.getStackTraceString(e));
-        }
-
-         */
         final int[] flag = {1};
         final Button btn1 = (Button)findViewById(R.id.btn_change);
         btn1.setText("往"+destination);
@@ -184,7 +157,6 @@ public class Page62_combination extends AppCompatActivity {
             }
         });
         //取前頁值
-
         TextView textView = (TextView)findViewById(R.id.txvtop);
         textView.setText(txv1);
 
@@ -193,12 +165,7 @@ public class Page62_combination extends AppCompatActivity {
         //recyclerView.addItemDecoration(new DividerItemDecoration(this,DividerItemDecoration.VERTICAL));
         myListAdapter = new MyAdapter();
         recyclerView.setAdapter(myListAdapter);
-
-
-
-
     }
-
 
     public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder>{
         ArrayList<page62_testName> page62TestNames;
@@ -214,7 +181,6 @@ public class Page62_combination extends AppCompatActivity {
             String str1 = arrayList.get(position).get("txv");
             String str2[] = str1.split(" ");
             holder.txv.setText(str2[1]);
-
 
             if(str2[0].equals("已過站")||str2[0].indexOf(":")!=-1){
                 holder.txv_2.setTextColor(Color.parseColor("#ffffff"));
@@ -250,9 +216,7 @@ public class Page62_combination extends AppCompatActivity {
             this.page62TestNames = page62TestNames;
 
         }
-
     }
-
 
     public static String Signature(String xData,String AppKey) throws SignatureException {
         String result ;
@@ -342,7 +306,6 @@ public class Page62_combination extends AppCompatActivity {
             Toast.makeText(Page62_combination.this,
                     "Call faild, please try again later.", Toast.LENGTH_SHORT).show();
         }
-        //startActivity(call        );
     }
     public void readUser(){
         String URL =Urls.url1+"/LoginRegister/fetch.php?email="+getmail;
@@ -372,75 +335,4 @@ public class Page62_combination extends AppCompatActivity {
         );
         requestQueue2.add(jsonObjectRequest);
     }
-/*
-    public class FetchInfo extends AsyncTask<Void, Void, Void> {
-        ProgressDialog pd;
-        String url2 = "https://ptx.transportdata.tw/MOTC/v2/Bus/EstimatedTimeOfArrival/City/Taichung/";
-        final String APIUrl = url2+txv1+"?$format=JSON";
-        String response;
-        public AsyncResponse asyncResponse;
-        public void setOnAsyncResponse(AsyncResponse asyncResponse){
-            this.asyncResponse = asyncResponse;
-        }
-        @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
-            pd = new ProgressDialog(Page62_combination.this);
-            pd.setCancelable(false);
-            pd.setMessage("Downloading...Please wait!");
-            pd.setProgress(0);
-            pd.show();
-        }
-
-        @Override
-        protected void onPostExecute(Void aVoid) {
-            super.onPostExecute(aVoid);
-            pd.dismiss();
-            Toast.makeText(getApplicationContext(),"Connection successful!",Toast.LENGTH_LONG).show();
-            try {
-                if(response!=null && !response.equals("")){
-                    JSONArray jsonArray = new JSONArray(response);
-                    if(jsonArray.length()>0){
-                        JSONObject jsonObject;
-                        for(int i = 0;i<jsonArray.length();i++) {
-                            jsonObject = jsonArray.getJSONObject(i);
-                            HashMap<String,String>hashMap = new HashMap<>();
-                            if(jsonObject.getString("StopStatus").equals("0")) {
-                                //站名
-                                JSONObject jsonObject1 = jsonObject.getJSONObject("StopName");
-                                String stopname = jsonObject1.getString("Zh_tw");
-                                int destination =jsonObject.getInt("Direction");
-
-                                //車牌,預估時間
-                                //testName.setEstimate(jsonObject.getString("EstimateTime"));
-                                //testName.setPlateNumb(jsonObject.getString("PlateNumb"));
-                                String estimate = jsonObject.getString("EstimateTime");
-                                hashMap.put(destination+" "+stopname,estimate);
-                                nameArrayList.add(hashMap);
-
-                                Log.d("Page62_in",i+":  destination: "+destination+",StopName: "+stopname+",estimateTime: "+estimate);
-                            }
-                        }
-                        asyncResponse.onDataReceviedSuccess(nameArrayList);
-                    }
-
-                }
-            }catch (JSONException e) {
-                e.printStackTrace();
-                Log.d("page62_json",Log.getStackTraceString(e));
-                asyncResponse.onDataReceivedFaild();
-            }
-        }
-
-        @Override
-        protected Void doInBackground(Void... voids) {
-            response = connect(APIUrl);
-            return null;
-        }
-
-
-    }
-
- */
-
 }

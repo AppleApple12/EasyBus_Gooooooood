@@ -12,6 +12,7 @@ import java.util.ArrayList;
 
 public class Page611InfoAdaptor extends RecyclerView.Adapter<Page611InfoViewHolder> {
     ArrayList<Page611Info> page611infos;
+    OnItemClickListener listener;
 
     public Page611InfoAdaptor() {
         page611infos=new ArrayList<>();
@@ -30,14 +31,29 @@ public class Page611InfoAdaptor extends RecyclerView.Adapter<Page611InfoViewHold
     }
 
     @Override
-    public void onBindViewHolder(@NonNull Page611InfoViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull Page611InfoViewHolder holder, final int position) {
         Page611Info page611info=page611infos.get(position);
         holder.mStep.setText("步驟"+(position+1));
         holder.mHtmlText.setText(page611info.htmlinstructions);
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (listener!=null){
+                    listener.onItemClick(v,position);
+                }
+            }
+        });
     }
 
     @Override
     public int getItemCount() {
         return page611infos.size();
+    }
+
+    public interface OnItemClickListener{
+        void onItemClick(View view,int position);
+    }
+    public void setOnItemClick(OnItemClickListener listener){
+        this.listener = listener;
     }
 }

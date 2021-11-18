@@ -20,13 +20,13 @@ import java.util.List;
 public class take_bus_Adapter extends RecyclerView.Adapter<take_bus_Adapter.take_bus_Holder>{
     Context context;
     List<take_bus_businfo> takeBusBusinfoList;
-   OnItemClickListener listener;
+    OnItemClickListener listener;
+
     public take_bus_Adapter (Context context,List<take_bus_businfo> takeBusBusinfoList){
         this.context = context;
         this.takeBusBusinfoList = takeBusBusinfoList;
     }
     @NonNull
-    //@org.jetbrains.annotations.NotNull
     @Override
     public take_bus_Holder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View takebusLayout = LayoutInflater.from(parent.getContext()).inflate(R.layout.take_bus_listview,parent,false);
@@ -66,13 +66,6 @@ public class take_bus_Adapter extends RecyclerView.Adapter<take_bus_Adapter.take
                 }
             }
         });
-            //Glide.with(context).load(R.drawable.working).into(holder.imageView);
-
-
-
-        //Glide.with(context).load(b.getImage()).into(holder.imageView);
-
-
     }
 
     @Override

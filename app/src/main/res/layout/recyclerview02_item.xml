@@ -41,11 +41,11 @@
         android:id="@+id/txv"
         android:layout_width="250dp"
         android:layout_height="30dp"
-        android:layout_marginTop="15dp"
         android:layout_marginLeft="10dp"
-        android:text="台中國際機場"
+        android:layout_marginTop="15dp"
+        android:background="@drawable/page601_txv2"
         android:gravity="center"
+        android:text="台中國際機場"
         android:textColor="#000000"
-        android:textSize="20dp"
-        android:background="@drawable/page601_txv2" />
+        android:textSize="20dp" />
 </LinearLayout>
