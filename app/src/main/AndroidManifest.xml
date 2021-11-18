@@ -59,7 +59,7 @@
         <activity android:name=".Forgotpassword" />
         <activity android:name=".Page801Activity" />
         <activity android:name=".Page701Activity" />
-        <activity android:name=".Register" />
+        <activity android:name=".Page901Activity" />
         <activity android:name=".Page10Activity" />
         <activity android:name=".Page9Activity" />
         <activity android:name=".Page5011Activity" />
