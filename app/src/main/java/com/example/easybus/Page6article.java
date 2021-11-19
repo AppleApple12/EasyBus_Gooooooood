@@ -1,5 +1,5 @@
 package com.example.easybus;
-
+/*要*/
 public class Page6article {
     String line;
     String line_name;

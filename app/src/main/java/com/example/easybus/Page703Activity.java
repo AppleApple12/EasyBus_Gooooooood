@@ -1,5 +1,5 @@
 package com.example.easybus;
-
+/*注意事項影片*/
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 

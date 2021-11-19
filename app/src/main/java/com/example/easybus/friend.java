@@ -1,5 +1,5 @@
 package com.example.easybus;
-
+/*我的聯絡人*/
 public class friend {
     String F_name,F_phone,F_image;
     private String imageUrl;

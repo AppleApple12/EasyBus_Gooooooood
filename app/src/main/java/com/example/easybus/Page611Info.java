@@ -1,5 +1,5 @@
 package com.example.easybus;
-
+/*搭車*/
 public class Page611Info {
     String htmlinstructions;
     String travelMode2;

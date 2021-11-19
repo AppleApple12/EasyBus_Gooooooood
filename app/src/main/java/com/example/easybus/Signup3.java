@@ -1,5 +1,5 @@
 package com.example.easybus;
-
+/*註冊*/
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 

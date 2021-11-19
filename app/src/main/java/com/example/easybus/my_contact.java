@@ -47,8 +47,8 @@ public class my_contact extends AppCompatActivity {
     RecyclerView mrecyclerView;
     RecyclerView imgrecyclerView;
     friendAdapter friendAdapter;
-    ImageListAdapter imageListAdapter;
-    List<ImageList>imageLists;
+
+
     List<friend> friendList;
     Dialog dialog;
     Button clickme;
@@ -85,7 +85,6 @@ public class my_contact extends AppCompatActivity {
         imgrecyclerView.setLayoutManager(ImageLayoutManager);*/
 
         friendList = new ArrayList<>();
-        imageLists =new ArrayList<>();
 
         requestQueue = Volley.newRequestQueue(this);
 
@@ -148,7 +147,7 @@ public class my_contact extends AppCompatActivity {
                                     e.printStackTrace();
                                 }
                             }
-                        friendAdapter = new friendAdapter(my_contact.this,friendList,imageLists);
+                        friendAdapter = new friendAdapter(my_contact.this,friendList);
                         mrecyclerView.setAdapter(friendAdapter);
                         /*imageListAdapter = new ImageListAdapter(my_contact.this, imageLists);
                         mrecyclerView.setAdapter(imageListAdapter);

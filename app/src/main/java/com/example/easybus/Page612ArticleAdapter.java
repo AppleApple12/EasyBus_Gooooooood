@@ -1,5 +1,5 @@
 package com.example.easybus;
-
+/*搭車*/
 import android.graphics.Color;
 import android.view.View;
 import android.view.ViewGroup;

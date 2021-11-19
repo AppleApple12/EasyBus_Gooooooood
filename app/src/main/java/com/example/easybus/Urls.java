@@ -1,4 +1,5 @@
 package com.example.easybus;
+/*ip*/
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 

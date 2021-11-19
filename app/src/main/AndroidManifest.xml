@@ -46,8 +46,6 @@
         <activity
             android:name=".SelectPicPopupWindow"
             tools:ignore="Instantiatable" />
-        <activity android:name=".AddFamMember" />
-        <activity android:name=".edit" />
         <activity android:name=".qrscanner" />
         <activity android:name=".emergency_contact" />
         <activity android:name=".Page8Activity_caregiver" />
@@ -55,7 +53,6 @@
         <activity android:name=".my_contact" />
         <activity android:name=".qrcode_page" />
         <activity android:name=".Forgotpassword" />
-        <activity android:name=".Page801Activity" />
         <activity android:name=".Page701Activity" />
         <activity android:name=".Page901Activity" />
         <activity android:name=".Page10Activity" />
@@ -90,7 +87,6 @@
         <activity android:name=".Page6Activity" />
         <activity android:name=".Page3Activity" />
         <activity android:name=".Page4Activity" />
-        <activity android:name=".Page2Activity" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

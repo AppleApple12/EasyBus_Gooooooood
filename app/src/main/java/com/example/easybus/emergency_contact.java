@@ -1,5 +1,5 @@
 package com.example.easybus;
-
+/*新增緊急聯絡人*/
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 

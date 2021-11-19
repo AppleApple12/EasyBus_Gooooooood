@@ -1,5 +1,5 @@
 package com.example.easybus;
-
+/*公車資訊*/
 public class BusInfo {
     String htmlinstructions;
     String shortname;

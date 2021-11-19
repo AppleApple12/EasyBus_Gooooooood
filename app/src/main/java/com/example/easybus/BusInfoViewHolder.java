@@ -1,5 +1,5 @@
 package com.example.easybus;
-
+/*公車資訊*/
 import android.util.TypedValue;
 import android.view.View;
 import android.widget.ImageView;
