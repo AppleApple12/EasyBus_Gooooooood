@@ -77,6 +77,7 @@ public class Page62_combination extends AppCompatActivity {
             public void onClick(View v) {
                 Intent in2 = new Intent(Page62_combination.this,Page62.class);
                 startActivity(in2);
+
             }
         });
 
