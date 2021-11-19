@@ -1,6 +1,5 @@
-
 package com.example.easybus;
-
+/*搭車 列表*/
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;

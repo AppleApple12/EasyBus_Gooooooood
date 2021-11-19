@@ -1,5 +1,5 @@
 package com.example.easybus;
-
+/*需求者背景定位*/
 import android.annotation.SuppressLint;
 import android.app.Service;
 import android.content.BroadcastReceiver;

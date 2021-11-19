@@ -1,5 +1,5 @@
 package com.example.easybus;
-
+/*我的聯絡人*/
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,12 +19,12 @@ import java.util.List;
 public class friendAdapter extends RecyclerView.Adapter<friendAdapter.frinedHolder>{
     Context context;
     List<friend> friendList;
-    List<ImageList> imageLists;
+
     AdapterView.OnItemClickListener listener;
-    public friendAdapter(Context context, List<friend> friendList,List<ImageList> imageLists) {
+    public friendAdapter(Context context, List<friend> friendList) {
         this.context = context;
         this.friendList = friendList;
-        this.imageLists = imageLists;
+
     }
 
     @NonNull

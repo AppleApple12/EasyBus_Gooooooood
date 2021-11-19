@@ -1,5 +1,5 @@
 package com.example.easybus;
-
+/*QRcode頁面*/
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 

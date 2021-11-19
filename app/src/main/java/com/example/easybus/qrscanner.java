@@ -1,5 +1,5 @@
 package com.example.easybus;
-
+/*QRcode掃描、加好友、判斷是否已存在好友*/
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;

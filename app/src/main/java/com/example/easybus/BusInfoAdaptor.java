@@ -1,5 +1,5 @@
 package com.example.easybus;
-
+/*公車資訊*/
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;

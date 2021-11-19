@@ -1,5 +1,5 @@
 package com.example.easybus;
-
+/*注意事項影片*/
 import android.content.Intent;
 import android.media.MediaPlayer;
 import android.net.Uri;
