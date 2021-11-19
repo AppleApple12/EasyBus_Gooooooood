@@ -108,7 +108,7 @@ public class Page3Activity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_page3);
-       
+
         instance = this;
 
         Dexter.withActivity(this)
