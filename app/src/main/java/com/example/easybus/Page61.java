@@ -118,7 +118,7 @@ public class Page61 extends AppCompatActivity {
                             public void onItemClick(View view, int position) {
                                 final String name=takeBusBusinfoList.get(position).getRoutename();
                                 if(name.equals(" 公  車  查  詢 ")){
-                                    Intent it1 = new Intent(Page61.this,Page62.class);
+                                    Intent it1 = new Intent(Page61.this,Page6Activity.class);
                                     startActivity(it1);
                                 }else{
                                     String URL =Urls.url1+"/LoginRegister/SearchRouteN.php?email="+getmail+"&routename="+name;

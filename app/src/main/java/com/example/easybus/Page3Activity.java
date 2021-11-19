@@ -84,7 +84,7 @@ public class Page3Activity extends AppCompatActivity {
     TextView test;
     String email, getmail, dateString;//
     RequestQueue requestQueue;
-    com.example.easybus.FloatingActionButton f;
+    //com.example.easybus.FloatingActionButton f;
 
     LocationManager locationManager;               //宣告定位管理控制
 
@@ -103,30 +103,12 @@ public class Page3Activity extends AppCompatActivity {
     }
 
 
-    /*final LocationCallback locationCallback = new LocationCallback() {
-        @Override
-        public void onLocationResult(@NonNull LocationResult locationResult) {
-            if (locationResult == null) {
-                return;
-            }
-            int i =0;
-            for (Location location : locationResult.getLocations()) {
-                Log.d(TAG, "onLocationResult : " + location.toString());
-                Log.d(TAG,"getLongitude : "+location.getLongitude());//經度
-                Log.d(TAG,"getLatitude : "+location.getLatitude());//緯度
-                latitude1 = location.getLatitude();
-                longitude1 = location.getLongitude();
-                //if(position.size()<1)
-                   // position.add( new Position(latitude1,longitude1));
-            }
-        }
-    };*/
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_page3);
-        //test = findViewById(R.id.test);
+       
         instance = this;
 
         Dexter.withActivity(this)

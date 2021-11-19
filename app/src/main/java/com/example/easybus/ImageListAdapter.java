@@ -32,7 +32,7 @@ public class ImageListAdapter extends RecyclerView.Adapter<ImageListAdapter.imag
     @Override
     public void onBindViewHolder(@NonNull ImageListAdapter.imagelistHolder holder, int position) {
         ImageList i = imageLists.get(position);
-        //Glide.with(context).load(i.getImageUrl()).into(holder.img);
+
         Picasso.with(context).load(i.getImageUrl()).into(holder.img);
     }
 

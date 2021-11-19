@@ -346,16 +346,6 @@ public class calendar extends View{
         canvas.drawText(m,getWidth()-FontUtil.getFontlength(mPaint,Mtoday[1]),275,mPaint);
         mPaint.setShadowLayer(5f,2,2,Color.GRAY);   //增加陰影
 
-        /*繪製年份
-        mPaint.setTextSize(mTextSizeYear);
-        mPaint.setColor(mTextColorYear);
-        Calendar mCalender = new GregorianCalendar();
-        int year = mCalender.get(Calendar.YEAR);
-        y = String.valueOf(year);
-        float textYear = FontUtil.getFontlength(mPaint,y);
-        float textYearStart = (getWidth()-textYear)/2;
-        canvas.drawText(y,mYearSpac,mYearSpac+FontUtil.getFontLeading(mPaint),mPaint);*/
-
         //繪製年份
         mPaint.setTextSize(mTextSizeYear);
         mPaint.setColor(mTextColorYear);
@@ -489,41 +479,6 @@ public class calendar extends View{
             int x = left+(columnWidth-len)/2;
             canvas.drawText(day+"",x,top+mLineSpac+dayTextLeading,mPaint);
 
-            /*繪製次數
-            mPaint.setTextSize(mTextSizePre);
-            Page10Activity.DayFinish finish = map.get(day);
-            String preStr = "0/0";
-            if(isCurrentMonth){
-                if(day>currentDay){
-                    mPaint.setColor(mTextColorPreNull);
-                }else if (finish!=null){
-                    //區分完成.未完成
-                    if(finish.finish>=finish.all){
-                        mPaint.setColor(mTextColorPreFinish);
-                    }else{
-                        mPaint.setColor(mTextColorPreUnFinish);
-                    }
-                    preStr = finish.finish+"/"+finish.all;
-                }else{
-                    mPaint.setColor(mTextColorPreNull);
-                }
-            }else {
-                if(finish!=null){
-                    //區分完成.未完成
-                    if(finish.finish>=finish.all){
-                        mPaint.setColor(mTextColorPreFinish);
-                    }else{
-                        mPaint.setColor(mTextColorPreUnFinish);
-                    }
-                    preStr = finish.finish+"/"+finish.all;
-                }else{
-                    mPaint.setColor(mTextColorPreNull);
-                }
-            }
-
-            len = (int)FontUtil.getFontlength(mPaint,preStr);
-            x = left+(columnWidth-len)/2;
-            canvas.drawText(preStr,x,topPre+mTextSpac+preTextLeading,mPaint);*/
         }
     }
 
