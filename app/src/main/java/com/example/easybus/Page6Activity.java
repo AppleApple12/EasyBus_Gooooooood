@@ -104,10 +104,10 @@ public class Page6Activity extends AppCompatActivity{
             @Override
             public void onItemClick(View view, int position) {
                 Intent it1 = new Intent(Page6Activity.this,Page601.class);
-                Log.d("Page6", String.valueOf(articles1.size()));
-                //String str1 = adapter.getItemId(position);
-                String str1 = articles1.get(position).line;
-                it1.putExtra("txv1",str1);
+                TextView str1 = (TextView) view.findViewById(R.id.txvline);
+                String string = str1.getText().toString();
+                //String str1 = articles1.get(position).line;
+                it1.putExtra("txv1",string);
                 startActivity(it1);
             }
         });
@@ -164,7 +164,7 @@ public class Page6Activity extends AppCompatActivity{
 
         @Override
         protected Void doInBackground(Void... voids) {
-            result = Page62.connect(API);
+            result = connect(API);
             return null;
         }
     }
@@ -186,5 +186,77 @@ public class Page6Activity extends AppCompatActivity{
         });
         return super.onCreateOptionsMenu(menu);
     }
+    public static String Signature(String xData,String AppKey) throws SignatureException {
+        String result ;
+        try{
+            SecretKeySpec secretKeySpec = new SecretKeySpec(AppKey.getBytes("UTF-8"),"HmacSHA1");
+            Mac mac = Mac.getInstance("HmacSHA1");
+            mac.init(secretKeySpec);
+            byte[] rawHmac = mac.doFinal(xData.getBytes());
+            result = Base64.encodeToString(rawHmac, Base64.NO_WRAP);
+            result=result.replace("\n", "");
+        } catch (Exception e) {
+            throw new SignatureException("Fail to generate HMAC"+e);
+        }
+        return result;
+    }
+
+    private static String getServerTime() {
+        Calendar calendar=Calendar.getInstance();
+        SimpleDateFormat dateFormat=new SimpleDateFormat("EEE, dd MMM yyyy HH:mm:ss z", Locale.US);
+        dateFormat.setTimeZone(TimeZone.getTimeZone("GMT"));
+        return dateFormat.format(calendar.getTime());
+    }
+
+    private static String getAuthorization(){
+        String APPID = "dd1526c197c14838857dfba8c2ea8335";
+        String APPKey = "C_iCBjqtaBK275sskxotWRmJ2Fc";
+        String xdate = getServerTime();
+        String SignDate = "x-date: " + xdate;
+        String Signature = "";
+
+        try {
+            Signature = Signature(SignDate, APPKey);
+        } catch (SignatureException e) {
+            e.printStackTrace();
+        }
+        String sAuth = "hmac username=\"" + APPID + "\", algorithm=\"hmac-sha1\", headers=\"x-date\", signature=\"" + Signature + "\"";
+        return sAuth;
+    }
+
+    public static String connect(String jsonURL) {
+        String response = "";
+        try {
+            URL url = new URL(jsonURL);
+            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+            connection.setRequestMethod("GET");
+            connection.setRequestProperty("Accept", "application/json");
+            connection.setRequestProperty("Authorization", getAuthorization());
+            connection.setRequestProperty("x-date", getServerTime());
+            connection.setReadTimeout(15000);
+            connection.setConnectTimeout(15000);
+            connection.setDoInput(true); //允許輸入流，即允許下載
+
+            InputStream is = new BufferedInputStream(connection.getInputStream());
+            BufferedReader br = new BufferedReader(new InputStreamReader(is));
+
+            String line;
+            StringBuffer jsonData = new StringBuffer();
+
+            while((line=br.readLine())!=null){
+                jsonData.append(line+"\n");
+            }
+            response = jsonData.toString();
+
+
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return response;
+    }
+
 
 }
