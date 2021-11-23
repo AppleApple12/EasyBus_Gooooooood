@@ -30,6 +30,7 @@ import android.telecom.Call;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -144,7 +145,7 @@ public class Page3Activity extends AppCompatActivity {
         actionBar.hide();
 
         //跳頁到新增路線
-        Button btn1 = (Button) findViewById(R.id.btn1);
+        ImageView btn1 = (ImageView) findViewById(R.id.img_bg1);
         btn1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -155,7 +156,7 @@ public class Page3Activity extends AppCompatActivity {
         });
 
         //跳頁到搭車
-        Button btn2 = (Button) findViewById(R.id.btn2);
+        ImageView btn2 = (ImageView) findViewById(R.id.img_bg2);
         btn2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -166,7 +167,7 @@ public class Page3Activity extends AppCompatActivity {
         });
 
         //跳頁到注意事項
-        Button btn3 = (Button) findViewById(R.id.btn3);
+        ImageView btn3 = (ImageView) findViewById(R.id.img_bg3);
         btn3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -177,7 +178,7 @@ public class Page3Activity extends AppCompatActivity {
         });
 
         //跳頁到我的帳戶
-        Button btn4 = (Button) findViewById(R.id.btn4);
+        ImageView btn4 = (ImageView) findViewById(R.id.img_bg4);
         btn4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

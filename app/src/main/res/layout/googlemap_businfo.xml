@@ -7,25 +7,24 @@
 
     <ImageView
         android:id="@+id/backg"
-        android:layout_width="355dp"
-        android:layout_height="125dp"
-        android:gravity="center"
+        android:layout_width="390dp"
+        android:layout_height="110dp"
+        android:padding="15dp"
+        android:alpha="0.5"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.493"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="1.0"
-        app:srcCompat="@drawable/routebg" />
+        app:srcCompat="@drawable/page5012_item" />
 
     <ImageView
         android:id="@+id/img"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_marginStart="25dp"
         android:layout_marginEnd="274dp"
-        android:layout_marginRight="274dp"
         app:layout_constraintBottom_toBottomOf="@+id/backg"
         app:layout_constraintEnd_toEndOf="@+id/backg"
         app:layout_constraintHorizontal_bias="0.062"
@@ -35,14 +34,14 @@
 
     <TextView
         android:id="@+id/Text"
-        android:layout_width="278dp"
+        android:layout_width="275dp"
         android:layout_height="48dp"
-        android:layout_gravity="center"
-        android:layout_marginLeft="13dp"
+        android:layout_marginLeft="10dp"
         android:text="Text"
-        android:textColor="#FFFFFF"
+        android:textColor="	#5B5B5B"
         app:autoSizeTextType="uniform"
         app:layout_constraintBottom_toBottomOf="@+id/backg"
+        app:layout_constraintEnd_toEndOf="@+id/backg"
         app:layout_constraintStart_toEndOf="@+id/img"
         app:layout_constraintTop_toTopOf="@+id/backg"
         app:layout_constraintVertical_bias="0.509" />

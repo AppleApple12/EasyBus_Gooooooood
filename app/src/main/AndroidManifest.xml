@@ -41,7 +41,6 @@
         <activity android:name=".Page704Activity" />
         <activity android:name=".Page703Activity" />
         <activity android:name=".Page702Activity" />
-        <activity android:name=".Page62" />
         <activity android:name=".Page61" />
         <activity
             android:name=".SelectPicPopupWindow"
@@ -85,9 +84,9 @@
         <activity android:name=".Page601" />
         <activity android:name=".Page611" />
         <activity android:name=".Page6Activity" />
-        <activity android:name=".Page3Activity" />
+        <activity android:name=".MainActivity" />
         <activity android:name=".Page4Activity" />
-        <activity android:name=".MainActivity">
+        <activity android:name=".Page3Activity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

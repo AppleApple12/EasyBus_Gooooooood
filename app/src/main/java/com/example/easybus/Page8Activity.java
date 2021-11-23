@@ -59,10 +59,9 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 public class Page8Activity extends AppCompatActivity {
     SelectPicPopupWindow menuWindow; //自訂義的彈出框類別(SelectPicPopupWindow)
-
-    ImageView backBtn,editpassword,qrcode,emergency,mycontact,logout;
+    View editpassword,qrcode,emergency,mycontact,logout;
+    ImageView backBtn;
     CircleImageView mPforfilepic;
-
     TextView mEnteredName,myphone;
     String identity;
     public static final int SELECT_PHOTO=1;
@@ -86,12 +85,12 @@ public class Page8Activity extends AppCompatActivity {
         backBtn=findViewById(R.id.backicon);
         mEnteredName = findViewById(R.id.EnteredName);
         mPforfilepic = findViewById(R.id.profilepic);
-        myphone = findViewById(R.id.txt1);
-        editpassword=findViewById(R.id.frame2);
-        qrcode = findViewById(R.id.frame3);
-        emergency = findViewById(R.id.frame4);
-        mycontact = findViewById(R.id.frame5);
-        logout = findViewById(R.id.frame8);
+        myphone = findViewById(R.id.Enteredphone);
+        editpassword=findViewById(R.id.view2);
+        qrcode = findViewById(R.id.view3);
+        emergency = findViewById(R.id.view4);
+        mycontact = findViewById(R.id.view5);
+        logout = findViewById(R.id.view6);
         mContext = Page8Activity.this;
 
         requestQueue = Volley.newRequestQueue(this);

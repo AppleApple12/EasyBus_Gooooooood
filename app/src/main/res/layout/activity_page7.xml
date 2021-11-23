@@ -4,69 +4,52 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#F0F0F0"
     tools:context=".Page7Activity">
 
     <View
         android:id="@+id/top"
         android:layout_width="wrap_content"
-        android:layout_height="95dp"
+        android:layout_height="120dp"
         android:background="@drawable/round_button"
         android:visibility="visible"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <ImageView
+        android:id="@+id/page6text"
+        android:layout_width="250dp"
+        android:layout_height="50dp"
+        app:layout_constraintBottom_toBottomOf="@+id/top"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/top"
+        app:srcCompat="@drawable/page3_3" />
+
     <ImageButton
         android:id="@+id/back"
-        android:layout_width="85dp"
-        android:layout_height="85dp"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
         android:layout_marginTop="8dp"
         android:scaleType="fitCenter"
+        android:background="#93FF93"
+        app:layout_constraintBottom_toBottomOf="@+id/top"
         app:layout_constraintEnd_toEndOf="@+id/top"
         app:layout_constraintHorizontal_bias="0.009"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/back" />
-
-    <ImageView
-        android:id="@+id/iv1"
-        android:layout_width="275dp"
-        android:layout_height="64dp"
-        android:layout_marginTop="16dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.395"
-        app:layout_constraintStart_toEndOf="@+id/back"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/page5up" />
+        app:srcCompat="@drawable/backicon" />
 
     <ImageView
         android:id="@+id/iv2"
         android:layout_width="55dp"
         android:layout_height="55dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
-        app:layout_constraintBottom_toBottomOf="@+id/iv1"
-        app:layout_constraintStart_toStartOf="@+id/iv1"
-        app:layout_constraintTop_toTopOf="@+id/iv1"
-        app:layout_constraintVertical_bias="0.5"
+        app:layout_constraintBottom_toBottomOf="@+id/top"
+        app:layout_constraintEnd_toStartOf="@+id/page6text"
+        app:layout_constraintStart_toEndOf="@+id/back"
+        app:layout_constraintTop_toTopOf="@+id/top"
         app:srcCompat="@drawable/ic_error_black_24dp"
         tools:ignore="VectorDrawableCompat" />
-
-    <TextView
-        android:id="@+id/txv1"
-        android:layout_width="157dp"
-        android:layout_height="53dp"
-        android:layout_marginEnd="32dp"
-        android:layout_marginRight="32dp"
-        android:gravity="center"
-        android:text="注\t意\t事\t項"
-        android:textColor="#000000"
-        android:textSize="30sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@+id/iv1"
-        app:layout_constraintEnd_toEndOf="@+id/iv1"
-        app:layout_constraintTop_toTopOf="@+id/iv1"
-        app:layout_constraintVertical_bias="0.454" />
 
     <ImageButton
         android:id="@+id/button2"
