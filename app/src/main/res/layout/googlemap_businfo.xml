@@ -7,7 +7,7 @@
 
     <ImageView
         android:id="@+id/backg"
-        android:layout_width="390dp"
+        android:layout_width="360dp"
         android:layout_height="110dp"
         android:padding="15dp"
         android:alpha="0.5"

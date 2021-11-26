@@ -32,6 +32,7 @@
             android:textSize="30sp"
             android:layout_marginTop="10dp"
             android:layout_marginLeft="20dp"
+            android:textStyle="bold"
             app:layout_constraintStart_toEndOf="@+id/imageView14"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -42,6 +43,7 @@
             android:layout_marginTop="10dp"
             android:text="TextView"
             android:textSize="30sp"
+            android:textStyle="bold"
             app:layout_constraintStart_toEndOf="@+id/textView2"
             app:layout_constraintTop_toTopOf="parent" />
 

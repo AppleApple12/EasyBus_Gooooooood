@@ -17,17 +17,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <ImageView
-        android:id="@+id/iv1"
-        android:layout_width="275dp"
-        android:layout_height="60dp"
-        android:layout_marginTop="15dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/back"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/page50125" />
-
-
     <ImageButton
         android:id="@+id/back"
         android:layout_width="60dp"

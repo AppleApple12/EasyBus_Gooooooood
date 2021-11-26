@@ -32,12 +32,11 @@ import java.util.Map;
 
 public class edit_password extends AppCompatActivity {
     String email, getmail, password, getpass;
+    TextView btnok;
     EditText pas1, pas2, pas3;
     public String pass1, pass2, pass3;
     RequestQueue requestQueue;
-    Button btnok;
-    //TextView btnback;
-//
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,7 +52,6 @@ public class edit_password extends AppCompatActivity {
         pas2 = findViewById(R.id.password2);
         pas3 = findViewById(R.id.password3);
         btnok = findViewById(R.id.okBtn);
-        //btnback = findViewById(R.id.back);
         requestQueue = Volley.newRequestQueue(this);
         readPassword();
         System.out.println("1:"+getpass);
@@ -67,13 +65,13 @@ public class edit_password extends AppCompatActivity {
             }
         });*/
 
-        ImageButton back = (ImageButton)findViewById(R.id.back);
+        /*ImageButton back = (ImageButton)findViewById(R.id.back);
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 readUser();
             }
-        });
+        });*/
 
         btnok.setOnClickListener(new View.OnClickListener() {
             @Override

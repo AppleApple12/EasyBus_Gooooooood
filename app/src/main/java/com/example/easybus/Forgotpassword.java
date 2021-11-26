@@ -36,10 +36,8 @@ import java.util.Map;
 public class Forgotpassword extends AppCompatActivity {
 
     EditText mEmail;
-    Button mForgotPassword;
-
     ProgressDialog progressDialog;
-    TextView back;
+    TextView back,mForgotPassword;
 
     StringRequest stringRequest;
     String URL ="";

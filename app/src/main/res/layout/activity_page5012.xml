@@ -11,13 +11,13 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="120dp">
+        android:layout_height="100dp">
 
         <View
             android:id="@+id/top"
             android:layout_width="wrap_content"
-            android:layout_height="120dp"
-            android:background="@drawable/round_button"
+            android:layout_height="100dp"
+            android:background="@drawable/round_button2"
             android:visibility="visible"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -37,7 +37,7 @@
                     android:id="@+id/view"
                     android:layout_width="61dp"
                     android:layout_height="68dp"
-                    android:alpha="0.3"
+                    android:alpha="0.5"
                     android:layout_weight="1"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -65,7 +65,7 @@
                     android:layout_width="280dp"
                     android:layout_height="70dp"
                     android:layout_marginLeft="10dp"
-                    android:alpha="0.3"
+                    android:alpha="0.5"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -102,16 +102,24 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <ImageView
+        <View
             android:id="@+id/background2"
-            android:layout_width="450dp"
-            android:layout_height="624dp"
-            android:layout_marginTop="57dp"
+            android:layout_width="380dp"
+            android:layout_height="600dp"
+            android:background="@drawable/page5012_bg2"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintVertical_bias="1.0"
-            app:srcCompat="@drawable/page501211" />
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <View
+            android:id="@+id/view7"
+            android:layout_width="150dp"
+            android:layout_height="10dp"
+            android:layout_marginTop="15dp"
+            android:background="@drawable/page5012_bgg"
+            app:layout_constraintEnd_toEndOf="@+id/background2"
+            app:layout_constraintStart_toStartOf="@+id/background2"
+            app:layout_constraintTop_toTopOf="@+id/background2" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/page611Info"
@@ -119,9 +127,7 @@
             android:layout_height="520dp"
             app:layout_constraintBottom_toBottomOf="@+id/background2"
             app:layout_constraintEnd_toEndOf="@+id/background2"
-            app:layout_constraintHorizontal_bias="0.497"
-            app:layout_constraintStart_toStartOf="@+id/background2"
-            app:layout_constraintVertical_bias="0.84">
+            app:layout_constraintStart_toStartOf="@+id/background2">
 
         </androidx.recyclerview.widget.RecyclerView>
 
@@ -139,5 +145,4 @@
             app:layout_constraintVertical_bias="0.971"
             app:srcCompat="@drawable/ic_priority_high_black_24dp" />
     </androidx.constraintlayout.widget.ConstraintLayout>
-
 </LinearLayout>
