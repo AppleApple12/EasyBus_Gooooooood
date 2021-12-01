@@ -49,11 +49,12 @@ public class MyLocationService extends BroadcastReceiver {
                             .toString();
                     try{
                         Page3Activity.getInstance().UpdateUser2(Page3Activity.getInstance().getmail,longitude,latitude);
-                        Page3Activity.getInstance().updateToast(location_string);
+                        Page3Activity.getInstance().updateToast(latitude,longitude);
                        // Page3Activity.getInstance().updateToast(location_string);
 
                     }catch(Exception ex){
                         Page3Activity.getInstance().UpdateUser2(Page3Activity.getInstance().getmail,longitude,latitude);
+                        Page3Activity.getInstance().updateToast(latitude,longitude);
                         //Toast.makeText(context, location_string, Toast.LENGTH_SHORT).show();
                         //Toast.makeText(context, ex.toString(), Toast.LENGTH_SHORT).show();
                         System.out.println(ex.toString());
