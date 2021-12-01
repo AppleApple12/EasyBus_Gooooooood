@@ -235,7 +235,7 @@ public class Page3Activity extends AppCompatActivity {
     }
 
     private void buildLocationRequest() {
-        locationRequest = new LocationRequest();
+        locationRequest = new LocationRequest();  
         locationRequest.setInterval(1000*10); //設置活動位置更新所需的時間間隔，以毫秒為單位
         locationRequest.setFastestInterval(1000*10); //顯式設置位置更新的最快間隔，以毫秒為單位
         locationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY); //設置請求的優先級
