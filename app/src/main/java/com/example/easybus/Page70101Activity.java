@@ -56,7 +56,7 @@ public class Page70101Activity extends AppCompatActivity {
         imgb = findViewById(R.id.imgb);
         imgc = findViewById(R.id.imgc);
         q1("小美在等待公車來時，\n應該注意甚麼呢 ?","1/2","繞過汽車查看公車","在候車線內等待","滑手機不注意公車",imga,imgb,imgc);
-        ImageButton back = (ImageButton)findViewById(R.id.back);
+        ImageView back = (ImageView)findViewById(R.id.backicon);
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

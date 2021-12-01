@@ -45,7 +45,7 @@ public class Page70301Activity extends AppCompatActivity {
         backbtn=Fdialog.findViewById(R.id.backbtn);
         fcontent=Fdialog.findViewById(R.id.cross_content);
 
-        ImageButton back = (ImageButton)findViewById(R.id.back);
+        ImageView back = (ImageView)findViewById(R.id.backicon);
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

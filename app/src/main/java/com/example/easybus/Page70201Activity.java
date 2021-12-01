@@ -54,7 +54,7 @@ public class Page70201Activity extends AppCompatActivity {
         imgb = findViewById(R.id.imgb);
         imgc = findViewById(R.id.imgc);
         q1("小豪鼻子想打噴嚏時，\n該怎麼做才好呢?","1/2","直接大聲打噴嚏","對著窗戶打噴嚏沒關係","遮住口鼻後，\n再打噴嚏",imga,imgb,imgc);
-        ImageButton back = (ImageButton)findViewById(R.id.back);
+        ImageView back = (ImageView)findViewById(R.id.backicon);
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

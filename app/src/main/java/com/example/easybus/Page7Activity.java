@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -50,7 +51,7 @@ public class Page7Activity extends AppCompatActivity {
             }
         });
 
-        ImageButton back = (ImageButton)findViewById(R.id.back);
+        ImageView back = (ImageView)findViewById(R.id.backicon);
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

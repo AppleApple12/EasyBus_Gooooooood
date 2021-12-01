@@ -50,7 +50,7 @@ public class Page70401Activity extends AppCompatActivity {
         cross_content = crossdialog.findViewById(R.id.cross_content);
 
 
-        ImageButton back = (ImageButton)findViewById(R.id.back);
+        ImageView back = (ImageView)findViewById(R.id.backicon);
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
