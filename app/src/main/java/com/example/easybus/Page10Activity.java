@@ -172,7 +172,7 @@ public class Page10Activity extends AppCompatActivity {
                     selectday[2]="0"+selectday[2];
                 clickday =selectday[0]+"-"+selectday[1]+"-"+selectday[2];
                 Log.w("","點擊了日期："+clickday);
-                Intent intent =new Intent(Page10Activity.this, Page1101Activity.class);
+                Intent intent =new Intent(Page10Activity.this, Page1102Activity.class);
                 intent.putExtra("dayStr",clickday);
                 startActivity(intent);
             }
