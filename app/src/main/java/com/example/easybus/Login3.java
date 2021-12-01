@@ -37,11 +37,9 @@ public class Login3 extends AppCompatActivity {
     static String Email;
     public static String password2;
     public static String email2;
-    TextView mRegistertext,mForgetext;
+    TextView mRegistertext,mForgetext,mLoginBtn;
     ImageButton backBtn;
-    Button mLoginBtn;
     RequestQueue requestQueue;
-    public static ProgressBar mProgressBar;
     public static CheckBox check;
     String email, password,identity;
     @Override
@@ -58,8 +56,6 @@ public class Login3 extends AppCompatActivity {
         mForgetext=findViewById(R.id.Forgetext);
         backBtn=findViewById(R.id.back);
         check=findViewById(R.id.checkBox);
-        mProgressBar=findViewById(R.id.progressBar);
-        mProgressBar.setVisibility(View.GONE);
         requestQueue = Volley.newRequestQueue(this);
         //跳到註冊
         mRegistertext.setOnClickListener(new View.OnClickListener() {
@@ -88,15 +84,10 @@ public class Login3 extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-
                 email = mEmail.getText().toString();
                 password = mPassword.getText().toString();
 
-
-
-
                 if (!email.equals("") && !password.equals("")) {
-                    mProgressBar.setVisibility(View.VISIBLE);
                     Handler handler = new Handler(Looper.getMainLooper());
                     handler.post(new Runnable() {
                         @Override
@@ -112,7 +103,6 @@ public class Login3 extends AppCompatActivity {
                             PutData putData = new PutData(Urls.url1+"/LoginRegister/login.php", "POST", field, data);//小高電腦的IP
                             if (putData.startPut()) {
                                 if (putData.onComplete()) {
-                                    mProgressBar.setVisibility(View.GONE);
                                     String result = putData.getResult();
                                     if (result.equals("Login Success")) {
                                         readUser(email);

@@ -11,6 +11,7 @@ import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -46,7 +47,7 @@ public class Page4Activity extends AppCompatActivity {
         clickme=dialog.findViewById(R.id.button10);
 
         //跳頁到定位查詢
-        Button btn1 = (Button)findViewById(R.id.btn1);
+        ImageView btn1 = (ImageView) findViewById(R.id.img_bg2);
         btn1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -58,7 +59,7 @@ public class Page4Activity extends AppCompatActivity {
             }
         });
         //跳頁到歷史足跡
-        Button btn2 = (Button)findViewById(R.id.btn2);
+        ImageView btn2 = (ImageView) findViewById(R.id.img_bg3);
         btn2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -96,7 +97,7 @@ public class Page4Activity extends AppCompatActivity {
             }
         });
         //跳頁到我的帳戶
-        Button btn3 = (Button)findViewById(R.id.btn3);
+        ImageView btn3 = (ImageView) findViewById(R.id.img_bg4);
         btn3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

@@ -35,7 +35,6 @@ import java.util.List;
 
 public class Page61 extends AppCompatActivity {
 
-    Page61Holder myAdapter;
     static ArrayList<HashMap<String, String>> arrayList1 = new ArrayList<>();
     static ArrayList<HashMap<String, Integer>> arrayList2 = new ArrayList<>();
     String getmail,routename,routename2;

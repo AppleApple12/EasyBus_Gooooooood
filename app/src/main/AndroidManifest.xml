@@ -39,11 +39,10 @@
         <activity android:name=".Page70401Activity" />
         <activity android:name=".Page70301Activity" />
         <activity android:name=".Page70201Activity" />
-        <activity android:name=".Page70101Activity" />
+        <activity android:name=".MainActivity" />
         <activity android:name=".Page704Activity" />
         <activity android:name=".Page703Activity" />
         <activity android:name=".Page702Activity" />
-        <activity android:name=".Page62" />
         <activity android:name=".Page61" />
         <activity
             android:name=".SelectPicPopupWindow"
@@ -89,7 +88,7 @@
         <activity android:name=".Page6Activity" />
         <activity android:name=".Page3Activity" />
         <activity android:name=".Page4Activity" />
-        <activity android:name=".MainActivity">
+        <activity android:name=".Page70101Activity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

@@ -167,8 +167,9 @@ public class Page611 extends AppCompatActivity {
                     @Override
                     public void onItemClick(View view, int position) {
                         current=page611infos.get(position).getHtmlinstructions();
-                        if(position!=0)
+                        if(position!=0) {
                             previous = page611infos.get(position - 1).getHtmlinstructions();
+                        }
 
                         if(page611infos.get(position).getTravelMode2().equals("WALKING")) {
                             Intent it6121 = new Intent(Page611.this, Page6121.class);

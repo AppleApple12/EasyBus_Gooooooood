@@ -23,9 +23,7 @@ import com.vishnusivadas.advanced_httpurlconnection.PutData;
 
 public class Signup3 extends AppCompatActivity {
     EditText mFullname, mPassword, mEmail,mPassword2,mPhone;
-    TextView mRegistertext;
-    Button mReg;
-    ProgressBar mProgressBar;
+    TextView mRegistertext,mReg;
     RadioButton mRad1,mRad2;
     RadioGroup mRaG;
     String midentity="";
@@ -48,11 +46,6 @@ public class Signup3 extends AppCompatActivity {
         mRaG=findViewById(R.id.RadioGroup);
         mRad1=findViewById(R.id.radioButton1);
         mRad2=findViewById(R.id.radioButton2);
-
-        mProgressBar=findViewById(R.id.progressBar);
-        mProgressBar.setVisibility(View.GONE);
-
-
 
         mRegistertext.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -87,7 +80,6 @@ public class Signup3 extends AppCompatActivity {
                 if (match == true) {
                     if (!fullname.equals("") && !email.equals("") && !password.equals("") && !identity.isEmpty() && !password2.equals("") && !userphone.equals("")) {
                         if (password.equals(password2)) {
-                            mProgressBar.setVisibility(View.VISIBLE);
                             Handler handler = new Handler(Looper.getMainLooper());
                             handler.post(new Runnable() {
                                 @Override
@@ -110,7 +102,6 @@ public class Signup3 extends AppCompatActivity {
                                     PutData putData = new PutData(url, "POST", field, data);//小高電腦的IP
                                     if (putData.startPut()) {
                                         if (putData.onComplete()) {
-                                            mProgressBar.setVisibility(View.GONE);
                                             String result = putData.getResult();
                                             if (result.equals("Sign Up Success")) {
                                                 Toast.makeText(getApplicationContext(), result, Toast.LENGTH_SHORT).show();
@@ -128,7 +119,7 @@ public class Signup3 extends AppCompatActivity {
                         }else{
                             Toast.makeText(Signup3.this,"密碼不相符",Toast.LENGTH_SHORT).show();
                         }
-                    }//
+                    }
                 }
                 else{
                     Toast.makeText(getApplicationContext(),"All filed required",Toast.LENGTH_SHORT).show();

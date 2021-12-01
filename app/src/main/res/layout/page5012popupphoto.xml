@@ -14,7 +14,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/page5012selphoto" />
+        app:srcCompat="@drawable/page5012selphoto_bg" />
 
     <ScrollView
         android:layout_width="302dp"
@@ -69,7 +69,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                app:srcCompat="@drawable/page5012save" />
+                app:srcCompat="@drawable/page5012_save" />
 
         </LinearLayout>
     </ScrollView>
