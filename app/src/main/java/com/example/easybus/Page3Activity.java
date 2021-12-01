@@ -13,19 +13,27 @@ import android.app.AlarmManager;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
+import android.app.Service;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentSender;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.location.Address;
+import android.location.Geocoder;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
+import android.media.AudioManager;
+import android.media.MediaPlayer;
+import android.media.Ringtone;
+import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Looper;
+import android.os.Vibrator;
 import android.telecom.Call;
 import android.util.Log;
 import android.view.View;
@@ -74,6 +82,7 @@ import java.util.Comparator;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.TimeZone;
 
@@ -84,8 +93,8 @@ public class Page3Activity extends AppCompatActivity {
     TextView test;
     String email, getmail, dateString;//
     RequestQueue requestQueue;
-    //com.example.easybus.FloatingActionButton f;
 
+    Geocoder gc;
     LocationManager locationManager;               //宣告定位管理控制
 
     private String provider;
@@ -110,7 +119,7 @@ public class Page3Activity extends AppCompatActivity {
         setContentView(R.layout.activity_page3);
        
         instance = this;
-
+        gc = new Geocoder(Page3Activity.this, Locale.TRADITIONAL_CHINESE);
         Dexter.withActivity(this)
                 .withPermission(ACCESS_FINE_LOCATION)
                 .withListener(new PermissionListener() {
@@ -201,7 +210,11 @@ public class Page3Activity extends AppCompatActivity {
         //locationRequest = LocationRequest.create();
        // init();
     }
-
+    // 獲取系統預設鈴聲的Uri
+    private Uri getSystemDefultRingtoneUri() {
+        return RingtoneManager.getActualDefaultRingtoneUri(this,RingtoneManager.TYPE_RINGTONE);
+    }
+    //更新定位位置
     private void updataLocation() {
         buildLocationRequest();
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
@@ -226,7 +239,8 @@ public class Page3Activity extends AppCompatActivity {
         locationRequest.setInterval(1000*10); //設置活動位置更新所需的時間間隔，以毫秒為單位
         locationRequest.setFastestInterval(1000*10); //顯式設置位置更新的最快間隔，以毫秒為單位
         locationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY); //設置請求的優先級
-        locationRequest.setSmallestDisplacement(10f); //以米為單位設置位置更新之間的最小位移
+       // locationRequest.setSmallestDisplacement(10f); //以米為單位設置位置更新之間的最小位移
+        locationRequest.setSmallestDisplacement(100); //以米為單位設置位置更新之間的最小位移
 
     }
     public  void UpdateUser2(final String email,final double longitude,final double latitude){
@@ -273,13 +287,89 @@ public class Page3Activity extends AppCompatActivity {
             }
         });
     }
-    public void updateToast(final String value){
+
+    public void updateToast(final double la,final  double lo){
         Page3Activity.this.runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                //.makeText(Page3Activity.this, value, Toast.LENGTH_SHORT).show();
+                final String place[] = {"台灣台中市南屯區大觀路","台灣台中市西屯區至善路"};
+                final Double latarr[] = {24.149462843698128,24.176133159383703,24.14560676635126};//一中，逢甲夜市,向學路
+                final Double lonarr[] = {120.6849656999734,120.6456141985743,120.64196358990795};
+                final Double distance[] = new Double[5];
+                String dis;
+
+                String address = GPS2City(gc,la,lo);
+
+                for(int i=0;i<place.length;i++){
+                    if(address.indexOf(place[i]) != -1){ //裡面含有
+                        distance[i]=90.0;
+                    }else{
+                        distance[i]=110.0;
+                    }
+                }
+                distance[2] = Distance(lonarr[0],latarr[0],lo,la);//一中
+                distance[3] = Distance(lonarr[1],latarr[1],lo,la);//逢甲
+                distance[4] = Distance(lonarr[2],latarr[2],lo,la);//向學路
+
+
+                for(int i=0;i<distance.length;i++){
+
+                    if(distance[i]<100){
+//                        Vibrator myVibrator = (Vibrator)getSystemService(VIBRATOR_SERVICE);
+//                        myVibrator.vibrate(5000);
+//                        System.out.println("Vibrator");
+                        Uri notification = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
+                        Ringtone r = RingtoneManager.getRingtone(getApplicationContext(), notification);
+                        r.play();
+                        System.out.println("Vibrator");
+                    }
+                    if(distance[i] < 1000 )
+                        dis= distance[i] + "m" ;
+                    else
+                        dis= new DecimalFormat("#.00").format(distance[i]/1000) + "km" ;
+
+                    System.out.println("dis = "+distance[i]);
+                    System.out.println("換算過的距離 = "+dis);
+                    //Toast.makeText(Page3Activity.this, dis, Toast.LENGTH_SHORT).show();
+
+
+                }
+
+
+
+
+
+                //Toast.makeText(Page3Activity.this, address, Toast.LENGTH_SHORT).show();
+
             }
         });
+    }
+    //經緯度轉地址
+    public static String GPS2City(Geocoder gc, double latitude, double longtitude){
+        String returnAddress = "";
+        try{
+            List<Address> lstAddress = gc.getFromLocation(latitude,longtitude,1);
+            returnAddress = lstAddress.get(0).getAddressLine(0);
+            Log.d("Page3Address",returnAddress);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+        return returnAddress;
+    }
+    //計算距離
+    public Double Distance(double longitude1, double latitude1, double longitude2,double latitude2)
+    {
+        double radLatitude1 = latitude1 * Math.PI / 180;
+        double radLatitude2 = latitude2 * Math.PI / 180;
+        double l = radLatitude1 - radLatitude2;
+        double p = longitude1 * Math.PI / 180 - longitude2 * Math.PI / 180;
+        double distance = 2 * Math.asin(Math.sqrt(Math.pow(Math.sin(l / 2), 2)
+                + Math.cos(radLatitude1) * Math.cos(radLatitude2)
+                * Math.pow(Math.sin(p / 2), 2)));
+        distance = distance * 6378137.0;
+        distance = Math.round(distance * 10000) / 10000;
+        return distance;
     }
 
     private  String  date(){
