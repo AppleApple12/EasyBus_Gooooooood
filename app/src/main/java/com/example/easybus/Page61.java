@@ -13,6 +13,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -55,7 +56,7 @@ public class Page61 extends AppCompatActivity {
         actionBar.hide();
 
         //跳回主頁
-        ImageButton btn2 = (ImageButton) findViewById(R.id.back);
+        ImageView btn2 = (ImageView) findViewById(R.id.backicon);
         btn2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
