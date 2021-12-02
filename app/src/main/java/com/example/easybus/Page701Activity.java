@@ -27,8 +27,10 @@ public class Page701Activity extends AppCompatActivity {
         final VideoView videoView = (VideoView)this.findViewById(R.id.videoView);
         MediaController mc = new MediaController(this);
         videoView.setMediaController(mc);
+        String url = Urls.url1+"/LoginRegister/video/one.mp4";
+        //videoView.setVideoURI(Uri.parse("android.resource://"+getPackageName()+"/"+R.raw.one));
+        videoView.setVideoPath(url);
 
-        videoView.setVideoURI(Uri.parse("android.resource://"+getPackageName()+"/"+R.raw.one));
         videoView.requestFocus();
         videoView.start();
         long duration = videoView.getDuration();
