@@ -70,6 +70,8 @@ import com.karumi.dexter.listener.PermissionDeniedResponse;
 import com.karumi.dexter.listener.PermissionGrantedResponse;
 import com.karumi.dexter.listener.PermissionRequest;
 import com.karumi.dexter.listener.single.PermissionListener;
+import com.squareup.picasso.Callback;
+import com.squareup.picasso.Picasso;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -91,11 +93,13 @@ import static android.Manifest.permission.ACCESS_COARSE_LOCATION;
 import static android.Manifest.permission.ACCESS_FINE_LOCATION;
 
 public class Page3Activity extends AppCompatActivity {
-    TextView test;
-    String email, getmail, dateString;//
+    TextView Name;
+    String getmail, dateString;
     RequestQueue requestQueue;
-
+    String fullname;
+    String image;
     Geocoder gc;
+    ImageView img;
     LocationManager locationManager;               //宣告定位管理控制
 
     private String provider;
@@ -148,7 +152,9 @@ public class Page3Activity extends AppCompatActivity {
         //抓email
         SharedPreferences email = getSharedPreferences("email", MODE_PRIVATE);
         getmail = email.getString("Email", "");
-        //dateString = date();
+        readUser();
+        img = findViewById(R.id.imageView14);
+        Name = findViewById(R.id.textView4);
         //隱藏title bar
         ActionBar actionBar = getSupportActionBar();
         actionBar.hide();
@@ -203,7 +209,7 @@ public class Page3Activity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                readUser();
+                emergency();
             }
         });
         //取得定位權限
@@ -211,10 +217,7 @@ public class Page3Activity extends AppCompatActivity {
         //locationRequest = LocationRequest.create();
        // init();
     }
-    // 獲取系統預設鈴聲的Uri
-    private Uri getSystemDefultRingtoneUri() {
-        return RingtoneManager.getActualDefaultRingtoneUri(this,RingtoneManager.TYPE_RINGTONE);
-    }
+
     //更新定位位置
     private void updataLocation() {
         buildLocationRequest();
@@ -412,12 +415,15 @@ public class Page3Activity extends AppCompatActivity {
                 URL,
                 null,
                 new Response.Listener<JSONObject>() {
-                    String emergency_phone;
+
                     @Override
                     public void onResponse(JSONObject response) {
+
                         try {
-                            emergency_phone = response.getString("emergency_contact");
-                            makeCall(emergency_phone);
+                            fullname = response.getString("fullname");
+                            Name.setText(fullname);
+                            image= response.getString("image");
+                            ImageRetriveWithPicasso(image);
                         } catch (JSONException e) {
                             e.printStackTrace();
                             //Toast.makeText(Page3Activity.this, e.toString(), Toast.LENGTH_SHORT).show();
@@ -432,6 +438,58 @@ public class Page3Activity extends AppCompatActivity {
                 }
         );
         requestQueue.add(jsonObjectRequest);
+    }
+    public void emergency(){
+        String URL =Urls.url1+"/LoginRegister/fetch.php?email="+getmail;
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(
+                Request.Method.GET,
+                URL,
+                null,
+                new Response.Listener<JSONObject>() {
+                    String emergency_phone;
+                    @Override
+                    public void onResponse(JSONObject response) {
+
+                        try {
+                            emergency_phone = response.getString("emergency_contact");
+                            makeCall(emergency_phone);
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                            //Toast.makeText(Page3Activity.this, e.toString(), Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        // Toast.makeText(Page3Activity.this, error.toString(), Toast.LENGTH_SHORT).show();
+                    }
+                }
+        );
+        requestQueue.add(jsonObjectRequest);
+    }
+    public void ImageRetriveWithPicasso(String image) {
+        String imgurl = Urls.url1+"/LoginRegister/images/"+image;
+        Picasso.with(this)
+
+                .load(imgurl)
+                .placeholder(R.drawable.profile)
+                .fit()
+                // .error(R.drawable.ic_error_black_24dp)
+                .into(img, new Callback() {
+                    @Override
+                    public void onSuccess() {
+                        // 圖片讀取完成
+                        Toast.makeText(Page3Activity.this, "圖片讀取成功", Toast.LENGTH_SHORT).show();
+                    }
+
+                    @Override
+                    public void onError() {
+                        // 圖片讀取失敗
+                          Toast.makeText(Page3Activity.this, "圖片讀取失敗", Toast.LENGTH_SHORT).show();
+                    }
+                });
+
     }
 
 }

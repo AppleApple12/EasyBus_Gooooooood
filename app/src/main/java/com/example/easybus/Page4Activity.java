@@ -8,10 +8,12 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.location.Geocoder;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -19,16 +21,22 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.squareup.picasso.Callback;
+import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 public class Page4Activity extends AppCompatActivity {
-    String email,getmail;
+    String getmail,fullname,image;
+    TextView Name;
     Dialog dialog;
     Button clickme;
+    RequestQueue requestQueue;
+    ImageView img;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,9 +44,13 @@ public class Page4Activity extends AppCompatActivity {
         //隱藏title bar
         ActionBar actionBar = getSupportActionBar();
         actionBar.hide();
+        requestQueue = Volley.newRequestQueue(this);
         //抓email
         SharedPreferences email = getSharedPreferences("email",MODE_PRIVATE);
         getmail=email.getString("Email","");
+        readUser();
+        img = findViewById(R.id.imageView14);
+        Name = findViewById(R.id.textView4);
 
         dialog = new Dialog(Page4Activity.this);
         dialog.setContentView(R.layout.nofriend_dialog);
@@ -104,7 +116,6 @@ public class Page4Activity extends AppCompatActivity {
 
                 if(getmail != "") {
                     Intent it4 = new Intent(Page4Activity.this, Page8Activity_caregiver.class);
-                    //it4.putExtra("email", email2);
                     startActivity(it4);
                 }else{
                     Intent it = new Intent(Page4Activity.this,Login3.class);
@@ -114,11 +125,59 @@ public class Page4Activity extends AppCompatActivity {
         });
 
     }
-    /*public String mail(){
-        Bundle extras = getIntent().getExtras();
-        if (extras!=null){
-            email=extras.getString("email");
-        }
-        return email;
-    }*/
+    public void readUser(){
+        String URL =Urls.url1+"/LoginRegister/fetch.php?email="+getmail;
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(
+                Request.Method.GET,
+                URL,
+                null,
+                new Response.Listener<JSONObject>() {
+
+                    @Override
+                    public void onResponse(JSONObject response) {
+
+                        try {
+                            fullname = response.getString("fullname");
+                            Name.setText(fullname);
+                            image= response.getString("image");
+                            ImageRetriveWithPicasso(image);
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                            //Toast.makeText(Page3Activity.this, e.toString(), Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        // Toast.makeText(Page3Activity.this, error.toString(), Toast.LENGTH_SHORT).show();
+                    }
+                }
+        );
+        requestQueue.add(jsonObjectRequest);
+
+    }
+    public void ImageRetriveWithPicasso(String image) {
+        String imgurl = Urls.url1+"/LoginRegister/images/"+image;
+        Picasso.with(this)
+
+                .load(imgurl)
+                .placeholder(R.drawable.profile)
+                .fit()
+                // .error(R.drawable.ic_error_black_24dp)
+                .into(img, new Callback() {
+                    @Override
+                    public void onSuccess() {
+                        // 圖片讀取完成
+                        Toast.makeText(Page4Activity.this, "圖片讀取成功", Toast.LENGTH_SHORT).show();
+                    }
+
+                    @Override
+                    public void onError() {
+                        // 圖片讀取失敗
+                        Toast.makeText(Page4Activity.this, "圖片讀取失敗", Toast.LENGTH_SHORT).show();
+                    }
+                });
+
+    }
 }
