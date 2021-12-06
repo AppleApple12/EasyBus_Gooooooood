@@ -80,13 +80,13 @@
         </provider>
 
         <activity android:name=".Page8Activity" />
-        <activity android:name=".Page7Activity" />
+        <activity android:name=".Page70101Activity" />
         <activity android:name=".Page601" />
         <activity android:name=".Page611" />
         <activity android:name=".Page6Activity" />
         <activity android:name=".Page3Activity" />
         <activity android:name=".Page4Activity" />
-        <activity android:name=".Page70101Activity">
+        <activity android:name=".Page7Activity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
