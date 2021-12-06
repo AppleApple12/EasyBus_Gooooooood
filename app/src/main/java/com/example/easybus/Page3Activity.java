@@ -13,6 +13,7 @@ import android.app.AlarmManager;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
+import android.app.ProgressDialog;
 import android.app.Service;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -30,6 +31,7 @@ import android.media.MediaPlayer;
 import android.media.Ringtone;
 import android.media.RingtoneManager;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Looper;
@@ -100,13 +102,7 @@ public class Page3Activity extends AppCompatActivity {
     String image;
     Geocoder gc;
     ImageView img;
-    LocationManager locationManager;               //宣告定位管理控制
-
-    private String provider;
-
-    double latitude, longitude;
     String TAG = "Page3Activity";
-    //int LOCATION_REQUEST_CODE = 10001;
     FusedLocationProviderClient fusedLocationProviderClient;
     LocationRequest locationRequest;
 
@@ -115,8 +111,6 @@ public class Page3Activity extends AppCompatActivity {
     public static Page3Activity getInstance() {
         return instance;
     }
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -146,26 +140,23 @@ public class Page3Activity extends AppCompatActivity {
                     }
                 }).check();
 
-
-
         requestQueue = Volley.newRequestQueue(this);
         //抓email
         SharedPreferences email = getSharedPreferences("email", MODE_PRIVATE);
         getmail = email.getString("Email", "");
-        readUser();
+
         img = findViewById(R.id.imageView14);
         Name = findViewById(R.id.textView4);
         //隱藏title bar
         ActionBar actionBar = getSupportActionBar();
         actionBar.hide();
-
+        new Page3Activity.fetchDatapage3().execute();
         //跳頁到新增路線
         ImageView btn1 = (ImageView) findViewById(R.id.img_bg1);
         btn1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent it1 = new Intent(Page3Activity.this, Page5011Activity.class);
-                //it1.putExtra("email",getmail);
                 startActivity(it1);
             }
         });
@@ -176,7 +167,6 @@ public class Page3Activity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent it2 = new Intent(Page3Activity.this, Page61.class);
-                //it2.putExtra("email",getmail);
                 startActivity(it2);
             }
         });
@@ -187,7 +177,6 @@ public class Page3Activity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent it3 = new Intent(Page3Activity.this, Page7Activity.class);
-                //it3.putExtra("email",getmail);
                 startActivity(it3);
             }
         });
@@ -198,8 +187,6 @@ public class Page3Activity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent it4 = new Intent(Page3Activity.this, Page8Activity.class);
-                // it4.putExtra("email",getmail);
-                // Toast.makeText(Page3Activity.this, getmail, Toast.LENGTH_SHORT).show();
                 startActivity(it4);
             }
         });
@@ -212,10 +199,6 @@ public class Page3Activity extends AppCompatActivity {
                 emergency();
             }
         });
-        //取得定位權限
-        //locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-        //locationRequest = LocationRequest.create();
-       // init();
     }
 
     //更新定位位置
@@ -245,7 +228,6 @@ public class Page3Activity extends AppCompatActivity {
         locationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY); //設置請求的優先級
        // locationRequest.setSmallestDisplacement(10f); //以米為單位設置位置更新之間的最小位移
         locationRequest.setSmallestDisplacement(100); //以米為單位設置位置更新之間的最小位移
-
     }
     public  void UpdateUser2(final String email,final double longitude,final double latitude){
         Page3Activity.this.runOnUiThread(new Runnable() {
@@ -263,7 +245,6 @@ public class Page3Activity extends AppCompatActivity {
                                 if(response.equals("Success")){
                                     // String s ="已將 "+phone+" 設為緊急聯絡電話";
                                     // Toast.makeText(Page3Activity.this, s, Toast.LENGTH_SHORT).show();
-
                                 }
                             }
                         },
@@ -286,8 +267,6 @@ public class Page3Activity extends AppCompatActivity {
                     }
                 };
                 requestQueue.add(stringRequest);
-
-
             }
         });
     }
@@ -314,10 +293,7 @@ public class Page3Activity extends AppCompatActivity {
                 distance[2] = Distance(lonarr[0],latarr[0],lo,la);//一中
                 distance[3] = Distance(lonarr[1],latarr[1],lo,la);//逢甲
                 distance[4] = Distance(lonarr[2],latarr[2],lo,la);//向學路
-
-
                 for(int i=0;i<distance.length;i++){
-
                     if(distance[i]<100){
 //                        Vibrator myVibrator = (Vibrator)getSystemService(VIBRATOR_SERVICE);
 //                        myVibrator.vibrate(5000);
@@ -335,16 +311,8 @@ public class Page3Activity extends AppCompatActivity {
                     System.out.println("dis = "+distance[i]);
                     System.out.println("換算過的距離 = "+dis);
                     //Toast.makeText(Page3Activity.this, dis, Toast.LENGTH_SHORT).show();
-
-
                 }
-
-
-
-
-
                 //Toast.makeText(Page3Activity.this, address, Toast.LENGTH_SHORT).show();
-
             }
         });
     }
@@ -388,7 +356,23 @@ public class Page3Activity extends AppCompatActivity {
 
         return dateString;
     }
+    public class fetchDatapage3 extends AsyncTask<Void,Void,Void> {
+        ProgressDialog pd;
 
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+        }
+        protected void onPostExecute(Void aVoid) {
+            super.onPreExecute();
+            readUser();
+
+        }
+        @Override
+        protected Void doInBackground(Void... voids) {
+            return null;
+        }
+    }
 
     @SuppressLint("LongLogTag")
     protected void makeCall(final String phone) {
@@ -418,12 +402,12 @@ public class Page3Activity extends AppCompatActivity {
 
                     @Override
                     public void onResponse(JSONObject response) {
-
                         try {
                             fullname = response.getString("fullname");
                             Name.setText(fullname);
                             image= response.getString("image");
                             ImageRetriveWithPicasso(image);
+                            System.out.println("1234567890");
                         } catch (JSONException e) {
                             e.printStackTrace();
                             //Toast.makeText(Page3Activity.this, e.toString(), Toast.LENGTH_SHORT).show();
