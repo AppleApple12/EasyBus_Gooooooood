@@ -3,6 +3,7 @@ package com.example.easybus;
 
 import android.Manifest;
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
@@ -11,6 +12,7 @@ import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
@@ -96,9 +98,8 @@ public class Page8Activity extends AppCompatActivity {
         requestQueue = Volley.newRequestQueue(this);
 
         //getpass=pass();
-        readUser();
-        fetchimage();
-        ImageRetriveWithPicasso();
+
+        new Page8Activity.fetchDatapage8().execute();
         //我的聯絡人
         mycontact.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -179,6 +180,25 @@ public class Page8Activity extends AppCompatActivity {
                 menuWindow.showAtLocation(Page8Activity.this.findViewById(R.id.profilepic), Gravity.BOTTOM | Gravity.CENTER_HORIZONTAL, 0, 0);
             }
         });
+    }
+    public class fetchDatapage8 extends AsyncTask<Void,Void,Void> {
+        ProgressDialog pd;
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+        }
+        protected void onPostExecute(Void aVoid) {
+            super.onPreExecute();
+            readUser();
+            fetchimage();
+            ImageRetriveWithPicasso();
+
+        }
+        @Override
+        protected Void doInBackground(Void... voids) {
+            return null;
+        }
     }
     //抓取使用者基本資料
     public void readUser(){

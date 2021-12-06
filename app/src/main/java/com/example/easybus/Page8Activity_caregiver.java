@@ -2,6 +2,8 @@ package com.example.easybus;
 /*照顧者 - 我的帳戶*/
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.ProgressDialog;
+import android.os.AsyncTask;
 import android.os.Bundle;
 
 
@@ -99,10 +101,9 @@ public class Page8Activity_caregiver extends AppCompatActivity {
         SharedPreferences email = getSharedPreferences("email",MODE_PRIVATE);
         getmail=email.getString("Email","");
         //getmail=mail();
-        getpass=pass();
-        readUser();
-        fetchimage();
-        ImageRetriveWithPicasso();
+        //getpass=pass();
+
+        new Page8Activity_caregiver.fetchDatapage8c().execute();
         //我的聯絡人
         mycontact.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -113,16 +114,7 @@ public class Page8Activity_caregiver extends AppCompatActivity {
                 finish();
             }
         });
-       /* //新增緊急聯絡人
-        emergency.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(Page8Activity.this,emergency_contact.class);
-                intent.putExtra("email",getmail);
-                startActivity(intent);
-                finish();
-            }
-        });*/
+
         //登出
         logout.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -181,6 +173,25 @@ public class Page8Activity_caregiver extends AppCompatActivity {
                 menuWindow.showAtLocation(Page8Activity_caregiver.this.findViewById(R.id.profilepic), Gravity.BOTTOM | Gravity.CENTER_HORIZONTAL, 0, 0);
             }
         });
+    }
+    public class fetchDatapage8c extends AsyncTask<Void,Void,Void> {
+        ProgressDialog pd;
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+        }
+        protected void onPostExecute(Void aVoid) {
+            super.onPreExecute();
+            readUser();
+            fetchimage();
+            ImageRetriveWithPicasso();
+
+        }
+        @Override
+        protected Void doInBackground(Void... voids) {
+            return null;
+        }
     }
     //抓取使用者基本資料
     public void readUser(){

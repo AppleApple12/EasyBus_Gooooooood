@@ -4,11 +4,13 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Dialog;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.location.Geocoder;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -48,7 +50,7 @@ public class Page4Activity extends AppCompatActivity {
         //抓email
         SharedPreferences email = getSharedPreferences("email",MODE_PRIVATE);
         getmail=email.getString("Email","");
-        readUser();
+
         img = findViewById(R.id.imageView14);
         Name = findViewById(R.id.textView4);
 
@@ -57,7 +59,7 @@ public class Page4Activity extends AppCompatActivity {
         //刪除dialog方方的背景
         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         clickme=dialog.findViewById(R.id.button10);
-
+        new Page4Activity.fetchDatapage4().execute();
         //跳頁到定位查詢
         ImageView btn1 = (ImageView) findViewById(R.id.img_bg2);
         btn1.setOnClickListener(new View.OnClickListener() {
@@ -124,6 +126,23 @@ public class Page4Activity extends AppCompatActivity {
             }
         });
 
+    }
+    public class fetchDatapage4 extends AsyncTask<Void,Void,Void> {
+        ProgressDialog pd;
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+        }
+        protected void onPostExecute(Void aVoid) {
+            super.onPreExecute();
+            readUser();
+
+        }
+        @Override
+        protected Void doInBackground(Void... voids) {
+            return null;
+        }
     }
     public void readUser(){
         String URL =Urls.url1+"/LoginRegister/fetch.php?email="+getmail;
