@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Page601"
-    android:background="#ffffff">
+    android:background="#ffffff"
+    tools:context=".Page601">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout5"
@@ -62,7 +62,7 @@
 
                 <ImageView
                     android:id="@+id/txvtop2"
-                    android:layout_width="320dp"
+                    android:layout_width="300dp"
                     android:layout_height="70dp"
                     android:layout_marginLeft="10dp"
                     app:layout_constraintBottom_toBottomOf="parent"
@@ -81,11 +81,14 @@
                     app:layout_constraintTop_toTopOf="@+id/txvtop2"
                     app:srcCompat="@drawable/ic_page6" />
 
-                <ImageView
+                <TextView
                     android:id="@+id/txvtoptext"
                     android:layout_width="160dp"
                     android:layout_height="60dp"
-                    android:src="@drawable/page3_2"
+                    android:gravity="center"
+                    android:textColor="#000000"
+                    android:textSize="30dp"
+                    android:textStyle="bold"
                     app:layout_constraintBottom_toBottomOf="@+id/txvtop2"
                     app:layout_constraintEnd_toEndOf="@+id/txvtop2"
                     app:layout_constraintStart_toEndOf="@+id/iv2"
@@ -99,19 +102,18 @@
         android:layout_width="374dp"
         android:layout_height="630dp"
         android:background="@drawable/page601recyclerview"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.457"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/constraintLayout5" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/btn_change"
         android:layout_width="341dp"
         android:layout_height="40dp"
         android:layout_marginTop="15dp"
+        android:background="@drawable/page601_btn"
         android:text="回程"
         android:textSize="20dp"
-        android:background="@drawable/page601_btn"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.46"
         app:layout_constraintStart_toStartOf="parent"

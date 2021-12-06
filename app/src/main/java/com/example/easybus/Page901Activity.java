@@ -53,7 +53,7 @@ public class Page901Activity extends AppCompatActivity {
         //抓email
         SharedPreferences email = getSharedPreferences("email",MODE_PRIVATE);
         getmail=email.getString("Email","");
-        backBtn=findViewById(R.id.back);
+        backBtn=findViewById(R.id.view);
         viewPager = findViewById(R.id.viewpager);
         readfriend();
         viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {

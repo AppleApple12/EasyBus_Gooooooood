@@ -89,7 +89,7 @@ public class Page8Activity_caregiver extends AppCompatActivity {
         backBtn=findViewById(R.id.backicon);
         mEnteredName = findViewById(R.id.EnteredName);
         mPforfilepic = findViewById(R.id.profilepic);
-        myphone = findViewById(R.id.view1);
+        myphone = findViewById(R.id.Enteredphone);
         editpassword=findViewById(R.id.view2);
         qrcode = findViewById(R.id.view3);
         mycontact = findViewById(R.id.view5);

@@ -61,7 +61,7 @@
 
                 <ImageView
                     android:id="@+id/txvtop2"
-                    android:layout_width="320dp"
+                    android:layout_width="300dp"
                     android:layout_height="70dp"
                     android:layout_marginLeft="10dp"
                     app:layout_constraintBottom_toBottomOf="parent"

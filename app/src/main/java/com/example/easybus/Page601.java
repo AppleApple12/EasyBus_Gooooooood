@@ -23,6 +23,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -73,7 +74,7 @@ public class Page601 extends AppCompatActivity {
         ActionBar actionBar = getSupportActionBar();
         actionBar.hide();
         //回前頁
-        ImageButton btn = (ImageButton)findViewById(R.id.back);
+        ImageView btn = findViewById(R.id.view);
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -89,7 +90,7 @@ public class Page601 extends AppCompatActivity {
         //recyclerView.addItemDecoration(new DividerItemDecoration(this,DividerItemDecoration.VERTICAL));
         myListAdapter = new MyListAdapter();
         recyclerView.setAdapter(myListAdapter);
-        TextView textView = (TextView)findViewById(R.id.txvtop);
+        TextView textView = (TextView)findViewById(R.id.txvtoptext);
         textView.setText(txv1);
         btn1 = (Button)findViewById(R.id.btn_change);
 

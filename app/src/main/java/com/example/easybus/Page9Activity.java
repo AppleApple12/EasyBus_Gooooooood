@@ -20,6 +20,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.PopupWindow;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -80,7 +81,7 @@ public class Page9Activity extends AppCompatActivity implements OnMapReadyCallba
         final Timer timer = new Timer();
         timer.schedule(new callfetch(),0,60*1000);
 
-        ImageButton back = (ImageButton)findViewById(R.id.back);
+        ImageView back = findViewById(R.id.view);
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

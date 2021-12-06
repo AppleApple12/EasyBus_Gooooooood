@@ -24,14 +24,13 @@
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/profilepic"
-            android:layout_width="197dp"
-            android:layout_height="163dp"
+            android:layout_width="176dp"
+            android:layout_height="150dp"
             android:clickable="true"
             android:src="@drawable/profile"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/profile" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/EnteredName"
@@ -47,9 +46,9 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_marginTop="35dp"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_marginTop="35dp">
 
         <TextView
             android:id="@+id/view1"
@@ -68,13 +67,12 @@
             android:id="@+id/Enteredphone"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="0926666533"
             android:textColor="#000000"
             android:textSize="30sp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="@+id/view1"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/view1"
+            app:layout_constraintTop_toTopOf="@+id/view1" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
