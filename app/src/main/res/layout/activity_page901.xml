@@ -71,7 +71,7 @@
         android:id="@+id/viewpager"
         android:layout_height="500dp"
         android:layout_width="match_parent"
-        android:clipToPadding="false"
+        android:clipToPadd.ing="false"
         android:foregroundGravity="center"
         android:overScrollMode="never"
         app:layout_constraintBottom_toBottomOf="parent"
