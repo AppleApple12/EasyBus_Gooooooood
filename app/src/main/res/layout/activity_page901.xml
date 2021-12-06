@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#DDDDDD"
-    tools:context=".Page901Activity">
+    tools:context=".Page901Activity"> 
 
     <View
         android:id="@+id/top"
