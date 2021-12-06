@@ -10,6 +10,7 @@ import androidx.core.content.ContextCompat;
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.AlarmManager;
+import android.app.Dialog;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
@@ -21,6 +22,8 @@ import android.content.Intent;
 import android.content.IntentSender;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
@@ -105,6 +108,8 @@ public class Page3Activity extends AppCompatActivity {
     String TAG = "Page3Activity";
     FusedLocationProviderClient fusedLocationProviderClient;
     LocationRequest locationRequest;
+    Dialog dialog;
+    Button alertbtn;
 
     static Page3Activity instance;
 
@@ -150,6 +155,18 @@ public class Page3Activity extends AppCompatActivity {
         //隱藏title bar
         ActionBar actionBar = getSupportActionBar();
         actionBar.hide();
+        dialog = new Dialog(Page3Activity.this);
+        dialog.setContentView(R.layout.alert_dialog);
+        //刪除dialog方方的背景
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        alertbtn=dialog.findViewById(R.id.alertbtn);
+        alertbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+
         new Page3Activity.fetchDatapage3().execute();
         //跳頁到新增路線
         ImageView btn1 = (ImageView) findViewById(R.id.img_bg1);
@@ -295,13 +312,15 @@ public class Page3Activity extends AppCompatActivity {
                 distance[4] = Distance(lonarr[2],latarr[2],lo,la);//向學路
                 for(int i=0;i<distance.length;i++){
                     if(distance[i]<100){
-//                        Vibrator myVibrator = (Vibrator)getSystemService(VIBRATOR_SERVICE);
-//                        myVibrator.vibrate(5000);
-//                        System.out.println("Vibrator");
-                        Uri notification = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
-                        Ringtone r = RingtoneManager.getRingtone(getApplicationContext(), notification);
-                        r.play();
+                        dialog.show();
+                        Vibrator myVibrator = (Vibrator)getSystemService(VIBRATOR_SERVICE);
+                        myVibrator.vibrate(5000);
                         System.out.println("Vibrator");
+//                        Uri notification = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
+//                        Ringtone r = RingtoneManager.getRingtone(getApplicationContext(), notification);
+//                        r.play();
+                        System.out.println("Vibrator");
+
                     }
                     if(distance[i] < 1000 )
                         dis= distance[i] + "m" ;

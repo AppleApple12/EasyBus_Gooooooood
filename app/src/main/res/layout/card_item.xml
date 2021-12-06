@@ -7,32 +7,38 @@
     android:orientation="vertical">
 
     <androidx.cardview.widget.CardView
-        android:layout_height="500dp"
         android:layout_width="match_parent"
+        android:layout_height="500dp"
         android:layout_margin="10dp"
-        app:cardCornerRadius="20dp"
-        android:background="@drawable/card_rect">
+        app:cardBackgroundColor="#670A0A"
+        app:cardCornerRadius="20dp">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_height="400dp"
+        <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
-            android:orientation="vertical"
-            android:layout_margin="20dp"
-            android:layout_gravity="center">
+            android:layout_height="450dp"
+            android:layout_margin="10dp"
+            app:cardCornerRadius="20dp">
 
-            <de.hdodenhof.circleimageview.CircleImageView
-                android:id="@+id/img_people"
-                android:layout_width="197dp"
-                android:layout_height="163dp"
-                android:src="@drawable/profile"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintBottom_toTopOf="@id/txv_name"
-                app:layout_constraintVertical_bias="0.08"
-                app:srcCompat="@drawable/profile"
-                android:clickable="true"/>
-            <!--
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="400dp"
+                android:layout_gravity="center"
+                android:layout_margin="20dp"
+                android:orientation="vertical">
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/img_people"
+                    android:layout_width="197dp"
+                    android:layout_height="163dp"
+                    android:clickable="true"
+                    android:src="@drawable/profile"
+                    app:layout_constraintBottom_toTopOf="@id/txv_name"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.08"
+                    app:srcCompat="@drawable/profile" />
+                <!--
             <ImageView
                 android:id="@+id/img_people"
                 android:layout_width="150dp"
@@ -46,20 +52,20 @@
                 android:scaleType="centerCrop"/>
                 -->
 
-            <TextView
-                android:id="@+id/txv_name"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:padding="10dp"
-                android:text="Teacher"
-                app:layout_constraintTop_toBottomOf="@+id/img_people"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"
-                android:textSize="35dp"
-                android:textColor="#000000"/>
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
+                <TextView
+                    android:id="@+id/txv_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp"
+                    android:text="Teacher"
+                    android:textColor="#000000"
+                    android:textSize="35dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/img_people" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.cardview.widget.CardView>
     </androidx.cardview.widget.CardView>
 
 </LinearLayout>
