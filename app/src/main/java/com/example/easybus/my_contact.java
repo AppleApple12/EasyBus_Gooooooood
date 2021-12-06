@@ -65,10 +65,10 @@ public class my_contact extends AppCompatActivity {
         getmail=email.getString("Email","");
         backBtn=findViewById(R.id.backicon);
         mEnteredName = findViewById(R.id.EnteredName);
-        dialog = new Dialog(my_contact.this);
         mPforfilepic = findViewById(R.id.profilepic);
-        dialog.setContentView(R.layout.nofriend_dialog);
 
+        dialog = new Dialog(my_contact.this);
+        dialog.setContentView(R.layout.nofriend_dialog);
         //刪除dialog方方的背景
         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         clickme=dialog.findViewById(R.id.button10);
