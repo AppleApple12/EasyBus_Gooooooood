@@ -4,6 +4,7 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.viewpager.widget.ViewPager;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -35,6 +36,8 @@ public class Page901Activity extends AppCompatActivity {
     RecyclerView mrecyclerView;
     HistoryAdapter historyAdapter;
     List<friend> friendList;
+    cardAdapter cardAdapter;
+    ViewPager viewPager;
 
     ArrayList<String> femailList = new ArrayList<>();
 
@@ -51,17 +54,28 @@ public class Page901Activity extends AppCompatActivity {
         SharedPreferences email = getSharedPreferences("email",MODE_PRIVATE);
         getmail=email.getString("Email","");
         backBtn=findViewById(R.id.back);
+        viewPager = findViewById(R.id.viewpager);
+        readfriend();
+        viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
 
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
-        mrecyclerView=findViewById(R.id.recyclerview);
-        mrecyclerView.setHasFixedSize(true);
-        mrecyclerView.setLayoutManager(linearLayoutManager);
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                System.out.println(position);
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
 
         friendList = new ArrayList<>();
         requestQueue = Volley.newRequestQueue(this);
 
-
-        readfriend();
 
         //返回我的資料
         backBtn.setOnClickListener(new View.OnClickListener() {
@@ -115,15 +129,13 @@ public class Page901Activity extends AppCompatActivity {
                                     e.printStackTrace();
                                 }
                             }
-                        historyAdapter = new HistoryAdapter(Page901Activity.this,friendList);
-                        mrecyclerView.setAdapter(historyAdapter);
-                        /*imageListAdapter = new ImageListAdapter(my_contact.this, imageLists);
-                        mrecyclerView.setAdapter(imageListAdapter);
-                        //imgrecyclerView.setAdapter(imageListAdapter);*/
+                        cardAdapter = new cardAdapter(Page901Activity.this,friendList);
+                        viewPager.setAdapter(cardAdapter);
+                        viewPager.setPadding(100,0,100,0);
 
-                        historyAdapter.setOnItemClick(new HistoryAdapter.OnItemClickListener() {
+                        cardAdapter.setCallBack(new cardAdapter.CallBack() {
                             @Override
-                            public void onItemClick(View view, int position) {
+                            public void OnClick(int position) {
                                 String myfemail  = friendList.get(position).getFemail();
                                 System.out.println("myfemail : " + myfemail);
 
