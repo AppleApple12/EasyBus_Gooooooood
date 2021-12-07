@@ -48,8 +48,8 @@ public class Page6121 extends AppCompatActivity implements OnMapReadyCallback, D
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_page6121);
 
-        ImageView mBack=findViewById(R.id.back);
-        TextView mTxvId=(TextView)findViewById(R.id.txvId);
+        ImageView mBack=findViewById(R.id.view);
+        TextView mTxvId= findViewById(R.id.txvId);
 
         //隱藏title bar
         ActionBar actionBar = getSupportActionBar();

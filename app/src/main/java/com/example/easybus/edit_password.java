@@ -32,7 +32,7 @@ import java.util.Map;
 
 public class edit_password extends AppCompatActivity {
     String email, getmail, password, getpass;
-    TextView btnok;
+    TextView btnok,back;
     EditText pas1, pas2, pas3;
     public String pass1, pass2, pass3;
     RequestQueue requestQueue;
@@ -52,6 +52,7 @@ public class edit_password extends AppCompatActivity {
         pas2 = findViewById(R.id.password2);
         pas3 = findViewById(R.id.password3);
         btnok = findViewById(R.id.okBtn);
+        back = findViewById(R.id.back);
         requestQueue = Volley.newRequestQueue(this);
         readPassword();
         System.out.println("1:"+getpass);
@@ -72,6 +73,16 @@ public class edit_password extends AppCompatActivity {
                 readUser();
             }
         });*/
+
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(edit_password.this,Page8Activity.class);
+                //intent.putExtra("email",getmail);
+                startActivity(intent);
+                finish();
+            }
+        });
 
         btnok.setOnClickListener(new View.OnClickListener() {
             @Override

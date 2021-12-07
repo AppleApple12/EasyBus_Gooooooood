@@ -9,18 +9,11 @@
     android:background="#F0F0F0"
     tools:context=".emergency_contact">
 
-    <ImageButton
-        android:id="@+id/back"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="8dp"
-        app:srcCompat="@drawable/back" />
-
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="200dp"
+        android:layout_marginTop="280dp"
         android:orientation="horizontal">
 
         <ImageView
@@ -64,6 +57,12 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
     </LinearLayout>
 
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:layout_gravity="center_horizontal">
+
     <Button
         android:id="@+id/add"
         android:layout_width="100dp"
@@ -74,6 +73,20 @@
         android:gravity="center"
         android:background="@drawable/accountbtn"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="30dp"  />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+        <TextView
+            android:id="@+id/back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="82dp"
+            android:text="返回"
+            android:textSize="20dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/add" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </LinearLayout>

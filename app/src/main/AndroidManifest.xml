@@ -29,7 +29,6 @@
         <activity android:name=".Page1102Activity"></activity>
         <activity android:name=".Page6121" />
         <activity android:name=".Page612" />
-        <activity android:name=".Page1101Activity" />
         <activity android:name=".Page11Activity" />
 
         <receiver

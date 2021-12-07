@@ -57,7 +57,7 @@ public class Page612 extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_page612);
         TextView mTxvId=(TextView)findViewById(R.id.txvId);
-        ImageView mBack=findViewById(R.id.back);
+        ImageView mBack=findViewById(R.id.view);
         RecyclerView recyclerView=findViewById(R.id.page612);
 
         recyclerView.setLayoutManager(new LinearLayoutManager(this));

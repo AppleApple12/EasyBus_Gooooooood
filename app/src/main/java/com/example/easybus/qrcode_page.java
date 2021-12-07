@@ -30,9 +30,9 @@ import org.json.JSONObject;
 
 public class qrcode_page extends AppCompatActivity {
     String email,getmail,fullname,getfullname;
-    ImageView qrcode,backBtn,qrscan;
+    ImageView qrcode,qrscan,backBtn;
+    View back;
     //TextView back;
-    ImageButton back;
     String identity;
     RequestQueue requestQueue;
     @Override
@@ -46,7 +46,7 @@ public class qrcode_page extends AppCompatActivity {
         //抓email
         SharedPreferences email = getSharedPreferences("email",MODE_PRIVATE);
         getmail=email.getString("Email","");
-        qrscan = findViewById(R.id.qrscan_btn);
+        qrscan = findViewById(R.id.view8);
         qrcode=findViewById(R.id.qrimage);
         back=findViewById(R.id.back);
         requestQueue = Volley.newRequestQueue(this);

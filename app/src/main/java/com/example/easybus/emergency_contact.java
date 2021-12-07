@@ -30,7 +30,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class emergency_contact extends AppCompatActivity {
-    ImageButton back;
+    TextView back;
     String email, getmail,phone;
     RequestQueue requestQueue;
     EditText memergency;

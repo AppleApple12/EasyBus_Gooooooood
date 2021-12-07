@@ -14,6 +14,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -48,7 +49,7 @@ public class Page611 extends AppCompatActivity {
         mOri2=(TextView)findViewById(R.id.ori);
         mDes2=(TextView)findViewById(R.id.des);
         TextView mTxvId=(TextView)findViewById(R.id.txvId);
-        ImageButton mBack=(ImageButton)findViewById(R.id.back);
+        ImageView mBack=findViewById(R.id.view);
         RecyclerView recyclerView=findViewById(R.id.page611Info);
 
         recyclerView.setLayoutManager(new LinearLayoutManager(this));

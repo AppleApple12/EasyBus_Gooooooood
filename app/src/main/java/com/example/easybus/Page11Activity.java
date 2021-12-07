@@ -16,6 +16,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -73,7 +74,7 @@ public class Page11Activity extends AppCompatActivity implements OnMapReadyCallb
         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         nodatabtn = dialog.findViewById(R.id.nodatabtn);
         //跳頁回家長主頁
-        ImageButton back = (ImageButton) findViewById(R.id.back);
+        ImageView back = findViewById(R.id.view);
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import java.text.SimpleDateFormat;
@@ -41,7 +42,7 @@ public class Page10Activity extends AppCompatActivity {
          //   d.add(retval);
 
         //跳頁回家長主頁
-        ImageButton back = (ImageButton)findViewById(R.id.back);
+        ImageView back = findViewById(R.id.view);
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

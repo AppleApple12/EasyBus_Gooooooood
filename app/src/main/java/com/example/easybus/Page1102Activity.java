@@ -76,7 +76,7 @@ public class Page1102Activity extends AppCompatActivity{
 
             }
         });
-        backBtn = findViewById(R.id.back);
+        backBtn = findViewById(R.id.view);
         backBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
