@@ -44,7 +44,7 @@ public class cardAdapter extends PagerAdapter {
 
         ImageView img = view.findViewById(R.id.img_people);
         TextView txv = view.findViewById(R.id.txv_name);
-
+  
         friend friend1 = friendList.get(position);
         String imgurl = friend1.getImageUrl();
         String textview = friend1.getF_name();
