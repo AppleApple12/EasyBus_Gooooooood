@@ -41,10 +41,10 @@ public class cardAdapter extends PagerAdapter {
     @Override
     public Object instantiateItem(@NonNull ViewGroup container, final int position) {
         View view = LayoutInflater.from(context).inflate(R.layout.card_item,container,false);
-
+  
         ImageView img = view.findViewById(R.id.img_people);
         TextView txv = view.findViewById(R.id.txv_name);
-  
+
         friend friend1 = friendList.get(position);
         String imgurl = friend1.getImageUrl();
         String textview = friend1.getF_name();
