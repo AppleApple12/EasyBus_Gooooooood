@@ -31,7 +31,7 @@ public class Page1102Activity extends AppCompatActivity{
     String femail,dayStr;
     String phone;
     ImageView backBtn;
-    cardAdapter cardAdapter;
+    cardAdapter1102 cardAdapter;
     ViewPager viewPager;
     List<friend> friendList;
     RequestQueue requestQueue;
@@ -128,10 +128,10 @@ public class Page1102Activity extends AppCompatActivity{
                                     e.printStackTrace();
                                 }
                             }
-                        cardAdapter = new cardAdapter(Page1102Activity.this,friendList);
+                        cardAdapter = new cardAdapter1102(Page1102Activity.this,friendList);
                             viewPager.setAdapter(cardAdapter);
                             viewPager.setPadding(100,0,100,0);
-                            cardAdapter.setCallBack(new cardAdapter.CallBack() {
+                            cardAdapter.setCallBack(new cardAdapter1102.CallBack() {
                                 @Override
                                 public void OnClick(int position) {
                                     String myfemail  = friendList.get(position).getFemail();

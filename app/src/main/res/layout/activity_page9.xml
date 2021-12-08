@@ -99,13 +99,13 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
         </LinearLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
- 
+
     <View
         android:id="@+id/bottom"
         android:layout_width="match_parent"
-        android:layout_height="570dp"
-        android:layout_marginStart="50dp"
-        android:layout_marginEnd="50dp"
+        android:layout_height="640dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
         android:background="@drawable/round_button3"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -114,22 +114,22 @@
 
     <fragment
         android:id="@+id/mapView"
-        android:layout_width="280dp"
-        android:layout_height="450dp"
+        android:layout_width="330dp"
+        android:layout_height="540dp"
         app:layout_constraintEnd_toEndOf="@+id/bottom"
         app:layout_constraintTop_toTopOf="@+id/bottom"
         app:layout_constraintStart_toStartOf="@+id/bottom"
         app:layout_constraintBottom_toTopOf="@+id/address"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="10dp"
         android:name="com.google.android.gms.maps.SupportMapFragment"/>
-
 
     <TextView
         android:id="@+id/address"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:text="Address:"
+        android:textSize="18dp"
+        android:text="地址："
         app:layout_constraintBottom_toBottomOf="@+id/bottom"
         app:layout_constraintEnd_toEndOf="@+id/bottom"
         app:layout_constraintStart_toStartOf="@+id/bottom"

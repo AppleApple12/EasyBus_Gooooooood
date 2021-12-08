@@ -16,12 +16,12 @@ import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
-public class cardAdapter extends PagerAdapter {
+public class cardAdapter1102 extends PagerAdapter {
 
     private Context context;
     private List<friend> friendList;
 
-    public cardAdapter(Context context, List<friend> friendList) {
+    public cardAdapter1102(Context context, List<friend> friendList) {
         this.context = context;
         this.friendList = friendList;
     }
@@ -40,7 +40,7 @@ public class cardAdapter extends PagerAdapter {
     @NonNull
     @Override
     public Object instantiateItem(@NonNull ViewGroup container, final int position) {
-        View view = LayoutInflater.from(context).inflate(R.layout.card_item,container,false);
+        View view = LayoutInflater.from(context).inflate(R.layout.card_item1102,container,false);
 
         ImageView img = view.findViewById(R.id.img_people);
         TextView txv = view.findViewById(R.id.txv_name);

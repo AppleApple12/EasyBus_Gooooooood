@@ -42,9 +42,9 @@ public class Page612ArticleAdapter extends RecyclerView.Adapter<RecyclerView.Vie
 
     @Override
     public int getItemViewType(int position) {
-        if (position==0)
+        if (page612R.size()!=1 && position==0)
             return 1;
-        else if(position==page612R.size()-1 )
+        else if(page612R.size()!=1 && position==page612R.size()-1 )
             return 3;
         else if(page612R.size()==1)
             return 4;

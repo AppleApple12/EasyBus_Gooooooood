@@ -1,91 +1,34 @@
-<?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="100dp"
-    android:background="#F0F0F0"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#f0f0f0"
+    android:gravity="center_vertical"
     tools:context=".qrscanner">
 
-    <View
-        android:id="@+id/top"
-        android:layout_width="wrap_content"
-        android:layout_height="100dp"
-        android:background="@drawable/round_button4"
+    <ImageView
+        android:id="@+id/logo"
+        android:layout_width="192dp"
+        android:layout_height="186dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/logo" />
 
-    <LinearLayout
-        android:id="@+id/linearLayout"
+    <TextView
+        android:id="@+id/title"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="horizontal">
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="60dp"
+        android:text="掃描行動條碼"
+        android:textColor="@android:color/black"
+        android:textSize="40dp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/logo" />
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_marginLeft="10dp"
-            android:layout_gravity="center_horizontal"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent">
-
-            <ImageView
-                android:id="@+id/view"
-                android:layout_width="61dp"
-                android:layout_height="68dp"
-                android:layout_weight="1"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/page5_top" />
-
-            <ImageView
-                android:id="@+id/backicon"
-                android:layout_width="31dp"
-                android:layout_height="36dp"
-                app:layout_constraintBottom_toBottomOf="@+id/view"
-                app:layout_constraintEnd_toEndOf="@+id/view"
-                app:layout_constraintStart_toStartOf="@+id/view"
-                app:layout_constraintTop_toTopOf="@+id/view"
-                app:srcCompat="@drawable/backicon" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_marginLeft="10dp"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent">
-
-            <ImageView
-                android:id="@+id/txvtop2"
-                android:layout_width="300dp"
-                android:layout_height="70dp"
-                android:layout_marginLeft="10dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/roundcorner" />
-
-            <ImageView
-                android:id="@+id/iv2"
-                android:layout_width="45dp"
-                android:layout_height="45dp"
-                android:layout_marginLeft="5dp"
-                app:layout_constraintBottom_toBottomOf="@+id/txvtop2"
-                app:layout_constraintEnd_toStartOf="@+id/txvtoptext"
-                app:layout_constraintStart_toStartOf="@+id/txvtop2"
-                app:layout_constraintTop_toTopOf="@+id/txvtop2"
-                app:srcCompat="@drawable/qrcode" />
-
-            <ImageView
-                android:id="@+id/txvtoptext"
-                android:layout_width="199dp"
-                android:layout_height="55dp"
-                android:layout_marginTop="3dp"
-                android:src="@drawable/text6"
-                app:layout_constraintBottom_toBottomOf="@+id/txvtop2"
-                app:layout_constraintEnd_toEndOf="@+id/txvtop2"
-                app:layout_constraintStart_toEndOf="@+id/iv2"
-                app:layout_constraintTop_toTopOf="@+id/txvtop2" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
-    </LinearLayout>
-    </androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>

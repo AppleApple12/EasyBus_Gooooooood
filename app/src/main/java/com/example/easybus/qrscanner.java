@@ -13,6 +13,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -40,7 +41,7 @@ public class qrscanner extends AppCompatActivity {
     //判斷是否加好友、判斷是否存在
     Button btnok,btncancle,btngo;
     TextView maddfriend,friendname,myfriend;
-    ImageButton back;
+    ImageView back;
     //private PopupWindow popupWindow = null;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,15 +50,15 @@ public class qrscanner extends AppCompatActivity {
         //抓email
         SharedPreferences email = getSharedPreferences("email",MODE_PRIVATE);
         mygetmail=email.getString("Email","");
-        back=findViewById(R.id.back);
-        back.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(qrscanner.this,Page8Activity.class);
-                // intent.putExtra("email",mygetmail);
-                startActivity(intent);
-            }
-        });
+//        back=findViewById(R.id.view);
+//        back.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent intent = new Intent(qrscanner.this,Page8Activity.class);
+//                // intent.putExtra("email",mygetmail);
+//                startActivity(intent);
+//            }
+//        });
 
         ActionBar actionBar = getSupportActionBar();
         actionBar.hide();

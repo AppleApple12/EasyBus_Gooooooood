@@ -7,7 +7,6 @@
     android:background="#F0F0F0"
     tools:context=".Page10Activity">
 
-
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout5"
         android:layout_width="match_parent"
@@ -18,6 +17,7 @@
             android:id="@+id/top"
             android:layout_width="wrap_content"
             android:layout_height="100dp"
+            android:alpha="0.7"
             android:background="@drawable/round_button2"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -86,7 +86,6 @@
                     android:id="@+id/txvtoptext"
                     android:layout_width="200dp"
                     android:layout_height="60dp"
-                    android:src="@drawable/page3_2"
                     android:text="需求者歷史足跡"
                     android:textSize="28dp"
                     android:gravity="center"

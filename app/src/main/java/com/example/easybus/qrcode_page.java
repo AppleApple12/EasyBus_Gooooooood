@@ -30,8 +30,7 @@ import org.json.JSONObject;
 
 public class qrcode_page extends AppCompatActivity {
     String email,getmail,fullname,getfullname;
-    ImageView qrcode,qrscan,backBtn;
-    View back;
+    ImageView qrcode,qrscan,backBtn,back;
     //TextView back;
     String identity;
     RequestQueue requestQueue;
@@ -48,7 +47,7 @@ public class qrcode_page extends AppCompatActivity {
         getmail=email.getString("Email","");
         qrscan = findViewById(R.id.view8);
         qrcode=findViewById(R.id.qrimage);
-        back=findViewById(R.id.back);
+        //back=findViewById(R.id.view);
         requestQueue = Volley.newRequestQueue(this);
         //getmail = mail();
         //getfullname=fullname();
@@ -64,16 +63,16 @@ public class qrcode_page extends AppCompatActivity {
             }
         });
         //返回健(基本資料)
-        back.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                turnpage(identity);
+        //back.setOnClickListener(new View.OnClickListener() {
+            //@Override
+            //public void onClick(View v) {
+                //turnpage(identity);
                 /*Intent intent = new Intent(qrcode_page.this,Page8Activity.class);
                 intent.putExtra("email",getmail);
                 startActivity(intent);
                 finish();*/
-            }
-        });
+            //
+        //});
         MultiFormatWriter writer = new MultiFormatWriter();
         try{
             BitMatrix martix = writer.encode(getmail, BarcodeFormat.QR_CODE,350,350);
