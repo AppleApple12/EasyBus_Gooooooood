@@ -30,7 +30,8 @@ import org.json.JSONObject;
 
 public class qrcode_page extends AppCompatActivity {
     String email,getmail,fullname,getfullname;
-    ImageView qrcode,qrscan,backBtn,back;
+    ImageView qrcode,qrscan,backBtn;
+    TextView back;
     //TextView back;
     String identity;
     RequestQueue requestQueue;
@@ -47,7 +48,7 @@ public class qrcode_page extends AppCompatActivity {
         getmail=email.getString("Email","");
         qrscan = findViewById(R.id.view8);
         qrcode=findViewById(R.id.qrimage);
-        //back=findViewById(R.id.view);
+        back=findViewById(R.id.textView5);
         requestQueue = Volley.newRequestQueue(this);
         //getmail = mail();
         //getfullname=fullname();
@@ -63,16 +64,13 @@ public class qrcode_page extends AppCompatActivity {
             }
         });
         //返回健(基本資料)
-        //back.setOnClickListener(new View.OnClickListener() {
-            //@Override
-            //public void onClick(View v) {
-                //turnpage(identity);
-                /*Intent intent = new Intent(qrcode_page.this,Page8Activity.class);
-                intent.putExtra("email",getmail);
-                startActivity(intent);
-                finish();*/
-            //
-        //});
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                turnpage(identity);
+            }
+        });
+
         MultiFormatWriter writer = new MultiFormatWriter();
         try{
             BitMatrix martix = writer.encode(getmail, BarcodeFormat.QR_CODE,350,350);
@@ -84,20 +82,7 @@ public class qrcode_page extends AppCompatActivity {
         }
 
     }
-    /*public String mail(){
-        Bundle extras = getIntent().getExtras();
-        if (extras!=null){
-            email=extras.getString("email");
-        }
-        return email;
-    }
-    public String fullname(){
-        Bundle extras = getIntent().getExtras();
-        if (extras!=null){
-            fullname=extras.getString("fullname");
-        }
-        return fullname;
-    }*/
+
     public void readUser(){
         String URL =Urls.url1+"/LoginRegister/fetch.php?email="+getmail;
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(
@@ -127,7 +112,6 @@ public class qrcode_page extends AppCompatActivity {
     }
 
     private void turnpage(String identity) {
-
         if("requester".equalsIgnoreCase(identity)) {
             Intent it4 = new Intent(qrcode_page.this,Page8Activity.class);
             it4.putExtra("email", getmail);

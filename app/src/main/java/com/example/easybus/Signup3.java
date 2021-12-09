@@ -104,12 +104,12 @@ public class Signup3 extends AppCompatActivity {
                                         if (putData.onComplete()) {
                                             String result = putData.getResult();
                                             if (result.equals("Sign Up Success")) {
-                                                Toast.makeText(getApplicationContext(), result, Toast.LENGTH_SHORT).show();
+                                                Toast.makeText(Signup3.this,"註冊成功！", Toast.LENGTH_SHORT).show();
                                                 Intent intent = new Intent(getApplicationContext(), Login3.class);
                                                 startActivity(intent);
                                                 finish();
                                             } else {
-                                                Toast.makeText(getApplicationContext(), result, Toast.LENGTH_SHORT).show();
+                                                Toast.makeText(Signup3.this,"註冊失敗，請重試！", Toast.LENGTH_SHORT).show();
                                             }
                                         }
                                     }
@@ -122,7 +122,7 @@ public class Signup3 extends AppCompatActivity {
                     }
                 }
                 else{
-                    Toast.makeText(getApplicationContext(),"All filed required",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(),"請填寫完整！",Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -134,7 +134,7 @@ public class Signup3 extends AppCompatActivity {
             //Toast.makeText(this,"Email Validated Successfully!",Toast.LENGTH_SHORT).show();
             return true;
         }else{
-            Toast.makeText(this,"InValid Email Address!",Toast.LENGTH_SHORT).show();
+            Toast.makeText(this,"無效的Email!",Toast.LENGTH_SHORT).show();
             return false;
         }
     }

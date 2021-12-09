@@ -213,14 +213,14 @@ public class Page8Activity_caregiver extends AppCompatActivity {
                             img = response.getString("image");
                         } catch (JSONException e) {
                             e.printStackTrace();
-                            Toast.makeText(Page8Activity_caregiver.this, e.toString(), Toast.LENGTH_SHORT).show();
+                            //Toast.makeText(Page8Activity_caregiver.this, e.toString(), Toast.LENGTH_SHORT).show();
                         }
                     }
                 },
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(Page8Activity_caregiver.this, error.toString(), Toast.LENGTH_SHORT).show();
+                       // Toast.makeText(Page8Activity_caregiver.this, error.toString(), Toast.LENGTH_SHORT).show();
                     }
                 }
         );
@@ -232,12 +232,12 @@ public class Page8Activity_caregiver extends AppCompatActivity {
         StringRequest request = new StringRequest(Request.Method.POST, URL, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                Toast.makeText(Page8Activity_caregiver.this,response,Toast.LENGTH_SHORT).show();
+                //Toast.makeText(Page8Activity_caregiver.this,response,Toast.LENGTH_SHORT).show();
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Toast.makeText(Page8Activity_caregiver.this,error.getMessage(),Toast.LENGTH_SHORT).show();
+                //Toast.makeText(Page8Activity_caregiver.this,error.getMessage(),Toast.LENGTH_SHORT).show();
             }
         }){
             @Override
@@ -267,7 +267,7 @@ public class Page8Activity_caregiver extends AppCompatActivity {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Toast.makeText(Page8Activity_caregiver.this,error.getMessage(),Toast.LENGTH_SHORT).show();
+                //Toast.makeText(Page8Activity_caregiver.this,error.getMessage(),Toast.LENGTH_SHORT).show();
             }
         });
         RequestQueue requestQueue = Volley.newRequestQueue(Page8Activity_caregiver.this);
@@ -285,7 +285,7 @@ public class Page8Activity_caregiver extends AppCompatActivity {
                     @Override
                     public void onSuccess() {
                         // 圖片讀取完成
-                        Toast.makeText(Page8Activity_caregiver.this, "Success", Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(Page8Activity_caregiver.this, "Success", Toast.LENGTH_SHORT).show();
                     }
 
                     @Override
@@ -297,21 +297,6 @@ public class Page8Activity_caregiver extends AppCompatActivity {
         System.out.println(imgurl);
     }
 
-
-    /*public String mail(){
-        Bundle extras = getIntent().getExtras();
-        if (extras!=null){
-            email=extras.getString("email");
-        }
-        return email;
-    }*/
-    public String pass(){
-        Bundle extras = getIntent().getExtras();
-        if (extras!=null){
-            password=extras.getString("password");
-        }
-        return password;
-    }
     private View.OnClickListener itemsOnClick=new View.OnClickListener(){
         @Override
         public void onClick(View v) {

@@ -202,7 +202,7 @@ public class Page611 extends AppCompatActivity {
             @Override
             public void onErrorResponse(VolleyError error) {
                 progressDialog.dismiss();
-                Toast.makeText(Page611.this,"發生錯誤1111!",Toast.LENGTH_LONG).show();
+                Toast.makeText(Page611.this,"請重試！",Toast.LENGTH_LONG).show();
             }
         });
         RequestQueue requestQueue= Volley.newRequestQueue(this);
@@ -221,9 +221,9 @@ public class Page611 extends AppCompatActivity {
             finish();
             Log.i("Finished making a call...", "");
         } catch (android.content.ActivityNotFoundException ex) {
-            Toast.makeText(Page611.this, ex.toString(), Toast.LENGTH_SHORT).show();
+            //Toast.makeText(Page611.this, ex.toString(), Toast.LENGTH_SHORT).show();
             Toast.makeText(Page611.this,
-                    "Call faild, please try again later.", Toast.LENGTH_SHORT).show();
+                    "請重撥!", Toast.LENGTH_SHORT).show();
         }
     }
     public void readUser(){

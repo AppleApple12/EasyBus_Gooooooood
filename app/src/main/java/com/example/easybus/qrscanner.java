@@ -50,15 +50,6 @@ public class qrscanner extends AppCompatActivity {
         //抓email
         SharedPreferences email = getSharedPreferences("email",MODE_PRIVATE);
         mygetmail=email.getString("Email","");
-//        back=findViewById(R.id.view);
-//        back.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent intent = new Intent(qrscanner.this,Page8Activity.class);
-//                // intent.putExtra("email",mygetmail);
-//                startActivity(intent);
-//            }
-//        });
 
         ActionBar actionBar = getSupportActionBar();
         actionBar.hide();
@@ -107,9 +98,9 @@ public class qrscanner extends AppCompatActivity {
                     @Override
                     public void onResponse(String response) {
                         if(response.equals("Success")){
-                            Toast.makeText(qrscanner.this, "加入成功 !", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(qrscanner.this, "加入成功！", Toast.LENGTH_SHORT).show();
                         }else {
-                            Toast.makeText(qrscanner.this, response, Toast.LENGTH_SHORT).show();
+                            Toast.makeText(qrscanner.this,"加入失敗，請重試！", Toast.LENGTH_SHORT).show();
                         }
                     }
                 },

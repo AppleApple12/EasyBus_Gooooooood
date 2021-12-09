@@ -177,9 +177,9 @@ public class Page61 extends AppCompatActivity {
             finish();
             Log.i("Finished making a call...", "");
         } catch (android.content.ActivityNotFoundException ex) {
-            Toast.makeText(Page61.this, ex.toString(), Toast.LENGTH_SHORT).show();
+           // Toast.makeText(Page61.this, ex.toString(), Toast.LENGTH_SHORT).show();
             Toast.makeText(Page61.this,
-                    "Call faild, please try again later.", Toast.LENGTH_SHORT).show();
+                    "請重撥!", Toast.LENGTH_SHORT).show();
         }
         //startActivity(call        );
     }

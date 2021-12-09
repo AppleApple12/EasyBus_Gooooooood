@@ -483,13 +483,13 @@ public class Page3Activity extends AppCompatActivity {
                     @Override
                     public void onSuccess() {
                         // 圖片讀取完成
-                        Toast.makeText(Page3Activity.this, "圖片讀取成功", Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(Page3Activity.this, "圖片讀取成功", Toast.LENGTH_SHORT).show();
                     }
 
                     @Override
                     public void onError() {
                         // 圖片讀取失敗
-                          Toast.makeText(Page3Activity.this, "圖片讀取失敗", Toast.LENGTH_SHORT).show();
+                        //  Toast.makeText(Page3Activity.this, "圖片讀取失敗", Toast.LENGTH_SHORT).show();
                     }
                 });
 

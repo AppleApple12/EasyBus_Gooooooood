@@ -145,7 +145,7 @@ public class Page5012Activity extends AppCompatActivity {
                         businfos.add(businfo);
                     }
                 }catch (JSONException e){
-                    Toast.makeText(Page5012Activity.this,e.getMessage(),Toast.LENGTH_LONG).show();
+                    //Toast.makeText(Page5012Activity.this,e.getMessage(),Toast.LENGTH_LONG).show();
                 }
                 adaptor.setData(businfos);
                 adaptor.notifyDataSetChanged();
@@ -155,7 +155,7 @@ public class Page5012Activity extends AppCompatActivity {
             @Override
             public void onErrorResponse(VolleyError error) {
                 progressDialog.dismiss();
-                Toast.makeText(Page5012Activity.this,"發生錯誤1111!",Toast.LENGTH_LONG).show();
+                //Toast.makeText(Page5012Activity.this,"發生錯誤1111!",Toast.LENGTH_LONG).show();
             }
         });
 
@@ -364,7 +364,7 @@ public class Page5012Activity extends AppCompatActivity {
         public void onClick(View view) {
         }
         public void savebusinfo(final String email,final String routename,final String origin,final String destination,final String img) {
-            String URL = Urls.url1+"/LoginRegister/save_businfo.php";//
+            String URL = Urls.url1+"/LoginRegister/save_businfo.php";
             StringRequest stringRequest = new StringRequest(
                     Request.Method.POST,
                     URL,
@@ -411,9 +411,8 @@ public class Page5012Activity extends AppCompatActivity {
             finish();
             Log.i("Finished making a call...", "");
         } catch (android.content.ActivityNotFoundException ex) {
-            Toast.makeText(Page5012Activity.this, ex.toString(), Toast.LENGTH_SHORT).show();
-            Toast.makeText(Page5012Activity.this,
-                    "Call faild, please try again later.", Toast.LENGTH_SHORT).show();
+            //Toast.makeText(Page5012Activity.this, ex.toString(), Toast.LENGTH_SHORT).show();
+            Toast.makeText(Page5012Activity.this,"請重撥！", Toast.LENGTH_SHORT).show();
         }
         //startActivity(call        );
     }

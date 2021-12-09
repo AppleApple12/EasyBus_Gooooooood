@@ -91,7 +91,7 @@ public class emergency_contact extends AppCompatActivity {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(emergency_contact.this, error.toString(), Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(emergency_contact.this, error.toString(), Toast.LENGTH_SHORT).show();
                     }
                 }
         ) {
@@ -118,11 +118,4 @@ public class emergency_contact extends AppCompatActivity {
         return true;
     }
 
-    /*public String mail() {
-        Bundle extras = getIntent().getExtras();
-        if (extras != null) {
-            email = extras.getString("email");
-        }
-        return email;
-    }*/
 }

@@ -54,7 +54,6 @@ public class Login3 extends AppCompatActivity {
         mRegistertext=findViewById(R.id.registertext);
         mLoginBtn=findViewById(R.id.login);
         mForgetext=findViewById(R.id.Forgetext);
-        backBtn=findViewById(R.id.back);
         check=findViewById(R.id.checkBox);
         requestQueue = Volley.newRequestQueue(this);
         //跳到註冊
@@ -106,10 +105,9 @@ public class Login3 extends AppCompatActivity {
                                     String result = putData.getResult();
                                     if (result.equals("Login Success")) {
                                         readUser(email);
-                                        Toast.makeText(getApplicationContext(), result, Toast.LENGTH_SHORT).show();
+                                        //Toast.makeText(getApplicationContext(), result, Toast.LENGTH_SHORT).show();
                                     } else {
-                                        Toast.makeText(getApplicationContext(), result, Toast.LENGTH_SHORT).show();
-
+                                        Toast.makeText(Login3.this, "登入失敗，請重試！", Toast.LENGTH_SHORT).show();
                                     }
                                 }
                             }
@@ -117,7 +115,7 @@ public class Login3 extends AppCompatActivity {
                     });
 
                 } else {
-                    Toast.makeText(getApplicationContext(), "All filed required", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "請填寫完整！", Toast.LENGTH_SHORT).show();
                 }
             }
 
@@ -165,14 +163,14 @@ public class Login3 extends AppCompatActivity {
                             turnpage(identity);
                         } catch (JSONException e) {
                             e.printStackTrace();
-                            Toast.makeText(Login3.this, e.toString(), Toast.LENGTH_SHORT).show();
+                            //Toast.makeText(Login3.this, e.toString(), Toast.LENGTH_SHORT).show();
                         }
                     }
                 },
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(Login3.this, error.toString(), Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(Login3.this, error.toString(), Toast.LENGTH_SHORT).show();
                     }
                 }
         );
@@ -182,7 +180,7 @@ public class Login3 extends AppCompatActivity {
     private void turnpage(String identity) {
 
         if("requester".equalsIgnoreCase(identity)) {
-            Intent it4 = new Intent(Login3.this,Page8Activity.class);
+            Intent it4 = new Intent(Login3.this,Page3Activity.class);
             it4.putExtra("email", email);
             it4.putExtra("password",password);
             startActivity(it4);
@@ -193,7 +191,7 @@ public class Login3 extends AppCompatActivity {
             editor.commit();
             finish();
         }else if("caregiver".equalsIgnoreCase(identity)){
-            Intent it = new Intent(Login3.this,Page8Activity_caregiver.class);
+            Intent it = new Intent(Login3.this,Page4Activity.class);
             it.putExtra("email", email);
             it.putExtra("password",password);
             startActivity(it);

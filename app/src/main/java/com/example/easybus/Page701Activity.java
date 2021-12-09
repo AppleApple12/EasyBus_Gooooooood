@@ -58,7 +58,7 @@ public class Page701Activity extends AppCompatActivity {
             super.onPreExecute();
             pd = new ProgressDialog(Page701Activity.this);
             pd.setCancelable(false);
-            pd.setMessage("Downloading...Please wait!");
+            pd.setMessage("加載中...請稍等!");
             pd.setProgress(0);
             pd.show();
         }

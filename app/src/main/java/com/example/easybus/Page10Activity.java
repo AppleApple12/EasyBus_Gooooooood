@@ -102,7 +102,7 @@ public class Page10Activity extends AppCompatActivity {
         cal.setOnClickListen(new calendar.onClickListener() {
             @Override
             public void onLeftRowClick() {
-                Toast.makeText(Page10Activity.this,"點擊減箭頭",Toast.LENGTH_SHORT).show();
+                //Toast.makeText(Page10Activity.this,"點擊減箭頭",Toast.LENGTH_SHORT).show();
                 cal.monthChange(-1);
                 if(cal.m.equals("JAN")){
                     cal.yearChange(-1);
@@ -128,7 +128,7 @@ public class Page10Activity extends AppCompatActivity {
 
             @Override
             public void onRightRowClick() {
-                Toast.makeText(Page10Activity.this,"點擊加箭頭",Toast.LENGTH_SHORT).show();
+               // Toast.makeText(Page10Activity.this,"點擊加箭頭",Toast.LENGTH_SHORT).show();
                 cal.monthChange(1);
                 if(cal.m.equals("DEC")){
                     cal.yearChange(1);
@@ -154,18 +154,18 @@ public class Page10Activity extends AppCompatActivity {
 
             @Override
             public void onTitleClick(String monStr, Date month) {
-                Toast.makeText(Page10Activity.this,"點擊了標題："+monStr,Toast.LENGTH_SHORT).show();
+               // Toast.makeText(Page10Activity.this,"點擊了標題："+monStr,Toast.LENGTH_SHORT).show();
             }
 
             @Override
             public void onWeekClick(int weekIndex, String weekStr) {
-                Toast.makeText(Page10Activity.this,"點擊了星期："+weekStr,Toast.LENGTH_SHORT).show();
+               // Toast.makeText(Page10Activity.this,"點擊了星期："+weekStr,Toast.LENGTH_SHORT).show();
 
             }
 
             @Override
             public void onDayClick(int day, String dayStr, DayFinish finish) {
-                Toast.makeText(Page10Activity.this,"點擊了日期："+dayStr,Toast.LENGTH_SHORT).show();
+               // Toast.makeText(Page10Activity.this,"點擊了日期："+dayStr,Toast.LENGTH_SHORT).show();
                 String selectday[];
                 String clickday;
                 selectday = dayStr.split("-");

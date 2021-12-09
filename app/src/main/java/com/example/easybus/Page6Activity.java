@@ -133,7 +133,7 @@ public class Page6Activity extends AppCompatActivity{
         protected void onPostExecute(Void aVoid) {
             super.onPostExecute(aVoid);
             pd.dismiss();
-            Toast.makeText(getApplicationContext(),"Connection successful!",Toast.LENGTH_LONG).show();
+            //Toast.makeText(getApplicationContext(),"Connection successful!",Toast.LENGTH_LONG).show();
             try{
                 if(result!=null && !result.equals("")){
                     JSONArray jsonArray = new JSONArray(result);

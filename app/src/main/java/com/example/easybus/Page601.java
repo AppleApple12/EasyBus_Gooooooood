@@ -200,7 +200,7 @@ public class Page601 extends AppCompatActivity {
             super.onPreExecute();
             pd = new ProgressDialog(Page601.this);
             pd.setCancelable(false);
-            pd.setMessage("Downloading...Please wait!");
+            pd.setMessage("加載中...請稍等!");
             pd.setProgress(0);
             if(!isCancelled() && Page601.this!=null && !Page601.this.isFinishing()){
                 pd.show();
@@ -211,7 +211,7 @@ public class Page601 extends AppCompatActivity {
         protected void onPostExecute(Void aVoid) {
             super.onPostExecute(aVoid);
 
-            Toast.makeText(getApplicationContext(),"Connection successful!",Toast.LENGTH_LONG).show();
+            //Toast.makeText(getApplicationContext(),"Connection successful!",Toast.LENGTH_LONG).show();
             arrayList = new ArrayList<>();
             arr_estimate = new ArrayList<>();
             try{

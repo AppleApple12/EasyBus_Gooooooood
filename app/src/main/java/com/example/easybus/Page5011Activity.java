@@ -127,7 +127,7 @@ public class Page5011Activity extends FragmentActivity implements OnMapReadyCall
             it.putExtras(bundle);
             startActivity(it);
         }catch(Exception e){
-            Toast.makeText(this, e.getMessage(), Toast.LENGTH_LONG).show();
+            //Toast.makeText(this, e.getMessage(), Toast.LENGTH_LONG).show();
         }
     }
 

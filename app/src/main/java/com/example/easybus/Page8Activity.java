@@ -220,14 +220,14 @@ public class Page8Activity extends AppCompatActivity {
                             img = response.getString("image");
                         } catch (JSONException e) {
                             e.printStackTrace();
-                            Toast.makeText(Page8Activity.this, e.toString(), Toast.LENGTH_SHORT).show();
+                           // Toast.makeText(Page8Activity.this, e.toString(), Toast.LENGTH_SHORT).show();
                         }
                     }
                 },
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(Page8Activity.this, error.toString(), Toast.LENGTH_SHORT).show();
+                       // Toast.makeText(Page8Activity.this, error.toString(), Toast.LENGTH_SHORT).show();
                     }
                 }
         );
@@ -239,12 +239,12 @@ public class Page8Activity extends AppCompatActivity {
         StringRequest request = new StringRequest(Request.Method.POST, URL, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                Toast.makeText(Page8Activity.this,response,Toast.LENGTH_SHORT).show();
+               // Toast.makeText(Page8Activity.this,response,Toast.LENGTH_SHORT).show();
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Toast.makeText(Page8Activity.this,error.getMessage(),Toast.LENGTH_SHORT).show();
+                //Toast.makeText(Page8Activity.this,error.getMessage(),Toast.LENGTH_SHORT).show();
             }
         }){
             @Override
@@ -274,7 +274,7 @@ public class Page8Activity extends AppCompatActivity {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Toast.makeText(Page8Activity.this,error.getMessage(),Toast.LENGTH_SHORT).show();
+               // Toast.makeText(Page8Activity.this,error.getMessage(),Toast.LENGTH_SHORT).show();
             }
         });
         RequestQueue requestQueue = Volley.newRequestQueue(Page8Activity.this);
@@ -292,7 +292,7 @@ public class Page8Activity extends AppCompatActivity {
                     @Override
                     public void onSuccess() {
                         // 圖片讀取完成
-                        Toast.makeText(Page8Activity.this, "Success", Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(Page8Activity.this, "Success", Toast.LENGTH_SHORT).show();
                     }
 
                     @Override
@@ -305,13 +305,6 @@ public class Page8Activity extends AppCompatActivity {
     }
 
 
-   /* public String pass(){
-        Bundle extras = getIntent().getExtras();
-        if (extras!=null){
-            password=extras.getString("password");
-        }
-        return password;
-    }*/
     private View.OnClickListener itemsOnClick=new View.OnClickListener(){
         @Override
         public void onClick(View v) {

@@ -55,32 +55,14 @@ public class edit_password extends AppCompatActivity {
         back = findViewById(R.id.back);
         requestQueue = Volley.newRequestQueue(this);
         readPassword();
+
         System.out.println("1:"+getpass);
-        // getmail = mail();
-        //  getpass = pass();
 
-        /*btnback.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                readUser();
-            }
-        });*/
-
-        /*ImageButton back = (ImageButton)findViewById(R.id.back);
-        back.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                readUser();
-            }
-        });*/
 
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(edit_password.this,Page8Activity.class);
-                //intent.putExtra("email",getmail);
-                startActivity(intent);
-                finish();
+                readUser();
             }
         });
 

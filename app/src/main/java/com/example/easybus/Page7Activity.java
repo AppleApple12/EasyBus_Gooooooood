@@ -108,9 +108,9 @@ public class Page7Activity extends AppCompatActivity {
             finish();
             Log.i("Finished making a call...", "");
         } catch (android.content.ActivityNotFoundException ex) {
-            Toast.makeText(Page7Activity.this, ex.toString(), Toast.LENGTH_SHORT).show();
+            //Toast.makeText(Page7Activity.this, ex.toString(), Toast.LENGTH_SHORT).show();
             Toast.makeText(Page7Activity.this,
-                    "Call faild, please try again later.", Toast.LENGTH_SHORT).show();
+                    "請重撥!", Toast.LENGTH_SHORT).show();
         }
         //startActivity(call        );
     }
@@ -129,14 +129,14 @@ public class Page7Activity extends AppCompatActivity {
                             makeCall(emergency_phone);
                         } catch (JSONException e) {
                             e.printStackTrace();
-                            Toast.makeText(Page7Activity.this, e.toString(), Toast.LENGTH_SHORT).show();
+                            //Toast.makeText(Page7Activity.this, e.toString(), Toast.LENGTH_SHORT).show();
                         }
                     }
                 },
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(Page7Activity.this, error.toString(), Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(Page7Activity.this, error.toString(), Toast.LENGTH_SHORT).show();
                     }
                 }
         );

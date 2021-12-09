@@ -126,7 +126,7 @@ public class Forgotpassword extends AppCompatActivity {
             //Toast.makeText(this,"Email Validated Successfully!",Toast.LENGTH_SHORT).show();
             return true;
         }else{
-            Toast.makeText(this,"InValid Email Address!",Toast.LENGTH_SHORT).show();
+            //Toast.makeText(this,"InValid Email Address!",Toast.LENGTH_SHORT).show();
             return false;
         }
     }

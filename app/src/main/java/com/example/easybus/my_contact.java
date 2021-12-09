@@ -157,7 +157,7 @@ public class my_contact extends AppCompatActivity {
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Toast.makeText(my_contact.this, error.toString(), Toast.LENGTH_SHORT).show();
+               // Toast.makeText(my_contact.this, error.toString(), Toast.LENGTH_SHORT).show();
             }
         });
         RequestQueue requestQueue2 = Volley.newRequestQueue(my_contact.this);
@@ -186,14 +186,14 @@ public class my_contact extends AppCompatActivity {
                             fetchimage();
                         } catch (JSONException e) {
                             e.printStackTrace();
-                            Toast.makeText(my_contact.this, e.toString(), Toast.LENGTH_SHORT).show();
+                           // Toast.makeText(my_contact.this, e.toString(), Toast.LENGTH_SHORT).show();
                         }
                     }
                 },
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(my_contact.this, error.toString(), Toast.LENGTH_SHORT).show();
+                       // Toast.makeText(my_contact.this, error.toString(), Toast.LENGTH_SHORT).show();
                     }
                 }
         );
@@ -233,7 +233,7 @@ public class my_contact extends AppCompatActivity {
                     @Override
                     public void onSuccess() {
                         // 圖片讀取完成
-                        Toast.makeText(my_contact.this, "Success", Toast.LENGTH_SHORT).show();
+                       // Toast.makeText(my_contact.this, "Success", Toast.LENGTH_SHORT).show();
                     }
 
                     @Override
