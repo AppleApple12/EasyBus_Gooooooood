@@ -11,6 +11,8 @@ import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Matrix;
+import android.media.ExifInterface;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
@@ -282,9 +284,16 @@ public class Page8Activity extends AppCompatActivity {
     }
     public void ImageRetriveWithPicasso() {
         String imgurl = Urls.url1+"/LoginRegister/images/"+img;
+        int degree = parseImageDegree(imgurl);
+        Bitmap bitmap = null;
+        byte[] bitmapArray;
+        bitmapArray = Base64.decode(imgurl, Base64.DEFAULT);
+        bitmap = BitmapFactory.decodeByteArray(bitmapArray, 0,
+                        bitmapArray.length);
+        Bitmap bitmap1 = rotateBitmap(bitmap,degree);
         Picasso.with(this)
 
-                .load(imgurl)
+                .load(String.valueOf(bitmap1))
                 .placeholder(R.drawable.profile)
                 .fit()
                // .error(R.drawable.ic_error_black_24dp)
@@ -303,7 +312,57 @@ public class Page8Activity extends AppCompatActivity {
                 });
         System.out.println(imgurl);
     }
+    /**
+     * 獲取圖片旋轉角度
+     * @param path 圖片路徑
+     * @return
+     */
+    private int parseImageDegree(String path) {
+        int degree = 0;
+        try {
+            ExifInterface exifInterface = new ExifInterface(path);
+            int orientation = exifInterface.getAttributeInt(ExifInterface.TAG_ORIENTATION, ExifInterface.ORIENTATION_NORMAL);
+            switch (orientation) {
+                case ExifInterface.ORIENTATION_ROTATE_90:
+                    degree = 90;
+                    break;
+                case ExifInterface.ORIENTATION_ROTATE_180:
+                    degree = 180;
+                    break;
+                case ExifInterface.ORIENTATION_ROTATE_270:
+                    degree = 270;
+                    break;
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return degree;
+    }
 
+    /**
+     * 圖片旋轉操作
+     *
+     * @param bm 需要旋轉的圖片
+     * @param degree 旋轉角度
+     * @return 旋轉後的圖片
+     */
+    private Bitmap rotateBitmap(Bitmap bm, int degree) {
+        Bitmap returnBm = null;
+
+        Matrix matrix = new Matrix();
+        matrix.postRotate(degree);
+        try {
+            returnBm = Bitmap.createBitmap(bm, 0, 0, bm.getWidth(), bm.getHeight(), matrix, true);
+        } catch (OutOfMemoryError e) {
+        }
+        if (returnBm == null) {
+            returnBm = bm;
+        }
+        if (bm != returnBm) {
+            bm.recycle();
+        }
+        return returnBm;
+    }
 
     private View.OnClickListener itemsOnClick=new View.OnClickListener(){
         @Override
