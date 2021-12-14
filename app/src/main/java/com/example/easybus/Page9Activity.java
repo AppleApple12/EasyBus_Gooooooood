@@ -165,7 +165,7 @@ public class Page9Activity extends AppCompatActivity implements OnMapReadyCallba
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Toast.makeText(Page9Activity.this, error.toString(), Toast.LENGTH_SHORT).show();
+                //Toast.makeText(Page9Activity.this, error.toString(), Toast.LENGTH_SHORT).show();
             }
         });
         RequestQueue requestQueue2 = Volley.newRequestQueue(Page9Activity.this);

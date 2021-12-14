@@ -143,13 +143,18 @@ public class Page611 extends AppCompatActivity {
                             b.setHtmlinstructions(urlDestination);
                         }else if(travelMode.equals("WALKING")){
                             String Htmlinstructions=ObjSteps.getString("html_instructions");
-                            if(Htmlinstructions.equals("永豐棧麗致酒店"))
+                            Log.d("路線名稱",Htmlinstructions);
+                            if(Htmlinstructions.equals("步行到永豐棧麗緻酒店")){
                                 Htmlinstructions="步行到永豐棧酒店";
+                                Log.d("路線名稱(改)",Htmlinstructions);
+                            }
                             b.setHtmlinstructions(Htmlinstructions.substring(3));
                         }else{
                             String Htmlinstructions=ObjSteps.getJSONObject("transit_details").getJSONObject("arrival_stop").getString("name");
+                            Log.d("路線名稱2",Htmlinstructions);
                             if(Htmlinstructions.equals("永豐棧麗致酒店")){
                                 Htmlinstructions="永豐棧酒店";
+                                Log.d("路線名稱2(改)",Htmlinstructions);
                             }
                             b.setHtmlinstructions(Htmlinstructions);
                         }
@@ -167,33 +172,33 @@ public class Page611 extends AppCompatActivity {
                 adaptor.setOnItemClick(new Page611InfoAdaptor.OnItemClickListener() {
                     @Override
                     public void onItemClick(View view, int position) {
+                        boolean flag=false;
                         current=page611infos.get(position).getHtmlinstructions();
                         if(position!=0) {
                             previous = page611infos.get(position - 1).getHtmlinstructions();
+                            flag=true;
                         }
 
-                        if(page611infos.get(position).getTravelMode2().equals("WALKING")) {
-                            Intent it6121 = new Intent(Page611.this, Page6121.class);
-                            Bundle bundle = new Bundle();
-                            //傳值(routename)
-                            if(position!=0) {
+                        if(flag){
+                            if(page611infos.get(position).getTravelMode2().equals("WALKING")) {
+                                Intent it6121 = new Intent(Page611.this, Page6121.class);
+                                Bundle bundle = new Bundle();
+                                //傳值(routename)
                                 bundle.putString("routename", urlRoutename);
                                 bundle.putString("Previous", previous);
                                 bundle.putString("Current", current);
-                            }
-                            it6121.putExtras(bundle);
-                            startActivity(it6121);
-                        }else{
-                            Intent it612 = new Intent(Page611.this, Page612.class);
-                            Bundle bundle = new Bundle();
-                            //傳值(routename)
-                            if(position!=0) {
+                                it6121.putExtras(bundle);
+                                startActivity(it6121);
+                            }else{
+                                Intent it612 = new Intent(Page611.this, Page612.class);
+                                Bundle bundle = new Bundle();
+                                //傳值(routename)
                                 bundle.putString("routename", urlRoutename);
                                 bundle.putString("Previous", previous);
                                 bundle.putString("Current", current);
+                                it612.putExtras(bundle);
+                                startActivity(it612);
                             }
-                            it612.putExtras(bundle);
-                            startActivity(it612);
                         }
                     }
                 });

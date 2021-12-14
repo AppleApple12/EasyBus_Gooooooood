@@ -75,7 +75,7 @@ public class Page612 extends AppCompatActivity {
         prevoius= bundle.getString("Previous");
         current= bundle.getString("Current");
         Routename= bundle.getString("routename");
-        mTxvId.setText(Routename);
+        mTxvId.setText("搭車至"+current);
 
         //返回搭車列表(page611)
         mBack.setOnClickListener(new View.OnClickListener() {
@@ -85,7 +85,6 @@ public class Page612 extends AppCompatActivity {
                 startActivity(page611);
             }
         });
-
         getData();
     }
 
@@ -121,6 +120,8 @@ public class Page612 extends AppCompatActivity {
             String Nprevoius2=Nprevoius.replace(']',')');
             String Ncurrent=current.replace('[','(');
             String Ncurrent2=Ncurrent.replace(']',')');
+            Log.d("起點",Nprevoius2);
+            Log.d("中點", Ncurrent2);
 
             try{
                 if(response!=null && !response.equals("") ){
@@ -139,9 +140,6 @@ public class Page612 extends AppCompatActivity {
                             if(StopName.equals(Nprevoius2)){
                                 flagP=true;
                             }
-                            //if(StopName.equals("永豐棧麗致酒店")){
-                            //Ncurrent2="永豐棧酒店";
-                            //}
                             if(flagP && StopName.equals(Ncurrent2)){
                                 String direction=jsonObject.getString("Direction");
                                 articleB.setLine(busline);
@@ -149,7 +147,7 @@ public class Page612 extends AppCompatActivity {
                                 articleB.setPrevious(Nprevoius2);
                                 articleB.setCurrent(Ncurrent2);
                                 articles612.add(articleB);
-                                //Log.d("公車資訊",busline+"  "+direction+"  "+Nprevoius2+"  "+Ncurrent2);
+                                Log.d("公車資訊",busline+"  "+direction+"  "+Nprevoius2+"  "+Ncurrent2);
                             }else if(flagP && j==ArrayStops.length()-1){
                                 flagP=false;
                             }
