@@ -10,6 +10,7 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -39,6 +40,7 @@ public class Page611 extends AppCompatActivity {
     ArrayList<Page611Info> page611infos;
     TextView mOri2,mDes2;
     RequestQueue requestQueue2;
+    RequestQueue requestQueue;
     private static final String DIRECTION_URL_API = "https://maps.googleapis.com/maps/api/directions/json?";
     private static final String GOOGLE_API_KEY = "AIzaSyAR3ZSrF2IrlUPdjjAIlXNRaMEJU-wN3CI";
 
@@ -65,6 +67,7 @@ public class Page611 extends AppCompatActivity {
         SharedPreferences email = getSharedPreferences("email", MODE_PRIVATE);
         getmail = email.getString("Email", "");
 
+        requestQueue = Volley.newRequestQueue(this);
         requestQueue2 = Volley.newRequestQueue(this);
         //浮動按鈕撥打給緊急聯絡人
         FloatingActionButton fab = (FloatingActionButton)findViewById(R.id.fab);
@@ -143,7 +146,7 @@ public class Page611 extends AppCompatActivity {
                             b.setHtmlinstructions(urlDestination);
                         }else if(travelMode.equals("WALKING")){
                             String Htmlinstructions=ObjSteps.getString("html_instructions");
-                            Log.d("路線名稱",Htmlinstructions);
+                            Log.d("路線名稱",Htmlinstructions+travelMode);
                             if(Htmlinstructions.equals("步行到永豐棧麗緻酒店")){
                                 Htmlinstructions="步行到永豐棧酒店";
                                 Log.d("路線名稱(改)",Htmlinstructions);
@@ -151,7 +154,7 @@ public class Page611 extends AppCompatActivity {
                             b.setHtmlinstructions(Htmlinstructions.substring(3));
                         }else{
                             String Htmlinstructions=ObjSteps.getJSONObject("transit_details").getJSONObject("arrival_stop").getString("name");
-                            Log.d("路線名稱2",Htmlinstructions);
+                            Log.d("路線名稱2",Htmlinstructions+travelMode);
                             if(Htmlinstructions.equals("永豐棧麗致酒店")){
                                 Htmlinstructions="永豐棧酒店";
                                 Log.d("路線名稱2(改)",Htmlinstructions);
@@ -184,7 +187,7 @@ public class Page611 extends AppCompatActivity {
                                 Intent it6121 = new Intent(Page611.this, Page6121.class);
                                 Bundle bundle = new Bundle();
                                 //傳值(routename)
-                                bundle.putString("routename", urlRoutename);
+                                bundle.putString("routename",Routename);
                                 bundle.putString("Previous", previous);
                                 bundle.putString("Current", current);
                                 it6121.putExtras(bundle);
@@ -193,7 +196,7 @@ public class Page611 extends AppCompatActivity {
                                 Intent it612 = new Intent(Page611.this, Page612.class);
                                 Bundle bundle = new Bundle();
                                 //傳值(routename)
-                                bundle.putString("routename", urlRoutename);
+                                bundle.putString("routename",Routename);
                                 bundle.putString("Previous", previous);
                                 bundle.putString("Current", current);
                                 it612.putExtras(bundle);

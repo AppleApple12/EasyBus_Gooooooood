@@ -300,8 +300,6 @@ public class Page5012Activity extends AppCompatActivity {
                 popupPhoto.title=title2;
             }
         }
-
-
     }
 
     //標題popupSelPhoto

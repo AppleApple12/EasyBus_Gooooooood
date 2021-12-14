@@ -5,7 +5,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -15,6 +17,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -43,7 +46,7 @@ import javax.crypto.Mac;
 import javax.crypto.spec.SecretKeySpec;
 
 public class Page612 extends AppCompatActivity {
-    String Routename,prevoius,current,BusLine,direction,prevoius2,BusLine2;
+    String prevoius,current,BusLine,direction,prevoius2,BusLine2,routename;
     String Url2="";
     Page612ArticleAdapter adaptor;
     ArrayList<Page6article> articles612;
@@ -72,9 +75,9 @@ public class Page612 extends AppCompatActivity {
 
         //取值routename
         Bundle bundle = getIntent().getExtras();
+        routename=bundle.getString("Routename");
         prevoius= bundle.getString("Previous");
         current= bundle.getString("Current");
-        Routename= bundle.getString("routename");
         mTxvId.setText("搭車至"+current);
 
         //返回搭車列表(page611)
@@ -121,7 +124,7 @@ public class Page612 extends AppCompatActivity {
             String Ncurrent=current.replace('[','(');
             String Ncurrent2=Ncurrent.replace(']',')');
             Log.d("起點",Nprevoius2);
-            Log.d("中點", Ncurrent2);
+            Log.d("終點",Ncurrent2);
 
             try{
                 if(response!=null && !response.equals("") ){
@@ -151,13 +154,30 @@ public class Page612 extends AppCompatActivity {
                             }else if(flagP && j==ArrayStops.length()-1){
                                 flagP=false;
                             }
+                            Log.d("Page612", String.valueOf(flagP));
                       }
                     }
-                    for(int i=0;i<articles612.size();i++){
-                        BusLine=articles612.get(i).line;
-                        Url2+="https://ptx.transportdata.tw/MOTC/v2/Bus/EstimatedTimeOfArrival/City/Taichung/"+BusLine+"?$format=JSON ";
+                    if(articles612.size()!=0){
+                        for(int i=0;i<articles612.size();i++){
+                            BusLine=articles612.get(i).line;
+                            Url2+="https://ptx.transportdata.tw/MOTC/v2/Bus/EstimatedTimeOfArrival/City/Taichung/"+BusLine+"?$format=JSON ";
+                        }
+                        callAsynchronousTask();
+                    }else{
+                        AlertDialog.Builder alertDialog =
+                                new AlertDialog.Builder(Page612.this);
+                        alertDialog.setTitle("無資料");
+                        alertDialog.setMessage("查無公車動態...");
+                        alertDialog.setPositiveButton("確定", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                Intent it612 = new Intent(Page612.this, Page612.class);
+                                startActivity(it612);
+                            }
+                        });
+                        alertDialog.setCancelable(false);
+                        alertDialog.show();
                     }
-                    callAsynchronousTask();
                 }
             }catch (JSONException e) {
                 e.printStackTrace();
