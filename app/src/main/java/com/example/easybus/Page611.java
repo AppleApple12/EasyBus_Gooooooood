@@ -34,7 +34,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 
 public class Page611 extends AppCompatActivity {
-    String Routename,urlOrigin,urlDestination,getmail,url,urlRoutename,previous,current;
+    String Routename,urlOrigin,urlDestination,getmail,url,urlRoutename,previous,current;//
     Page611InfoAdaptor adaptor;
     ArrayList<Page611Info> page611infos;
     TextView mOri2,mDes2;
