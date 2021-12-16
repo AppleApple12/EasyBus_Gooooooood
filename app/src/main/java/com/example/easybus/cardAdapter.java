@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -26,6 +27,11 @@ public class cardAdapter extends PagerAdapter {
         this.friendList = friendList;
     }
 
+    @Override
+    public void destroyItem(@NonNull ViewGroup container, int position, @NonNull Object object) {
+        //super.destroyItem(container, position, object);
+        container.removeView((LinearLayout) object);
+    }
 
     @Override
     public int getCount() {
@@ -52,7 +58,7 @@ public class cardAdapter extends PagerAdapter {
         Picasso.with(context).load(imgurl).placeholder(R.drawable.profile).into(img);
         txv.setText(textview);
 
-        container.addView(view,position);
+        container.addView(view,0);
 
         view.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -11,6 +11,8 @@ import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Matrix;
+import android.media.ExifInterface;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
@@ -386,13 +388,15 @@ public class Page8Activity extends AppCompatActivity {
                 try{
                     //將圖片解析成bitmap對象
                     Bitmap bitmap = BitmapFactory.decodeStream(getContentResolver().openInputStream(imageUri));
+                    int degree = readPictureDegree((imageUri).toString());
+                    Bitmap bitmap1 = rotateBitmap(bitmap, degree);
                     //將圖片顯示出來
                     mPforfilepic.setImageBitmap(bitmap);
                     if(data!=null){
                         System.out.println("turi"+imageUri);
                         System.out.println("tbitmap"+bitmap.toString());
                         pic=imageUri.toString();
-                        imageStore(bitmap);
+                        imageStore(bitmap1);
                         savepic();
                     }else{
 
@@ -417,8 +421,10 @@ public class Page8Activity extends AppCompatActivity {
                     if(uri != null){
                         ContentResolver cr = this.getContentResolver();
                         Bitmap bitmap = BitmapFactory.decodeStream(cr.openInputStream(uri));
+                        int degree = readPictureDegree((uri).toString());
+                        Bitmap bitmap2 = rotateBitmap(bitmap, degree);
                         mPforfilepic.setImageBitmap(bitmap);
-                        imageStore(bitmap);
+                        imageStore(bitmap2);
                         System.out.println("suri"+uri);
                         System.out.println("sbitmap"+bitmap.toString());
                         pic=uri.toString();
@@ -465,6 +471,47 @@ public class Page8Activity extends AppCompatActivity {
             startActivity(it);
 
         }
+    }
+
+    /**
+     * 获取图片旋转角度
+     * @param srcPath
+     * @return
+     */
+    private static int readPictureDegree(String srcPath) {
+        int degree = 0;
+        try {
+            ExifInterface exifInterface = new ExifInterface(srcPath);
+            int orientation = exifInterface.getAttributeInt(ExifInterface.TAG_ORIENTATION, ExifInterface.ORIENTATION_NORMAL);
+            switch (orientation) {
+                case ExifInterface.ORIENTATION_ROTATE_90:
+                    degree = 90;
+                    break;
+                case ExifInterface.ORIENTATION_ROTATE_180:
+                    degree = 180;
+                    break;
+                case ExifInterface.ORIENTATION_ROTATE_270:
+                    degree = 270;
+                    break;
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return degree;
+    }
+
+    //处理图片旋转
+    private static Bitmap rotateBitmap(Bitmap bitmap, int rotate) {
+        if (bitmap == null)
+            return null;
+
+        int w = bitmap.getWidth();
+        int h = bitmap.getHeight();
+
+        // Setting post rotate to 90
+        Matrix mtx = new Matrix();
+        mtx.postRotate(rotate);
+        return Bitmap.createBitmap(bitmap, 0, 0, w, h, mtx, true);
     }
 
 }

@@ -128,6 +128,7 @@ public class Page1102Activity extends AppCompatActivity{
                                     e.printStackTrace();
                                 }
                             }
+
                         cardAdapter = new cardAdapter1102(Page1102Activity.this,friendList);
                             viewPager.setAdapter(cardAdapter);
                             viewPager.setPadding(100,0,100,0);

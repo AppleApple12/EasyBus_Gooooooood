@@ -103,7 +103,7 @@ public class Page4Activity extends AppCompatActivity {
                         }, new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(Page4Activity.this, error.toString(), Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(Page4Activity.this, error.toString(), Toast.LENGTH_SHORT).show();
                     }
                 });
                 RequestQueue requestQueue2 = Volley.newRequestQueue(Page4Activity.this);
@@ -133,10 +133,11 @@ public class Page4Activity extends AppCompatActivity {
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
+            readUser();
         }
         protected void onPostExecute(Void aVoid) {
             super.onPreExecute();
-            readUser();
+
 
         }
         @Override

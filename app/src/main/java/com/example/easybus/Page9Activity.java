@@ -79,7 +79,7 @@ public class Page9Activity extends AppCompatActivity implements OnMapReadyCallba
         actionBar.hide();//
         //自動更新
         final Timer timer = new Timer();
-        timer.schedule(new callfetch(),0,60*1000);
+        timer.schedule(new callfetch(),0,10*1000);
 
         ImageView back = findViewById(R.id.view);
         back.setOnClickListener(new View.OnClickListener() {
@@ -157,7 +157,7 @@ public class Page9Activity extends AppCompatActivity implements OnMapReadyCallba
 
                         for(history h : historyArrayList) {
                             LatLng latlng = new LatLng(h.getLatitude(), h.getLongitude());
-                            mMap.addMarker(new MarkerOptions().position(latlng).title("hiiiiii"));
+                            mMap.addMarker(new MarkerOptions().position(latlng).title("目前位於"));
                             mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latlng,14));
                             showLocation(h.getLatitude(), h.getLongitude());
                         }
@@ -165,7 +165,7 @@ public class Page9Activity extends AppCompatActivity implements OnMapReadyCallba
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Toast.makeText(Page9Activity.this, error.toString(), Toast.LENGTH_SHORT).show();
+                //Toast.makeText(Page9Activity.this, error.toString(), Toast.LENGTH_SHORT).show();
             }
         });
         RequestQueue requestQueue2 = Volley.newRequestQueue(Page9Activity.this);

@@ -61,16 +61,17 @@ public class Page701Activity extends AppCompatActivity {
             pd.setMessage("加載中...請稍等!");
             pd.setProgress(0);
             pd.show();
+            mc.setAnchorView(videoView);
+            // Get the URL from String VideoURL
+            Uri video = Uri.parse(url);
+            videoView.setMediaController(mc);
+            videoView.setVideoURI(video);
+
+            videoView.requestFocus();
         }
         protected void onPostExecute(Void aVoid) {
 
-                mc.setAnchorView(videoView);
-                // Get the URL from String VideoURL
-                Uri video = Uri.parse(url);
-                videoView.setMediaController(mc);
-                videoView.setVideoURI(video);
 
-                videoView.requestFocus();
                 pd.dismiss();
                 videoView.start();
         }
