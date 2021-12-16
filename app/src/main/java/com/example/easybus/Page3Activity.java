@@ -136,7 +136,7 @@ public class Page3Activity extends AppCompatActivity {
 
                     @Override
                     public void onPermissionDenied(PermissionDeniedResponse response) {
-                        //Toast.makeText(Page3Activity.this, "You must accept this location .", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(Page3Activity.this, "You must accept this location .", Toast.LENGTH_SHORT).show();
                     }
 
                     @Override
@@ -381,10 +381,11 @@ public class Page3Activity extends AppCompatActivity {
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
+            readUser();
         }
         protected void onPostExecute(Void aVoid) {
             super.onPreExecute();
-            readUser();
+
 
         }
         @Override

@@ -109,7 +109,7 @@ public class Signup3 extends AppCompatActivity {
                                                 startActivity(intent);
                                                 finish();
                                             } else {
-                                                Toast.makeText(Signup3.this,"註冊失敗，請重試！", Toast.LENGTH_SHORT).show();
+                                                Toast.makeText(getApplicationContext(),result, Toast.LENGTH_SHORT).show();
                                             }
                                         }
                                     }

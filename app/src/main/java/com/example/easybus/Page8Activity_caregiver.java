@@ -441,7 +441,7 @@ public class Page8Activity_caregiver extends AppCompatActivity {
 //////到底
     private void imageStore(Bitmap bitmap) {
         ByteArrayOutputStream stream = new ByteArrayOutputStream();
-        bitmap.compress(Bitmap.CompressFormat.JPEG,100,stream);
+        bitmap.compress(Bitmap.CompressFormat.JPEG,30,stream);
         byte[] imageBytes = stream.toByteArray();
         encodeimage = android.util.Base64.encodeToString(imageBytes, Base64.DEFAULT);
     }
