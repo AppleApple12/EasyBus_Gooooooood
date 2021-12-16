@@ -25,7 +25,7 @@
                 android:layout_marginEnd="65dp"
                 android:text="加入聯絡人"
                 android:textColor="#000000"
-                android:textSize="24sp"
+                android:textSize="22sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -34,8 +34,9 @@
                 android:layout_width="238dp"
                 android:layout_height="109dp"
                 android:gravity="center"
-                android:text="是否加入陳時中為好友"
+                android:text="是否加入陳時中為好友？"
                 android:textSize="20sp"
+                android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/Title" />

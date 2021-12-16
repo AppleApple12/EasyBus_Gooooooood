@@ -57,44 +57,54 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginLeft="10dp">
 
                 <ImageView
                     android:id="@+id/txvtop2"
-                    android:layout_width="300dp"
-                    android:layout_height="70dp"
-                    android:layout_marginLeft="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:paddingStart="10dp"
+                    android:paddingEnd="15dp"
+                    android:paddingTop="15dp"
+                    android:paddingBottom="15dp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     app:srcCompat="@drawable/roundcorner" />
 
-                <ImageView
-                    android:id="@+id/iv2"
-                    android:layout_width="45dp"
-                    android:layout_height="45dp"
-                    app:layout_constraintBottom_toBottomOf="@+id/txvtop2"
-                    app:layout_constraintEnd_toStartOf="@+id/txvtoptext"
-                    app:layout_constraintStart_toStartOf="@+id/txvtop2"
-                    app:layout_constraintTop_toTopOf="@+id/txvtop2"
-                    app:srcCompat="@drawable/calendar" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
 
-                <TextView
-                    android:id="@+id/txvtoptext"
-                    android:layout_width="200dp"
-                    android:layout_height="60dp"
-                    android:text="需求者歷史足跡"
-                    android:textSize="28dp"
-                    android:gravity="center"
-                    android:textStyle="bold"
-                    android:textColor="#000000"
-                    app:layout_constraintBottom_toBottomOf="@+id/txvtop2"
-                    app:layout_constraintEnd_toEndOf="@+id/txvtop2"
-                    app:layout_constraintStart_toEndOf="@+id/iv2"
-                    app:layout_constraintTop_toTopOf="@+id/txvtop2" />
+                    <ImageView
+                        android:id="@+id/iv2"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="3"
+                        android:layout_marginStart="40dp"
+                        android:layout_marginTop="25dp"
+                        android:layout_marginBottom="25dp"
+                        app:srcCompat="@drawable/calendar" />
+
+                    <TextView
+                        android:id="@+id/txvtoptext"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="left"
+                        android:paddingStart="10dp"
+                        android:paddingEnd="20dp"
+                        android:paddingTop="30dp"
+                        android:paddingBottom="10dp"
+                        android:text="需求者歷史足跡"
+                        android:textColor="#000000"
+                        android:textSize="30dp"
+                        android:textStyle="bold" />
+                </LinearLayout>
             </androidx.constraintlayout.widget.ConstraintLayout>
         </LinearLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>

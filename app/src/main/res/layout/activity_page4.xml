@@ -4,211 +4,268 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_margin="10dp"
     android:orientation="vertical"
     android:background="#ffffff">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_marginTop="10dp"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="100dp">
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
 
-        <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/imageView14"
-            android:layout_width="80dp"
-            android:layout_height="80dp"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:layout_marginTop="10dp">
 
-            android:layout_marginBottom="8dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.051"
-            app:layout_constraintStart_toStartOf="parent"
-            app:srcCompat="@drawable/profile" />
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/imageView14"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_marginBottom="8dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.051"
+                app:layout_constraintStart_toStartOf="parent"
+                app:srcCompat="@drawable/profile" />
 
-        <TextView
-            android:id="@+id/textView2"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Hi, "
-            android:textSize="30sp"
-            android:layout_marginTop="10dp"
-            android:layout_marginLeft="20dp"
-            android:textStyle="bold"
-            app:layout_constraintStart_toEndOf="@+id/imageView14"
-            app:layout_constraintTop_toTopOf="parent" />
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="10dp"
+                android:layout_weight="1"
+                android:text="Hi, "
+                android:textSize="30sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toEndOf="@+id/imageView14"
+                app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            android:id="@+id/textView4"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:text="TextView"
-            android:textSize="30sp"
-            android:textStyle="bold"
-            app:layout_constraintStart_toEndOf="@+id/textView2"
-            app:layout_constraintTop_toTopOf="parent" />
+            <TextView
+                android:id="@+id/textView4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="TextView"
+                android:textSize="30sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toEndOf="@+id/textView2"
+                app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            android:id="@+id/textView3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="歡迎使用Easy Bus!"
-            android:textSize="18sp"
-            android:layout_marginTop="5dp"
-            android:layout_marginLeft="20dp"
-            app:layout_constraintStart_toEndOf="@+id/imageView14"
-            app:layout_constraintTop_toBottomOf="@+id/textView2" />
+            <TextView
+                android:id="@+id/textView3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="5dp"
+                android:text="歡迎使用Easy Bus!"
+                android:textSize="18sp"
+                app:layout_constraintStart_toEndOf="@+id/imageView14"
+                app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </LinearLayout>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:layout_marginTop="60dp"
-        android:layout_width="match_parent"
-        android:layout_height="170dp">
+        android:orientation="vertical">
 
-        <ImageView
-            android:id="@+id/img_bg2"
-            android:layout_width="375dp"
-            android:layout_height="90dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/page3_itembg2" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/text2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="需求者定位查詢"
-            android:textSize="32dp"
-            android:textStyle="bold"
-            android:gravity="center"
-            android:textColor="#ffffff"
-            app:layout_constraintStart_toEndOf="@+id/img22"
-            app:layout_constraintBottom_toBottomOf="@+id/img_bg2"
-            app:layout_constraintEnd_toStartOf="@+id/img2"
-            app:layout_constraintTop_toTopOf="@+id/img_bg2" />
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="2">
 
-        <ImageView
-            android:id="@+id/img2"
-            android:layout_width="39dp"
-            android:layout_height="31dp"
-            app:layout_constraintStart_toEndOf="@+id/text2"
-            app:layout_constraintBottom_toBottomOf="@+id/img_bg2"
-            app:layout_constraintEnd_toEndOf="@+id/img_bg2"
-            app:layout_constraintTop_toTopOf="@+id/img_bg2"
-            app:srcCompat="@drawable/page3_2img" />
+                <ImageView
+                    android:id="@+id/img_bg2"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginBottom="120dp"
+                    android:paddingStart="10dp"
+                    android:paddingEnd="5dp"
+                    android:paddingBottom="10dp"
+                    app:srcCompat="@drawable/page3_itembg2" />
 
-        <ImageView
-            android:id="@+id/img22"
-            android:layout_width="68dp"
-            android:layout_height="64dp"
-            app:layout_constraintBottom_toBottomOf="@+id/img_bg2"
-            app:layout_constraintEnd_toStartOf="@+id/text2"
-            app:layout_constraintStart_toStartOf="@+id/img_bg2"
-            app:layout_constraintTop_toTopOf="@+id/img_bg2"
-            app:srcCompat="@drawable/page4_img" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:paddingStart="15dp"
+                    android:paddingEnd="5dp"
+                    android:paddingBottom="10dp"
+                    app:layout_constraintBottom_toBottomOf="@+id/img_bg2"
+                    app:layout_constraintEnd_toEndOf="@+id/img_bg2"
+                    app:layout_constraintStart_toStartOf="@+id/img_bg2"
+                    app:layout_constraintTop_toTopOf="@+id/img_bg2">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="170dp">
+                    <ImageView
+                        android:id="@+id/img22"
+                        android:layout_width="61dp"
+                        android:layout_height="62dp"
+                        android:layout_marginLeft="7dp"
+                        android:layout_weight="1"
+                        app:srcCompat="@drawable/page4_img" />
 
-        <ImageView
-            android:id="@+id/img_bg3"
-            android:layout_width="375dp"
-            android:layout_height="90dp"
-            android:alpha="0.7"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/page3_itembg3" />
+                    <TextView
+                        android:id="@+id/text2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginLeft="5dp"
+                        android:layout_weight="2"
+                        android:text="需求者定位查詢"
+                        android:textColor="#ffffff"
+                        android:textSize="36dp"
+                        android:textStyle="bold" />
 
-        <TextView
-            android:id="@+id/text3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="需求者歷史足跡"
-            android:textSize="32dp"
-            android:textStyle="bold"
-            android:gravity="center"
-            android:textColor="#ffffff"
-            app:layout_constraintStart_toEndOf="@+id/img33"
-            app:layout_constraintBottom_toBottomOf="@+id/img_bg3"
-            app:layout_constraintEnd_toStartOf="@+id/img3"
-            app:layout_constraintTop_toTopOf="@+id/img_bg3" />
+                    <ImageView
+                        android:id="@+id/img2"
+                        android:layout_width="39dp"
+                        android:layout_height="31dp"
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        app:srcCompat="@drawable/page3_2img" />
+                </LinearLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </LinearLayout>
 
-        <ImageView
-            android:id="@+id/img3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintStart_toEndOf="@+id/text3"
-            app:layout_constraintBottom_toBottomOf="@+id/img_bg3"
-            app:layout_constraintEnd_toEndOf="@+id/img_bg3"
-            app:layout_constraintTop_toTopOf="@+id/img_bg3"
-            app:srcCompat="@drawable/page3_3img" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical">
 
-        <ImageView
-            android:id="@+id/img33"
-            android:layout_width="65dp"
-            android:layout_height="63dp"
-            app:layout_constraintBottom_toBottomOf="@+id/img_bg3"
-            app:layout_constraintEnd_toStartOf="@+id/text3"
-            app:layout_constraintStart_toStartOf="@+id/img_bg3"
-            app:layout_constraintTop_toTopOf="@+id/img_bg3"
-            app:srcCompat="@drawable/page4_img2" />
+            <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="2">
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+                    <ImageView
+                        android:id="@+id/img_bg3"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:alpha="0.7"
+                        android:layout_marginBottom="120dp"
+                        android:paddingStart="10dp"
+                        android:paddingEnd="5dp"
+                        android:paddingBottom="10dp"
+                        app:srcCompat="@drawable/page3_itembg3" />
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="170dp">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:paddingStart="15dp"
+                        android:paddingEnd="5dp"
+                        android:paddingBottom="10dp"
+                        app:layout_constraintBottom_toBottomOf="@+id/img_bg3"
+                        app:layout_constraintEnd_toEndOf="@+id/img_bg3"
+                        app:layout_constraintStart_toStartOf="@+id/img_bg3"
+                        app:layout_constraintTop_toTopOf="parent">
 
-        <ImageView
-            android:id="@+id/img_bg4"
-            android:layout_width="375dp"
-            android:layout_height="90dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/page3_itembg4" />
+                        <ImageView
+                            android:id="@+id/img33"
+                            android:layout_width="62dp"
+                            android:layout_height="63dp"
+                            android:layout_weight="1"
+                            app:srcCompat="@drawable/page4_img2" />
 
-        <TextView
-            android:id="@+id/text4"
-            android:layout_width="234dp"
-            android:layout_height="wrap_content"
-            android:text="我的帳戶"
-            android:textSize="32dp"
-            android:textStyle="bold"
-            android:gravity="center"
-            android:textColor="#ffffff"
-            app:layout_constraintBottom_toBottomOf="@+id/img_bg4"
-            app:layout_constraintEnd_toStartOf="@+id/img4"
-            app:layout_constraintStart_toEndOf="@+id/img44"
-            app:layout_constraintTop_toTopOf="@+id/img_bg4" />
+                        <TextView
+                            android:id="@+id/text3"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginLeft="5dp"
+                            android:layout_weight="2"
+                            android:text="需求者歷史足跡"
+                            android:textSize="36dp"
+                            android:textColor="#ffffff"
+                            android:textStyle="bold" />
 
-        <ImageView
-            android:id="@+id/img4"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintBottom_toBottomOf="@+id/img_bg4"
-            app:layout_constraintEnd_toEndOf="@+id/img_bg4"
-            app:layout_constraintStart_toEndOf="@+id/text4"
-            app:layout_constraintTop_toTopOf="@+id/img_bg4"
-            app:srcCompat="@drawable/page3_4img" />
+                        <ImageView
+                            android:id="@+id/img3"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_weight="1"
+                            app:srcCompat="@drawable/page3_3img" />
+                    </LinearLayout>
+                </androidx.constraintlayout.widget.ConstraintLayout>
+        </LinearLayout>
 
-        <ImageView
-            android:id="@+id/img44"
-            android:layout_width="63dp"
-            android:layout_height="55dp"
-            app:layout_constraintBottom_toBottomOf="@+id/img_bg4"
-            app:layout_constraintEnd_toStartOf="@+id/text4"
-            app:layout_constraintStart_toStartOf="@+id/img_bg4"
-            app:layout_constraintTop_toTopOf="@+id/img_bg4"
-            app:srcCompat="@drawable/page3_4img2" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="2">
+
+                <ImageView
+                    android:id="@+id/img_bg4"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginBottom="120dp"
+                    android:paddingStart="10dp"
+                    android:paddingEnd="5dp"
+                    android:paddingBottom="10dp"
+                    app:srcCompat="@drawable/page3_itembg4" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:paddingStart="15dp"
+                    android:paddingEnd="5dp"
+                    android:paddingBottom="10dp"
+                    app:layout_constraintBottom_toBottomOf="@+id/img_bg4"
+                    app:layout_constraintEnd_toEndOf="@+id/img_bg4"
+                    app:layout_constraintStart_toStartOf="@+id/img_bg4"
+                    app:layout_constraintTop_toTopOf="@+id/img_bg4">
+
+                    <ImageView
+                        android:id="@+id/img44"
+                        android:layout_width="63dp"
+                        android:layout_height="55dp"
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        app:srcCompat="@drawable/page3_4img2" />
+
+                    <TextView
+                        android:id="@+id/text4"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="30dp"
+                        android:layout_marginTop="5dp"
+                        android:layout_weight="4"
+                        android:gravity="center"
+                        android:text="我的帳戶"
+                        android:textColor="#ffffff"
+                        android:textSize="36dp"
+                        android:textStyle="bold" />
+
+                    <ImageView
+                        android:id="@+id/img4"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginLeft="50dp"
+                        android:layout_weight="1"
+                        app:srcCompat="@drawable/page3_4img" />
+                </LinearLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </LinearLayout>
+
+    </LinearLayout>
+
 </LinearLayout>

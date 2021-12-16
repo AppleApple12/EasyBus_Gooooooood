@@ -9,343 +9,402 @@
     android:background="#F0F0F0"
     tools:context=".Signup3">
 
-    <ImageView
-        android:id="@+id/logo"
-        android:layout_width="wrap_content"
-        android:layout_height="75dp"
-        android:layout_marginTop="4dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/logo" />
-
-    <TextView
-        android:id="@+id/title"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="35dp"
-        android:layout_marginTop="5dp"
-        android:text="註冊"
-        android:textColor="@android:color/black"
-        android:textSize="40dp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/logo" />
-
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="30dp"
-        android:orientation="horizontal">
-
-        <ImageView
-            android:id="@+id/people"
-            android:layout_width="42dp"
-            android:layout_height="36dp"
-            android:layout_gravity="center_vertical"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/people" />
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp">
-
-            <EditText
-                android:id="@+id/name"
-                android:layout_width="300dp"
-                android:layout_height="50dp"
-                android:background="@drawable/account_bg"
-                android:hint="ex: 蔡曉華"
-                android:textSize="20sp"
-                android:paddingStart="15dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <TextView
-                android:id="@+id/txt1"
-                android:layout_width="42dp"
-                android:layout_height="17dp"
-                android:background="#F0F0F0"
-                android:text="姓名"
-                android:textSize="14sp"
-                android:gravity="center"
-                android:layout_marginStart="15dp"
-                android:layout_marginBottom="43dp"
-                app:layout_constraintBottom_toBottomOf="@+id/name"
-                app:layout_constraintStart_toStartOf="@+id/name" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:layout_gravity="center_horizontal"
-        android:orientation="horizontal">
-
-        <ImageView
-            android:id="@+id/mailimage"
-            android:layout_width="42dp"
-            android:layout_height="36dp"
-            android:layout_gravity="center_vertical"
-            app:srcCompat="@drawable/mailicon" />
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp">
-
-            <EditText
-                android:id="@+id/email"
-                android:layout_width="300dp"
-                android:layout_height="50dp"
-                android:background="@drawable/account_bg"
-                android:hint="ex: 123@gmail.com"
-                android:inputType="textEmailAddress"
-                android:paddingStart="15sp"
-                android:textSize="20sp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <TextView
-                android:id="@+id/txt2"
-                android:layout_width="42dp"
-                android:layout_height="17dp"
-                android:text="信箱"
-                android:textSize="14sp"
-                android:background="#f0f0f0"
-                android:gravity="center"
-                android:layout_marginStart="15dp"
-                android:layout_marginBottom="43dp"
-                app:layout_constraintBottom_toBottomOf="@+id/email"
-                app:layout_constraintStart_toStartOf="@+id/email" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="10dp"
-        android:orientation="horizontal">
-
-        <ImageView
-            android:id="@+id/passimage"
-            android:layout_width="46dp"
-            android:layout_height="39dp"
-            android:layout_gravity="center_vertical"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/pass" />
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp">
-
-            <EditText
-                android:id="@+id/pass"
-                android:layout_width="300dp"
-                android:layout_height="50dp"
-                android:background="@drawable/account_bg"
-                android:textSize="20sp"
-                android:inputType="textPassword"
-                android:paddingStart="15dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <TextView
-                android:id="@+id/txt3"
-                android:layout_width="42dp"
-                android:layout_height="17dp"
-                android:text="密碼"
-                android:textSize="14sp"
-                android:background="#f0f0f0"
-                android:gravity="center"
-                android:layout_marginStart="15dp"
-                android:layout_marginBottom="43dp"
-                app:layout_constraintBottom_toBottomOf="@+id/pass"
-                app:layout_constraintStart_toStartOf="@+id/pass" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="10dp"
-        android:orientation="horizontal">
-
-        <ImageView
-            android:id="@+id/passimage2"
-            android:layout_width="46dp"
-            android:layout_height="39dp"
-            android:layout_gravity="center_vertical"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/pass" />
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp">
-
-            <EditText
-                android:id="@+id/pass2"
-                android:layout_width="300dp"
-                android:layout_height="50dp"
-                android:background="@drawable/account_bg"
-                android:textSize="20sp"
-                android:inputType="textPassword"
-                android:paddingStart="15dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <TextView
-                android:id="@+id/txt4"
-                android:layout_width="71dp"
-                android:layout_height="17dp"
-                android:layout_marginStart="15dp"
-                android:layout_marginBottom="43dp"
-                android:background="#f0f0f0"
-                android:gravity="center"
-                android:text="確認密碼"
-                app:layout_constraintBottom_toBottomOf="@+id/pass2"
-                app:layout_constraintStart_toStartOf="@+id/pass2"
-                app:layout_constraintTop_toTopOf="parent" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:layout_gravity="center_horizontal"
-        android:orientation="horizontal">
-
-        <ImageView
-            android:id="@+id/phoneimage"
-            android:layout_width="35dp"
-            android:layout_height="39dp"
-            android:layout_marginLeft="13dp"
-            android:layout_gravity="center_vertical"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/iphone" />
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp">
-
-            <EditText
-                android:id="@+id/cell"
-                android:layout_width="300dp"
-                android:layout_height="50dp"
-                android:background="@drawable/account_bg"
-                android:hint="ex: 0912345678"
-                android:inputType="number"
-                android:paddingStart="15dp"
-                android:textSize="20sp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <TextView
-                android:id="@+id/txt5"
-                android:layout_width="42dp"
-                android:layout_height="17dp"
-                android:background="#f0f0f0"
-                android:gravity="center"
-                android:text="手機"
-                android:textSize="14sp"
-                android:layout_marginStart="15dp"
-                android:layout_marginBottom="43dp"
-                app:layout_constraintBottom_toBottomOf="@+id/cell"
-                app:layout_constraintStart_toStartOf="@+id/cell" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-    </LinearLayout>
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="33dp"
-        android:layout_marginTop="10dp"
-        android:orientation="horizontal">
+        android:orientation="vertical">
 
-        <RadioGroup
-            android:id="@+id/RadioGroup"
+        <ImageView
+            android:id="@+id/logo"
+            android:layout_width="wrap_content"
+            android:layout_height="75dp"
+            android:layout_marginTop="4dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/logo" />
+
+        <TextView
+            android:id="@+id/title"
             android:layout_width="match_parent"
-            android:layout_height="45dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="35dp"
+            android:layout_marginTop="5dp"
+            android:text="註冊"
+            android:textColor="@android:color/black"
+            android:textSize="40dp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/logo" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:gravity="center_vertical"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="30dp"
             android:orientation="horizontal">
 
-            <RadioButton
-                android:id="@+id/radioButton1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="需求者"
-                android:textSize="20dp"
-                tools:layout_editor_absoluteX="39dp"
-                tools:layout_editor_absoluteY="515dp" />
-
-            <RadioButton
-                android:id="@+id/radioButton2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:text="照顧者"
-                android:textSize="20dp" />
-
-            <TextView
-                android:id="@+id/Registertext"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="登入"
-                android:textSize="20sp"
-                android:layout_marginLeft="125dp"
+            <ImageView
+                android:id="@+id/people"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="6"
+                android:gravity="center"
+                android:layout_marginTop="15dp"
+                android:layout_marginBottom="15dp"
+                android:layout_marginLeft="20dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/people" />
 
-        </RadioGroup>
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginLeft="20dp">
+
+                <EditText
+                    android:id="@+id/name"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginEnd="20dp"
+                    android:background="@drawable/account_bg"
+                    android:hint="ex: 蔡曉華"
+                    android:paddingStart="15dp"
+                    android:textSize="20sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/txt1"
+                    android:layout_width="42dp"
+                    android:layout_height="17dp"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginBottom="43dp"
+                    android:background="#F0F0F0"
+                    android:gravity="center"
+                    android:text="姓名"
+                    android:textSize="14sp"
+                    app:layout_constraintBottom_toBottomOf="@+id/name"
+                    app:layout_constraintStart_toStartOf="@+id/name" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/mailimage"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="6"
+                android:gravity="center"
+                android:layout_marginTop="20dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginBottom="20dp"
+                app:srcCompat="@drawable/mailicon" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginLeft="20dp">
+
+                <EditText
+                    android:id="@+id/email"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginEnd="20dp"
+                    android:background="@drawable/account_bg"
+                    android:hint="ex: 123@gmail.com"
+                    android:inputType="textEmailAddress"
+                    android:paddingStart="15sp"
+                    android:textSize="20sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/txt2"
+                    android:layout_width="42dp"
+                    android:layout_height="17dp"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginBottom="43dp"
+                    android:background="#f0f0f0"
+                    android:gravity="center"
+                    android:text="信箱"
+                    android:textSize="14sp"
+                    app:layout_constraintBottom_toBottomOf="@+id/email"
+                    app:layout_constraintStart_toStartOf="@+id/email" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/passimage"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="6"
+                android:gravity="center"
+                android:layout_marginTop="15dp"
+                android:layout_marginBottom="15dp"
+                android:layout_marginLeft="20dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/pass" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginLeft="20dp">
+
+                <EditText
+                    android:id="@+id/pass"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginEnd="20dp"
+                    android:background="@drawable/account_bg"
+                    android:inputType="textPassword"
+                    android:paddingStart="15dp"
+                    android:textSize="20sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/txt3"
+                    android:layout_width="42dp"
+                    android:layout_height="17dp"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginBottom="43dp"
+                    android:background="#f0f0f0"
+                    android:gravity="center"
+                    android:text="密碼"
+                    android:textSize="14sp"
+                    app:layout_constraintBottom_toBottomOf="@+id/pass"
+                    app:layout_constraintStart_toStartOf="@+id/pass" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/passimage2"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="6"
+                android:gravity="center"
+                android:layout_marginTop="15dp"
+                android:layout_marginBottom="15dp"
+                android:layout_marginLeft="20dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/pass" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginLeft="20dp">
+
+                <EditText
+                    android:id="@+id/pass2"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginEnd="20dp"
+                    android:background="@drawable/account_bg"
+                    android:inputType="textPassword"
+                    android:paddingStart="15dp"
+                    android:textSize="20sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/txt4"
+                    android:layout_width="71dp"
+                    android:layout_height="17dp"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginBottom="43dp"
+                    android:background="#f0f0f0"
+                    android:gravity="center"
+                    android:text="確認密碼"
+                    app:layout_constraintBottom_toBottomOf="@+id/pass2"
+                    app:layout_constraintStart_toStartOf="@+id/pass2"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/phoneimage"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="6"
+                android:gravity="center"
+                android:layout_marginTop="15dp"
+                android:layout_marginBottom="15dp"
+                android:layout_marginLeft="20dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/iphone" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginLeft="20dp">
+
+                <EditText
+                    android:id="@+id/cell"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginEnd="20dp"
+                    android:background="@drawable/account_bg"
+                    android:hint="ex: 0912345678"
+                    android:inputType="number"
+                    android:paddingStart="15dp"
+                    android:textSize="20sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/txt5"
+                    android:layout_width="42dp"
+                    android:layout_height="17dp"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginBottom="43dp"
+                    android:background="#f0f0f0"
+                    android:gravity="center"
+                    android:text="手機"
+                    android:textSize="14sp"
+                    app:layout_constraintBottom_toBottomOf="@+id/cell"
+                    app:layout_constraintStart_toStartOf="@+id/cell" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <!--android:layout_marginStart="33dp"
+            android:layout_marginTop="10dp"-->
+
+            <RadioGroup
+                android:id="@+id/RadioGroup"
+                android:layout_marginLeft="20dp"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:orientation="horizontal">
+
+                <RadioButton
+                    android:id="@+id/radioButton1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="需求者"
+                    android:textSize="20dp" />
+
+                <RadioButton
+                    android:id="@+id/radioButton2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:text="照顧者"
+                    android:textSize="20dp" />
+
+                <TextView
+                    android:id="@+id/Registertext"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="25dp"
+                    android:gravity="right"
+                    android:text="登入"
+                    android:textSize="20sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </RadioGroup>
+        </LinearLayout>
+
     </LinearLayout>
 
-    <TextView
-        android:id="@+id/register"
-        android:layout_width="100dp"
-        android:layout_height="50dp"
-        android:text="註冊"
-        android:textStyle="bold"
-        android:textSize="20dp"
-        android:gravity="center"
-        android:background="@drawable/accountbtn"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="30dp" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="2"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/register"
+            android:layout_width="100dp"
+            android:layout_height="50dp"
+            android:layout_gravity="center_horizontal"
+            android:background="@drawable/accountbtn"
+            android:gravity="center"
+            android:text="註冊"
+            android:textSize="20dp"
+            android:textStyle="bold" />
+    </LinearLayout>
+
 </LinearLayout>

@@ -37,7 +37,7 @@
         android:gravity="center"
         android:text="Text"
         android:textColor="	#ffffff"
-        app:autoSizeTextType="uniform"
+        android:autoSizeTextType="uniform"
         app:layout_constraintBottom_toBottomOf="@+id/backg"
         app:layout_constraintEnd_toEndOf="@+id/backg"
         app:layout_constraintStart_toEndOf="@+id/img"

@@ -34,7 +34,7 @@ public class Page901Activity extends AppCompatActivity {
     ImageView backBtn;
     RequestQueue requestQueue;
     RecyclerView mrecyclerView;
-    HistoryAdapter historyAdapter;
+    //HistoryAdapter historyAdapter;
     List<friend> friendList;
     cardAdapter cardAdapter;
     ViewPager viewPager;

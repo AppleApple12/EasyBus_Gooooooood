@@ -4,5 +4,6 @@ import java.net.UnknownHostException;
 
 public class Urls {
     //private local InetAddress ip IPv4
-    public static String url1 = "http://10.0.32.115";
+    //public static String url1 = "http://10.0.32.115";
+    public static String url1 = "http://120.110.112.63";
     }
