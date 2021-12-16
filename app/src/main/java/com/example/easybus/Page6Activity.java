@@ -111,8 +111,6 @@ public class Page6Activity extends AppCompatActivity{
                 startActivity(it1);
             }
         });
-
-
     }
 
     public class fetchData extends AsyncTask<Void,Void,Void>{

@@ -10,6 +10,7 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -34,11 +35,12 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 
 public class Page611 extends AppCompatActivity {
-    String Routename,urlOrigin,urlDestination,getmail,url,urlRoutename,previous,current;
+    String Routename,urlOrigin,urlDestination,getmail,url,urlRoutename,previous,current;//
     Page611InfoAdaptor adaptor;
     ArrayList<Page611Info> page611infos;
     TextView mOri2,mDes2;
     RequestQueue requestQueue2;
+    RequestQueue requestQueue;
     private static final String DIRECTION_URL_API = "https://maps.googleapis.com/maps/api/directions/json?";
     private static final String GOOGLE_API_KEY = "AIzaSyAR3ZSrF2IrlUPdjjAIlXNRaMEJU-wN3CI";
 
@@ -65,6 +67,7 @@ public class Page611 extends AppCompatActivity {
         SharedPreferences email = getSharedPreferences("email", MODE_PRIVATE);
         getmail = email.getString("Email", "");
 
+        requestQueue = Volley.newRequestQueue(this);
         requestQueue2 = Volley.newRequestQueue(this);
         //浮動按鈕撥打給緊急聯絡人
         FloatingActionButton fab = (FloatingActionButton)findViewById(R.id.fab);
@@ -143,13 +146,18 @@ public class Page611 extends AppCompatActivity {
                             b.setHtmlinstructions(urlDestination);
                         }else if(travelMode.equals("WALKING")){
                             String Htmlinstructions=ObjSteps.getString("html_instructions");
-                            if(Htmlinstructions.equals("永豐棧麗致酒店"))
+                            Log.d("路線名稱",Htmlinstructions+travelMode);
+                            if(Htmlinstructions.equals("步行到永豐棧麗緻酒店")){
                                 Htmlinstructions="步行到永豐棧酒店";
+                                Log.d("路線名稱(改)",Htmlinstructions);
+                            }
                             b.setHtmlinstructions(Htmlinstructions.substring(3));
                         }else{
                             String Htmlinstructions=ObjSteps.getJSONObject("transit_details").getJSONObject("arrival_stop").getString("name");
+                            Log.d("路線名稱2",Htmlinstructions+travelMode);
                             if(Htmlinstructions.equals("永豐棧麗致酒店")){
                                 Htmlinstructions="永豐棧酒店";
+                                Log.d("路線名稱2(改)",Htmlinstructions);
                             }
                             b.setHtmlinstructions(Htmlinstructions);
                         }
@@ -167,33 +175,33 @@ public class Page611 extends AppCompatActivity {
                 adaptor.setOnItemClick(new Page611InfoAdaptor.OnItemClickListener() {
                     @Override
                     public void onItemClick(View view, int position) {
+                        boolean flag=false;
                         current=page611infos.get(position).getHtmlinstructions();
                         if(position!=0) {
                             previous = page611infos.get(position - 1).getHtmlinstructions();
+                            flag=true;
                         }
 
-                        if(page611infos.get(position).getTravelMode2().equals("WALKING")) {
-                            Intent it6121 = new Intent(Page611.this, Page6121.class);
-                            Bundle bundle = new Bundle();
-                            //傳值(routename)
-                            if(position!=0) {
-                                bundle.putString("routename", urlRoutename);
+                        if(flag){
+                            if(page611infos.get(position).getTravelMode2().equals("WALKING")) {
+                                Intent it6121 = new Intent(Page611.this, Page6121.class);
+                                Bundle bundle = new Bundle();
+                                //傳值(routename)
+                                bundle.putString("routename",Routename);
                                 bundle.putString("Previous", previous);
                                 bundle.putString("Current", current);
-                            }
-                            it6121.putExtras(bundle);
-                            startActivity(it6121);
-                        }else{
-                            Intent it612 = new Intent(Page611.this, Page612.class);
-                            Bundle bundle = new Bundle();
-                            //傳值(routename)
-                            if(position!=0) {
-                                bundle.putString("routename", urlRoutename);
+                                it6121.putExtras(bundle);
+                                startActivity(it6121);
+                            }else{
+                                Intent it612 = new Intent(Page611.this, Page612.class);
+                                Bundle bundle = new Bundle();
+                                //傳值(routename)
+                                bundle.putString("routename",Routename);
                                 bundle.putString("Previous", previous);
                                 bundle.putString("Current", current);
+                                it612.putExtras(bundle);
+                                startActivity(it612);
                             }
-                            it612.putExtras(bundle);
-                            startActivity(it612);
                         }
                     }
                 });

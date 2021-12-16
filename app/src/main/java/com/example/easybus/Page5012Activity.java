@@ -13,6 +13,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
@@ -79,7 +80,8 @@ public class Page5012Activity extends AppCompatActivity {
         recyclerView.setAdapter(adaptor);
         businfos=new ArrayList<>();
 
-        getData();
+        //getData();
+        new getData().execute();
         SharedPreferences email = getSharedPreferences("email",MODE_PRIVATE);
         getmail=email.getString("Email","");
         requestQueue = Volley.newRequestQueue(this);
@@ -114,7 +116,70 @@ public class Page5012Activity extends AppCompatActivity {
         });
     }
 
-    private void getData() { //抓公車JSON
+    public class getData extends AsyncTask<Void,Void,Void> {
+        ProgressDialog pd;
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            pd = new ProgressDialog(Page5012Activity.this);
+            pd.setCancelable(false);
+            pd.setMessage("Downloading...Please wait!");
+            pd.setProgress(0);
+            pd.show();
+        }
+
+        @Override
+        protected void onPostExecute(Void unused) {
+            pd.dismiss();
+
+            final JsonObjectRequest jsonObjectRequest=new JsonObjectRequest(url,null, new Response.Listener<JSONObject>() {
+                @Override
+                public void onResponse(JSONObject response) {
+                    try{
+                        JSONArray ArrayRoutes = response.getJSONArray("routes");
+                        JSONArray ArrayLegs =ArrayRoutes.getJSONObject(0).getJSONArray("legs");
+                        JSONArray ArraySteps =ArrayLegs.getJSONObject(0).getJSONArray("steps");
+
+                        for(int i=0;i<ArraySteps.length();i++){
+                            JSONObject ObjSteps=ArraySteps.getJSONObject(i);
+                            String travelMode=ObjSteps.getString("travel_mode");
+                            BusInfo businfo=new BusInfo();
+
+                            if (travelMode.equals("WALKING")) {
+                                String Htmlinstructions=ObjSteps.getString("html_instructions");
+                                businfo.setHtmlinstructions(Htmlinstructions.substring(3));
+                                businfo.setShortname(null);
+                                businfo.setPic(1);
+                            }else{
+                                businfo.setHtmlinstructions (ObjSteps.getJSONObject("transit_details").getJSONObject("arrival_stop").getString("name"));
+                                businfo.setShortname(ObjSteps.getJSONObject("transit_details").getJSONObject("line").getString("short_name"));
+                                businfo.setPic(0);
+                            }
+                            businfos.add(businfo);
+                        }
+                    }catch (JSONException e){
+                        //Toast.makeText(Page5012Activity.this,e.getMessage(),Toast.LENGTH_LONG).show();
+                    }
+                    adaptor.setData(businfos);
+                    adaptor.notifyDataSetChanged();
+                }
+            }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    //Toast.makeText(Page5012Activity.this,"發生錯誤1111!",Toast.LENGTH_LONG).show();
+                }
+            });
+            //RequestQueue requestQueue= Volley.newRequestQueue(this);
+            requestQueue.add(jsonObjectRequest);
+        }
+
+        @Override
+        protected Void doInBackground(Void... voids) {
+            return null;
+        }
+    }
+    /*private void getData() { //抓公車JSON
         final ProgressDialog progressDialog=new ProgressDialog(this);
         progressDialog.setMessage("載入中...");
         progressDialog.show();
@@ -161,7 +226,7 @@ public class Page5012Activity extends AppCompatActivity {
 
         RequestQueue requestQueue= Volley.newRequestQueue(this);
         requestQueue.add(jsonObjectRequest);
-    }
+    } */
 
     //標題popupwindow
     public class popupWindow extends PopupWindow implements View.OnClickListener {
@@ -235,8 +300,6 @@ public class Page5012Activity extends AppCompatActivity {
                 popupPhoto.title=title2;
             }
         }
-
-
     }
 
     //標題popupSelPhoto

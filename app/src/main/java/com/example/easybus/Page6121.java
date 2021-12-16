@@ -36,7 +36,7 @@ import tw.edu.pu.s1071481.module.Route;
 
 public class Page6121 extends AppCompatActivity implements OnMapReadyCallback, DirectionFinderListener {
     private static final String TAG = "Page6121";
-    String origin,destination,Routename;
+    String origin,destination;
     private GoogleMap mMap;
     private ProgressDialog progressDialog;
     private List<Marker> originMarkers = new ArrayList<>();
@@ -59,8 +59,7 @@ public class Page6121 extends AppCompatActivity implements OnMapReadyCallback, D
         Bundle bundle = getIntent().getExtras();
         origin= bundle.getString("Previous");
         destination= bundle.getString("Current");
-        Routename= bundle.getString("routename");
-        mTxvId.setText(Routename);
+        mTxvId.setText("步行至"+destination);
 
         //返回搭車列表(page611)
         mBack.setOnClickListener(new View.OnClickListener() {
