@@ -85,7 +85,7 @@ public class qrscanner extends AppCompatActivity {
         fdialog.setContentView(R.layout.myfriend_dialog);
         btngo = fdialog.findViewById(R.id.button10);
         myfriend = fdialog.findViewById(R.id.myfriend);
-
+        myreadUser();
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -96,6 +96,33 @@ public class qrscanner extends AppCompatActivity {
 
 
 
+    }
+    public void myreadUser(){
+        String URL =Urls.url1+"/LoginRegister/fetch.php?email="+mygetmail;
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(
+                Request.Method.GET,
+                URL,
+                null,
+                new Response.Listener<JSONObject>() {
+
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        try {
+                            identity = response.getString("identity");
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                            //Toast.makeText(qrcode_page.this, e.toString(), Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        //Toast.makeText(qrcode_page.this, error.toString(), Toast.LENGTH_SHORT).show();
+                    }
+                }
+        );
+        requestQueue.add(jsonObjectRequest);
     }
     public void addfriend(final String f_name,final String f_email,final String f_phone,final String f_image){
         String URL =Urls.url1+"/LoginRegister/addfriend.php?email="+mygetmail;
@@ -238,7 +265,7 @@ public class qrscanner extends AppCompatActivity {
                     @Override
                     public void onResponse(JSONObject response) {
                         try {
-                            identity = response.getString("identity");
+
 
                             f_name = response.getString("fullname");
                             //dialog內的TextView

@@ -7,16 +7,6 @@
     tools:context=".Page6Activity"
     android:background="#d0d0d0"
     xmlns:app="http://schemas.android.com/apk/res-auto">
-    <!--
-        <ImageButton
-            android:id="@+id/back"
-            android:layout_width="85dp"
-            android:layout_height="85dp"
-            android:layout_marginTop="8dp"
-            android:scaleType="fitCenter"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/back" />-->
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvPrograms"
@@ -29,6 +19,17 @@
         app:layout_constraintTop_toTopOf="parent">
 
     </androidx.recyclerview.widget.RecyclerView>
-
-
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        app:backgroundTint="#FD0318"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.971"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.971"
+        app:srcCompat="@drawable/ic_priority_high_black_24dp" />
 </androidx.constraintlayout.widget.ConstraintLayout>
