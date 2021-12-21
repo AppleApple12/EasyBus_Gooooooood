@@ -284,16 +284,10 @@ public class Page8Activity extends AppCompatActivity {
     }
     public void ImageRetriveWithPicasso() {
         String imgurl = Urls.url1+"/LoginRegister/images/"+img;
-        int degree = parseImageDegree(imgurl);
-        Bitmap bitmap = null;
-        byte[] bitmapArray;
-        bitmapArray = Base64.decode(imgurl, Base64.DEFAULT);
-        bitmap = BitmapFactory.decodeByteArray(bitmapArray, 0,
-                        bitmapArray.length);
-        Bitmap bitmap1 = rotateBitmap(bitmap,degree);
+
         Picasso.with(this)
 
-                .load(String.valueOf(bitmap1))
+                .load(imgurl)
                 .placeholder(R.drawable.profile)
                 .fit()
                // .error(R.drawable.ic_error_black_24dp)
@@ -312,57 +306,7 @@ public class Page8Activity extends AppCompatActivity {
                 });
         System.out.println(imgurl);
     }
-    /**
-     * 獲取圖片旋轉角度
-     * @param path 圖片路徑
-     * @return
-     */
-    private int parseImageDegree(String path) {
-        int degree = 0;
-        try {
-            ExifInterface exifInterface = new ExifInterface(path);
-            int orientation = exifInterface.getAttributeInt(ExifInterface.TAG_ORIENTATION, ExifInterface.ORIENTATION_NORMAL);
-            switch (orientation) {
-                case ExifInterface.ORIENTATION_ROTATE_90:
-                    degree = 90;
-                    break;
-                case ExifInterface.ORIENTATION_ROTATE_180:
-                    degree = 180;
-                    break;
-                case ExifInterface.ORIENTATION_ROTATE_270:
-                    degree = 270;
-                    break;
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return degree;
-    }
 
-    /**
-     * 圖片旋轉操作
-     *
-     * @param bm 需要旋轉的圖片
-     * @param degree 旋轉角度
-     * @return 旋轉後的圖片
-     */
-    private Bitmap rotateBitmap(Bitmap bm, int degree) {
-        Bitmap returnBm = null;
-
-        Matrix matrix = new Matrix();
-        matrix.postRotate(degree);
-        try {
-            returnBm = Bitmap.createBitmap(bm, 0, 0, bm.getWidth(), bm.getHeight(), matrix, true);
-        } catch (OutOfMemoryError e) {
-        }
-        if (returnBm == null) {
-            returnBm = bm;
-        }
-        if (bm != returnBm) {
-            bm.recycle();
-        }
-        return returnBm;
-    }
 
     private View.OnClickListener itemsOnClick=new View.OnClickListener(){
         @Override
@@ -445,15 +389,14 @@ public class Page8Activity extends AppCompatActivity {
                 try{
                     //將圖片解析成bitmap對象
                     Bitmap bitmap = BitmapFactory.decodeStream(getContentResolver().openInputStream(imageUri));
-                    int degree = readPictureDegree((imageUri).toString());
-                    Bitmap bitmap1 = rotateBitmap(bitmap, degree);
+
                     //將圖片顯示出來
                     mPforfilepic.setImageBitmap(bitmap);
                     if(data!=null){
                         System.out.println("turi"+imageUri);
                         System.out.println("tbitmap"+bitmap.toString());
                         pic=imageUri.toString();
-                        imageStore(bitmap1);
+                        imageStore(bitmap);
                         savepic();
                     }else{
 
@@ -478,10 +421,9 @@ public class Page8Activity extends AppCompatActivity {
                     if(uri != null){
                         ContentResolver cr = this.getContentResolver();
                         Bitmap bitmap = BitmapFactory.decodeStream(cr.openInputStream(uri));
-                        int degree = readPictureDegree((uri).toString());
-                        Bitmap bitmap2 = rotateBitmap(bitmap, degree);
+
                         mPforfilepic.setImageBitmap(bitmap);
-                        imageStore(bitmap2);
+                        imageStore(bitmap);
                         System.out.println("suri"+uri);
                         System.out.println("sbitmap"+bitmap.toString());
                         pic=uri.toString();
@@ -530,45 +472,6 @@ public class Page8Activity extends AppCompatActivity {
         }
     }
 
-    /**
-     * 获取图片旋转角度
-     * @param srcPath
-     * @return
-     */
-    private static int readPictureDegree(String srcPath) {
-        int degree = 0;
-        try {
-            ExifInterface exifInterface = new ExifInterface(srcPath);
-            int orientation = exifInterface.getAttributeInt(ExifInterface.TAG_ORIENTATION, ExifInterface.ORIENTATION_NORMAL);
-            switch (orientation) {
-                case ExifInterface.ORIENTATION_ROTATE_90:
-                    degree = 90;
-                    break;
-                case ExifInterface.ORIENTATION_ROTATE_180:
-                    degree = 180;
-                    break;
-                case ExifInterface.ORIENTATION_ROTATE_270:
-                    degree = 270;
-                    break;
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return degree;
-    }
 
-    //处理图片旋转
-    private static Bitmap rotateBitmap(Bitmap bitmap, int rotate) {
-        if (bitmap == null)
-            return null;
-
-        int w = bitmap.getWidth();
-        int h = bitmap.getHeight();
-
-        // Setting post rotate to 90
-        Matrix mtx = new Matrix();
-        mtx.postRotate(rotate);
-        return Bitmap.createBitmap(bitmap, 0, 0, w, h, mtx, true);
-    }
 
 }

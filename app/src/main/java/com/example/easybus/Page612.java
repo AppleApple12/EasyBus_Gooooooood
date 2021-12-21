@@ -86,6 +86,7 @@ public class Page612 extends AppCompatActivity {
             public void onClick(View view) {
                 Intent page611=new Intent(Page612.this,Page611.class);
                 startActivity(page611);
+                finish();
             }
         });
         getData();
@@ -157,6 +158,7 @@ public class Page612 extends AppCompatActivity {
                             Log.d("Page612", String.valueOf(flagP));
                       }
                     }
+
                     if(articles612.size()!=0){
                         for(int i=0;i<articles612.size();i++){
                             BusLine=articles612.get(i).line;
@@ -242,6 +244,7 @@ public class Page612 extends AppCompatActivity {
         @Override
         protected Void doInBackground(String... params) {
             articles612R.clear();
+            System.out.println(Url2);
             String tokens[]=Url2.split(" ");
             int count=0;
             for(String toke:tokens){

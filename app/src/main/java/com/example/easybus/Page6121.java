@@ -67,6 +67,7 @@ public class Page6121 extends AppCompatActivity implements OnMapReadyCallback, D
             public void onClick(View view) {
                 Intent page611=new Intent(Page6121.this,Page611.class);
                 startActivity(page611);
+                finish();
             }
         });
 
