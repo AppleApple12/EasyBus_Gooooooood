@@ -80,7 +80,7 @@ public class Page61 extends AppCompatActivity {
         mrecyclerView.setLayoutManager(linearLayoutManager);
         takeBusBusinfoList = new ArrayList<>();
         String image[] = {"busdetails"};
-        final String text[] = {" 公  車  查  詢 "};
+        final String text[] = {"公車查詢"};
         for(int i = image.length-1;i>=0;i--){
             take_bus_businfo b =new take_bus_businfo();
             b.setRoutename(text[i]);
@@ -116,7 +116,7 @@ public class Page61 extends AppCompatActivity {
                             @Override
                             public void onItemClick(View view, int position) {
                                 final String name=takeBusBusinfoList.get(position).getRoutename();
-                                if(name.equals(" 公  車  查  詢 ")){
+                                if(name.equals("公車查詢")){
                                     Intent it1 = new Intent(Page61.this,Page6Activity.class);
                                     startActivity(it1);
                                 }else{

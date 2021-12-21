@@ -13,6 +13,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -38,25 +39,55 @@ public class take_bus_Adapter extends RecyclerView.Adapter<take_bus_Adapter.take
         take_bus_businfo b = takeBusBusinfoList.get(position);
         holder.routename.setText(b.getRoutename());
         holder.s =b.getImage();
-        System.out.println(holder.s);
+        System.out.println("what is it"+holder.s);
         System.out.println(b.getRoutename());
-        if(holder.s.equals("work")) {
-            Glide.with(context).load(R.drawable.working).into(holder.imageView);
-            System.out.println(Glide.with(context).load(R.drawable.working).into(holder.imageView));
-        }else if (holder.s.equals("shopping")){
-            Glide.with(context).load(R.drawable.shopping).into(holder.imageView);
-            System.out.println(Glide.with(context).load(R.drawable.shopping).into(holder.imageView));
-        }else if (holder.s.equals("home")){
-            Glide.with(context).load(R.drawable.home).into(holder.imageView);
-            System.out.println(Glide.with(context).load(R.drawable.home).into(holder.imageView));
-        }else if (holder.s.equals("play")){
-            Glide.with(context).load(R.drawable.play).into(holder.imageView);
-            System.out.println(Glide.with(context).load(R.drawable.play).into(holder.imageView));
+        if(holder.s.equals("work")){
+            holder.imageView.setImageResource(R.drawable.work);
+        }else if(holder.s.equals("school")){
+            holder.imageView.setImageResource(R.drawable.school);
+        }else if(holder.s.equals("market")){
+            holder.imageView.setImageResource(R.drawable.market);
+        }else if(holder.s.equals("shopping")){
+            holder.imageView.setImageResource(R.drawable.shopping);
+        }else if(holder.s.equals("eat")){
+            holder.imageView.setImageResource(R.drawable.eat);
+        }else if(holder.s.equals("home")){
+            holder.imageView.setImageResource(R.drawable.home);
+        }else if(holder.s.equals("doctor")){
+            holder.imageView.setImageResource(R.drawable.doctor);
+        }else if(holder.s.equals("shopping2")){
+            holder.imageView.setImageResource(R.drawable.shopping2);
+        }else if(holder.s.equals("cafe")){
+            holder.imageView.setImageResource(R.drawable.cafe);
+        }else if(holder.s.equals("busdetails")){
+            holder.imageView.setImageResource(R.drawable.bus_detail);
+        }
+        /*
+        if(holder.s.equals("eat")) {
+            Glide.with(context).load(R.drawable.eat).into(holder.imageView);
+            //System.out.println(Glide.with(context).load(R.drawable.working).into(holder.imageView));
+        }else if (holder.s.equals("school")){
+            Glide.with(context).load(R.drawable.school).into(holder.imageView);
+            //System.out.println(Glide.with(context).load(R.drawable.shopping).into(holder.imageView));
+        }else if (holder.s.equals("market")){
+            Glide.with(context).load(R.drawable.market).into(holder.imageView);
+           // System.out.println(Glide.with(context).load(R.drawable.home).into(holder.imageView));
+        }else if (holder.s.equals("work")){
+            Glide.with(context).load(R.drawable.work).into(holder.imageView);
+            //System.out.println(Glide.with(context).load(R.drawable.play).into(holder.imageView));
         }else if (holder.s.equals("busdetails")){
             Glide.with(context).load(R.drawable.busdetails).into(holder.imageView);
+        }else if (holder.s.equals("shopping")){
+            Glide.with(context).load(R.drawable.shopping).into(holder.imageView);
+        }else if (holder.s.equals("home")){
+            Glide.with(context).load(R.drawable.home).into(holder.imageView);
+        }else if (holder.s.equals("doctor")){
+            Glide.with(context).load(R.drawable.doctor).into(holder.imageView);
+        }else if (holder.s.equals("shopping2")){
+            Glide.with(context).load(R.drawable.shopping2).into(holder.imageView);
         }else{
-            Glide.with(context).load(R.drawable.business).into(holder.imageView);
-        }//
+            Glide.with(context).load(R.drawable.cafe).into(holder.imageView);
+        }*/
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -80,7 +111,7 @@ public class take_bus_Adapter extends RecyclerView.Adapter<take_bus_Adapter.take
         public take_bus_Holder(View itemView) {
             super(itemView);
             routename=itemView.findViewById(R.id.routename);
-            imageView=itemView.findViewById(R.id.busimg);
+            imageView=itemView.findViewById(R.id.eat_icon);
         }
     }
     public interface OnItemClickListener{

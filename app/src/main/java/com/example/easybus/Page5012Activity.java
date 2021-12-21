@@ -11,6 +11,7 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.AsyncTask;
@@ -179,54 +180,6 @@ public class Page5012Activity extends AppCompatActivity {
             return null;
         }
     }
-    /*private void getData() { //抓公車JSON
-        final ProgressDialog progressDialog=new ProgressDialog(this);
-        progressDialog.setMessage("載入中...");
-        progressDialog.show();
-
-        final JsonObjectRequest jsonObjectRequest=new JsonObjectRequest(url,null, new Response.Listener<JSONObject>() {
-            @Override
-            public void onResponse(JSONObject response) {
-                try{
-                    JSONArray ArrayRoutes = response.getJSONArray("routes");
-                    JSONArray ArrayLegs =ArrayRoutes.getJSONObject(0).getJSONArray("legs");
-                    JSONArray ArraySteps =ArrayLegs.getJSONObject(0).getJSONArray("steps");
-
-                    for(int i=0;i<ArraySteps.length();i++){
-                        JSONObject ObjSteps=ArraySteps.getJSONObject(i);
-                        String travelMode=ObjSteps.getString("travel_mode");
-                        BusInfo businfo=new BusInfo();
-
-                        if (travelMode.equals("WALKING")) {
-                            String Htmlinstructions=ObjSteps.getString("html_instructions");
-                            businfo.setHtmlinstructions(Htmlinstructions.substring(3));
-                            businfo.setShortname(null);
-                            businfo.setPic(1);
-                        }else{
-                            businfo.setHtmlinstructions (ObjSteps.getJSONObject("transit_details").getJSONObject("arrival_stop").getString("name"));
-                            businfo.setShortname(ObjSteps.getJSONObject("transit_details").getJSONObject("line").getString("short_name"));
-                            businfo.setPic(0);
-                        }
-                        businfos.add(businfo);
-                    }
-                }catch (JSONException e){
-                    //Toast.makeText(Page5012Activity.this,e.getMessage(),Toast.LENGTH_LONG).show();
-                }
-                adaptor.setData(businfos);
-                adaptor.notifyDataSetChanged();
-                progressDialog.dismiss();
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                progressDialog.dismiss();
-                //Toast.makeText(Page5012Activity.this,"發生錯誤1111!",Toast.LENGTH_LONG).show();
-            }
-        });
-
-        RequestQueue requestQueue= Volley.newRequestQueue(this);
-        requestQueue.add(jsonObjectRequest);
-    } */
 
     //標題popupwindow
     public class popupWindow extends PopupWindow implements View.OnClickListener {
@@ -305,17 +258,21 @@ public class Page5012Activity extends AppCompatActivity {
     //標題popupSelPhoto
     public class popupSelPhoto extends PopupWindow implements View.OnClickListener{
         View v;
-        ImageView mWork,mHome,mPlay,mShopping,mSaveImg;
+        ImageView mEat,mSchool,mMarket,mWork,mShopping,mHome,mDoctor,mShopping2,mCafe,mSaveImg;
         int choose=0;
         String title,img = "";
         public popupSelPhoto(Context mContext2) {
             //動態頁面載入
             v = LayoutInflater.from(mContext2).inflate(R.layout.page5012popupphoto, null);
-
+            mEat=v.findViewById(R.id.eat);
+            mSchool=v.findViewById(R.id.school);
+            mMarket=v.findViewById(R.id.market);
             mWork=v.findViewById(R.id.work);
-            mHome=v.findViewById(R.id.home);
-            mPlay=v.findViewById(R.id.play);
             mShopping=v.findViewById(R.id.shopping);
+            mHome=v.findViewById(R.id.home);
+            mDoctor=v.findViewById(R.id.doctor);
+            mShopping2=v.findViewById(R.id.shopping2);
+            mCafe=v.findViewById(R.id.cafe);
             mSaveImg=v.findViewById(R.id.saveImg);
 
             //設置PopupWindow的View
@@ -345,68 +302,105 @@ public class Page5012Activity extends AppCompatActivity {
                     return true;
                 }
             });
-
-            mWork.setOnClickListener(new View.OnClickListener() {
+            mEat.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     choose=1;
                     if (choose==1){
-                        mWork.setImageResource(R.drawable.working1);
-                        mHome.setImageResource(R.drawable.home);
-                        mPlay.setImageResource(R.drawable.play);
-                        mShopping.setImageResource(R.drawable.shopping);
-                        img = "work";
+                        mEat.getDrawable().setTint(Color.RED);
+                        img = "eat";
                     }
                 }
             });
-
-            mHome.setOnClickListener(new View.OnClickListener() {
+            mSchool.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     choose=2;
                     if (choose==2){
-                        mHome.setImageResource(R.drawable.home1);
-                        mWork.setImageResource(R.drawable.working);
-                        mPlay.setImageResource(R.drawable.play);
-                        mShopping.setImageResource(R.drawable.shopping);
-                        img = "home";
+                        mSchool.getDrawable().setTint(Color.RED);
+                        img = "school";
                     }
                 }
             });
-
-            mPlay.setOnClickListener(new View.OnClickListener() {
+            mMarket.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     choose=3;
                     if (choose==3){
-                        mPlay.setImageResource(R.drawable.play1);
-                        mWork.setImageResource(R.drawable.working);
-                        mHome.setImageResource(R.drawable.home);
-                        mShopping.setImageResource(R.drawable.shopping);
-                        img = "play";
+                        mMarket.getDrawable().setTint(Color.RED);
+                        img = "market";
                     }
                 }
             });
 
-            mShopping.setOnClickListener(new View.OnClickListener() {
+            mWork.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     choose=4;
                     if (choose==4){
-                        mShopping.setImageResource(R.drawable.shopping1);
-                        mWork.setImageResource(R.drawable.working);
-                        mHome.setImageResource(R.drawable.home);
-                        mPlay.setImageResource(R.drawable.play);
+                        mWork.getDrawable().setTint(Color.RED);
+                        img = "work";
+                    }
+                }
+            });
+            mShopping.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    choose=5;
+                    if (choose==5){
+                        mShopping.getDrawable().setTint(Color.RED);
                         img = "shopping";
                     }
                 }
             });
+            mHome.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    choose=6;
+                    if (choose==6){
+                        mHome.getDrawable().setTint(Color.RED);
+                        img = "home";
+                    }
+                }
+            });
+            mDoctor.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    choose=7;
+                    if (choose==7){
+                        mDoctor.getDrawable().setTint(Color.RED);
+                        img = "doctor";
+                    }
+                }
+            });
+            mShopping2.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    choose=8;
+                    if (choose==8){
+                        mShopping2.getDrawable().setTint(Color.RED);
+                        img = "shopping2";
+                    }
+                }
+            });
+            mCafe.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    choose=9;
+                    if (choose==9){
+                        mCafe.getDrawable().setTint(Color.RED);
+                        img = "cafe";
+                    }
+                }
+            });
+
+
 
             mSaveImg.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     choose+=1;
-                    if (choose>=2 && choose<=5){ //有選擇照片
+                    if (choose>=2 && choose<=10){ //有選擇照片
                         System.out.println(urlDestination);
                         System.out.println("title : "+title);
                         System.out.println(urlOrigin);

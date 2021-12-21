@@ -93,6 +93,7 @@ public class Page611 extends AppCompatActivity {
         mTxvId.setText(Routename);
 
         fetchOriDes();
+
     }
 
     private void fetchOriDes() {
@@ -167,6 +168,7 @@ public class Page611 extends AppCompatActivity {
                 }catch (JSONException e){
                     Toast.makeText(Page611.this,e.getMessage(),Toast.LENGTH_LONG).show();
                 }
+
                 adaptor.setData(page611infos);
                 adaptor.notifyDataSetChanged();
                 progressDialog.dismiss();
