@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -6,87 +5,134 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="#F0F0F0"
-    tools:context=".emergency_contact">
+    android:background="#F0F0F0">
 
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="280dp"
-        android:orientation="horizontal">
+        android:orientation="vertical">
 
         <ImageView
-            android:id="@+id/people"
-            android:layout_width="42dp"
-            android:layout_height="36dp"
-            android:layout_gravity="center_vertical"
-            app:srcCompat="@drawable/iphone" />
+            android:id="@+id/logo"
+            android:layout_width="wrap_content"
+            android:layout_height="75dp"
+            android:layout_marginTop="4dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/logo" />
+
+        <TextView
+            android:id="@+id/text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="35dp"
+            android:layout_marginTop="5dp"
+            android:text="新增緊急聯絡人"
+            android:textColor="@android:color/black"
+            android:textSize="40dp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp">
+
+            <ImageView
+                android:id="@+id/people"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginBottom="15dp"
+                android:layout_weight="6"
+                android:gravity="center"
+                app:srcCompat="@drawable/iphone" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="10dp"
+                android:layout_weight="1">
+
+                <EditText
+                    android:id="@+id/emergency_phone"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginEnd="20dp"
+                    android:background="@drawable/account_bg"
+                    android:hint="ex: 0912345678"
+                    android:inputType="number"
+                    android:paddingStart="10dp"
+                    android:textSize="20sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/txt1"
+                    android:layout_width="42dp"
+                    android:layout_height="17dp"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginBottom="43dp"
+                    android:background="#f0f0f0"
+                    android:gravity="center"
+                    android:text="手機"
+                    android:textSize="14sp"
+                    app:layout_constraintBottom_toBottomOf="@+id/emergency_phone"
+                    app:layout_constraintStart_toStartOf="@+id/emergency_phone" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="vertical">
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp">
+            android:layout_gravity="center_horizontal">
 
-            <EditText
-                android:id="@+id/emergency_phone"
-                android:layout_width="300dp"
+            <Button
+                android:id="@+id/add"
+                android:layout_width="120dp"
                 android:layout_height="50dp"
-                android:background="@drawable/account_bg"
-                android:hint="ex: 0912345678"
-                android:inputType="number"
-                android:paddingStart="15dp"
-                android:textSize="20sp"
-                app:layout_constraintBottom_toBottomOf="parent"
+                android:background="@drawable/accountbtn"
+                android:gravity="center"
+                android:text="新增"
+                android:textSize="20dp"
+                android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/txt1"
-                android:layout_width="42dp"
-                android:layout_height="17dp"
-                android:background="#f0f0f0"
-                android:gravity="center"
-                android:text="手機"
-                android:textSize="14sp"
-                android:layout_marginStart="15dp"
-                android:layout_marginBottom="43dp"
-                app:layout_constraintBottom_toBottomOf="@+id/emergency_phone"
-                app:layout_constraintStart_toStartOf="@+id/emergency_phone" />
+                android:id="@+id/back"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="25dp"
+                android:text="返回"
+                android:textSize="20dp"
+                app:layout_constraintBottom_toBottomOf="@+id/add"
+                app:layout_constraintEnd_toEndOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </LinearLayout>
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
-        android:layout_gravity="center_horizontal">
-
-    <Button
-        android:id="@+id/add"
-        android:layout_width="100dp"
-        android:layout_height="50dp"
-        android:text="新增"
-        android:textStyle="bold"
-        android:textSize="20dp"
-        android:gravity="center"
-        android:background="@drawable/accountbtn"
-        android:layout_gravity="center_horizontal"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
-
-        <TextView
-            android:id="@+id/back"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="82dp"
-            android:text="返回"
-            android:textSize="20dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/add" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </LinearLayout>

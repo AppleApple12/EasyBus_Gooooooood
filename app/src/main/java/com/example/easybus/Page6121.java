@@ -5,16 +5,26 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -25,6 +35,10 @@ import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.Polyline;
 import com.google.android.gms.maps.model.PolylineOptions;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
@@ -36,7 +50,9 @@ import tw.edu.pu.s1071481.module.Route;
 
 public class Page6121 extends AppCompatActivity implements OnMapReadyCallback, DirectionFinderListener {
     private static final String TAG = "Page6121";
-    String origin,destination;
+    String origin,destination,getmail;
+    RequestQueue requestQueue;
+    ImageView mBack;
     private GoogleMap mMap;
     private ProgressDialog progressDialog;
     private List<Marker> originMarkers = new ArrayList<>();
@@ -48,7 +64,7 @@ public class Page6121 extends AppCompatActivity implements OnMapReadyCallback, D
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_page6121);
 
-        ImageView mBack=findViewById(R.id.view);
+        mBack=findViewById(R.id.view);
         TextView mTxvId= findViewById(R.id.txvId);
 
         //隱藏title bar
@@ -61,13 +77,16 @@ public class Page6121 extends AppCompatActivity implements OnMapReadyCallback, D
         destination= bundle.getString("Current");
         mTxvId.setText("步行至"+destination);
 
-        //返回搭車列表(page611)
-        mBack.setOnClickListener(new View.OnClickListener() {
+        SharedPreferences email = getSharedPreferences("email",MODE_PRIVATE);
+        getmail=email.getString("Email","");
+        requestQueue = Volley.newRequestQueue(this);
+
+        //浮動按鈕撥打給緊急聯絡人
+        com.google.android.material.floatingactionbutton.FloatingActionButton fab = (FloatingActionButton)findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
-                Intent page611=new Intent(Page6121.this,Page611.class);
-                startActivity(page611);
-                finish();
+            public void onClick(View v) {
+                readUser();
             }
         });
 
@@ -77,9 +96,18 @@ public class Page6121 extends AppCompatActivity implements OnMapReadyCallback, D
 
         try{
             new DirectionFinder(this,origin,destination).execute();
-        }catch(UnsupportedEncodingException e){
+        }catch(UnsupportedEncodingException e) {
             e.printStackTrace();
         }
+
+        //返回搭車列表(page611)
+        mBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent page611=new Intent(Page6121.this,Page611.class);
+                startActivity(page611);
+            }
+        });
     }
 
     @Override
@@ -155,5 +183,51 @@ public class Page6121 extends AppCompatActivity implements OnMapReadyCallback, D
 
             polylinePaths.add(mMap.addPolyline(polylineOptions));
         }
+    }
+
+    @SuppressLint("LongLogTag")
+    protected void makeCall(final String phone) {
+        //Snackbar.make(v,"打電話給緊急連絡人",Snackbar.LENGTH_LONG).setAction("Action",null).show();
+        Intent call = new Intent(Intent.ACTION_DIAL);
+        Uri u = Uri.parse("tel:"+phone);
+        call.setData(u);
+
+        try {
+            startActivity(call);
+            finish();
+            Log.i("Finished making a call...", "");
+        } catch (android.content.ActivityNotFoundException ex) {
+            //Toast.makeText(Page5012Activity.this, ex.toString(), Toast.LENGTH_SHORT).show();
+            Toast.makeText(Page6121.this,"請重撥！", Toast.LENGTH_SHORT).show();
+        }
+        //startActivity(call        );
+    }
+    public void readUser(){
+        String URL =Urls.url1+"/LoginRegister/fetch.php?email="+getmail;
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(
+                Request.Method.GET,
+                URL,
+                null,
+                new Response.Listener<JSONObject>() {
+                    String emergency_phone;
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        try {
+                            emergency_phone = response.getString("emergency_contact");
+                            makeCall(emergency_phone);
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                            Toast.makeText(Page6121.this, e.toString(), Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(Page6121.this, error.toString(), Toast.LENGTH_SHORT).show();
+                    }
+                }
+        );
+        requestQueue.add(jsonObjectRequest);
     }
 }

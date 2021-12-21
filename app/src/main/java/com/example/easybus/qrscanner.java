@@ -35,13 +35,13 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class qrscanner extends AppCompatActivity {
-    String f_email,email,mygetmail;
+    String f_email,email,mygetmail,identity;
     RequestQueue requestQueue, requestQueue1;
     Dialog dialog,fdialog;
     //判斷是否加好友、判斷是否存在
     Button btnok,btncancle,btngo;
-    TextView maddfriend,friendname,myfriend;
-    ImageView back;
+    TextView maddfriend,friendname,myfriend,back;
+
     //private PopupWindow popupWindow = null;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,6 +53,8 @@ public class qrscanner extends AppCompatActivity {
 
         ActionBar actionBar = getSupportActionBar();
         actionBar.hide();
+
+        back=findViewById(R.id.back);
         //mygetmail=mail();
         requestQueue1 = Volley.newRequestQueue(this);
         requestQueue = Volley.newRequestQueue(this);
@@ -83,10 +85,44 @@ public class qrscanner extends AppCompatActivity {
         fdialog.setContentView(R.layout.myfriend_dialog);
         btngo = fdialog.findViewById(R.id.button10);
         myfriend = fdialog.findViewById(R.id.myfriend);
+        myreadUser();
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                turnpage(identity);
+            }
+        });
 
 
 
 
+    }
+    public void myreadUser(){
+        String URL =Urls.url1+"/LoginRegister/fetch.php?email="+mygetmail;
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(
+                Request.Method.GET,
+                URL,
+                null,
+                new Response.Listener<JSONObject>() {
+
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        try {
+                            identity = response.getString("identity");
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                            //Toast.makeText(qrcode_page.this, e.toString(), Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        //Toast.makeText(qrcode_page.this, error.toString(), Toast.LENGTH_SHORT).show();
+                    }
+                }
+        );
+        requestQueue.add(jsonObjectRequest);
     }
     public void addfriend(final String f_name,final String f_email,final String f_phone,final String f_image){
         String URL =Urls.url1+"/LoginRegister/addfriend.php?email="+mygetmail;
@@ -229,6 +265,8 @@ public class qrscanner extends AppCompatActivity {
                     @Override
                     public void onResponse(JSONObject response) {
                         try {
+
+
                             f_name = response.getString("fullname");
                             //dialog內的TextView
                             maddfriend.setText("是否加入\n"+f_name+"\n為聯絡人");
@@ -264,6 +302,17 @@ public class qrscanner extends AppCompatActivity {
             Toast.makeText(getApplicationContext(), "掃描失敗", Toast.LENGTH_SHORT).show();
         }
     }
+    private void turnpage(String identity) {
+        if ("requester".equalsIgnoreCase(identity)) {
+            Intent it4 = new Intent(qrscanner.this, Page8Activity.class);
 
+            startActivity(it4);
+            finish();
+        } else if ("caregiver".equalsIgnoreCase(identity)) {
+            Intent it = new Intent(qrscanner.this, Page8Activity_caregiver.class);
+            startActivity(it);
+            finish();
+        }
+    }
 //悲劇
 }

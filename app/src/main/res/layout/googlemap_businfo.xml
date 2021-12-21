@@ -1,47 +1,44 @@
-<?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="100dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical">
 
-    <ImageView
-        android:id="@+id/backg"
-        android:layout_width="340dp"
-        android:layout_height="100dp"
-        android:alpha="0.5"
-        android:paddingTop="25dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/page5012_item" />
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="20dp">
 
-    <ImageView
-        android:id="@+id/img"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
-        android:layout_marginTop="25dp"
-        android:layout_marginStart="10dp"
-        app:layout_constraintBottom_toBottomOf="@+id/backg"
-        app:layout_constraintStart_toStartOf="@+id/backg"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:srcCompat="@drawable/page5012modepic" />
+        <ImageView
+            android:id="@+id/backG"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/page5012_item"/>
 
-    <TextView
-        android:id="@+id/Text"
-        android:layout_width="270dp"
-        android:layout_height="60dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="25dp"
-        android:gravity="center"
-        android:text="Text"
-        android:textColor="	#ffffff"
-        app:autoSizeTextType="uniform"
-        app:layout_constraintBottom_toBottomOf="@+id/backg"
-        app:layout_constraintEnd_toEndOf="@+id/backg"
-        app:layout_constraintStart_toEndOf="@+id/img"
-        app:layout_constraintTop_toTopOf="@+id/backg"
-        app:layout_constraintVertical_bias="0.509" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:layout_margin="5dp"
+            android:orientation="horizontal">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+            <ImageView
+                android:id="@+id/img"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_marginStart="5dp"
+                android:src="@drawable/page5012modepic" />
+
+            <TextView
+                android:id="@+id/Text"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginStart="10dp"
+                android:gravity="center"
+                android:textColor="	#ffffff"
+                app:autoSizeTextType="uniform"/>
+
+        </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</LinearLayout>
