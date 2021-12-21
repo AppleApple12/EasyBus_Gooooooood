@@ -58,6 +58,7 @@ public class Page5011Activity extends FragmentActivity implements OnMapReadyCall
     private List<Marker> originMarkers = new ArrayList<>();
     private List<Marker> destinationMarkers = new ArrayList<>();
     private List<Polyline> polylinePaths = new ArrayList<>();
+    RequestQueue requestQueue;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,6 +77,15 @@ public class Page5011Activity extends FragmentActivity implements OnMapReadyCall
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.mapView);
         mapFragment.getMapAsync(this);
+
+        requestQueue = Volley.newRequestQueue(this);
+        com.google.android.material.floatingactionbutton.FloatingActionButton fab = (FloatingActionButton)findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                readUser1();
+            }
+        });
 
         mBtnFindPath.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -204,5 +214,51 @@ public class Page5011Activity extends FragmentActivity implements OnMapReadyCall
 
             polylinePaths.add(mMap.addPolyline(polylineOptions));
         }
+    }
+
+    @SuppressLint("LongLogTag")
+    protected void makeCall(final String phone) {
+        //Snackbar.make(v,"打電話給緊急連絡人",Snackbar.LENGTH_LONG).setAction("Action",null).show();
+        Intent call = new Intent(Intent.ACTION_DIAL);
+        Uri u = Uri.parse("tel:"+phone);
+        call.setData(u);
+
+        try {
+            startActivity(call);
+            finish();
+            Log.i("Finished making a call...", "");
+        } catch (android.content.ActivityNotFoundException ex) {
+            //Toast.makeText(Page5012Activity.this, ex.toString(), Toast.LENGTH_SHORT).show();
+            Toast.makeText(Page5011Activity.this,"請重撥！", Toast.LENGTH_SHORT).show();
+        }
+        //startActivity(call        );
+    }
+    public void readUser1(){
+        String URL =Urls.url1+"/LoginRegister/fetch.php?email="+getmail;
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(
+                Request.Method.GET,
+                URL,
+                null,
+                new Response.Listener<JSONObject>() {
+                    String emergency_phone;
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        try {
+                            emergency_phone = response.getString("emergency_contact");
+                            makeCall(emergency_phone);
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                            Toast.makeText(Page5011Activity.this, e.toString(), Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(Page5011Activity.this, error.toString(), Toast.LENGTH_SHORT).show();
+                    }
+                }
+        );
+        requestQueue.add(jsonObjectRequest);
     }
 }

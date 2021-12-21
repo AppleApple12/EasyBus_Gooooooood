@@ -507,5 +507,4 @@ public class Page5012Activity extends AppCompatActivity {
         );
         requestQueue2.add(jsonObjectRequest);
     }
-
 }

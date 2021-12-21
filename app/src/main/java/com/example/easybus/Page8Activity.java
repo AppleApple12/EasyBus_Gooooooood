@@ -2,6 +2,7 @@ package com.example.easybus;
 /*需求者 - 我的帳戶*/
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.ContentResolver;
@@ -22,6 +23,7 @@ import android.os.Handler;
 import android.os.Looper;
 import android.provider.MediaStore;
 import android.util.Base64;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.ImageView;
@@ -43,6 +45,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 import com.vishnusivadas.advanced_httpurlconnection.PutData;
@@ -73,7 +76,7 @@ public class Page8Activity extends AppCompatActivity {
     private Uri imageUri;
     private Context mContext;
     public String email,getmail,password,getpass,fullname,pic,phone,encodeimage,img;
-    RequestQueue requestQueue;
+    RequestQueue requestQueue,requestQueue1;
     String url =Urls.url1+"/LoginRegister/savepic.php?fullname="+fullname;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -98,8 +101,16 @@ public class Page8Activity extends AppCompatActivity {
         mContext = Page8Activity.this;
 
         requestQueue = Volley.newRequestQueue(this);
+        requestQueue1 = Volley.newRequestQueue(this);
 
-        //getpass=pass();
+        //浮動按鈕撥打給緊急聯絡人
+        com.google.android.material.floatingactionbutton.FloatingActionButton fab = (FloatingActionButton)findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                readUser1();
+            }
+        });
 
         new Page8Activity.fetchDatapage8().execute();
         //我的聯絡人
@@ -515,4 +526,49 @@ public class Page8Activity extends AppCompatActivity {
         return Bitmap.createBitmap(bitmap, 0, 0, w, h, mtx, true);
     }
 
+    @SuppressLint("LongLogTag")
+    protected void makeCall(final String phone) {
+        //Snackbar.make(v,"打電話給緊急連絡人",Snackbar.LENGTH_LONG).setAction("Action",null).show();
+        Intent call = new Intent(Intent.ACTION_DIAL);
+        Uri u = Uri.parse("tel:"+phone);
+        call.setData(u);
+
+        try {
+            startActivity(call);
+            finish();
+            Log.i("Finished making a call...", "");
+        } catch (android.content.ActivityNotFoundException ex) {
+            //Toast.makeText(Page5012Activity.this, ex.toString(), Toast.LENGTH_SHORT).show();
+            Toast.makeText(Page8Activity.this,"請重撥！", Toast.LENGTH_SHORT).show();
+        }
+        //startActivity(call        );
+    }
+    public void readUser1(){
+        String URL =Urls.url1+"/LoginRegister/fetch.php?email="+getmail;
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(
+                Request.Method.GET,
+                URL,
+                null,
+                new Response.Listener<JSONObject>() {
+                    String emergency_phone;
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        try {
+                            emergency_phone = response.getString("emergency_contact");
+                            makeCall(emergency_phone);
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                            Toast.makeText(Page8Activity.this, e.toString(), Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(Page8Activity.this, error.toString(), Toast.LENGTH_SHORT).show();
+                    }
+                }
+        );
+        requestQueue1.add(jsonObjectRequest);
+    }
 }

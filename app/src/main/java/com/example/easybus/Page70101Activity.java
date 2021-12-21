@@ -3,24 +3,40 @@ package com.example.easybus;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.media.TimedMetaData;
+import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 public class Page70101Activity extends AppCompatActivity {
     TextView question,ans1,ans2,ans3,number,content,nexttxt,backtxt,fcontent;
     String getmail;
     ImageView imga,imgb,imgc,nextbtn,backbtn;
     Dialog Tdialog,Fdialog;
+    RequestQueue requestQueue;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,6 +48,7 @@ public class Page70101Activity extends AppCompatActivity {
         //抓email
         SharedPreferences email = getSharedPreferences("email",MODE_PRIVATE);
         getmail=email.getString("Email","");
+
         //Tdialog的東西
         Tdialog = new Dialog(Page70101Activity.this);
         Tdialog.setContentView(R.layout.correct_dialog);
@@ -39,6 +56,7 @@ public class Page70101Activity extends AppCompatActivity {
         nexttxt=Tdialog.findViewById(R.id.nexttxt);
         nextbtn=Tdialog.findViewById(R.id.nextbtn);
         content=Tdialog.findViewById(R.id.correct_content);
+
         //Fdialog的東西
         Fdialog = new Dialog(Page70101Activity.this);
         Fdialog.setContentView(R.layout.cross_dialog);
@@ -46,6 +64,17 @@ public class Page70101Activity extends AppCompatActivity {
         //backtxt=Fdialog.findViewById(R.id.backtxt);
         backbtn=Fdialog.findViewById(R.id.backbtn);
         fcontent=Fdialog.findViewById(R.id.cross_content);
+
+        requestQueue = Volley.newRequestQueue(this);
+        //浮動按鈕撥打給緊急聯絡人
+        com.google.android.material.floatingactionbutton.FloatingActionButton fab = (FloatingActionButton)findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                readUser();
+            }
+        });
+
         //原本定義的東西
         question = findViewById(R.id.question);
         number=findViewById(R.id.number);
@@ -56,8 +85,8 @@ public class Page70101Activity extends AppCompatActivity {
         imgb = findViewById(R.id.imgb);
         imgc = findViewById(R.id.imgc);
         q1("小美在等待公車來時，\n應該注意甚麼呢 ?","1/2","繞過汽車查看公車","在候車線內等待","滑手機不注意公車",imga,imgb,imgc);
-        ImageView back = (ImageView)findViewById(R.id.backicon);
-        back.setOnClickListener(new View.OnClickListener() {
+        ImageView mBack = (ImageView)findViewById(R.id.view);
+        mBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent back = new Intent(Page70101Activity.this,Page7Activity.class);
@@ -147,7 +176,6 @@ public class Page70101Activity extends AppCompatActivity {
         nextbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 Tdialog.dismiss();
                 Intent intent = new Intent(Page70101Activity.this,Page7Activity.class);
                 startActivity(intent);
@@ -159,5 +187,51 @@ public class Page70101Activity extends AppCompatActivity {
                 Fdialog.dismiss();
             }
         });
+    }
+
+    @SuppressLint("LongLogTag")
+    protected void makeCall(final String phone) {
+        //Snackbar.make(v,"打電話給緊急連絡人",Snackbar.LENGTH_LONG).setAction("Action",null).show();
+        Intent call = new Intent(Intent.ACTION_DIAL);
+        Uri u = Uri.parse("tel:"+phone);
+        call.setData(u);
+
+        try {
+            startActivity(call);
+            finish();
+            Log.i("Finished making a call...", "");
+        } catch (android.content.ActivityNotFoundException ex) {
+            //Toast.makeText(Page5012Activity.this, ex.toString(), Toast.LENGTH_SHORT).show();
+            Toast.makeText(Page70101Activity.this,"請重撥！", Toast.LENGTH_SHORT).show();
+        }
+        //startActivity(call        );
+    }
+    public void readUser(){
+        String URL =Urls.url1+"/LoginRegister/fetch.php?email="+getmail;
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(
+                Request.Method.GET,
+                URL,
+                null,
+                new Response.Listener<JSONObject>() {
+                    String emergency_phone;
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        try {
+                            emergency_phone = response.getString("emergency_contact");
+                            makeCall(emergency_phone);
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                            Toast.makeText(Page70101Activity.this, e.toString(), Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(Page70101Activity.this, error.toString(), Toast.LENGTH_SHORT).show();
+                    }
+                }
+        );
+        requestQueue.add(jsonObjectRequest);
     }
 }

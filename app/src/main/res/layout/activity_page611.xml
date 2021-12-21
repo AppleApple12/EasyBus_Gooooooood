@@ -93,10 +93,8 @@
                         android:layout_marginBottom="20dp"
                         android:layout_marginTop="15dp"
                         android:textColor="#000000"
-                        android:textSize="30dp"
                         android:textStyle="bold"
-                        android:autoSizeTextType="uniform"
-                        android:text="上班下班回家上班下班回家拉屎"
+                        app:autoSizeTextType="uniform"
                         app:layout_constraintBottom_toBottomOf="@+id/txvtop2"
                         app:layout_constraintEnd_toEndOf="@+id/txvtop2"
                         app:layout_constraintStart_toStartOf="@+id/txvtop2"
@@ -209,7 +207,6 @@
                 app:layout_constraintStart_toStartOf="@+id/bg2"
                 app:layout_constraintTop_toTopOf="@+id/bg2" />
         </androidx.constraintlayout.widget.ConstraintLayout>
-
     </LinearLayout>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton

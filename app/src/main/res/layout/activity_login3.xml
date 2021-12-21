@@ -66,7 +66,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:layout_marginLeft="20dp">
+                android:layout_marginLeft="10dp">
 
                 <EditText
                     android:id="@+id/email"
@@ -78,7 +78,7 @@
                     android:background="@drawable/account_bg"
                     android:hint="ex: 123@gmail.com"
                     android:inputType="textEmailAddress"
-                    android:paddingStart="20sp"
+                    android:paddingStart="10dp"
                     android:textSize="18sp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -125,7 +125,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:layout_marginLeft="20dp">
+                android:layout_marginLeft="10dp">
 
                 <EditText
                     android:id="@+id/pass"
@@ -136,7 +136,7 @@
                     android:layout_marginEnd="20dp"
                     android:background="@drawable/account_bg"
                     android:inputType="textPassword"
-                    android:paddingStart="15dp"
+                    android:paddingStart="10dp"
                     android:textSize="20sp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"

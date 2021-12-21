@@ -8,10 +8,13 @@ import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.annotation.SuppressLint;
 import android.app.IntentService;
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
@@ -26,6 +29,14 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -54,18 +65,17 @@ import javax.crypto.Mac;
 import javax.crypto.spec.SecretKeySpec;
 
 public class Page601 extends AppCompatActivity {
-
-    String txv2,txv4,txv1;
+    String txv2,txv4,txv1,destination,getmail;
     RecyclerView recyclerView;
     MyListAdapter myListAdapter;
     ArrayList<HashMap<String,String>> arrayList ;
     ArrayList<HashMap<String,String>> arr_estimate;
     Button btn1;
-    String destination;
     Boolean flag;
-
+    RequestQueue requestQueue;
     Timer timer;
     TimerTask doAsynchronousTask;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -93,6 +103,17 @@ public class Page601 extends AppCompatActivity {
         TextView textView = (TextView)findViewById(R.id.txvtoptext);
         textView.setText(txv1);
         btn1 = (Button)findViewById(R.id.btn_change);
+
+        SharedPreferences email = getSharedPreferences("email",MODE_PRIVATE);
+        getmail=email.getString("Email","");
+        requestQueue = Volley.newRequestQueue(this);
+        com.google.android.material.floatingactionbutton.FloatingActionButton fab = (FloatingActionButton)findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                readUser();
+            }
+        });
 
         //new fetchDetail().execute();
         callAsynchronousTask();
@@ -459,16 +480,57 @@ public class Page601 extends AppCompatActivity {
                 jsonData.append(line+"\n");
             }
             response = jsonData.toString();
-
-
         } catch (MalformedURLException e) {
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
         }
-
         return response;
     }
 
+    @SuppressLint("LongLogTag")
+    protected void makeCall(final String phone) {
+        //Snackbar.make(v,"打電話給緊急連絡人",Snackbar.LENGTH_LONG).setAction("Action",null).show();
+        Intent call = new Intent(Intent.ACTION_DIAL);
+        Uri u = Uri.parse("tel:"+phone);
+        call.setData(u);
 
+        try {
+            startActivity(call);
+            finish();
+            Log.i("Finished making a call...", "");
+        } catch (android.content.ActivityNotFoundException ex) {
+            //Toast.makeText(Page5012Activity.this, ex.toString(), Toast.LENGTH_SHORT).show();
+            Toast.makeText(Page601.this,"請重撥！", Toast.LENGTH_SHORT).show();
+        }
+        //startActivity(call        );
+    }
+    public void readUser(){
+        String URL =Urls.url1+"/LoginRegister/fetch.php?email="+getmail;
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(
+                Request.Method.GET,
+                URL,
+                null,
+                new Response.Listener<JSONObject>() {
+                    String emergency_phone;
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        try {
+                            emergency_phone = response.getString("emergency_contact");
+                            makeCall(emergency_phone);
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                            Toast.makeText(Page601.this, e.toString(), Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(Page601.this, error.toString(), Toast.LENGTH_SHORT).show();
+                    }
+                }
+        );
+        requestQueue.add(jsonObjectRequest);
+    }
 }

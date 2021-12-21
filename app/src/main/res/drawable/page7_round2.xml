@@ -2,8 +2,7 @@
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android">
     <!--第一层阴影-->
     <item>
-        <shape android:shape="rectangle">
-            <corners android:radius="20dp" />
+        <shape android:shape="oval">
             <solid android:color="#ffffff"/>
             <!-- 大小 -->
         </shape>
@@ -15,6 +14,7 @@
         android:bottom="10dp"
         android:left="10dp"
         android:right="10dp"
-        android:drawable="@drawable/page612_busline">
+        android:drawable="@drawable/page7_round"
+        >
     </item>
 </layer-list>
