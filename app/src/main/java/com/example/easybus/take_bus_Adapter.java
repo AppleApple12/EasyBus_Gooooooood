@@ -16,7 +16,7 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.squareup.picasso.Picasso;
 
-import java.util.List; 
+import java.util.List;
 
 public class take_bus_Adapter extends RecyclerView.Adapter<take_bus_Adapter.take_bus_Holder>{
     Context context;
