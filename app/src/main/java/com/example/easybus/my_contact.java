@@ -38,7 +38,7 @@ import java.util.List;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class my_contact extends AppCompatActivity {
-    String email,getmail,img,img2,imgUrl,fimage;//
+    String email,getmail,img,img2,imgUrl,fimage,identity;//
     String femail;
     String phone;
     TextView mEnteredName;
@@ -95,10 +95,7 @@ public class my_contact extends AppCompatActivity {
         backBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(my_contact.this,Page8Activity.class);
-                //intent.putExtra("email",getmail);
-                startActivity(intent);
-                finish();
+                turnpage(identity);
             }
         });
     }
@@ -182,6 +179,7 @@ public class my_contact extends AppCompatActivity {
                         String fullname;
                         try {
                             fullname = response.getString("fullname");
+                            identity = response.getString("identity");
                             mEnteredName.setText(fullname);
                             fetchimage();
                         } catch (JSONException e) {
@@ -243,5 +241,18 @@ public class my_contact extends AppCompatActivity {
                     }
                 });
         System.out.println(imgurl);
+    }
+    private void turnpage(String identity) {
+        if("requester".equalsIgnoreCase(identity)) {
+            Intent it4 = new Intent(my_contact.this,Page8Activity.class);
+            it4.putExtra("email", getmail);
+            startActivity(it4);
+            finish();
+        }else if("caregiver".equalsIgnoreCase(identity)){
+            Intent it = new Intent(my_contact.this,Page8Activity_caregiver.class);
+            it.putExtra("email", getmail);
+            startActivity(it);
+            finish();
+        }
     }
 }
