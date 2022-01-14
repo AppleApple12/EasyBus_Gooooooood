@@ -93,7 +93,6 @@ public class Page611 extends AppCompatActivity {
         mTxvId.setText(Routename);
 
         fetchOriDes();
-
     }
 
     private void fetchOriDes() {

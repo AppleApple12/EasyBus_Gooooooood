@@ -7,131 +7,153 @@
     android:background="#ffffff"
     tools:context=".Page601">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/constraintLayout5"
+    <LinearLayout
+        android:id="@+id/linearLayout7"
         android:layout_width="match_parent"
-        android:layout_height="100dp"
-        tools:ignore="MissingConstraints">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-        <View
-            android:id="@+id/top"
-            android:layout_width="wrap_content"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraintLayout5"
+            android:layout_width="match_parent"
             android:layout_height="100dp"
-            android:background="@drawable/round_button3"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            tools:ignore="MissingConstraints">
+
+            <View
+                android:id="@+id/top"
+                android:layout_width="wrap_content"
+                android:layout_height="100dp"
+                android:background="@drawable/round_button3"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <LinearLayout
+                android:id="@+id/linearLayout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginLeft="10dp">
+
+                    <ImageView
+                        android:id="@+id/view"
+                        android:layout_width="61dp"
+                        android:layout_height="68dp"
+                        android:layout_weight="1"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:srcCompat="@drawable/page5_top" />
+
+                    <ImageView
+                        android:id="@+id/backicon"
+                        android:layout_width="31dp"
+                        android:layout_height="36dp"
+                        app:layout_constraintBottom_toBottomOf="@+id/view"
+                        app:layout_constraintEnd_toEndOf="@+id/view"
+                        app:layout_constraintStart_toStartOf="@+id/view"
+                        app:layout_constraintTop_toTopOf="@+id/view"
+                        app:srcCompat="@drawable/backicon" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="10dp">
+
+                    <ImageView
+                        android:id="@+id/txvtop2"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:paddingStart="10dp"
+                        android:paddingTop="15dp"
+                        android:paddingEnd="15dp"
+                        android:paddingBottom="15dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:srcCompat="@drawable/roundcorner" />
+
+                    <ImageView
+                        android:id="@+id/iv2"
+                        android:layout_width="55dp"
+                        android:layout_height="55dp"
+                        app:layout_constraintBottom_toBottomOf="@+id/txvtop2"
+                        app:layout_constraintEnd_toStartOf="@+id/txvtoptext"
+                        app:layout_constraintStart_toStartOf="@+id/txvtop2"
+                        app:layout_constraintTop_toTopOf="@+id/txvtop2"
+                        app:srcCompat="@drawable/ic_page6" />
+
+                    <TextView
+                        android:id="@+id/txvtoptext"
+                        android:layout_width="160dp"
+                        android:layout_height="60dp"
+                        android:gravity="center"
+                        android:textColor="#000000"
+                        android:textSize="30dp"
+                        android:textStyle="bold"
+                        app:layout_constraintBottom_toBottomOf="@+id/txvtop2"
+                        app:layout_constraintEnd_toEndOf="@+id/txvtop2"
+                        app:layout_constraintStart_toEndOf="@+id/iv2"
+                        app:layout_constraintTop_toTopOf="@+id/txvtop2" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </LinearLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
         <LinearLayout
-            android:id="@+id/linearLayout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="horizontal">
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginLeft="10dp">
-
-                <ImageView
-                    android:id="@+id/view"
-                    android:layout_width="61dp"
-                    android:layout_height="68dp"
-                    android:layout_weight="1"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:srcCompat="@drawable/page5_top" />
-
-                <ImageView
-                    android:id="@+id/backicon"
-                    android:layout_width="31dp"
-                    android:layout_height="36dp"
-                    app:layout_constraintBottom_toBottomOf="@+id/view"
-                    app:layout_constraintEnd_toEndOf="@+id/view"
-                    app:layout_constraintStart_toStartOf="@+id/view"
-                    app:layout_constraintTop_toTopOf="@+id/view"
-                    app:srcCompat="@drawable/backicon" />
-            </androidx.constraintlayout.widget.ConstraintLayout>
+            android:orientation="vertical">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginLeft="10dp">
+                android:layout_height="match_parent">
 
-                <ImageView
-                    android:id="@+id/txvtop2"
+                <View
+                    android:id="@+id/viewbottom"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:paddingStart="10dp"
-                    android:paddingEnd="15dp"
-                    android:paddingTop="15dp"
-                    android:paddingBottom="15dp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:srcCompat="@drawable/roundcorner" />
+                    android:layout_marginStart="15dp"
+                    android:layout_marginTop="40dp"
+                    android:layout_marginEnd="15dp"
+                    android:background="@drawable/page601recyclerview" />
 
-                <ImageView
-                    android:id="@+id/iv2"
-                    android:layout_width="55dp"
-                    android:layout_height="55dp"
-                    app:layout_constraintBottom_toBottomOf="@+id/txvtop2"
-                    app:layout_constraintEnd_toStartOf="@+id/txvtoptext"
-                    app:layout_constraintStart_toStartOf="@+id/txvtop2"
-                    app:layout_constraintTop_toTopOf="@+id/txvtop2"
-                    app:srcCompat="@drawable/ic_page6" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginTop="40dp"
+                    android:layout_marginEnd="15dp"
+                    android:orientation="vertical">
 
-                <TextView
-                    android:id="@+id/txvtoptext"
-                    android:layout_width="160dp"
-                    android:layout_height="60dp"
-                    android:gravity="center"
-                    android:textColor="#000000"
-                    android:textSize="30dp"
-                    android:textStyle="bold"
-                    app:layout_constraintBottom_toBottomOf="@+id/txvtop2"
-                    app:layout_constraintEnd_toEndOf="@+id/txvtop2"
-                    app:layout_constraintStart_toEndOf="@+id/iv2"
-                    app:layout_constraintTop_toTopOf="@+id/txvtop2" />
+                    <Button
+                        android:id="@+id/btn_change"
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:layout_marginTop="15dp"
+                        android:layout_marginStart="20dp"
+                        android:layout_marginEnd="20dp"
+                        android:background="@drawable/page601_btn"
+                        android:textSize="20dp" />
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/recyclerview"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginTop="30dp"
+                        android:layout_marginEnd="10dp" />
+                </LinearLayout>
+
             </androidx.constraintlayout.widget.ConstraintLayout>
         </LinearLayout>
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <View
-        android:id="@+id/viewbottom"
-        android:layout_width="374dp"
-        android:layout_height="630dp"
-        android:background="@drawable/page601recyclerview"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <Button
-        android:id="@+id/btn_change"
-        android:layout_width="341dp"
-        android:layout_height="40dp"
-        android:layout_marginTop="15dp"
-        android:background="@drawable/page601_btn"
-        android:text="回程"
-        android:textSize="20dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.46"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/viewbottom" />
-
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerview"
-        android:layout_width="338dp"
-        android:layout_height="575dp"
-        android:layout_marginBottom="2dp"
-        android:background="#d0d0d0"
-        app:layout_constraintBottom_toBottomOf="@+id/viewbottom"
-        app:layout_constraintEnd_toEndOf="@+id/viewbottom"
-        app:layout_constraintStart_toStartOf="@+id/viewbottom" />
+    </LinearLayout>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
     android:id="@+id/fab"

@@ -62,6 +62,7 @@
                         app:layout_constraintStart_toStartOf="@+id/view"
                         app:layout_constraintTop_toTopOf="@+id/view"
                         app:srcCompat="@drawable/backicon" />
+
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <androidx.constraintlayout.widget.ConstraintLayout
@@ -133,7 +134,6 @@
                     app:layout_constraintStart_toStartOf="@+id/imageView8"
                     app:layout_constraintTop_toTopOf="parent"
                     app:srcCompat="@drawable/bus2" />
-
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -146,8 +146,7 @@
                     android:layout_height="match_parent"
                     android:paddingStart="20dp"
                     android:paddingEnd="20dp"
-                    app:srcCompat="@drawable/page612mode_bg"
-                    tools:layout_editor_absoluteY="614dp" />
+                    app:srcCompat="@drawable/page612mode_bg" />
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/page612"
